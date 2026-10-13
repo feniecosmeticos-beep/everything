@@ -1,0 +1,2478 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-10-09",
+  "policy": "Agrupamento editorial por SKU explícito; nenhum cadastro comercial é eliminado. Funções, fórmulas e kits distintos permanecem separados. Sem conversão presumida entre g e ml.",
+  "families": [
+    {
+      "id": "mup-color",
+      "name": "Coloração MUP Color",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MUP-COL-1",
+          "label": "1 - Preto",
+          "name": "Coloração 1 - Preto MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-3",
+          "label": "3 - Castanho Escuro",
+          "name": "Coloração 3 - Castanho Escuro MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-4",
+          "label": "4 - Castanho Médio",
+          "name": "Coloração 4 - Castanho Médio MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-5",
+          "label": "5 - Castanho Claro",
+          "name": "Coloração 5 - Castanho Claro MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-51",
+          "label": "5.1 - Castanho Claro Cinza",
+          "name": "Coloração 5.1 - Castanho Claro Cinza MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-53",
+          "label": "5.3 - Castanho Claro Dourado",
+          "name": "Coloração 5.3 - Castanho Claro Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-535",
+          "label": "5.35 - Castanho Claro Dourado Acajú",
+          "name": "Coloração 5.35 - Castanho Claro Dourado Acajú MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-565",
+          "label": "5.65 - Castanho Claro Vermelho Acajú",
+          "name": "Coloração 5.65 - Castanho Claro Vermelho Acajú MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-57",
+          "label": "5.7 - Castanho Claro Marrom Natural",
+          "name": "Coloração 5.7 - Castanho Claro Marrom Natural MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-571",
+          "label": "5.71 - Castanho Claro Marrom Frio",
+          "name": "Coloração 5.71 - Castanho Claro Marrom Frio MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-6",
+          "label": "6 - Louro Escuro",
+          "name": "Coloração 6 - Louro Escuro MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-61",
+          "label": "6.1 - Louro Escuro Cinza",
+          "name": "Coloração 6.1 - Louro Escuro Cinza MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-613",
+          "label": "6.13 - Louro Escuro Cinza Dourado",
+          "name": "Coloração 6.13 - Louro Escuro Cinza Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-63",
+          "label": "6.3 - Louro Escuro Dourado",
+          "name": "Coloração 6.3 - Louro Escuro Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-635",
+          "label": "6.35 - Louro Escuro Dourado Acajú",
+          "name": "Coloração 6.35 - Louro Escuro Dourado Acajú MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-64",
+          "label": "6.4 - Louro Escuro Cobre",
+          "name": "Coloração 6.4 - Louro Escuro Cobre MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-643",
+          "label": "6.43 - Louro Escuro Cobre Dourado",
+          "name": "Coloração 6.43 - Louro Escuro Cobre Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-646",
+          "label": "6.46 - Louro Escuro Cobre Vermelho",
+          "name": "Coloração 6.46 - Louro Escuro Cobre Vermelho MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-653",
+          "label": "6.53 - Louro Escuro Acajú Dourado",
+          "name": "Coloração 6.53 - Louro Escuro Acajú Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-666",
+          "label": "6.66 - Louro Escuro Vermelho Intenso",
+          "name": "Coloração 6.66 - Louro Escuro Vermelho Intenso MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-67",
+          "label": "6.7 - Louro Escuro Marrom Natural",
+          "name": "Coloração 6.7 - Louro Escuro Marrom Natural MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-671",
+          "label": "6.71 - Louro Escuro Marrom Frio",
+          "name": "Coloração 6.71 - Louro Escuro Marrom Frio MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-7",
+          "label": "7 - Louro Médio",
+          "name": "Coloração 7 - Louro Médio MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-71",
+          "label": "7.1 - Louro Médio Cinza",
+          "name": "Coloração 7.1 - Louro Médio Cinza MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-713",
+          "label": "7.13 - Louro Médio Cinza Dourado",
+          "name": "Coloração 7.13 - Louro Médio Cinza Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-72",
+          "label": "7.2 - Louro Médio Violeta",
+          "name": "Coloração 7.2 - Louro Médio Violeta MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-73",
+          "label": "7.3 - Louro Médio Dourado",
+          "name": "Coloração 7.3 - Louro Médio Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-732",
+          "label": "7.32 - Louro Médio Dourado Violeta",
+          "name": "Coloração 7.32 - Louro Médio Dourado Violeta MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-735",
+          "label": "7.35 - Louro Medio Dourado Acajú",
+          "name": "Coloração 7.35 - Louro Medio Dourado Acajú MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-74",
+          "label": "7.4 - Louro Médio Cobre",
+          "name": "Coloração 7.4 - Louro Médio Cobre MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-743",
+          "label": "7.43 - Louro Médio Cobre Dourado",
+          "name": "Coloração 7.43 - Louro Médio Cobre Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-766",
+          "label": "7.66 - Louro Médio Vermelho Intenso",
+          "name": "Coloração 7.66 - Louro Médio Vermelho Intenso MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-77",
+          "label": "7.7 - Louro Médio Marrom Natural",
+          "name": "Coloração 7.7 - Louro Médio Marrom Natural MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-771",
+          "label": "7.71 - Louro Médio Marrom Frio",
+          "name": "Coloração 7.71 - Louro Médio Marrom Frio MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-8",
+          "label": "8 - Louro Claro",
+          "name": "Coloração 8 - Louro Claro MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-81",
+          "label": "8.1 - Louro Claro Cinza",
+          "name": "Coloração 8.1 - Louro Claro Cinza MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-82",
+          "label": "8.2 - Louro Claro Violeta",
+          "name": "Coloração 8.2 - Louro Claro Violeta MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-83",
+          "label": "8.3 - Louro Claro Dourado",
+          "name": "Coloração 8.3 - Louro Claro Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-837",
+          "label": "8.37 - Louro Claro Dourado Marrom",
+          "name": "Coloração 8.37 - Louro Claro Dourado Marrom MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-84",
+          "label": "8.4 - Louro Claro Cobre",
+          "name": "Coloração 8.4 - Louro Claro Cobre MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-843",
+          "label": "8.43 - Louro Claro Cobre Dourado",
+          "name": "Coloração 8.43 - Louro Claro Cobre Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-871",
+          "label": "8.71 - Louro Claro Marrom Frio",
+          "name": "Coloração 8.71 - Louro Claro Marrom Frio MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-9",
+          "label": "9 - Louro Muito Claro",
+          "name": "Coloração 9 - Louro Muito Claro MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-91",
+          "label": "9.1 - Louro Muito Claro Cinza",
+          "name": "Coloração 9.1 - Louro Muito Claro Cinza MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-912",
+          "label": "9.12 - Louro Pérola",
+          "name": "Coloração 9.12 - Louro Pérola MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-913",
+          "label": "9.13 - Louro Muito Claro Cinza Dourado",
+          "name": "Coloração 9.13 - Louro Muito Claro Cinza Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-92",
+          "label": "9.2 - Louro Muito Claro Violeta",
+          "name": "Coloração 9.2 - Louro Muito Claro Violeta MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-93",
+          "label": "9.3 - Louro Muito Claro Dourado",
+          "name": "Coloração 9.3 - Louro Muito Claro Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-10",
+          "label": "10 - Louro Claríssimo",
+          "name": "Coloração 10 - Louro Claríssimo MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-907",
+          "label": "9.07 - Louro Muito Claro Marrom Suave",
+          "name": "Coloração 9.07 - Louro Muito Claro Marrom Suave MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-101",
+          "label": "10.1 - Louro Claríssimo Cinza",
+          "name": "Coloração 10.1 - Louro Claríssimo Cinza MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-1012",
+          "label": "10.12 - Louro Claríssimo Pérola",
+          "name": "Coloração 10.12 - Louro Claríssimo Pérola MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-1200",
+          "label": "12.00 - Louro Especial",
+          "name": "Coloração 12.00 - Louro Especial MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-1210",
+          "label": "12.10 - Louro Cinza Especial",
+          "name": "Coloração 12.10 - Louro Cinza Especial MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-1212",
+          "label": "12.12 - Louro Cinza Violeta Especial",
+          "name": "Coloração 12.12 - Louro Cinza Violeta Especial MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-1289",
+          "label": "12.89 - Louro Pérola Especial",
+          "name": "Coloração 12.89 - Louro Pérola Especial MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-6626",
+          "label": "66.26 - Louro Escuro Vermelho Marsala",
+          "name": "Coloração 66.26 - Louro Escuro Vermelho Marsala MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-773",
+          "label": "7.73 - Marrom Café",
+          "name": "Coloração 7.73 - Marrom Café MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-834",
+          "label": "8.34 - Caramelo",
+          "name": "Coloração 8.34 - Caramelo MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-1034",
+          "label": "10.34 - Caramelo Suave",
+          "name": "Coloração 10.34 - Caramelo Suave MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-1037",
+          "label": "10.37 - Baunilha",
+          "name": "Coloração 10.37 - Baunilha MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-luminoso",
+      "name": "Coloração MUP Color Luminoso",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MUP-COL-5L",
+          "label": "5L - Castanho Claro Luminoso",
+          "name": "Coloração 5L - Castanho Claro Luminoso",
+          "brand": "MUP COLOR",
+          "size": "5 L"
+        },
+        {
+          "sku": "MUP-COL-6L",
+          "label": "6L - Louro Escuro Luminoso",
+          "name": "Coloração 6L - Louro Escuro Luminoso",
+          "brand": "MUP COLOR",
+          "size": "6 L"
+        },
+        {
+          "sku": "MUP-COL-7L",
+          "label": "7L - Louro Médio Luminoso",
+          "name": "Coloração 7L - Louro Médio Luminoso",
+          "brand": "MUP COLOR",
+          "size": "7 L"
+        },
+        {
+          "sku": "MUP-COL-8L",
+          "label": "8L - Louro Claro Luminoso",
+          "name": "Coloração 8L - Louro Claro Luminoso",
+          "brand": "MUP COLOR",
+          "size": "8 L"
+        },
+        {
+          "sku": "MUP-COL-9L",
+          "label": "9L - Louro Muito Claro Luminoso",
+          "name": "Coloração 9L - Louro Muito Claro Luminoso",
+          "brand": "MUP COLOR",
+          "size": "9 L"
+        }
+      ]
+    },
+    {
+      "id": "mup-mix",
+      "name": "Mix MUP Color",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MUP-COL-M11",
+          "label": "/11 - Cinza",
+          "name": "Mix /11 - Cinza MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-M12",
+          "label": "/12 - Pérola",
+          "name": "Mix /12 - Pérola MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-M33",
+          "label": "/33 - Dourado",
+          "name": "Mix /33 - Dourado MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-M44",
+          "label": "/44 - Cobre",
+          "name": "Mix /44 - Cobre MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-M66",
+          "label": "/66 - Vermelho",
+          "name": "Mix /66 - Vermelho MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MUP-COL-M99",
+          "label": "/99 - Verde",
+          "name": "Mix /99 - Verde MUP",
+          "brand": "MUP COLOR",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "doha-hirix",
+      "name": "Coloração Hirix Doha",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "DOH-COL-HRX-1",
+          "label": "1.0 Preto",
+          "name": "Hirix Coloração 1.0 Preto 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-3",
+          "label": "3.0 Castanho Escuro Natural",
+          "name": "Hirix Coloração 3.0 Castanho Escuro Natural 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-4",
+          "label": "4.0 Castanho Medio Natural",
+          "name": "Hirix Coloração 4.0 Castanho Medio Natural 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "HXCOL4DOH-COL-HRX-5",
+          "label": "5.0 Castanho Claro Natural",
+          "name": "Hirix Coloração 5.0 Castanho Claro Natural 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-7",
+          "label": "7.0 Louro Medio Natural",
+          "name": "Hirix Coloração7.0 Louro Medio Natural 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-8",
+          "label": "8.0 Louro Claro Natural",
+          "name": "Hirix Coloração 8.0 Louro Claro Natural 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-9",
+          "label": "9.0 Louro Clarissimo Natural",
+          "name": "Hirix Coloração 9.0 Louro Clarissimo Natural 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-921",
+          "label": "9.21 Louro Clarissimo Irisado Cinza",
+          "name": "Hirix Coloração 9.21 Louro Clarissimo Irisado Cinza 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-631",
+          "label": "6.31 Louro Escuro Bege",
+          "name": "Hirix Coloração 6.31 Louro Escuro Bege 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-731",
+          "label": "7.31 Louro Medio Bege",
+          "name": "Hirix Coloração7.31 Louro Medio Bege 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-831",
+          "label": "8.31 Louro Claro Bege",
+          "name": "Hirix Coloração 8.31 Louro Claro Bege 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-63",
+          "label": "6.3 Louro Escuro Dourado",
+          "name": "Hirix Coloração 6.3 Louro Escuro Dourado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-83",
+          "label": "8.3 Louro Claro Dourado",
+          "name": "Hirix Coloração 8.3 Louro Claro Dourado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-77",
+          "label": "7.7 Louro Medio Marrom",
+          "name": "Hirix Coloração 7.7 Louro Medio Marrom 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-671",
+          "label": "6.71 Louro Escuro Marrom Acinzentado",
+          "name": "Hirix Coloração 6.71 Louro Escuro Marrom Acinzentado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-771",
+          "label": "7.71 Louro Medio Marrom Acinzentado",
+          "name": "Hirix Coloração 7.71 Louro Medio Marrom Acinzentado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-673",
+          "label": "6.73 Louro Escuro Marrom Dourado",
+          "name": "Hirix Coloração 6.73 Louro Escuro Marrom Dourado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-773",
+          "label": "7.73 Louro Medio Marrom Dourado",
+          "name": "Hirix Coloração 7.73 Louro Medio Marrom Dourado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-555",
+          "label": "5.55 Castanho Claro Acaju",
+          "name": "Hirix Coloração 5.55 Castanho Claro Acaju 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-64",
+          "label": "6.4 Louro Escuro Acobreado",
+          "name": "Hirix Coloração 6.4 Louro Escuro Acobreado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-74",
+          "label": "7.4 Louro Medio Acobreado",
+          "name": "Hirix Coloração 7.4 Louro Medio Acobreado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-84",
+          "label": "8.4 Louro Claro Acobreado",
+          "name": "Hirix Coloração 8.4 Louro Claro Acobreado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-856",
+          "label": "8.56 Marsala",
+          "name": "Hirix Coloração 8.56 Marsala 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-1089",
+          "label": "10.89 Louro Super Claro Perola",
+          "name": "Hirix Coloração 10.89 Louro Super Claro Perola 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-1202",
+          "label": "12.02 Lourissimo Natural Irisado",
+          "name": "Hirix Coloração 12.02 Lourissimo Natural Irisado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-AZ",
+          "label": "Azul",
+          "name": "Hirix Coloração Azul 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-873",
+          "label": "8.73 Louro Claro Marrom Dourado",
+          "name": "Hirix Coloração 8.73 Louro Claro Marrom Dourado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-VM",
+          "label": "Vermelho",
+          "name": "Hirix Coloração Vermelho 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-DR",
+          "label": "Dourado",
+          "name": "Hirix Coloração Dourado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-67",
+          "label": "6.7 Louro Escuro Marrom",
+          "name": "Hirix Coloração 6.7 Louro Escuro Marrom",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-HRX-1021",
+          "label": "10.21",
+          "name": "Hirix Coloração 10.21",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-HRX-73",
+          "label": "7.3 Louro Medio Dourado",
+          "name": "Hirix Coloração 7.3 Louro Medio Dourado 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-81",
+          "label": "8.1 Louro Claro Cinza",
+          "name": "Hirix Coloração 8.1 Louro Claro Cinza 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-M33",
+          "label": "/33 - Dourado Doha",
+          "name": "/33 - Dourado Doha",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-HRX-91",
+          "label": "9.1 Louro Clarissimo Cinza",
+          "name": "Hirix Coloração 9.1 Louro Clarissimo Cinza 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-71",
+          "label": "7.1 Louro Medio Cinza",
+          "name": "Hirix Coloração 7.1 Louro Medio Cinza 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-HRX-CZ",
+          "label": "Concentrado Cinza",
+          "name": "Hirix Coloração Concentrado Cinza 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        }
+      ]
+    },
+    {
+      "id": "doha-royal-fantasie",
+      "name": "Coloração Royal Fantasie Doha",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "DOH-COL-RYF-889",
+          "label": "8/89 Louro Claro Perola Acinzentado",
+          "name": "Royal Fantasie 8/89 Louro Claro Perola Acinzentado",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-989",
+          "label": "9/89 Louro Claríssimo Perola",
+          "name": "Royal Fantasie 9/89 Louro Claríssimo Perola",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-844",
+          "label": "8/44 Louro Claro Acobreado Intenso",
+          "name": "Royal Fantasie Coloração 8/44 Louro Claro Acobreado Intenso",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-5562",
+          "label": "55/62 Castanho Claro Intenso Vermelho",
+          "name": "Royal Fantasie 55/62 Castanho Claro Intenso Vermelho 50ml",
+          "brand": "DOHA",
+          "size": "50 ml"
+        },
+        {
+          "sku": "DOH-COL-RYF-1001",
+          "label": "10/01 Loiro Super Claro Acinzentado",
+          "name": "Royal Fantasie 10/01 Loiro Super Claro Acinzentado",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-50",
+          "label": "5/0 Castanho Claro Natural",
+          "name": "Royal Fantasie 5/0 Castanho Claro Natural",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-40",
+          "label": "4/0 Castanho Médio Natural",
+          "name": "Royal Fantasie 4/0 Castanho Médio Natural",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-70",
+          "label": "7/0 Loiro Medio Natural",
+          "name": "Royal Fantasie 7/0 Loiro Medio Natural",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-873",
+          "label": "8/73 Loiro Claro Marrom Dourado",
+          "name": "Royal Fantasie 8/73 Loiro Claro Marrom Dourado",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-100",
+          "label": "10/0 Loiro Super Claro Natural",
+          "name": "Royal Fantasie 10/0 Loiro Super Claro Natural",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-6662",
+          "label": "66/62 Loiro Escuro Intenso Vermelho Violeta",
+          "name": "Royal Fantasie 66/62 Loiro Escuro Intenso Vermelho Violeta",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-846",
+          "label": "8/46 - Loiro Super Claro Acinzentado",
+          "name": "8/46 - Loiro Super Claro Acinzentado Royal Fantasie",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "DOH-COL-RYF-60",
+          "label": "6/0 Loiro Escuro Natural",
+          "name": "Royal Fantasie 6/0 Loiro Escuro Natural",
+          "brand": "DOHA",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-base",
+      "name": "Base Líquida MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-BSE-C130-1",
+          "label": "C130",
+          "name": "Base Líquida MUP Makeup C130",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BSE-C160-1",
+          "label": "C160",
+          "name": "Base Líquida MUP Makeup C160",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BSE-C180-1",
+          "label": "C180",
+          "name": "Base Líquida MUP Makeup C180",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BSE-M220-1",
+          "label": "M220",
+          "name": "Base Líquida MUP Makeup M220",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BSE-M240-1",
+          "label": "M240",
+          "name": "Base Líquida MUP Makeup M240",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BSE-M280-1",
+          "label": "M280",
+          "name": "Base Líquida MUP Makeup M280",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BSE-E340-1",
+          "label": "E340",
+          "name": "Base Líquida MUP Makeup E340",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BSE-E360-1",
+          "label": "E360",
+          "name": "Base Líquida MUP Makeup E360",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BSE-E380-1",
+          "label": "E380",
+          "name": "Base Líquida MUP Makeup E380",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-corretivo-liquido",
+      "name": "Corretivo Líquido MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-COR-C115",
+          "label": "C115",
+          "name": "Corretivo Líquido MUP Makeup C115",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-COR-M135",
+          "label": "M135",
+          "name": "Corretivo Líquido MUP Makeup M135",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-COR-M285",
+          "label": "M285",
+          "name": "Corretivo Líquido MUP Makeup M285",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-COR-E365",
+          "label": "E365",
+          "name": "Corretivo Líquido MUP Makeup E365",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-camuflagem",
+      "name": "Corretivo Camuflagem MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-COR-AMA",
+          "label": "Amarelo",
+          "name": "Corretivo Camuflagem MUP Makeup Amarelo",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-COR-VER",
+          "label": "Verde",
+          "name": "Corretivo Camuflagem MUP Makeup Verde",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-COR-LAR",
+          "label": "Laranja",
+          "name": "Corretivo Camuflagem MUP Makeup Laranja",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-batom-liquido",
+      "name": "Batom Líquido Matte MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-BTL-CHO-1",
+          "label": "Chocolate",
+          "name": "Batom Líquido Matte MUP Makeup Chocolate",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BTL-MAT-1",
+          "label": "Rosa Matte",
+          "name": "Batom Líquido Matte MUP Makeup Rosa Matte",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BTL-INT-1",
+          "label": "Bordô Intenso",
+          "name": "Batom Líquido Matte MUP Makeup Bordô Intenso",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BTL-VER-1",
+          "label": "Vermelho Vibrante",
+          "name": "Batom Líquido Matte MUP Makeup Vermelho Vibrante",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-batom-soft",
+      "name": "Batom Bala Soft Matte MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-BTB-RED-1",
+          "label": "Red Carpet",
+          "name": "Batom Bala Soft Matte MUP Makeup Red Carpet",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BTB-MAT-1",
+          "label": "Nude Matte",
+          "name": "Batom Bala Soft Matte MUP Makeup Nude Matte",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BTB-CAR-1",
+          "label": "Carmim",
+          "name": "Batom Bala Soft Matte MUP Makeup Carmim",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BTB-MAR-1",
+          "label": "Marrom",
+          "name": "Batom Bala Soft Matte MUP Makeup Marrom",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-batom-cremoso",
+      "name": "Batom Bala Cremoso MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-BTB-COR-1",
+          "label": "Coral",
+          "name": "Batom Bala Cremoso MUP Makeup Coral",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BTB-ROS-1",
+          "label": "Nude Rosado",
+          "name": "Batom Bala Cremoso MUP Makeup Nude Rosado",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BTB-NUD-1",
+          "label": "Nude",
+          "name": "Batom Bala Cremoso MUP Makeup Nude",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BTB-INT-1",
+          "label": "Nude Intenso",
+          "name": "Batom Bala Cremoso MUP Makeup Nude Intenso",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-po-compacto",
+      "name": "Pó Compacto MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-POC-20",
+          "label": "20",
+          "name": "Pó Compacto MUP Makeup COR 20",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-POC-40",
+          "label": "40",
+          "name": "Pó Compacto MUP Makeup COR 40",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-POC-60",
+          "label": "60",
+          "name": "Pó Compacto MUP Makeup COR 60",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-POC-80",
+          "label": "80",
+          "name": "Pó Compacto MUP Makeup COR 80",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-blush",
+      "name": "Blush Compacto MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-BLU-BZT",
+          "label": "Bronzant",
+          "name": "Blush Compacto MUP Makeup Bronzant",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BLU-VIN",
+          "label": "Vinho",
+          "name": "Blush Compacto MUP Makeup Vinho",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BLU-RSM",
+          "label": "Rosa Matte",
+          "name": "Blush Compacto MUP Makeup Rosa Matte",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-BLU-COR",
+          "label": "Coral",
+          "name": "Blush Compacto MUP Makeup Coral",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-iluminador",
+      "name": "Iluminador MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-ILU-DOU",
+          "label": "Dourado",
+          "name": "Iluminador MUP Makeup Dourado",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-ILU-ROS",
+          "label": "Rosé",
+          "name": "Iluminador MUP Makeup Rosé",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-ILU-BRZ",
+          "label": "Bronzé",
+          "name": "Iluminador MUP Makeup Bronzé",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-po-facial",
+      "name": "Pó Facial MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-POF-TLC",
+          "label": "Translúcido",
+          "name": "Pó Facial MUP Makeup Translúcido",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-POF-AMR",
+          "label": "Amarelado",
+          "name": "Pó Facial MUP Makeup Amarelado",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "mup-gloss",
+      "name": "Gloss Labial MUP Makeup",
+      "dimension": "Tonalidade",
+      "reason": "Mesmo produto e função; muda somente tonalidade.",
+      "variants": [
+        {
+          "sku": "MAK-GLO-VNL",
+          "label": "Vinil",
+          "name": "Gloss Labial Vinil",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "MAK-GLO-ROS",
+          "label": "Rosé",
+          "name": "Gloss Labial Rosé",
+          "brand": "MUP MAKEUP",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "olk-fnd-lps",
+      "name": "Lipid Serum Olenka",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "OLK-FND-LPS-30",
+          "label": "30 ml",
+          "name": "Mini Lipid Serum de Nutrição 30ml",
+          "brand": "OLENKA",
+          "size": "30 ml"
+        },
+        {
+          "sku": "OLK-FND-LPS-100",
+          "label": "100 ml",
+          "name": "Lipid Serum - 100ml",
+          "brand": "OLENKA",
+          "size": "100 ml"
+        }
+      ]
+    },
+    {
+      "id": "olk-msk-bdp",
+      "name": "Blend de Proteínas Olenka",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "OLK-MSK-BDP-50",
+          "label": "50 g",
+          "name": "Mini Blend de Proteinas 50g",
+          "brand": "OLENKA",
+          "size": "50 g"
+        },
+        {
+          "sku": "OLK-MSK-BDP-220",
+          "label": "220 g",
+          "name": "Mascara Blend de Proteínas Olenka 220g",
+          "brand": "OLENKA",
+          "size": "220 g"
+        },
+        {
+          "sku": "OLK-MSK-BDP-600",
+          "label": "600 g",
+          "name": "Máscara Blend de Proteinas 600g",
+          "brand": "OLENKA",
+          "size": "600 g"
+        }
+      ]
+    },
+    {
+      "id": "olk-msk-pha",
+      "name": "pH Acid Olenka",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "OLK-MSK-PHA-30",
+          "label": "30 ml",
+          "name": "Mini pH Acid Olenka 30ml",
+          "brand": "OLENKA",
+          "size": "30 ml"
+        },
+        {
+          "sku": "OLK-MSK-PHA-250",
+          "label": "250 ml",
+          "name": "pH Acid - Másc Estab pH 250ml",
+          "brand": "OLENKA",
+          "size": "250 ml"
+        }
+      ]
+    },
+    {
+      "id": "olk-msk-col",
+      "name": "Máscara Banho de Colágeno Olenka",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "OLK-MSK-COL-050",
+          "label": "50 g",
+          "name": "Mini Máscara Banho de Colágeno - 50g",
+          "brand": "OLENKA",
+          "size": "50 g"
+        },
+        {
+          "sku": "OLK-MSK-COL-220",
+          "label": "220 g",
+          "name": "Máscara Banho de Colageno 220g",
+          "brand": "OLENKA",
+          "size": "220 g"
+        }
+      ]
+    },
+    {
+      "id": "olk-sh-men",
+      "name": "Shampoo Purificante Men’s Care Olenka",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "OLK-SH-MEN-300",
+          "label": "300 ml",
+          "name": "Shampoo Purificante de Tratamento Men's Care Olenka 300ml",
+          "brand": "OLENKA",
+          "size": "300 ml"
+        },
+        {
+          "sku": "OLK-SH-MEN-1.5",
+          "label": "1,5 L",
+          "name": "Shampoo Purificante de Tratamento Men's Care Olenka 1,5l",
+          "brand": "OLENKA",
+          "size": "1,5 L"
+        }
+      ]
+    },
+    {
+      "id": "olk-cond-men",
+      "name": "Condicionador Revitalizante Men’s Care Olenka",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "OLK-COND-MEN-300",
+          "label": "300 ml",
+          "name": "Condicionador Revitalizante de Tratamento Men's Care Olenka 300ml",
+          "brand": "OLENKA",
+          "size": "300 ml"
+        },
+        {
+          "sku": "OLK-COND-MEN-1.5",
+          "label": "1,5 L",
+          "name": "Condicionador Revitalizante de Tratamento Men's Care Olenka 1,5l",
+          "brand": "OLENKA",
+          "size": "1,5 L"
+        }
+      ]
+    },
+    {
+      "id": "olk-kit-men",
+      "name": "Kit Shampoo + Condicionador Men’s Care Olenka",
+      "dimension": "Tamanho dos itens",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "OLK-KIT-MEN-300",
+          "label": "300 ml por item",
+          "name": "Kit Shampoo Purificante 300ml + Condicionador Revitalizante 300ml Mens Care",
+          "brand": "OLENKA",
+          "size": "300 ml"
+        },
+        {
+          "sku": "OLK-KIT-MEN-1.5",
+          "label": "1,5 L por item",
+          "name": "Kit Tratamento Men's Care Olenka (shampoo 1,5l + Condicionador 1,5l)",
+          "brand": "OLENKA",
+          "size": "1,5 L"
+        }
+      ]
+    },
+    {
+      "id": "gly-arg-oil",
+      "name": "Óleo de Argan Glynett",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "GLY-ARG-OIL-30",
+          "label": "30 ml",
+          "name": "Oleo de Argan Glynett 30ml",
+          "brand": "GLYNETT",
+          "size": "30 ml"
+        },
+        {
+          "sku": "GLY-ARG-OIL-60",
+          "label": "60 ml",
+          "name": "Oleo de Argan Glynett 60ml",
+          "brand": "GLYNETT",
+          "size": "60 ml"
+        },
+        {
+          "sku": "GLY-ARG-OIL-120",
+          "label": "120 ml",
+          "name": "Oleo de Argan Glynett 120ml",
+          "brand": "GLYNETT",
+          "size": "120 ml"
+        }
+      ]
+    },
+    {
+      "id": "phl-rea-bux",
+      "name": "Realinhamento Burix One Prohall",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "PHL-REA-BUX-120",
+          "label": "120 ml",
+          "name": "Progressiva Burix One Prohall 120ml",
+          "brand": "PROHALL",
+          "size": "120 ml"
+        },
+        {
+          "sku": "PHL-REA-BUX-300",
+          "label": "300 ml",
+          "name": "Realinhamento Burix One 300ml",
+          "brand": "PROHALL",
+          "size": "300 ml"
+        },
+        {
+          "sku": "PHL-REA-BUX-1000",
+          "label": "1 L",
+          "name": "Progresiva Burix One 1L - Prohall",
+          "brand": "PROHALL",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "phl-rea-sel",
+      "name": "Realinhamento Select One Prohall",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "PHL-REA-SEL-30",
+          "label": "300 ml",
+          "name": "Realinhamento Select One 300ml",
+          "brand": "PROHALL",
+          "size": "300 ml"
+        },
+        {
+          "sku": "PHL-REA-SEL-1000",
+          "label": "1 L",
+          "name": "Progressiva Select One 1lt - Prohall",
+          "brand": "PROHALL",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "phl-msk-pbo",
+      "name": "Máscara Proboo Fiber Prohall",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "PHL-MSK-PBO-300",
+          "label": "300 g",
+          "name": "Máscara de Reconstrução Intensiva Proboo Fiber 300g",
+          "brand": "PROHALL",
+          "size": "300 g"
+        },
+        {
+          "sku": "PHL-MSK-PBO-500",
+          "label": "500 g",
+          "name": "Máscara Reconstrutora Proboo Fiber 500g",
+          "brand": "PROHALL",
+          "size": "500 g"
+        }
+      ]
+    },
+    {
+      "id": "phl-msk-eqz",
+      "name": "Máscara Equalize Prohall",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "PHL-MSK-EQZ-300",
+          "label": "300 g",
+          "name": "Máscara Equalize Prohall 300g",
+          "brand": "PROHALL",
+          "size": "300 g"
+        },
+        {
+          "sku": "PHL-MSK-EQZ-500",
+          "label": "500 g",
+          "name": "Máscara Neutralizante Equalize Mask 500g",
+          "brand": "PROHALL",
+          "size": "500 g"
+        }
+      ]
+    },
+    {
+      "id": "phl-rvb-mad",
+      "name": "Máscara Adaptativa Raízes & Vibes Prohall",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "PHL-RVB-MAD-250",
+          "label": "250 g",
+          "name": "Mascara Adaptativa 250g Raizes e Vibes 250G",
+          "brand": "PROHALL",
+          "size": "250 g"
+        },
+        {
+          "sku": "PHL-RVB-MAD-450",
+          "label": "450 g",
+          "name": "Mascara adaptativa Raizes e Vaibes 450G",
+          "brand": "PROHALL",
+          "size": "450 g"
+        }
+      ]
+    },
+    {
+      "id": "doh-sh-dil",
+      "name": "Shampoo Daily Amazon Doha",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "DOH-SH-DIL-250",
+          "label": "250 ml",
+          "name": "Shampoo Daily Amazon - 250ml",
+          "brand": "DOHA",
+          "size": "250 ml"
+        },
+        {
+          "sku": "DOH-SH-DIL-1",
+          "label": "1 L",
+          "name": "Shampoo Profissional Daily Amazon - 1L",
+          "brand": "DOHA",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "doh-msc-dil",
+      "name": "Máscara Daily Amazon Doha",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "DOH-MSC-DIL-200",
+          "label": "200 ml",
+          "name": "Máscara Daily Amazon - 200ml",
+          "brand": "DOHA",
+          "size": "200 ml"
+        },
+        {
+          "sku": "DOH-MSC-DIL-500",
+          "label": "500 ml",
+          "name": "Máscara Profissional Daily Amazon - 500ml",
+          "brand": "DOHA",
+          "size": "500 ml"
+        }
+      ]
+    },
+    {
+      "id": "doh-rcd-xtm",
+      "name": "Bifásico Xtreme Repair Doha",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "DOH-RCD-XTM-60",
+          "label": "60 ml",
+          "name": "Bifásico Xtreme Repair - 60ml",
+          "brand": "DOHA",
+          "size": "60 ml"
+        },
+        {
+          "sku": "DOH-RCD-XTM-250",
+          "label": "250 ml",
+          "name": "Bifásico Xtreme Repair - 250ml",
+          "brand": "DOHA",
+          "size": "250 ml"
+        }
+      ]
+    },
+    {
+      "id": "doh-rcd-bv",
+      "name": "Bifásico Blond Vivance Doha",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "DOH-RCD-BV-120",
+          "label": "120 ml",
+          "name": "Bifasico Blond Vivance Doha 120ml",
+          "brand": "DOHA",
+          "size": "120 ml"
+        },
+        {
+          "sku": "DOH-RCD-BV-250",
+          "label": "250 ml",
+          "name": "Bifásico Blond Vivance - 250ml",
+          "brand": "DOHA",
+          "size": "250 ml"
+        }
+      ]
+    },
+    {
+      "id": "doh-sh-bv",
+      "name": "Shampoo Blond Vivance Doha",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "DOH-SH-BV-320",
+          "label": "320 ml",
+          "name": "Shampoo Blond Vivance Doha - 320ml",
+          "brand": "DOHA",
+          "size": "320 ml"
+        },
+        {
+          "sku": "DOH-SH-BV-1000",
+          "label": "1 L",
+          "name": "Shampoo Blond Vivance Doha - 1L",
+          "brand": "DOHA",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "doh-sh-bvv",
+      "name": "Shampoo Blond Vivance Violet Doha",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "DOH-SH-BVV-250",
+          "label": "250 ml",
+          "name": "Shampoo Blond Vivance Violet - 250ml",
+          "brand": "DOHA",
+          "size": "250 ml"
+        },
+        {
+          "sku": "DOH-SH-BVV-1",
+          "label": "1 L",
+          "name": "Shampoo Blond Vivance Violet - 1L",
+          "brand": "DOHA",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "doh-msc-bvv",
+      "name": "Máscara Blond Vivance Violet Doha",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "DOH-MSC-BVV-200",
+          "label": "200 ml",
+          "name": "Mascara Blond Vivance Violet Doha 200ml",
+          "brand": "DOHA",
+          "size": "200 ml"
+        },
+        {
+          "sku": "DOH-MSC-BVV-500",
+          "label": "500 ml",
+          "name": "Máscara Blond Vivance Violet - 500ml",
+          "brand": "DOHA",
+          "size": "500 ml"
+        }
+      ]
+    },
+    {
+      "id": "doh-msl-dnl",
+      "name": "Máscara Líquida DNA Link Doha",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "DOH-MSL-DNL-60",
+          "label": "60 ml",
+          "name": "Máscara Líquida DNA Link Doha - 60ml",
+          "brand": "DOHA",
+          "size": "60 ml"
+        },
+        {
+          "sku": "DOH-MSL-DNL-200",
+          "label": "250 ml",
+          "name": "Máscara Líquida DNA Link Doha - 250ml",
+          "brand": "DOHA",
+          "size": "250 ml"
+        }
+      ]
+    },
+    {
+      "id": "sfo-amc-thp",
+      "name": "Micelar Nutry Acqua Therapy Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-AMC-THP-250",
+          "label": "250 ml",
+          "name": "Micelar Nutry Acqua Therapy Spa do Fio 250ml",
+          "brand": "SPA DO FIO",
+          "size": "250 ml"
+        },
+        {
+          "sku": "SFO-AMC-THP-1000",
+          "label": "1 L",
+          "name": "Micelar Nutry Acqua Therapy 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-mpt-thp",
+      "name": "Max Protein Therapy Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-MPT-THP-300",
+          "label": "300 ml",
+          "name": "Max Protein Therapy Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-MPT-THP-1000",
+          "label": "1 L",
+          "name": "Max Protein Therapy Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-sh-exo",
+      "name": "Shampoo Exo Prime Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-SH-EXO-300",
+          "label": "300 ml",
+          "name": "Shampoo Exo Prime Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-SH-EXO-1000",
+          "label": "1 L",
+          "name": "Shampoo Exo Prime Spa do Fio 1lt",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-msk-exo",
+      "name": "Máscara Exo Prime Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-MSK-EXO-300",
+          "label": "300 ml",
+          "name": "Máscara Exo Prime Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-MSK-EXO-1000",
+          "label": "1 L",
+          "name": "Máscara Exo Prime Spa do Fio 1lt",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-cond-acm",
+      "name": "Condicionador Acalmia Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-COND-ACM-300",
+          "label": "300 ml",
+          "name": "Condicionador Acalmia Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-COND-ACM-1000",
+          "label": "1 L",
+          "name": "Condicionador Acalmia Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-sh-eng",
+      "name": "Shampoo Energizante Energ Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-SH-ENG-300",
+          "label": "300 ml",
+          "name": "Shampoo Energizante Energ Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-SH-ENG-1000",
+          "label": "1 L",
+          "name": "Shampoo Energizante Energ Spa do fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-cond-eng",
+      "name": "Condicionador Energ Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-COND-ENG-300",
+          "label": "300 ml",
+          "name": "Condicionador Energ Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-COND-ENG-1000",
+          "label": "1 L",
+          "name": "Condicionador Energ Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-sh-hdt",
+      "name": "Shampoo Hidrat Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-SH-HDT-300",
+          "label": "300 ml",
+          "name": "Shampoo Hidratante Hidrat Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-SH-HDT-1000",
+          "label": "1 L",
+          "name": "Shampoo Hidratante Hidrat Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-cond-hdt",
+      "name": "Condicionador Hidrat Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-COND-HDT-300",
+          "label": "300 ml",
+          "name": "Condicionador Hidratante Hidrat Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-COND-HDT-1000",
+          "label": "1 L",
+          "name": "Condicionador Hidratante Hidrat Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-sh-ctr",
+      "name": "Shampoo Control Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-SH-CTR-300",
+          "label": "300 ml",
+          "name": "Shampoo Disciplinante Control Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-SH-CTR-1000",
+          "label": "1 L",
+          "name": "Shampoo Disciplinante Control Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-cond-ctr",
+      "name": "Condicionador Control Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-COND-CTR-300",
+          "label": "300 ml",
+          "name": "Condicionador Disciplinante Control Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-COND-CTR-1000",
+          "label": "1 L",
+          "name": "Condicionador Disciplinante Control Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-sh-col",
+      "name": "Shampoo Color Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-SH-COL-300",
+          "label": "300 ml",
+          "name": "Shampoo Color Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-SH-COL-1000",
+          "label": "1 L",
+          "name": "Shampoo Color Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-cond-col",
+      "name": "Condicionador Color Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-COND-COL-300",
+          "label": "300 ml",
+          "name": "Condicionador Color Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-COND-COL-1000",
+          "label": "1 L",
+          "name": "Condicionador Color Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-sh-bld",
+      "name": "Shampoo Blond Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-SH-BLD-300",
+          "label": "300 ml",
+          "name": "Shampoo Blond Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-SH-BLD-1000",
+          "label": "1 L",
+          "name": "Shampoo Blond Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-cond-bld",
+      "name": "Condicionador Blond Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-COND-BLD-300",
+          "label": "300 ml",
+          "name": "Condicionador Blond Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-COND-BLD-1000",
+          "label": "1 L",
+          "name": "Condicionador Blond Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-sh-hbl",
+      "name": "Shampoo Herbal Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-SH-HBL-300",
+          "label": "300 ml",
+          "name": "Shampoo Herbal Spa do Fio 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-SH-HBL-1000",
+          "label": "1 L",
+          "name": "Shampoo Herbal Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "sfo-sh-cly",
+      "name": "Shampoo Curly Spa do Fio",
+      "dimension": "Tamanho",
+      "reason": "Mesmo produto e função; muda somente tamanho.",
+      "variants": [
+        {
+          "sku": "SFO-SH-CLY-300",
+          "label": "300 ml",
+          "name": "Shampoo Curly 300ml",
+          "brand": "SPA DO FIO",
+          "size": "300 ml"
+        },
+        {
+          "sku": "SFO-SH-CLY-1000",
+          "label": "1 L",
+          "name": "Shampoo Curly Spa do Fio 1L",
+          "brand": "SPA DO FIO",
+          "size": "1 L"
+        }
+      ]
+    },
+    {
+      "id": "18k-llc",
+      "name": "Escova Cerâmica Laranja LLC 18K",
+      "dimension": "Diâmetro",
+      "reason": "Mesmo produto e função; muda somente diâmetro.",
+      "variants": [
+        {
+          "sku": "ACS-ESC-LRJ-12",
+          "label": "12 mm",
+          "name": "Escova Cerâmica Laranja c/ Cabo Longo 12mm - LLC12",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-LRJ-15",
+          "label": "15 mm",
+          "name": "Escova Cerâmica Laranja c/ Cabo Longo 15mm - LLC 15",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-LRJ-19",
+          "label": "19 mm",
+          "name": "Escova Cerâmica Laranja c/ Cabo Longo LLC 19",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-LRJ-33",
+          "label": "33 mm",
+          "name": "Escova Cerâmica Laranja c/ Cabo Longo 33mm - LLC 33",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-LRJ-43",
+          "label": "43 mm",
+          "name": "Escova Cerâmica Laranja c/ Cabo Longo 43mm - LLC 43",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "18k-clp",
+      "name": "Escova Cerâmica Lilás CLP 18K",
+      "dimension": "Diâmetro",
+      "reason": "Mesmo produto e função; muda somente diâmetro.",
+      "variants": [
+        {
+          "sku": "ACS-ESC-CRM-15",
+          "label": "15 mm",
+          "name": "Escova em Cêramica Lilás Pinos Duplos CLP 15",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-CRM-34",
+          "label": "34 mm",
+          "name": "Escova em Cerâmica Lilás Pino Duplo - CLP 34",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "18k-cvg",
+      "name": "Escova Cerâmica Verde CVG 18K",
+      "dimension": "Diâmetro",
+      "reason": "Mesmo produto e função; muda somente diâmetro.",
+      "variants": [
+        {
+          "sku": "ACS-ESC-CRM-19",
+          "label": "19 mm",
+          "name": "Escova em Cerâmica Verde e Pinos Duplos Cód. CVG 19",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-CRM-27",
+          "label": "27 mm",
+          "name": "Escova em Cerâmica Verde e Pinos Duplos Cód. CVG 27",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-CRM-33",
+          "label": "33 mm",
+          "name": "Escova em Cerâmica Verde e Pinos Duplos Cód. CVG 33",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "18k-agc",
+      "name": "Escova Cerâmica Amarela AGC 18K",
+      "dimension": "Diâmetro",
+      "reason": "Mesmo produto e função; muda somente diâmetro.",
+      "variants": [
+        {
+          "sku": "ACS-ESC-AMR-19",
+          "label": "19 mm",
+          "name": "Escova Ceramica Amarela AGC 19",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-AMR-27",
+          "label": "27 mm",
+          "name": "Escova Ceramica Amarela AGC 27",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-AMR-33",
+          "label": "33 mm",
+          "name": "Escova Ceramica Amarela AGC 33",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-AMR-43",
+          "label": "43 mm",
+          "name": "Escova Ceramica Amarela Pont. Grossa AGC 43",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "18k-gxp",
+      "name": "Escova Térmica Dourada GXP 18K",
+      "dimension": "Diâmetro",
+      "reason": "Mesmo produto e função; muda somente diâmetro.",
+      "variants": [
+        {
+          "sku": "ACS-ESC-TMC-25",
+          "label": "25 mm",
+          "name": "Escova Dourada Termica Pontiagudo GXP 25",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-TMC-33",
+          "label": "33 mm",
+          "name": "Escova Dourada Termica Pontiagudo GXP 33",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-TMC-43",
+          "label": "43 mm",
+          "name": "Escova Dourada Termica Pontiagudo GXP 43",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-TMC-53",
+          "label": "53 mm",
+          "name": "Escova Dourada Termica Pontiaguda GXP 53",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "18k-gsl",
+      "name": "Escova Térmica Super Longa GSL 18K",
+      "dimension": "Diâmetro",
+      "reason": "Mesmo produto e função; muda somente diâmetro.",
+      "variants": [
+        {
+          "sku": "ACS-ESC-TMC-L25",
+          "label": "25 mm",
+          "name": "Escova Termica Super Longa GSL 25",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "ACS-ESC-TMC-L33",
+          "label": "33 mm",
+          "name": "Escova Termica Super Longa GSL 33",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "taiff-curves",
+      "name": "Modelador Taiff Curves Bivolt",
+      "dimension": "Diâmetro",
+      "reason": "Mesmo produto e função; muda somente diâmetro.",
+      "variants": [
+        {
+          "sku": "TIF-EQP-MDL-32",
+          "label": "32 mm",
+          "name": "Modelador Taiff Curves 11/4 Bivoit (32mm)",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "TIF-EQP-MDL-38",
+          "label": "38 mm",
+          "name": "Modelador Taiff Curves 11/2 Bivolt (38mm)",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "papel-standard",
+      "name": "Papel para Mechas Standard",
+      "dimension": "Formato",
+      "reason": "Mesmo produto e função; muda somente formato.",
+      "variants": [
+        {
+          "sku": "PPM-PAP-STD200F-60",
+          "label": "11 × 27 cm · 200 folhas",
+          "name": "Papel para Mechas: Standard 11x27 60g 200 Folhas",
+          "brand": "Marca a confirmar",
+          "size": "60 g + 200 folhas"
+        },
+        {
+          "sku": "PPM-PAP-STD120F-60",
+          "label": "11 × 47 cm · 120 folhas",
+          "name": "Papel para Mechas: Standard 11x47 60g 120 Folhas",
+          "brand": "Marca a confirmar",
+          "size": "60 g + 120 folhas"
+        }
+      ]
+    },
+    {
+      "id": "papel-standard-plus",
+      "name": "Papel para Mechas Standard Plus",
+      "dimension": "Formato",
+      "reason": "Mesmo produto e função; muda somente formato.",
+      "variants": [
+        {
+          "sku": "PPM-PAP-STP340F-60",
+          "label": "11 × 37 cm · 340 folhas",
+          "name": "Papel para Mechas: Standard Plus 11x37 60g 340 Folhas",
+          "brand": "Marca a confirmar",
+          "size": "60 g + 340 folhas"
+        },
+        {
+          "sku": "PPM-PAP-STP180F-60",
+          "label": "11 × 47 cm · 180 folhas",
+          "name": "Papel para Mechas: Standard Plus 11x47 60g 180 Folhas",
+          "brand": "Marca a confirmar",
+          "size": "60 g + 180 folhas"
+        }
+      ]
+    },
+    {
+      "id": "plaquete-premium",
+      "name": "Plaquete Cristal Premium Dentada 3 mm",
+      "dimension": "Formato",
+      "reason": "Mesmo produto e função; muda somente formato.",
+      "variants": [
+        {
+          "sku": "PPM-PRD-STD-1-01",
+          "label": "11 × 30 cm",
+          "name": "Plaquete Cristal Premium 11x30 3mm Dentada",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        },
+        {
+          "sku": "PPM-PRD-STD-1-02",
+          "label": "11 × 40 cm",
+          "name": "Plaquete Cristal Premium 11x40 3mm Dentada",
+          "brand": "Marca a confirmar",
+          "size": "Embalagem a confirmar"
+        }
+      ]
+    },
+    {
+      "id": "olenka-olenkolor",
+      "name": "Máscara de Tonalização Olenkolor",
+      "dimension": "Tonalidade",
+      "reason": "Linha Olenkolor 250 ml: variante de tonalização; rótulo de cada embalagem identificado individualmente.",
+      "variants": [
+        {
+          "sku": "OLK-COL-ACO-250",
+          "label": "Acobreados",
+          "name": "Olenkolor Acobreados 250ml",
+          "brand": "OLENKA",
+          "size": "250 ml"
+        },
+        {
+          "sku": "OLK-COL-DOU-250",
+          "label": "Loiro Dourado",
+          "name": "Olenkolor Loiro Dourado 250ml",
+          "brand": "OLENKA",
+          "size": "250 ml"
+        },
+        {
+          "sku": "OLK-COL-INT-250",
+          "label": "Loiro Intenso",
+          "name": "Olenkolor Loiro Intenso 250ml",
+          "brand": "OLENKA",
+          "size": "250 ml"
+        },
+        {
+          "sku": "OLK-COL-MIL-250",
+          "label": "Morenas Iluminadas",
+          "name": "Olenkolor Morenas Iluminadas 250ml",
+          "brand": "OLENKA",
+          "size": "250 ml"
+        },
+        {
+          "sku": "OLK-COL-PLA-250",
+          "label": "Platinados",
+          "name": "Olenkolor Platinados 250ml",
+          "brand": "OLENKA",
+          "size": "250 ml"
+        },
+        {
+          "sku": "OLK-COL-PRA-250",
+          "label": "Prateados",
+          "name": "Olenkolor Prateados 250ml",
+          "brand": "OLENKA",
+          "size": "250 ml"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "families": 65,
+    "variantSkus": 278,
+    "listingEntries": 488
+  }
+}

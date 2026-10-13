@@ -1,33 +1,62 @@
 # Catálogo profissional Fenié PRO
 
-Prévia do catálogo com busca, filtros, produtos agrupados por variantes, carrinho e geração de mensagem de demonstração.
+Catálogo com busca por nome ou código, filtros por marca e necessidade, variantes, pedido de demonstração e lista de reposição salva no navegador.
 
-## Abrir a prévia
+## Abrir ou publicar
 
-Baixe o repositório e abra `index.html` em um navegador. Não é necessário instalar dependências ou compilar o projeto. Fotos e dados estão embutidos no HTML; a fonte Google Fonts usa conexão com a internet e tem fontes locais como alternativa.
+Baixe o repositório completo e abra `index.html`. Mantenha a pasta `assets/` junto do HTML: ela contém as fotos, os estilos e o código do catálogo. Não há instalação de dependências ou compilação.
 
-Também é possível servir a pasta localmente:
+Para servir localmente:
 
 ```sh
 python -m http.server 8080
 ```
 
-Abra `http://localhost:8080`.
+Abra `http://localhost:8080`. Em uma hospedagem estática, envie `index.html` e a pasta `assets/` preservando a estrutura. GitHub Pages não está configurado por esta alteração.
 
-## Versão importada
+## Experiência visual e navegação
 
-- Arquivo de origem: `Fenie-Catalogo-Fotos-Previa (7).html`.
-- Importado em 13/10/2026 como `index.html`, sem alterações de conteúdo.
-- 701 opções comerciais, agrupadas em 488 produtos.
-- Preços identificados na prévia como tabela padrão Mercos de 07/10/2026.
-- Pedidos reais desativados. A mensagem gerada é uma demonstração.
+Atualização de 13/10/2026, inspirada na identidade do [site institucional da Fenié](https://feniecosmeticos.com.br/): títulos em Georgia, controles em Segoe UI/Arial, azul profundo, marfim e dourado discreto.
 
-## Pendências conhecidas
+- Início editorial com acesso a marcas, uso profissional, revenda e reposição.
+- Consulta de produtos em uma área própria com filtros ativos e ordenação próxima dos resultados.
+- Endereços que preservam filtros, busca e ordenação ao recarregar ou voltar de uma ficha.
+- Navegação inferior no celular e painel de filtros com controles de toque.
+- Fotos separadas em arquivos com carregamento sob demanda, sem alterar as imagens originais.
+- Correção da classificação das colorações Royal Fantasie e Mix MUP; pó descolorante preservado na categoria de descoloração.
+- Filtro explícito para os itens com marca a confirmar.
 
-- Corrigir a classificação de categorias: a Royal Fantasie Doha 8/89, SKU `DOH-COL-RYF-889`, aparece pela busca do código, mas é excluída ao filtrar por Coloração.
-- Revisar 203 opções sem foto, 111 com marca a confirmar, 275 com embalagem a confirmar e 175 com grupo não informado. Esses grupos podem se sobrepor.
-- Corrigir o grupo `hampoos e condicionadores`, separado de `Shampoos e condicionadores`.
-- Otimizar as imagens para publicação: o HTML completo tem aproximadamente 29,4 MB.
-- Confirmar preços, disponibilidade e atendimento antes de habilitar pedidos reais.
+### Rotas
 
-O repositório contém a prévia exportada; os arquivos-fonte que geraram esse HTML não fazem parte desta importação.
+| Caminho | Conteúdo |
+|---|---|
+| `#/` | Início |
+| `#/catalogo` | Produtos e filtros |
+| `#/marcas` | Marcas |
+| `#/selecoes` | Seleções e dicas para o salão |
+| `#/produto/<slug>` | Ficha e variantes |
+| `#/carrinho` | Seleção atual |
+| `#/resumo` | Revisão e mensagem de demonstração |
+| `#/reposicao` | Lista salva |
+
+Exemplo de filtro: `#/catalogo?q=DOH-COL-RYF-889&category=coloracao`. Parâmetros comerciais de campanha na URL continuam preservados.
+
+## Dados comerciais
+
+Origem: `Fenie-Catalogo-Fotos-Previa (7).html`, importado em 13/10/2026. São 701 opções comerciais, agrupadas em 488 produtos. O cadastro comercial, os preços e os SKUs foram preservados nesta atualização.
+
+Os preços são identificados na prévia como tabela padrão Mercos de 07/10/2026. Pedidos reais permanecem desativados; a mensagem gerada é marcada como demonstração.
+
+Pendências: 203 opções sem foto, 111 com marca a confirmar, 275 com embalagem a confirmar e 175 com grupo não informado. Esses grupos podem se sobrepor. É necessário confirmar preço, disponibilidade, fotos e atendimento antes de habilitar pedidos reais.
+
+## Organização
+
+- `index.html`: estrutura e navegação.
+- `assets/catalogue-base.css`: estilos da prévia de origem.
+- `assets/catalogue-premium.css`: identidade visual e ajustes responsivos.
+- `assets/catalogue.js`: dados, busca, filtros, variantes e pedido.
+- `assets/images/`: imagens extraídas da prévia, sem alteração dos bytes.
+- `docs/audits/`: registros de origem das fotos e variantes.
+- `docs/verificacao-ui-ux.md`: validação da atualização.
+
+Os arquivos-fonte anteriores à exportação HTML não fazem parte deste repositório.
