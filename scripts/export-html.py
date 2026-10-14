@@ -6,7 +6,7 @@ import sys
 
 root = Path(__file__).resolve().parents[1]
 html = (root / 'index.html').read_text(encoding='utf-8')
-for name in ('catalogue-base.css', 'catalogue-premium.css'):
+for name in ('catalogue-base.css', 'catalogue-premium.css', 'catalogue-mobile.css'):
     css = (root / 'assets' / name).read_text(encoding='utf-8')
     html = html.replace(f'<link rel="stylesheet" href="./assets/{name}">', f'<style>\n{css}\n</style>')
 js = (root / 'assets/catalogue.js').read_text(encoding='utf-8')

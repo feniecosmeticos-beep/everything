@@ -22,6 +22,7 @@ Atualização de 13/10/2026, inspirada na identidade do [site institucional da F
 - Consulta de produtos em uma área própria com filtros ativos e ordenação próxima dos resultados.
 - Endereços que preservam filtros, busca e ordenação ao recarregar ou voltar de uma ficha.
 - Navegação inferior no celular e painel de filtros com controles de toque.
+- Ajuste móvel de 14/10/2026: cabeçalho compacto, logos sobre branco, fotos sem mistura de cores, produtos em uma coluna e controles de compra sem sobreposição.
 - Fotos separadas em arquivos com carregamento sob demanda, sem alterar as imagens originais.
 - Correção da classificação das colorações Royal Fantasie e Mix MUP; pó descolorante preservado na categoria de descoloração.
 - Filtro explícito para os itens com marca a confirmar.
@@ -54,8 +55,10 @@ Pendências: 203 opções sem foto, 111 com marca a confirmar, 275 com embalagem
 - `index.html`: estrutura e navegação.
 - `assets/catalogue-base.css`: estilos da prévia de origem.
 - `assets/catalogue-premium.css`: identidade visual e ajustes responsivos.
+- `assets/catalogue-mobile.css`: correções finais de layout para celular e enquadramento dos logos.
 - `assets/catalogue.js`: dados, busca, filtros, variantes e pedido.
 - `assets/images/`: imagens extraídas da prévia, sem alteração dos bytes.
+- `assets/logos/`: logos originais das marcas.
 - `docs/audits/`: registros de origem das fotos e variantes.
 - `docs/verificacao-ui-ux.md`: validação da atualização.
 
