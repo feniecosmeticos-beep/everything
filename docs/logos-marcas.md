@@ -1,6 +1,6 @@
 # Logos das marcas no catálogo
 
-Incluídos em 14/10/2026 nos cartões de marcas do início e da página Marcas. Os nomes e a contagem de produtos foram mantidos; os cartões continuam abrindo o filtro da marca correspondente.
+Incluídos em 14/10/2026 nos cartões de marcas do início e da página Marcas. Os logos estão centralizados e os nomes repetidos abaixo deles foram removidos. A contagem de produtos foi mantida; os cartões continuam abrindo o filtro da marca correspondente. A identificação da marca permanece no logo e nos rótulos acessíveis.
 
 Os arquivos SVG são contêineres com a imagem original incorporada e um enquadramento ajustado para reduzir margens. As cores e os pixels das imagens de origem foram preservados. O logo Olenka é exibido em branco por CSS sobre o cartão azul.
 
