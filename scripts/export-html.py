@@ -1,0 +1,28 @@
+"""Export the catalogue as a standalone HTML file (standard library only)."""
+from pathlib import Path
+import base64
+import re
+import sys
+
+root = Path(__file__).resolve().parents[1]
+html = (root / 'index.html').read_text(encoding='utf-8')
+for name in ('catalogue-base.css', 'catalogue-premium.css'):
+    css = (root / 'assets' / name).read_text(encoding='utf-8')
+    html = html.replace(f'<link rel="stylesheet" href="./assets/{name}">', f'<style>\n{css}\n</style>')
+js = (root / 'assets/catalogue.js').read_text(encoding='utf-8')
+assert '</script' not in js.lower()
+html = html.replace('<script src="./assets/catalogue.js" defer></script>', f'<script>\n{js}\n</script>')
+cache = {}
+def embed(match):
+    name = match.group(0)
+    if name not in cache:
+        file = root / name[2:]
+        mime = {'.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp', '.svg': 'image/svg+xml'}[file.suffix]
+        cache[name] = 'data:' + mime + ';base64,' + base64.b64encode(file.read_bytes()).decode('ascii')
+    return cache[name]
+html = re.sub(r'\./assets/(?:images|logos)/[A-Za-z0-9_-]+\.(?:png|jpg|webp|svg)', embed, html)
+assert not re.search(r'(?:src|href)="\./assets/', html)
+assert '<script src=' not in html
+output = Path(sys.argv[1]) if len(sys.argv) > 1 else root / 'catalogo-standalone.html'
+output.write_text(html, encoding='utf-8')
+print(f'{output.name}: {output.stat().st_size} bytes; {len(cache)} embedded images')
