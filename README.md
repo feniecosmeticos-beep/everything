@@ -70,3 +70,11 @@ Pendências: 203 opções sem foto, 111 com marca a confirmar, 275 com embalagem
 - `scripts/import-ranking-xlsx.py`: leitura do relatório agregado, reconciliação das quantidades e cruzamento de nomes com SKUs; não publica faturamento histórico.
 
 Os arquivos-fonte anteriores à exportação HTML não fazem parte deste repositório.
+
+## Verificação e manutenção
+
+A revisão de 16/10/2026 utilizou REA 6.5.0 e testes de navegação, pedido e reposição. Consulte [o relatório](docs/revisao-rea.md) para falhas corrigidas, evidências e limitações.
+
+Execute `node --test scripts/tests/test-catalogue.cjs`, `python scripts/tests/test-sales.py` e `python scripts/tests/test-assets.py` para as 12 verificações automatizadas.
+
+Após editar CSS ou JavaScript, rode `python scripts/version-assets.py` para atualizar as versões por conteúdo no HTML. Para gerar uma versão independente: `python scripts/export-html.py catalogo-revisado.html`.
