@@ -1,0 +1,68 @@
+{
+  "period": {
+    "from": "2026-10-01",
+    "to": "2026-10-14"
+  },
+  "products": [
+    {
+      "product": "Shampoo Home Care Macadâmia Extreme Repair 300ml",
+      "brand": "PROHALL",
+      "units": 4,
+      "sourceRank": 97
+    },
+    {
+      "product": "Livro Olenka",
+      "brand": "OLENKA",
+      "units": 3,
+      "sourceRank": 113
+    },
+    {
+      "product": "Pincel de Base Angular MUP Makeup",
+      "brand": "MUP MAKEUP",
+      "units": 2,
+      "sourceRank": 134
+    },
+    {
+      "product": "Mini Royal Look (shampoo 120ml + Alisante 180ml)",
+      "brand": "OLENKA",
+      "units": 2,
+      "sourceRank": 139
+    },
+    {
+      "product": "Coloração 9-89 Louro Muito Claro Pérola",
+      "brand": "GLYNETT",
+      "units": 1,
+      "sourceRank": 175
+    },
+    {
+      "product": "Óleo Blond Vivance - 60ml",
+      "brand": "DO•HA",
+      "units": 1,
+      "sourceRank": 180
+    },
+    {
+      "product": "Shampoo Calmante Acalmia Spa do Fio 1000ml",
+      "brand": "SPA DO FIO",
+      "units": 1,
+      "sourceRank": 221
+    },
+    {
+      "product": "Terapia Express - Gabriela Niejelski",
+      "brand": "Não se aplica (curso)",
+      "units": 1,
+      "sourceRank": 224
+    },
+    {
+      "product": "Mascara Force Hair Prohall 500ml",
+      "brand": "PROHALL",
+      "units": 1,
+      "sourceRank": 225
+    },
+    {
+      "product": "Mascara Hydraté 500g",
+      "brand": "GLYNETT",
+      "units": 1,
+      "sourceRank": 233
+    }
+  ]
+}

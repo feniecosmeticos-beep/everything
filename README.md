@@ -26,6 +26,7 @@ Atualização de 13/10/2026, inspirada na identidade do [site institucional da F
 - Fotos separadas em arquivos com carregamento sob demanda, sem alterar as imagens originais.
 - Correção da classificação das colorações Royal Fantasie e Mix MUP; pó descolorante preservado na categoria de descoloração.
 - Filtro explícito para os itens com marca a confirmar.
+- Destaques: vitrine dos mais vendidos agrupada por linha e ranking completo por marca/classificação, com dados reais de 01 a 14/10/2026. MUP fica em uma única posição. Os combos estão pausados. Consulte `docs/destaques.md`.
 
 ### Rotas
 
@@ -34,6 +35,7 @@ Atualização de 13/10/2026, inspirada na identidade do [site institucional da F
 | `#/` | Início |
 | `#/catalogo` | Produtos e filtros |
 | `#/marcas` | Marcas |
+| `#/destaques` | Mais pedidos e ranking completo |
 | `#/selecoes` | Seleções e dicas para o salão |
 | `#/produto/<slug>` | Ficha e variantes |
 | `#/carrinho` | Seleção atual |
@@ -56,10 +58,15 @@ Pendências: 203 opções sem foto, 111 com marca a confirmar, 275 com embalagem
 - `assets/catalogue-base.css`: estilos da prévia de origem.
 - `assets/catalogue-premium.css`: identidade visual e ajustes responsivos.
 - `assets/catalogue-mobile.css`: correções finais de layout para celular e enquadramento dos logos.
+- `assets/catalogue-highlights.css`: vitrine de combos e rankings.
+- `assets/highlights-data.js`: conteúdo comercial dos destaques, gerado a partir do JSON.
+- `content/highlights.json`: combinações de SKUs e contagens agregadas de vendas por mês.
 - `assets/catalogue.js`: dados, busca, filtros, variantes e pedido.
 - `assets/images/`: imagens extraídas da prévia, sem alteração dos bytes.
 - `assets/logos/`: logos originais das marcas.
 - `docs/audits/`: registros de origem das fotos e variantes.
 - `docs/verificacao-ui-ux.md`: validação da atualização.
+- `scripts/import-sales.py`: preparação local dos rankings a partir de CSV, sem publicar dados de clientes ou números de pedido.
+- `scripts/import-ranking-xlsx.py`: leitura do relatório agregado, reconciliação das quantidades e cruzamento de nomes com SKUs; não publica faturamento histórico.
 
 Os arquivos-fonte anteriores à exportação HTML não fazem parte deste repositório.
