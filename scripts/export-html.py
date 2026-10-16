@@ -8,13 +8,14 @@ root = Path(__file__).resolve().parents[1]
 html = (root / 'index.html').read_text(encoding='utf-8')
 for name in ('catalogue-base.css', 'catalogue-premium.css', 'catalogue-mobile.css', 'catalogue-highlights.css'):
     css = (root / 'assets' / name).read_text(encoding='utf-8')
-    html = html.replace(f'<link rel="stylesheet" href="./assets/{name}">', f'<style>\n{css}\n</style>')
+    tag = re.compile(r'<link rel="stylesheet" href="\./assets/' + re.escape(name) + r'(?:\?v=[a-f0-9]+)?">')
+    html = tag.sub(lambda _: f'<style>\n{css}\n</style>', html)
 js = (root / 'assets/catalogue.js').read_text(encoding='utf-8')
 assert '</script' not in js.lower()
-html = html.replace('<script src="./assets/catalogue.js" defer></script>', f'<script>\n{js}\n</script>')
+html = re.sub(r'<script src="\./assets/catalogue\.js(?:\?v=[a-f0-9]+)?" defer></script>', lambda _: f'<script>\n{js}\n</script>', html)
 highlights = (root / 'assets/highlights-data.js').read_text(encoding='utf-8')
 assert '</script' not in highlights.lower()
-html = html.replace('<script src="./assets/highlights-data.js" defer></script>', f'<script>\n{highlights}\n</script>')
+html = re.sub(r'<script src="\./assets/highlights-data\.js(?:\?v=[a-f0-9]+)?" defer></script>', lambda _: f'<script>\n{highlights}\n</script>', html)
 cache = {}
 def embed(match):
     name = match.group(0)

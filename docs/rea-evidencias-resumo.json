@@ -1,0 +1,60 @@
+{
+  "tool": "rea-agents",
+  "version": "6.5.0",
+  "repository": "https://github.com/morluto/rea",
+  "sourcePaths": [
+    "assets/catalogue.js",
+    "assets/highlights-data.js"
+  ],
+  "before": {
+    "evidenceId": "ev_e16aff1cc86718d9cf40d312d5b0d9ca5d4a64f31e783f47fd9edd95e65d4253",
+    "statistics": {
+      "relevant_files": 11,
+      "nested_asar_containers": 0,
+      "text_bytes_read": 710102,
+      "invalid_utf8_files": 0,
+      "parsed_javascript_files": 2,
+      "visited_ast_nodes": 66579,
+      "findings": 11,
+      "modules": 0,
+      "parse_failures": 0
+    }
+  },
+  "after": {
+    "evidenceId": "ev_49d5d521a03b7a96fd5bff4a207507b5e2d3c47caa902b01e7005e5e0e957570",
+    "statistics": {
+      "relevant_files": 12,
+      "nested_asar_containers": 0,
+      "text_bytes_read": 710890,
+      "invalid_utf8_files": 0,
+      "parsed_javascript_files": 2,
+      "visited_ast_nodes": 66660,
+      "findings": 11,
+      "modules": 0,
+      "parse_failures": 0
+    }
+  },
+  "routerTrace": {
+    "evidenceId": "ev_e750039170334765b0fb447eab354e79af33e5dfe61ea469854a77c2fbfc74dd",
+    "total_seed_matches": 1,
+    "traversed_nodes": 4,
+    "traversed_relations": 3,
+    "traversed_functions": 4,
+    "traversed_modules": 1,
+    "relevant_unknowns": 9,
+    "status": "found",
+    "coverage": {
+      "status": "partial"
+    }
+  },
+  "commercialDataPreserved": true,
+  "limitations": [
+    "Caller-selected source analysis leaves 9 inventoried files outside analysis scope. Inventory identity covers the complete artifact; relationships through unselected sources remain unknown.",
+    "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+    "Graph coverage is incomplete; unavailable facts remain explicit and must not be read as absence.",
+    "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+    "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+    "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+    "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+  ]
+}
