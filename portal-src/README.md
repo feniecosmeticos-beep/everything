@@ -23,10 +23,10 @@ Cinco testes dos formulários passaram (`npm test`). `tests/rls.sql` valida perm
 ## Prévia e ativação
 
 Prévia protegida da Vercel: https://catalogofenie-73uj1ajze-feniecosmeticos-3642s-projects.vercel.app/
-O catálogo de produção não foi substituído. Validar cadastro, entrega de e-mail e login do administrador antes de liberar clientes. Conferir SMTP próprio para envio a clientes externos e configurar o domínio definitivo em Authentication > URL Configuration antes de produção. Não desativar confirmação de e-mail. A prévia mantém Vercel Authentication.
+O catálogo de produção não foi substituído. Validar cadastro, entrega de e-mail e login do administrador antes de liberar clientes. O SMTP próprio foi salvo; configurar o domínio definitivo em Authentication > URL Configuration antes de produção. Não desativar confirmação de e-mail. A prévia mantém Vercel Authentication.
 
 ## Limites desta etapa
 
 Pagamento é preferência informada ao atendimento; não existe cobrança automática. Frete e disponibilidade são confirmados pela equipe. Envio ao WhatsApp abre a mensagem preenchida para a pessoa confirmar. Lista de reposição e rascunho do carrinho ficam no navegador por conta; pedidos, perfis, endereços e alterações administrativas ficam no banco. Login de ponta a ponta aguarda o cadastro e a confirmação do e-mail do administrador; o agente não criou senha nem enviou mensagens ou pedidos reais.
 
-O Resend foi provisionado no plano Free e conectado ao ambiente de prévia. A ativação do domínio e o SMTP do Supabase ainda estão pendentes; veja EMAIL-SETUP.md e os modelos em supabase/templates/.
+O Resend está no plano Free, conectado à prévia. auth.feniecosmeticos.com.br foi verificado; os três registros DNS foram conferidos sem alterar o MX principal. O SMTP do Supabase foi salvo pelo responsável. Os modelos de confirmação e recuperação foram publicados e conferidos no painel. A entrega real e o primeiro login ainda aguardam o cadastro do administrador; veja EMAIL-SETUP.md.

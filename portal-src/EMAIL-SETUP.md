@@ -1,6 +1,6 @@
 # Ativação dos e-mails do Portal Fenié
 
-O serviço Resend foi criado no plano Free e conectado apenas ao ambiente de prévia do projeto catalogofenie. Recurso: fenie-portal-email. O onboarding e a validação DNS ainda precisam ser concluídos.
+O serviço Resend foi criado no plano Free e conectado apenas ao ambiente de prévia do projeto catalogofenie. Recurso: fenie-portal-email. Domínio verificado, SMTP salvo pelo responsável e modelos de confirmação e recuperação publicados no Supabase. A entrega real de e-mail e o primeiro login ainda aguardam o cadastro do administrador.
 
 1. Abra o recurso Resend pela Vercel: https://vercel.com/d/dashboard/integrations/resend/icfg_KFx8RAktDljiwzrdhO6fGlQR/resources/ir_8HLuXKy7A6sbsD7J
 2. No Resend, valide auth.feniecosmeticos.com.br com os registros exatos que o painel fornecer. A zona DNS pública do domínio usa ns902.hostgator.com.br e ns903.hostgator.com.br. Não inventar o valor DKIM nem substituir o MX do domínio principal.
