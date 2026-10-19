@@ -28,7 +28,8 @@ function environment(search='',otpError=null,role='client'){
   await events.click[0]({target:{closest:()=>button}});return button;
  }
  async function change(target){await events.change[0]({target});}
- return {calls,context,rows,ready,submit,click,change,root,historyCalls,api:context.window.testPortal};
+ async function clickAll(target){for(const fn of events.click)await fn({target,preventDefault(){}});}
+ return {calls,context,rows,ready,submit,click,change,clickAll,root,historyCalls,api:context.window.testPortal};
 }
 test('login usa Supabase e lê o perfil aprovado do banco',async()=>{
  const e=environment();await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'senha de teste'}, {role:'client'});
@@ -161,12 +162,67 @@ test('pedido do salão tem botão Enviar para o WhatsApp e aviso de que só vale
  assert.doesNotMatch(e.root.innerHTML,/Ver mensagem do WhatsApp/);
 });
 
-test('trocar categoria ou marca filtra na hora, sem botão Buscar',async()=>{
+test('categorias em botões filtram com um toque e a marca filtra na hora',async()=>{
  const e=environment();await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
  e.context.location.hash='#/cliente/catalogo';e.api.render();
- assert.doesNotMatch(e.root.innerHTML,/>Buscar</);assert.match(e.root.innerHTML,/>Categorias</);
- const form={dataset:{form:'catalog-search'},data:{q:'',brand:'',category:'Máscaras'},querySelector:()=>null};
- const select={tagName:'SELECT',dataset:{},name:'category',hasAttribute:()=>false,closest:()=>form};
- await e.change(select);
+ assert.doesNotMatch(e.root.innerHTML,/>Buscar</);assert.match(e.root.innerHTML,/data-action="category-chip" data-category="Máscaras"/);
+ const chip={dataset:{action:'category-chip',category:'Máscaras'}};chip.closest=sel=>sel==='[data-action]'?chip:null;await e.clickAll(chip);
  assert.match(e.root.innerHTML,/Máscara Nutrição/);assert.doesNotMatch(e.root.innerHTML,/<h3>Produto<\/h3>/);
+ const form={dataset:{form:'catalog-search'},data:{q:'',brand:'Fenié',category:''},querySelector:()=>null};
+ await e.change({tagName:'SELECT',dataset:{},name:'brand',hasAttribute:()=>false,closest:()=>form});
+ assert.match(e.root.innerHTML,/<h3>Produto<\/h3>/);assert.doesNotMatch(e.root.innerHTML,/Máscara Nutrição/);
+});
+
+const ORDER=()=>({id:'FEN-00000009',user_id:'client-1',created_at:'2026-10-19T12:00:00Z',status:'waiting',whatsapp_sent_at:null,payment_method:'pix',installments:1,items:[{productId:'p1',variantId:'v1',name:'Produto',volume:'900 ml',sku:'SKU',price:4250,quantity:2}],address:{label:'Salão',street:'Rua, 1',district:'Centro',city:'Curitiba',uf:'PR',cep:'80000000',complement:''},notes:'',events:[{date:'2026-10-19T12:00:00Z',text:'Solicitação registrada'}],total_cents:8500});
+test('pedido não enviado aparece no início do salão e o clique em enviar fica registrado',async()=>{
+ const e=environment();e.rows.fenie_orders=[ORDER()];await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.location.hash='#/cliente';e.api.render();
+ assert.match(e.root.innerHTML,/ainda não foi enviado pelo WhatsApp/);assert.match(e.root.innerHTML,/data-wa-order="FEN-00000009"/);
+ const anchor={dataset:{waOrder:'FEN-00000009'}};anchor.closest=sel=>sel==='[data-wa-order]'?anchor:null;
+ await e.clickAll(anchor);
+ assert.equal(e.calls.filter(c=>c[0]==='fenie_mark_whatsapp').length,1);
+ e.api.render();assert.doesNotMatch(e.root.innerHTML,/ainda não foi enviado/);
+ await e.clickAll(anchor);assert.equal(e.calls.filter(c=>c[0]==='fenie_mark_whatsapp').length,1);
+});
+test('admin filtra não enviados e confirma recebimento pelo WhatsApp',async()=>{
+ const e=environment('',null,'admin');const sent={...ORDER(),id:'FEN-00000010',whatsapp_sent_at:'2026-10-19T12:05:00Z'};e.rows.fenie_orders=[ORDER(),sent];
+ e.rows.fenie_profiles.push({id:'client-x',role:'client',status:'approved',name:'X',salon:'Salão X',email:'x@example.invalid',phone:''});
+ await e.ready();await e.submit('login',{email:'equipe@example.invalid',password:'teste'},{role:'admin'});
+ e.context.location.hash='#/admin/pedidos';e.api.render();
+ assert.match(e.root.innerHTML,/Não enviados pelo WhatsApp/);assert.match(e.root.innerHTML,/WhatsApp aberto/);
+ await e.change({tagName:'SELECT',dataset:{},hasAttribute:n=>n==='data-status-filter',value:'unsent',closest:()=>null});
+ assert.match(e.root.innerHTML,/FEN-00000009/);assert.doesNotMatch(e.root.innerHTML,/FEN-00000010/);
+ const b={dataset:{action:'order-received',id:'FEN-00000009'}};b.closest=sel=>sel==='[data-action]'?b:null;await e.clickAll(b);
+ const call=e.calls.find(c=>c[0]==='fenie_update_order');assert.equal(call[1].p_status,'confirmed');
+});
+
+test('card já vem com a primeira opção e adiciona a quantidade escolhida',async()=>{
+ const e=environment();e.rows.fenie_products[1].variants.push({id:'v3',sku:'MSK-1K',label:'1 kg',price:15000});
+ await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.location.hash='#/cliente/catalogo';e.api.render();
+ assert.doesNotMatch(e.root.innerHTML,/Escolher opção/);
+ const card={querySelector:()=>({textContent:''})};
+ const btn=(action,delta)=>{const b={dataset:{action,id:'p2',delta}};b.closest=sel=>sel==='[data-action]'?b:sel==='[data-product]'?card:null;return b;};
+ await e.clickAll(btn('card-qty','1'));await e.clickAll(btn('card-qty','1'));
+ await e.clickAll(btn('add-product'));
+ assert.equal(e.api.getState().cart.v2,3);
+});
+
+test('início oferece repetir o último pedido e a reposição adiciona tudo de uma vez',async()=>{
+ const e=environment();e.rows.fenie_orders=[ORDER()];await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.location.hash='#/cliente';e.api.render();
+ assert.match(e.root.innerHTML,/data-action="reorder" data-id="FEN-00000009">Repetir último pedido/);
+ e.api.getState().saved=['p1','p2'];e.context.location.hash='#/cliente/reposicao';e.api.render();
+ assert.match(e.root.innerHTML,/Adicionar todos ao pedido/);
+ const b={dataset:{action:'add-saved'}};b.closest=sel=>sel==='[data-action]'?b:null;await e.clickAll(b);
+ assert.equal(e.api.getState().cart.v1,1);assert.equal(e.api.getState().cart.v2,1);
+});
+
+test('admin altera o preço direto na tabela para produto de opção única',async()=>{
+ const e=environment('',null,'admin');await e.ready();await e.submit('login',{email:'equipe@example.invalid',password:'teste'},{role:'admin'});
+ e.context.location.hash='#/admin/catalogo';e.api.render();
+ assert.match(e.root.innerHTML,/data-form="inline-price" data-id="p1"/);
+ await e.submit('inline-price',{price:'49,90'},{id:'p1'});
+ const [,op,row]=e.calls.find(c=>c[0]==='fenie_products');assert.equal(op,'update');assert.equal(row.variants[0].price,4990);assert.equal(row.variants[0].id,'v1');
+ const err=await e.submit('inline-price',{price:'0'},{id:'p1'});assert.match(err.textContent,/preço válido/);
 });
