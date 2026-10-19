@@ -16,6 +16,13 @@ const statusNames={waiting:'Aguardando atendimento',confirmed:'Confirmado',separ
 function badge(s){const label=statusNames[s]||{pending:'Aguardando aprovação',approved:'Aprovado',denied:'Não aprovado'}[s]||s,cls=['delivered','confirmed','approved'].includes(s)?'approved':['waiting','pending'].includes(s)?'waiting':['cancelled','denied'].includes(s)?'cancelled':'separating';return '<span class="badge '+cls+'">'+C(label)+'</span>';}
 function makeState(){return {products:[],clients:[],orders:[],cart:{},saved:[],checkout:{addressId:'',method:'combinar',installments:'2',notes:''}};}
 let state=makeState(),loading=true,syncVersion=0,recoveryMode=new URLSearchParams(location.search).has('recovery'),lastSync=0;
+const emailParams=new URLSearchParams(location.search);
+let emailLink=emailParams.has('token_hash')?{token:emailParams.get('token_hash'),type:emailParams.get('type')}:null;
+if(emailLink)history.replaceState(null,'',location.pathname+'#/confirmar-email');
+function emailLinkScreen(message=''){
+ const valid=emailLink&&['email','recovery'].includes(emailLink.type)&&/^[a-zA-Z0-9_-]{20,256}$/.test(emailLink.token||''),recover=emailLink?.type==='recovery';
+ root.innerHTML=publicHead()+'<main id="main" tabindex="-1" style="max-width:620px;margin:50px auto;padding:0 20px"><section class="card empty"><p class="eyebrow">PORTAL FENIÉ</p><h1>'+(recover?'Recupere seu acesso.':'Confirme seu e-mail.')+'</h1><p>'+(message||'Para continuar, confirme que você solicitou este '+(recover?'link de recuperação.':'cadastro.'))+'</p>'+(valid&&!message?'<form data-form="verify-email"><p class="form-error" data-form-error role="alert" hidden></p><button class="btn primary" type="submit">'+(recover?'Continuar para nova senha':'Confirmar meu e-mail')+'</button></form>':'<p role="alert">Solicite um novo link ou entre com sua senha caso já tenha confirmado o e-mail.</p><a class="btn primary" href="#/recuperar" data-action="email-link-leave">Recuperar acesso</a><a class="btn ghost" href="#/entrar" data-action="email-link-leave">Voltar para entrar</a>')+'</section></main>'+publicFoot();
+}
 function draftKey(){return STORE+'.'+(session?.clientId||'visitor');}
 function readDraft(){try{const d=JSON.parse(localStorage.getItem(draftKey()));state.cart=d?.cart||{};state.saved=d?.saved||[];state.checkout=d?.checkout||{addressId:'',method:'combinar',installments:'2',notes:''};}catch{state.cart={};state.saved=[];}}
 function persist(){try{localStorage.setItem(draftKey(),JSON.stringify({cart:state.cart,saved:state.saved,checkout:state.checkout}));}catch{toast('A seleção ficará disponível apenas nesta aba.');}}
@@ -162,6 +169,7 @@ function productModal(id){
 }
 function error(form,text){const el=form.querySelector('[data-form-error]');if(el){el.textContent=text;el.hidden=false;}else toast(text);}
 function render(){
+ if(emailLink){emailLinkScreen();return;}
  const path=route();if(loading)return;if(modal.open)modal.close();
  if(path.startsWith('/admin')&&path!=='/admin/entrar'&&session?.role!=='admin'){go('/admin/entrar');return;}
  if(path.startsWith('/cliente')&&session?.role!=='client'){go('/entrar');return;}
@@ -194,17 +202,24 @@ document.addEventListener('submit',async event=>{
  const kind=form.dataset.form,data=new FormData(form),get=n=>String(data.get(n)||'').trim();
  form.dataset.busy='1';setBusy(form,true);
  try{
+ if(kind==='verify-email'){
+  if(!emailLink||!['email','recovery'].includes(emailLink.type)||!/^[a-zA-Z0-9_-]{20,256}$/.test(emailLink.token||''))throw new Error('Link inválido. Solicite um novo e-mail.');
+  const link=emailLink;
+  try{checked(await backend.auth.verifyOtp({token_hash:link.token,type:link.type}));}
+  catch(e){emailLinkScreen('Este link expirou ou já foi utilizado.');return;}
+  emailLink=null;recoveryMode=link.type==='recovery';await syncAccount(true);return;
+ }
  if(kind==='login'){
   checked(await backend.auth.signInWithPassword({email:get('email'),password:String(data.get('password')||'')}));await syncAccount();
   if(form.dataset.role!==session?.role)throw new Error('Sua conta não tem acesso a esta área. Use a área correspondente ao seu perfil.');
   go(session.role==='admin'?'/admin':client().status==='approved'?'/cliente':'/cliente/aguardando');return;
  }
  if(kind==='register'){
-  const result=checked(await backend.auth.signUp({email:get('email'),password:String(data.get('password')||''),options:{emailRedirectTo:location.origin+location.pathname,data:{application:'fenie_portal',name:get('name'),salon:get('salon'),phone:get('phone')}}}));
+  const result=checked(await backend.auth.signUp({email:get('email'),password:String(data.get('password')||''),options:{emailRedirectTo:__AUTH_SITE_URL__,data:{application:'fenie_portal',name:get('name'),salon:get('salon'),phone:get('phone')}}}));
   if(result.session){await syncAccount(true);}else showModal('Confirme seu e-mail','<p>Confira sua caixa de entrada para confirmar o endereço e depois entre no portal. Se o e-mail já estiver cadastrado, use a recuperação de senha.</p><a class="btn primary" href="#/entrar">Voltar para entrar</a>');return;
  }
  if(kind==='recover'){
-  checked(await backend.auth.resetPasswordForEmail(get('email'),{redirectTo:location.origin+location.pathname+'?recovery=1'}));
+  checked(await backend.auth.resetPasswordForEmail(get('email'),{redirectTo:__AUTH_SITE_URL__+'?recovery=1'}));
   showModal('Confira seu e-mail','<p>Se houver uma conta vinculada a este e-mail, você receberá as instruções para recuperar o acesso.</p><button class="btn primary" data-action="recover-done">Voltar para entrar</button>');return;
  }
  if(kind==='reset-password'){
@@ -258,6 +273,7 @@ document.addEventListener('click',async event=>{
  const button=event.target.closest('[data-action]');if(!button)return;const action=button.dataset.action,id=button.dataset.id;
  if(button.dataset.busy)return;button.dataset.busy='1';
  try{
+ if(action==='email-link-leave'){emailLink=null;await syncAccount();return;}
  if(action==='refresh'){await syncAccount();return;}
  if(action==='modal-close'){modal.close();return;}
  if(action==='logout'){persist();await signOut();return;}
@@ -294,6 +310,6 @@ document.addEventListener('click',async event=>{
 window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);document.querySelector('#main')?.focus({preventScroll:true});});
 document.addEventListener('click',event=>{const link=event.target.closest('a[href="#main"]');if(link){event.preventDefault();document.querySelector('#main')?.focus();}});
 root.innerHTML='<main class="content"><p role="status">Carregando o Portal Fenié…</p></main>';
-backend.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY')recoveryMode=true;if(['SIGNED_OUT','PASSWORD_RECOVERY'].includes(event))setTimeout(()=>syncAccount().catch(()=>{}),0);});
-syncAccount().catch(()=>{});
+backend.auth.onAuthStateChange((event)=>{if(event==='PASSWORD_RECOVERY')recoveryMode=true;if(!emailLink&&['SIGNED_OUT','PASSWORD_RECOVERY'].includes(event))setTimeout(()=>syncAccount().catch(()=>{}),0);});
+if(emailLink)emailLinkScreen();else syncAccount().catch(()=>{});
 })();

@@ -18,15 +18,20 @@ O e-mail inicial foi cadastrado de forma privada pelo proprietário em `fenie_pr
 
 ## Validação
 
-Cinco testes dos formulários passaram (`npm test`). `tests/rls.sql` valida permissões, isolamento entre contas, bloqueio de autoaprovação, preços do servidor, parcelas e idempotência em transação com rollback. A execução no projeto isolado passou e não deixou contas ou pedidos fictícios. API pública: 488 produtos/712 opções, HTTP 200. Perfis e pedidos sem login: HTTP 401. Schema privado pela API: HTTP 406. Advisor de segurança sem apontamentos.
+Nove testes dos formulários e retornos de autenticação passaram (`npm test`). `tests/rls.sql` valida permissões, isolamento entre contas, bloqueio de autoaprovação, preços do servidor, parcelas e idempotência em transação com rollback. A execução no projeto isolado passou e não deixou contas ou pedidos fictícios. API pública: 488 produtos/712 opções, HTTP 200. Perfis e pedidos sem login: HTTP 401. Schema privado pela API: HTTP 406. Advisor de segurança sem apontamentos.
 
-## Prévia e ativação
+## Publicação e autenticação
 
-Prévia protegida da Vercel: https://catalogofenie-73uj1ajze-feniecosmeticos-3642s-projects.vercel.app/
-O catálogo de produção não foi substituído. Validar cadastro, entrega de e-mail e login do administrador antes de liberar clientes. O SMTP próprio foi salvo; configurar o domínio definitivo em Authentication > URL Configuration antes de produção. Não desativar confirmação de e-mail. A prévia mantém Vercel Authentication.
+Portal público: https://fenie-portal.vercel.app/ (projeto Vercel independente fenie-portal). O catálogo público original permanece em https://catalogofenie.vercel.app/.
+
+A antiga prévia catalogofenie-73uj1ajze estava protegida pela Vercel e bloqueava o retorno dos e-mails no celular. Não compartilhar esse endereço com clientes. O Site URL do Supabase e o authSiteUrl da compilação agora apontam para o portal público. Os modelos de confirmação e recuperação usam SiteURL + TokenHash, consumido por verifyOtp após confirmação explícita na página. Isso permite abrir o e-mail em outro navegador, sem depender do verificador PKCE salvo no navegador do cadastro. O token é removido do endereço antes da interface e das imagens; a página usa no-referrer. Tipos aceitos: email e recovery. Links expirados exibem orientação para recuperar acesso.
+
+Publicação: compilar dist/ e publicar apenas esses arquivos no projeto prj_x9viwDxrFO2Yw4Vy9FtRllUvBWHU, equipe team_zVxyPLv78v2KAQHVfo81tSxh. Não substituir o projeto catalogofenie. A branch do portal continua separada e o PR permanece em rascunho até validar o administrador.
+
+O salão de teste já confirmou o e-mail e está pendente de aprovação; basta entrar com a senha existente no endereço novo. A entrega e a confirmação do e-mail anterior foram observadas no banco. O novo fluxo por link ainda exige um teste humano real. O primeiro administrador autorizado ainda precisa se cadastrar e confirmar o próprio e-mail.
 
 ## Limites desta etapa
 
-Pagamento é preferência informada ao atendimento; não existe cobrança automática. Frete e disponibilidade são confirmados pela equipe. Envio ao WhatsApp abre a mensagem preenchida para a pessoa confirmar. Lista de reposição e rascunho do carrinho ficam no navegador por conta; pedidos, perfis, endereços e alterações administrativas ficam no banco. Login de ponta a ponta aguarda o cadastro e a confirmação do e-mail do administrador; o agente não criou senha nem enviou mensagens ou pedidos reais.
+Pagamento é preferência informada ao atendimento; não existe cobrança automática. Frete e disponibilidade são confirmados pela equipe. Envio ao WhatsApp abre a mensagem preenchida para a pessoa confirmar. Lista de reposição e rascunho do carrinho ficam no navegador por conta; pedidos, perfis, endereços e alterações administrativas ficam no banco. O primeiro acesso administrativo e o novo fluxo completo de recuperação aguardam teste humano; o agente não criou senha nem enviou mensagens ou pedidos reais.
 
 O Resend está no plano Free, conectado à prévia. auth.feniecosmeticos.com.br foi verificado; os três registros DNS foram conferidos sem alterar o MX principal. O SMTP do Supabase foi salvo pelo responsável. Os modelos de confirmação e recuperação foram publicados e conferidos no painel. A entrega real e o primeiro login ainda aguardam o cadastro do administrador; veja EMAIL-SETUP.md.
