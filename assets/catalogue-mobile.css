@@ -195,3 +195,6 @@ html { color-scheme: only light; }
   .purchase-row .primary { width: 100%; }
   .brand-card-mark .brand-logo-art { width: min(112px,calc(54px * var(--logo-ratio))); }
 }
+
+/* Pedido real: CTA legível e sem conflito com navegação móvel. */
+.whatsapp-order{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;min-height:48px;margin:0 0 12px;max-width:100%;white-space:normal;text-align:center}.review-main>.secondary{display:block;margin-bottom:16px}.variant-card .product-identity{overflow-wrap:anywhere}

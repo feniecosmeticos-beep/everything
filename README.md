@@ -1,6 +1,6 @@
 # Catálogo profissional Fenié PRO
 
-Catálogo com busca por nome ou código, filtros por marca e necessidade, variantes, pedido de demonstração e lista de reposição salva no navegador.
+Catálogo com busca por nome ou código, filtros por marca e necessidade, variantes, pedido pelo WhatsApp e lista de reposição salva no navegador.
 
 ## Abrir ou publicar
 
@@ -39,18 +39,18 @@ Atualização de 13/10/2026, inspirada na identidade do [site institucional da F
 | `#/selecoes` | Seleções e dicas para o salão |
 | `#/produto/<slug>` | Ficha e variantes |
 | `#/carrinho` | Seleção atual |
-| `#/resumo` | Revisão e mensagem de demonstração |
+| `#/resumo` | Revisão e envio pelo WhatsApp |
 | `#/reposicao` | Lista salva |
 
 Exemplo de filtro: `#/catalogo?q=DOH-COL-RYF-889&category=coloracao`. Parâmetros comerciais de campanha na URL continuam preservados.
 
 ## Dados comerciais
 
-Origem: `Fenie-Catalogo-Fotos-Previa (7).html`, importado em 13/10/2026. São 701 opções comerciais, agrupadas em 488 produtos. O cadastro comercial, os preços e os SKUs foram preservados nesta atualização.
+Origem: `Fenie-Catalogo-Fotos-Previa (7).html`, importado em 13/10/2026. A importação original tinha 701 opções, agrupadas em 488 produtos. Em 19/10/2026, os três oxidantes agregados receberam 14 variações conferidas no Mercos: são 712 opções selecionáveis e três registros agregados ocultos para preservar vínculos históricos.
 
-Os preços são identificados na prévia como tabela padrão Mercos de 07/10/2026. Pedidos reais permanecem desativados; a mensagem gerada é marcada como demonstração.
+A tabela geral é de 07/10/2026; os 14 oxidantes foram conferidos em 19/10/2026. Pedidos pelo WhatsApp +55 41 9840-2800 estão habilitados: o cliente confere e envia a mensagem. Disponibilidade, frete e condições dependem do atendimento. Consulte [oxidantes e WhatsApp](docs/oxidantes-e-whatsapp.md).
 
-Pendências: 203 opções sem foto, 111 com marca a confirmar, 275 com embalagem a confirmar e 175 com grupo não informado. Esses grupos podem se sobrepor. É necessário confirmar preço, disponibilidade, fotos e atendimento antes de habilitar pedidos reais.
+Pendências do restante do cadastro: 200 opções sem foto, 111 com marca a confirmar, 275 com embalagem a confirmar e 175 com grupo não informado. Esses grupos podem se sobrepor. Esses campos e a disponibilidade devem ser conferidos pelo atendimento antes de confirmar a compra.
 
 ## Organização
 
@@ -75,6 +75,6 @@ Os arquivos-fonte anteriores à exportação HTML não fazem parte deste reposit
 
 A revisão de 16/10/2026 utilizou REA 6.5.0 e testes de navegação, pedido e reposição. Consulte [o relatório](docs/revisao-rea.md) para falhas corrigidas, evidências e limitações.
 
-Execute `node --test scripts/tests/test-catalogue.cjs`, `python scripts/tests/test-sales.py` e `python scripts/tests/test-assets.py` para as 12 verificações automatizadas.
+Execute `node --test scripts/tests/test-catalogue.cjs`, `python scripts/tests/test-sales.py` e `python scripts/tests/test-assets.py` para as 15 verificações automatizadas.
 
 Após editar CSS ou JavaScript, rode `python scripts/version-assets.py` para atualizar as versões por conteúdo no HTML. Para gerar uma versão independente: `python scripts/export-html.py catalogo-revisado.html`.

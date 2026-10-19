@@ -1,0 +1,165 @@
+{
+  "checkedAt": "2026-10-19",
+  "source": "Mercos — preço de tabela e variações, conferidos na listagem de produtos",
+  "notes": [
+    "Doha não possui SKU por variação no Mercos; códigos internos únicos não são exibidos como SKU comercial.",
+    "Fotos da linha de 20 Vol identificadas como ilustrativas quando não correspondem à volumagem selecionada.",
+    "Vendas históricas dos cadastros agregados permanecem agrupadas por família; não foram distribuídas por volumagem."
+  ],
+  "variants": [
+    {
+      "sku": "OLK-OX-10V-900",
+      "commercialSku": "OLK-OX-10V-900",
+      "mercosVariantId": "253386446",
+      "parentSku": "OLK-OX-BLT-900",
+      "volume": "10 Vol",
+      "priceCents": 4250,
+      "image": "./assets/images/ox-olenka-linha-20.png",
+      "photoKind": "family",
+      "source": "Mercos: imagem da família OLK-OX-BLT-900"
+    },
+    {
+      "sku": "OLK-OX-20V-900",
+      "commercialSku": "OLK-OX-20V-900",
+      "mercosVariantId": "253386447",
+      "parentSku": "OLK-OX-BLT-900",
+      "volume": "20 Vol",
+      "priceCents": 4250,
+      "image": "./assets/images/ox-olenka-20.jpg",
+      "photoKind": "product",
+      "source": "https://loja.olenkacosmeticos.com.br/produto/creme-ativador-hidratante-20-vol-blond-tech-900ml/"
+    },
+    {
+      "sku": "OLK-OX-30V-900",
+      "commercialSku": "OLK-OX-30V-900",
+      "mercosVariantId": "253386448",
+      "parentSku": "OLK-OX-BLT-900",
+      "volume": "30 Vol",
+      "priceCents": 4250,
+      "image": "./assets/images/ox-olenka-30.jpg",
+      "photoKind": "product",
+      "source": "https://loja.olenkacosmeticos.com.br/produto/creme-ativador-hidratante-30-vol-blond-tech-900ml/"
+    },
+    {
+      "sku": "OLK-OX-35V-900",
+      "commercialSku": "OLK-OX-35V-900",
+      "mercosVariantId": "253386449",
+      "parentSku": "OLK-OX-BLT-900",
+      "volume": "35 Vol",
+      "priceCents": 5400,
+      "image": "./assets/images/ox-olenka-35.jpg",
+      "photoKind": "product",
+      "source": "https://loja.olenkacosmeticos.com.br/produto/creme-ativador-hidratante-35-vol-blond-x-900ml/"
+    },
+    {
+      "sku": "OLK-OX-40V-900",
+      "commercialSku": "OLK-OX-40V-900",
+      "mercosVariantId": "253386450",
+      "parentSku": "OLK-OX-BLT-900",
+      "volume": "40 Vol",
+      "priceCents": 4250,
+      "image": "./assets/images/ox-olenka-40.jpg",
+      "photoKind": "product",
+      "source": "https://loja.olenkacosmeticos.com.br/produto/creme-ativador-hidratante-40-vol-blond-tech-900ml/"
+    },
+    {
+      "sku": "MC-OX-06V",
+      "commercialSku": "MC-OX-06V",
+      "mercosVariantId": "253386649",
+      "parentSku": "MC-OX-900",
+      "volume": "6 Vol",
+      "priceCents": 4250,
+      "image": "./assets/images/ox-mup-6.jpg",
+      "photoKind": "product",
+      "source": "https://loja.olenkacosmeticos.com.br/produto/creme-ativador-hidratante-06-vol-ultra-hd-mup-color-900/"
+    },
+    {
+      "sku": "MC-OX-20V",
+      "commercialSku": "MC-OX-20V",
+      "mercosVariantId": "253386646",
+      "parentSku": "MC-OX-900",
+      "volume": "20 Vol",
+      "priceCents": 4250,
+      "image": "./assets/images/ox-mup-20.jpg",
+      "photoKind": "product",
+      "source": "https://loja.olenkacosmeticos.com.br/produto/creme-ativador-hidratante-20-vol-ultra-hd-mup-color/"
+    },
+    {
+      "sku": "MC-OX-30V",
+      "commercialSku": "MC-OX-30V",
+      "mercosVariantId": "253386647",
+      "parentSku": "MC-OX-900",
+      "volume": "30 Vol",
+      "priceCents": 4250,
+      "image": "./assets/images/ox-mup-30.jpg",
+      "photoKind": "product",
+      "source": "https://loja.olenkacosmeticos.com.br/produto/creme-ativador-hidratante-30-vol-ultra-hd-mup-color/"
+    },
+    {
+      "sku": "MC-OX-40V",
+      "commercialSku": "MC-OX-40V",
+      "mercosVariantId": "253386648",
+      "parentSku": "MC-OX-900",
+      "volume": "40 Vol",
+      "priceCents": 4250,
+      "image": "./assets/images/ox-mup-40.jpg",
+      "photoKind": "product",
+      "source": "https://loja.olenkacosmeticos.com.br/produto/creme-ativador-hidratante-40-vol-ultra-hd-mup-color-900-ml/"
+    },
+    {
+      "sku": "DOH-OX-900-V05",
+      "commercialSku": "DOH-OX-900",
+      "mercosVariantId": "256224079",
+      "parentSku": "DOH-OX-900",
+      "volume": "5 Vol",
+      "priceCents": 5490,
+      "image": "./assets/images/ox-doha-linha-20.webp",
+      "photoKind": "family",
+      "source": "https://www.belezanaweb.com.br/produto/mp529246-do-ha-royal-fantasie-creme-oxidante-20-vol-900ml"
+    },
+    {
+      "sku": "DOH-OX-900-V10",
+      "commercialSku": "DOH-OX-900",
+      "mercosVariantId": "256224075",
+      "parentSku": "DOH-OX-900",
+      "volume": "10 Vol",
+      "priceCents": 5490,
+      "image": "./assets/images/ox-doha-linha-20.webp",
+      "photoKind": "family",
+      "source": "https://www.belezanaweb.com.br/produto/mp529246-do-ha-royal-fantasie-creme-oxidante-20-vol-900ml"
+    },
+    {
+      "sku": "DOH-OX-900-V20",
+      "commercialSku": "DOH-OX-900",
+      "mercosVariantId": "256224076",
+      "parentSku": "DOH-OX-900",
+      "volume": "20 Vol",
+      "priceCents": 5490,
+      "image": "./assets/images/ox-doha-linha-20.webp",
+      "photoKind": "product",
+      "source": "https://www.belezanaweb.com.br/produto/mp529246-do-ha-royal-fantasie-creme-oxidante-20-vol-900ml"
+    },
+    {
+      "sku": "DOH-OX-900-V30",
+      "commercialSku": "DOH-OX-900",
+      "mercosVariantId": "256224077",
+      "parentSku": "DOH-OX-900",
+      "volume": "30 Vol",
+      "priceCents": 5490,
+      "image": "./assets/images/ox-doha-linha-20.webp",
+      "photoKind": "family",
+      "source": "https://www.belezanaweb.com.br/produto/mp529246-do-ha-royal-fantasie-creme-oxidante-20-vol-900ml"
+    },
+    {
+      "sku": "DOH-OX-900-V40",
+      "commercialSku": "DOH-OX-900",
+      "mercosVariantId": "256224078",
+      "parentSku": "DOH-OX-900",
+      "volume": "40 Vol",
+      "priceCents": 5490,
+      "image": "./assets/images/ox-doha-linha-20.webp",
+      "photoKind": "family",
+      "source": "https://www.belezanaweb.com.br/produto/mp529246-do-ha-royal-fantasie-creme-oxidante-20-vol-900ml"
+    }
+  ]
+}
