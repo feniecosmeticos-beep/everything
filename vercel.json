@@ -1,0 +1,11 @@
+{
+  "redirects": [
+    { "source": "/", "destination": "https://fenie-portal.vercel.app/", "permanent": false },
+    { "source": "/index.html", "destination": "https://fenie-portal.vercel.app/", "permanent": false },
+    { "source": "/assets/:file(.*\\.js)", "destination": "https://fenie-portal.vercel.app/", "permanent": false },
+    { "source": "/docs/:path*", "destination": "https://fenie-portal.vercel.app/", "permanent": false },
+    { "source": "/content/:path*", "destination": "https://fenie-portal.vercel.app/", "permanent": false },
+    { "source": "/scripts/:path*", "destination": "https://fenie-portal.vercel.app/", "permanent": false },
+    { "source": "/README.md", "destination": "https://fenie-portal.vercel.app/", "permanent": false }
+  ]
+}
