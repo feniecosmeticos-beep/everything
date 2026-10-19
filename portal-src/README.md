@@ -18,7 +18,7 @@ O e-mail inicial foi cadastrado de forma privada pelo proprietário em `fenie_pr
 
 ## Validação
 
-Nove testes dos formulários e retornos de autenticação passaram (`npm test`). `tests/rls.sql` valida permissões, isolamento entre contas, bloqueio de autoaprovação, preços do servidor, parcelas e idempotência em transação com rollback. A execução no projeto isolado passou e não deixou contas ou pedidos fictícios. API pública: 488 produtos/712 opções, HTTP 200. Perfis e pedidos sem login: HTTP 401. Schema privado pela API: HTTP 406. Advisor de segurança sem apontamentos.
+Onze testes dos formulários e retornos de autenticação passaram (`npm test`). `tests/rls.sql` valida permissões, isolamento entre contas, bloqueio de autoaprovação, preços do servidor, parcelas e idempotência em transação com rollback. A execução no projeto isolado passou e não deixou contas ou pedidos fictícios. API pública: 488 produtos/712 opções, HTTP 200. Perfis e pedidos sem login: HTTP 401. Schema privado pela API: HTTP 406. Advisor de segurança sem apontamentos.
 
 ## Publicação e autenticação
 
@@ -35,3 +35,7 @@ O salão de teste já confirmou o e-mail e está pendente de aprovação; basta 
 Pagamento é preferência informada ao atendimento; não existe cobrança automática. Frete e disponibilidade são confirmados pela equipe. Envio ao WhatsApp abre a mensagem preenchida para a pessoa confirmar. Lista de reposição e rascunho do carrinho ficam no navegador por conta; pedidos, perfis, endereços e alterações administrativas ficam no banco. O primeiro acesso administrativo e o novo fluxo completo de recuperação aguardam teste humano; o agente não criou senha nem enviou mensagens ou pedidos reais.
 
 O Resend está no plano Free, conectado à prévia. auth.feniecosmeticos.com.br foi verificado; os três registros DNS foram conferidos sem alterar o MX principal. O SMTP do Supabase foi salvo pelo responsável. Os modelos de confirmação e recuperação foram publicados e conferidos no painel. A entrega real e o primeiro login ainda aguardam o cadastro do administrador; veja EMAIL-SETUP.md.
+
+## Consulta de aprovação
+
+O cadastro de cliente só libera pedidos após aprovação pela equipe. Verificar aprovação consulta o perfil no banco, mostra Verificando durante a consulta e um retorno explícito quando continua pendente. Após aprovação, a mesma consulta abre a área do cliente. Não há autoaprovação. O primeiro administrador ainda precisa realizar o cadastro com o e-mail autorizado de forma privada.

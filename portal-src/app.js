@@ -14,7 +14,7 @@ function client(){return state.clients.find(c=>c.id===session?.clientId);}
 function payment(m,n){const labels={pix:'Pix',credito:'Cartão de crédito',debito:'Cartão de débito','boleto-avista':'Boleto à vista',combinar:'A combinar com o atendimento'};return m==='boleto-parcelado'?'Boleto parcelado em '+(Number.isInteger(Number(n))&&n>=2&&n<=6?Number(n):2)+'x':labels[m]||labels.combinar;}
 const statusNames={waiting:'Aguardando atendimento',confirmed:'Confirmado',separating:'Em separação',dispatched:'Em entrega',delivered:'Entregue',cancelled:'Cancelado'};
 function badge(s){const label=statusNames[s]||{pending:'Aguardando aprovação',approved:'Aprovado',denied:'Não aprovado'}[s]||s,cls=['delivered','confirmed','approved'].includes(s)?'approved':['waiting','pending'].includes(s)?'waiting':['cancelled','denied'].includes(s)?'cancelled':'separating';return '<span class="badge '+cls+'">'+C(label)+'</span>';}
-function makeState(){return {products:[],clients:[],orders:[],cart:{},saved:[],checkout:{addressId:'',method:'combinar',installments:'2',notes:''}};}
+function makeState(){return {products:[],clients:[],orders:[],cart:{},saved:[],approvalChecked:false,checkout:{addressId:'',method:'combinar',installments:'2',notes:''}};}
 let state=makeState(),loading=true,syncVersion=0,recoveryMode=new URLSearchParams(location.search).has('recovery'),lastSync=0;
 const emailParams=new URLSearchParams(location.search);
 let emailLink=emailParams.has('token_hash')?{token:emailParams.get('token_hash'),type:emailParams.get('type')}:null;
@@ -85,7 +85,7 @@ function authScreen(mode){
  (!admin&&!reset?'<p class="center-note">'+(register||recover?'<a href="#/entrar">← Voltar para entrar</a>':'Novo por aqui? <a href="#/cadastro"><strong>Cadastre seu salão</strong></a>')+'</p>':'');
  return publicHead()+'<main id="main" tabindex="-1" class="auth-layout"><section class="auth-story"><div><p class="eyebrow">'+(admin?'GESTÃO FENIÉ':'PORTAL DO SALÃO')+'</p><h1 style="margin:18px 0">Seu salão.<br>Mais perto<br><em>da Fenié.</em></h1><p>Uma experiência pensada para quem transforma cuidado em profissão.</p></div><div class="auth-still"><img src="'+C(state.products.find(p=>/oxidante-olenka/.test(p.id))?.image||state.products[0]?.image||seed.logo)+'" alt="Produtos profissionais Fenié"><img src="'+C(state.products.find(p=>p.id==='OLK-MSK-FNS-500')?.image||state.products[4]?.image||seed.logo)+'" alt="Seleção Fenié"></div><span class="auth-story-bottom">Escolher · Repor · Acompanhar</span></section><section class="auth-form"><nav class="role-tabs" aria-label="Tipo de acesso"><a href="#/entrar" class="'+(!admin?'active':'')+'">Sou cliente</a><a href="#/admin/entrar" class="'+(admin?'active':'')+'">Sou administrador</a></nav><h2>'+title+'</h2><p class="sub">'+desc+'</p>'+body+'</section></main>'+publicFoot();
 }
-function pendingScreen(){const c=client();return publicHead()+'<main id="main" tabindex="-1" style="max-width:620px;margin:50px auto;padding:0 20px"><section class="card empty"><p class="eyebrow">CADASTRO DO SALÃO</p><h1>'+C(c.salon)+'</h1>'+badge(c.status)+'<p>'+(c.status==='denied'?'Seu cadastro não foi aprovado. Entre em contato com a equipe para revisar os dados.':'Sua solicitação está aguardando a análise da equipe Fenié.')+'</p><button class="btn primary" data-action="refresh">Verificar aprovação</button><button class="btn ghost" data-action="logout">Sair da conta</button></section></main>'+publicFoot();}
+function pendingScreen(){const c=client();return publicHead()+'<main id="main" tabindex="-1" style="max-width:620px;margin:50px auto;padding:0 20px"><section class="card empty"><p class="eyebrow">CADASTRO DO SALÃO</p><h1>'+C(c.salon)+'</h1>'+badge(c.status)+'<p>'+(c.status==='denied'?'Seu cadastro não foi aprovado. Entre em contato com a equipe para revisar os dados.':'Seu e-mail está confirmado. A equipe Fenié precisa aprovar o cadastro para liberar seus pedidos.')+'</p><p class="note">Conta: '+C(c.email)+'</p><p>O botão abaixo consulta se a aprovação já foi feita.</p><button class="btn primary" data-action="check-approval">Verificar aprovação</button>'+(state.approvalChecked?'<p role="status" aria-live="polite">Consulta concluída. '+(c.status==='denied'?'Seu cadastro continua não aprovado. Entre em contato com a equipe.':'Seu cadastro ainda aguarda aprovação da equipe Fenié.')+'</p>':'')+'<button class="btn ghost" data-action="logout">Sair da conta</button></section></main>'+publicFoot();}
 const clientNav=[['/cliente','home','Minha área'],['/cliente/catalogo','box','Explorar catálogo'],['/cliente/pedidos','bag','Meus pedidos'],['/cliente/reposicao','star','Minha reposição'],['/cliente/enderecos','pin','Endereços'],['/cliente/perfil','user','Meu cadastro']],adminNav=[['/admin','home','Visão geral'],['/admin/pedidos','bag','Pedidos'],['/admin/clientes','users','Clientes'],['/admin/catalogo','box','Catálogo'],['/admin/destaques','star','Destaques']];
 function isActive(path,target){return path===target||target.split('/').length>2&&path.startsWith(target+'/');}
 function shell(content,admin=false){
@@ -275,6 +275,11 @@ document.addEventListener('click',async event=>{
  try{
  if(action==='email-link-leave'){emailLink=null;await syncAccount();return;}
  if(action==='refresh'){await syncAccount();return;}
+ if(action==='check-approval'){
+  const label=button.textContent;button.textContent='Verificando…';button.disabled=true;
+  try{state.approvalChecked=true;await syncAccount(true);}finally{button.disabled=false;button.textContent=label;}
+  return;
+ }
  if(action==='modal-close'){modal.close();return;}
  if(action==='logout'){persist();await signOut();return;}
  if(action==='recover-done'){modal.close();go('/entrar');return;}

@@ -13,18 +13,24 @@ function environment(search='',otpError=null){
  rpc:async(name,p)=>{calls.push([name,p]);return {data:'FEN-00000001'}}};
  const document={title:'',querySelector:s=>s==='#app'?root:s==='#modal'?modal:toast,addEventListener:(type,fn)=>{(events[type]??=[]).push(fn)}};
  const historyCalls=[];
- const context={window:{PROTOTYPE_SEED:{logo:'logo'},addEventListener(){}},document,location:{hash:'#/entrar',search,origin:'https://protected-preview.example',pathname:'/'},history:{replaceState(...args){historyCalls.push(args)}},localStorage:{getItem:k=>store.get(k),setItem:(k,v)=>store.set(k,v),removeItem:k=>store.delete(k)},createClient:()=>backend,__SUPABASE_URL__:'https://example.supabase.co',__SUPABASE_KEY__:'sb_publishable_test',__AUTH_SITE_URL__:'https://fenie-portal.vercel.app/',URLSearchParams,FormData:class{constructor(f){this.data=f.data}get(k){return this.data[k]}has(k){return k in this.data}},crypto:{randomUUID:()=> 'cccccccc-cccc-4ccc-8ccc-cccccccccccc'},setTimeout:()=>1,clearTimeout(){},navigator:{clipboard:{writeText:async()=>{}}},console};
+ let browserHash='#/entrar';
+ const mockLocation={search,origin:'https://protected-preview.example',pathname:'/',get hash(){return browserHash},set hash(value){browserHash=value.startsWith('#')?value:'#'+value}};
+ const context={window:{PROTOTYPE_SEED:{logo:'logo'},addEventListener(){}},document,location:mockLocation,history:{replaceState(...args){historyCalls.push(args)}},localStorage:{getItem:k=>store.get(k),setItem:(k,v)=>store.set(k,v),removeItem:k=>store.delete(k)},createClient:()=>backend,__SUPABASE_URL__:'https://example.supabase.co',__SUPABASE_KEY__:'sb_publishable_test',__AUTH_SITE_URL__:'https://fenie-portal.vercel.app/',URLSearchParams,FormData:class{constructor(f){this.data=f.data}get(k){return this.data[k]}has(k){return k in this.data}},crypto:{randomUUID:()=> 'cccccccc-cccc-4ccc-8ccc-cccccccccccc'},setTimeout:()=>1,clearTimeout(){},navigator:{clipboard:{writeText:async()=>{}}},console};
  vm.runInNewContext(source,context);
  async function ready(){await new Promise(ok=>setImmediate(ok));if(!search.includes('token_hash'))await context.window.testPortal.syncAccount();}
  async function submit(kind,data={},extra={}){
  const errors={hidden:true,textContent:''},form={data,dataset:{form:kind,...extra},isConnected:true,querySelector:()=>errors,querySelectorAll:()=>[]};
  await events.submit[0]({target:{closest:()=>form},preventDefault(){}});return errors;
  }
- return {calls,context,rows,ready,submit,root,historyCalls,api:context.window.testPortal};
+ async function click(action){
+  const button={dataset:{action},textContent:'Verificar aprovação',disabled:false};
+  await events.click[0]({target:{closest:()=>button}});return button;
+ }
+ return {calls,context,rows,ready,submit,click,root,historyCalls,api:context.window.testPortal};
 }
 test('login usa Supabase e lê o perfil aprovado do banco',async()=>{
  const e=environment();await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'senha de teste'}, {role:'client'});
- assert.equal(e.calls[0][0],'login');assert.equal(e.api.getSession().role,'client');assert.equal(e.context.location.hash,'/cliente');
+ assert.equal(e.calls[0][0],'login');assert.equal(e.api.getSession().role,'client');assert.equal(e.context.location.hash,'#/cliente');
 });
 test('cadastro solicita confirmação e nunca atribui papel administrativo',async()=>{
  const e=environment();await e.ready();await e.submit('register',{email:'cliente@example.invalid',password:'senha de teste',name:'Nome',salon:'Salão',phone:'(41) 0000-0000'});
@@ -56,12 +62,12 @@ test('confirmação funciona em um navegador sem o verificador PKCE original e a
  assert.match(e.root.innerHTML,/Confirmar meu e-mail/);assert.ok(!e.root.innerHTML.includes(token));
  await e.submit('verify-email');
  assert.equal(e.calls[0][0],'verifyOtp');assert.equal(e.calls[0][1].type,'email');assert.equal(e.calls[0][1].token_hash,token);
- assert.equal(e.api.getSession().role,'client');assert.equal(e.context.location.hash,'/cliente');
+ assert.equal(e.api.getSession().role,'client');assert.equal(e.context.location.hash,'#/cliente');
 });
 
 test('link de recuperação validado abre nova senha sem reutilizar o navegador do pedido',async()=>{
  const e=environment('?token_hash=token_de_teste_sem_valor_real_123456&type=recovery');await e.ready();await e.submit('verify-email');
- assert.equal(e.calls[0][1].type,'recovery');assert.equal(e.context.location.hash,'/nova-senha');
+ assert.equal(e.calls[0][1].type,'recovery');assert.equal(e.context.location.hash,'#/nova-senha');
 });
 
 test('link expirado apresenta caminho de recuperação sem criar sessão nem expor token',async()=>{
@@ -72,4 +78,18 @@ test('link expirado apresenta caminho de recuperação sem criar sessão nem exp
 test('tipos de confirmação fora da lista permitida não são enviados ao Supabase',async()=>{
  const e=environment('?token_hash=token_de_teste_sem_valor_real_123456&type=invite');await e.ready();await e.submit('verify-email');
  assert.equal(e.calls.length,0);assert.equal(e.api.getSession(),null);
+});
+
+test('verificar aprovação mostra retorno explícito enquanto o cadastro continua pendente',async()=>{
+ const e=environment();e.rows.fenie_profiles[0].status='pending';await e.ready();
+ await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ const button=await e.click('check-approval');
+ assert.equal(e.context.location.hash,'#/cliente/aguardando');assert.match(e.root.innerHTML,/Consulta concluída/);assert.match(e.root.innerHTML,/ainda aguarda aprovação/);assert.equal(button.disabled,false);
+});
+
+test('verificar aprovação libera a área do cliente somente após aprovação real no banco',async()=>{
+ const e=environment();e.rows.fenie_profiles[0].status='pending';await e.ready();
+ await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.rows.fenie_profiles[0].status='approved';await e.click('check-approval');
+ assert.equal(e.context.location.hash,'#/cliente');assert.equal(e.calls.some(c=>c[0]==='fenie_review_client'),false);
 });
