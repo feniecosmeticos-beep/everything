@@ -28,3 +28,5 @@ O catálogo de produção não foi substituído. Validar cadastro, entrega de e-
 ## Limites desta etapa
 
 Pagamento é preferência informada ao atendimento; não existe cobrança automática. Frete e disponibilidade são confirmados pela equipe. Envio ao WhatsApp abre a mensagem preenchida para a pessoa confirmar. Lista de reposição e rascunho do carrinho ficam no navegador por conta; pedidos, perfis, endereços e alterações administrativas ficam no banco. Login de ponta a ponta aguarda o cadastro e a confirmação do e-mail do administrador; o agente não criou senha nem enviou mensagens ou pedidos reais.
+
+O Resend foi provisionado no plano Free e conectado ao ambiente de prévia. A ativação do domínio e o SMTP do Supabase ainda estão pendentes; veja EMAIL-SETUP.md e os modelos em supabase/templates/.
