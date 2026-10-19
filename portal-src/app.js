@@ -5,7 +5,8 @@ const backend=createClient(__SUPABASE_URL__,__SUPABASE_KEY__,{auth:{flowType:'pk
 const seed=window.PROTOTYPE_SEED,root=document.querySelector('#app'),modal=document.querySelector('#modal'),STORE='fenie.portal.draft.v1';
 const clone=x=>JSON.parse(JSON.stringify(x)),C=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=n=>(n/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}),initials=n=>n.split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase();
-let session=null,cartSelections={},filters={q:'',brand:'',status:'',clientQ:''},newOrderId='',toastTimer;
+const PHOTO_BUCKET='fenie-produtos',PHOTO_TYPES={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'},PHOTO_MAX=5*1024*1024,ADMIN_PAGE=40;
+let session=null,cartSelections={},filters={q:'',brand:'',status:'',clientQ:'',adminQ:'',adminBrand:'',adminStatus:'',adminLimit:ADMIN_PAGE},variantRowSeq=0,newOrderId='',toastTimer;
 const icons={home:'<path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-7h6v7"/>',box:'<path d="m3 7 9-4 9 4v11l-9 4-9-4V7Zm0 0 9 5 9-5M12 12v10"/>',bag:'<path d="M5 7h14l1 14H4L5 7ZM8 8V6a4 4 0 0 1 8 0v2"/>',users:'<circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M17 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 6"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/>',pin:'<path d="M19 10c0 6-7 12-7 12S5 16 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/>',star:'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>',search:'<circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/>',arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>'};
 function icon(n){return '<span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24">'+(icons[n]||icons.box)+'</svg></span>';}
 function product(id){return state.products.find(p=>p.id===id);}
@@ -145,8 +146,27 @@ function adminClients(){
  return heading('RELACIONAMENTO','Os salões da Fenié.','Consulte os dados e acompanhe o histórico de cada cliente.')+'<form data-form="client-search" class="filterbar"><div class="search-wrap">'+icon('search')+'<input class="search-input" name="q" value="'+C(filters.clientQ)+'" placeholder="Buscar salão, contato ou e-mail" aria-label="Buscar salão, contato ou e-mail"></div><button class="btn">Buscar</button><button class="btn ghost" type="button" data-action="clear-client-search">Limpar</button></form><section class="card table-wrap"><table class="table"><thead><tr><th>Salão / contato</th><th>E-mail</th><th>Situação</th><th>Atendimento</th></tr></thead><tbody>'+clients.map(c=>'<tr><td><strong>'+C(c.salon)+'</strong><small>'+C(c.name)+' · '+C(c.phone)+'</small></td><td>'+C(c.email)+'</td><td>'+badge(c.status)+'</td><td><div class="actions">'+'<button class="btn small" data-action="client-open" data-id="'+c.id+'">Ver cadastro ↗</button></div></td></tr>').join('')+'</tbody></table>'+(clients.length?'':'<p class="muted" style="padding:20px 0">Nenhum cadastro encontrado.</p>')+'</section>';
 }
 function priceRange(p){const prices=p.variants.map(v=>v.price),min=Math.min(...prices),max=Math.max(...prices);return money(min)+(min!==max?' — '+money(max):'');}
+function adminProducts(){
+ const q=normalize(filters.adminQ||''),st=filters.adminStatus;
+ return state.products.filter(p=>{
+  if(filters.adminBrand&&p.brand!==filters.adminBrand)return false;
+  if(st==='published'&&!p.active||st==='hidden'&&p.active||st==='nophoto'&&p.image||st==='nobrand'&&!/a confirmar/i.test(p.brand)||st==='nocategory'&&p.category&&!/n[ãa]o informado/i.test(p.category))return false;
+  return !q||normalize(p.name+' '+p.brand+' '+p.category+' '+p.size+' '+p.variants.map(v=>v.sku+' '+v.label).join(' ')).includes(q);
+ });
+}
+function photoThumb(src){return src?'<img class="table-photo" src="'+C(src)+'" alt="" loading="lazy">':'<span class="table-photo photo-missing" aria-hidden="true">sem foto</span>';}
 function adminCatalog(){
- return heading('CATÁLOGO PROFISSIONAL','Uma seleção bem cuidada.','Gerencie preços por opção e a publicação dos produtos neste portal.')+'<section class="card table-wrap"><table class="table"><thead><tr><th>Produto</th><th>Opções</th><th>Preço de referência</th><th>Visibilidade</th><th></th></tr></thead><tbody>'+state.products.map(p=>'<tr><td><div class="row"><img class="table-photo" src="'+p.image+'" alt=""><div><strong>'+C(p.name)+'</strong><small>'+C(p.brand)+' · '+C(p.size)+'</small></div></div></td><td>'+p.variants.length+'</td><td>'+priceRange(p)+'</td><td><button class="btn small" data-action="toggle-product" data-id="'+C(p.id)+'" aria-label="'+(p.active?'Ocultar':'Publicar')+' '+C(p.name)+'">'+(p.active?'Publicado':'Oculto')+'</button></td><td><button class="btn small" data-action="product-open" data-id="'+C(p.id)+'">Editar ↗</button></td></tr>').join('')+'</tbody></table></section>';
+ const list=adminProducts(),shown=list.slice(0,filters.adminLimit||ADMIN_PAGE),brands=[...new Set(state.products.map(p=>p.brand))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+ const statuses=[['','Todos os produtos'],['published','Publicados'],['hidden','Ocultos'],['nophoto','Sem foto'],['nobrand','Marca a confirmar'],['nocategory','Sem categoria']];
+ return heading('CATÁLOGO PROFISSIONAL','Painel de produtos.','Edite nome, foto, marca, categoria, embalagem, opções e preços. As alterações aparecem no portal assim que você salva.','<button class="btn primary" data-action="product-new">+ Novo produto</button>')
+ +'<form data-form="admin-product-search" class="filterbar"><div class="search-wrap">'+icon('search')+'<input class="search-input" type="search" name="q" value="'+C(filters.adminQ)+'" placeholder="Buscar nome, marca, categoria ou código" aria-label="Buscar produtos"></div>'
+ +'<select class="filter-select" name="brand" aria-label="Filtrar por marca"><option value="">Todas as marcas</option>'+brands.map(b=>'<option value="'+C(b)+'" '+(filters.adminBrand===b?'selected':'')+'>'+C(b)+'</option>').join('')+'</select>'
+ +'<select class="filter-select" name="status" aria-label="Filtrar por situação">'+statuses.map(([v,l])=>'<option value="'+v+'" '+(filters.adminStatus===v?'selected':'')+'>'+l+'</option>').join('')+'</select>'
+ +'<button class="btn">Buscar</button><button class="btn ghost" type="button" data-action="clear-admin-products">Limpar</button></form>'
+ +'<section class="card table-wrap"><table class="table"><thead><tr><th>Produto</th><th>Categoria</th><th>Opções</th><th>Preço</th><th>Visibilidade</th><th></th></tr></thead><tbody>'
+ +shown.map(p=>'<tr><td><div class="row">'+photoThumb(p.image)+'<div><strong>'+C(p.name)+'</strong><small>'+C(p.brand)+(p.size?' · '+C(p.size):'')+(p.featured?' · ★ destaque':'')+'</small></div></div></td><td>'+C(p.category||'—')+'</td><td>'+p.variants.length+'</td><td>'+priceRange(p)+'</td><td><button class="btn small" data-action="toggle-product" data-id="'+C(p.id)+'" aria-label="'+(p.active?'Ocultar':'Publicar')+' '+C(p.name)+'">'+(p.active?'Publicado':'Oculto')+'</button></td><td><button class="btn small" data-action="product-open" data-id="'+C(p.id)+'">Editar ↗</button></td></tr>').join('')
+ +'</tbody></table>'+(list.length?'':'<p class="muted" style="padding:20px 0">Nenhum produto encontrado com esses filtros.</p>')+'</section>'
+ +'<div class="actions" style="margin-top:18px"><span class="small-label">Mostrando '+shown.length+' de '+list.length+' produtos ('+state.products.length+' no total)</span>'+(shown.length<list.length?'<button class="btn" data-action="admin-more">Mostrar mais</button>':'')+'</div>';
 }
 function adminHighlights(){
  const featured=state.products.filter(p=>p.featured&&p.active);
@@ -163,9 +183,56 @@ function clientModal(id){
  const orders=state.orders.filter(o=>o.clientId===id);
  showModal(c.salon,'<p class="eyebrow">CADASTRO DO SALÃO</p><dl class="detail-list"><div><dt>Contato</dt><dd>'+C(c.name)+'</dd></div><div><dt>E-mail</dt><dd>'+C(c.email)+'</dd></div><div><dt>WhatsApp</dt><dd>'+C(c.phone)+'</dd></div><div><dt>Histórico</dt><dd>'+orders.length+' pedido'+(orders.length!==1?'s':'')+' · '+money(orders.reduce((sum,o)=>sum+orderTotal(o),0))+'</dd></div></dl>'+(orders.length?'<div class="rule"></div><h3>Pedidos deste salão</h3>'+orders.map(o=>'<div class="attention"><a class="text-btn" href="#/admin/pedidos/'+o.id+'">'+o.id+' ↗</a> '+badge(o.status)+'</div>').join(''):''));
 }
+function variantRow(v={id:'',sku:'',label:'',price:0}){
+ const n=++variantRowSeq;
+ return '<div class="variant-row" data-variant-row><input type="hidden" name="variant_id" value="'+C(v.id)+'">'
+ +'<div class="field"><label for="vl-'+n+'">Opção</label><input id="vl-'+n+'" name="variant_label" value="'+C(v.label)+'" placeholder="Ex.: 900 ml" maxlength="300" required></div>'
+ +'<div class="field"><label for="vs-'+n+'">Código (SKU)</label><input id="vs-'+n+'" name="variant_sku" value="'+C(v.sku)+'" maxlength="150" required></div>'
+ +'<div class="field"><label for="vp-'+n+'">Preço (R$)</label><input id="vp-'+n+'" name="variant_price" type="number" min="0.01" max="1000000" step="0.01" value="'+(v.price?(v.price/100).toFixed(2):'')+'" required></div>'
+ +'<button type="button" class="close variant-remove" data-action="variant-remove" aria-label="Remover esta opção">×</button></div>';
+}
+function textField(name,label,value,{max=100,required=true,type='text',list='',placeholder='',help=''}={}){
+ return '<div class="field"><label for="f-'+name+'">'+label+'</label><input id="f-'+name+'" name="'+name+'" type="'+type+'" value="'+C(value)+'" maxlength="'+max+'"'+(required?' required':'')+(list?' list="'+list+'"':'')+(placeholder?' placeholder="'+C(placeholder)+'"':'')+'>'+(help?'<small>'+help+'</small>':'')+'</div>';
+}
 function productModal(id){
- const p=product(id);if(!p)return;const v=p.variants[0];
- showModal('Editar produto','<div class="row" style="margin-bottom:22px"><img class="table-photo" src="'+p.image+'" alt=""><div><h3>'+C(p.name)+'</h3><small>'+C(p.brand)+'</small></div></div><form data-form="product" data-id="'+C(id)+'">'+input('name','Nome do produto',p.name)+'<div class="field"><label for="editVariant">Opção comercial</label><select id="editVariant" name="variant" data-edit-variant="'+C(id)+'">'+p.variants.map(v=>'<option value="'+C(v.id)+'">'+C(v.label)+' · '+C(v.sku)+'</option>').join('')+'</select></div><div class="field"><label for="editPrice">Preço desta opção (R$)</label><input id="editPrice" name="price" type="number" min="0.01" max="1000000" step="0.01" value="'+(v.price/100).toFixed(2)+'" required></div><label class="checkbox-line"><input type="checkbox" name="active" '+(p.active?'checked':'')+'>Publicado no catálogo</label><p class="note">A imagem e os códigos foram reaproveitados da base. A edição atualiza o catálogo do portal.</p><p class="form-error" data-form-error role="alert" hidden></p><button class="btn primary full" style="margin-top:18px">Salvar produto →</button></form>');
+ const p=id?product(id):{id:'',name:'',brand:'',size:'',category:'',image:'',active:true,featured:false,variants:[{id:'',sku:'',label:'',price:0}]};if(!p)return;
+ const uniq=key=>[...new Set(state.products.map(x=>x[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR')).map(x=>'<option value="'+C(x)+'"></option>').join('');
+ showModal(id?'Editar produto':'Novo produto','<form data-form="product" data-id="'+C(p.id)+'">'
+ +'<div class="photo-edit"><div class="photo-frame">'+(p.image?'<img data-photo-preview src="'+C(p.image)+'" alt="Foto atual do produto">':'<img data-photo-preview alt="Prévia da foto" hidden><span class="photo-missing" data-photo-empty>sem foto</span>')+'</div>'
+ +'<div class="photo-fields"><div class="field"><label for="f-photo">'+(p.image?'Trocar foto':'Enviar foto')+'</label><input id="f-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" data-photo-input><small>JPG, PNG ou WEBP com até 5 MB. Fundo branco funciona melhor.</small></div>'
+ +textField('image','Ou cole o link da foto',p.image,{max:1000,required:false,type:'url',placeholder:'https://…'})+'</div></div>'
+ +textField('name','Nome do produto',p.name,{max:300})
+ +'<div class="form-grid">'+textField('brand','Marca',p.brand,{list:'brandOptions'})+textField('category','Categoria',p.category,{required:false,list:'categoryOptions'})+'</div>'
+ +textField('size','Embalagem / tamanho',p.size,{required:false,placeholder:'Ex.: 1 L, 300 g, kit'})
+ +'<datalist id="brandOptions">'+uniq('brand')+'</datalist><datalist id="categoryOptions">'+uniq('category')+'</datalist>'
+ +'<div class="rule"></div><div class="section-mini"><h3>Opções comerciais</h3><small>Cada opção tem seu próprio código e preço. O cliente escolhe a opção no pedido.</small></div>'
+ +'<div data-variant-list>'+p.variants.map(variantRow).join('')+'</div><button type="button" class="btn small ghost" data-action="variant-add">+ Adicionar opção</button>'
+ +'<div class="rule"></div><label class="checkbox-line"><input type="checkbox" name="active" '+(p.active?'checked':'')+'>Publicado no catálogo</label><label class="checkbox-line"><input type="checkbox" name="featured" '+(p.featured?'checked':'')+'>Mostrar nos destaques</label>'
+ +'<p class="form-error" data-form-error role="alert" hidden></p><button class="btn primary full" style="margin-top:12px">'+(id?'Salvar alterações →':'Cadastrar produto →')+'</button>'
+ +(id?'<button type="button" class="btn ghost full danger" style="margin-top:10px" data-action="product-delete" data-id="'+C(p.id)+'">Excluir produto</button><p class="metric-note">Para tirar um produto do ar sem perder o cadastro, desmarque “Publicado no catálogo”.</p>':'')
+ +'</form>');
+}
+function slugify(t){return normalize(t).replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,90)||'produto';}
+function readVariants(data,existing){
+ const all=n=>(data.getAll?data.getAll(n):[].concat(data.get(n)??[])).map(x=>String(x??'').trim());
+ const labels=all('variant_label'),skus=all('variant_sku'),prices=all('variant_price'),ids=all('variant_id');
+ if(!labels.length)throw new Error('Inclua ao menos uma opção comercial.');
+ const used=new Set();
+ return labels.map((label,i)=>{
+  const sku=skus[i]||'',price=Math.round(Number(String(prices[i]||'').replace(',','.'))*100);
+  if(!label||!sku)throw new Error('Preencha a opção e o código de todas as linhas.');
+  if(!Number.isSafeInteger(price)||price<1||price>100000000)throw new Error('Informe um preço válido em todas as opções.');
+  let id=ids[i]||sku.toUpperCase().replace(/[^A-Z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,140)||'OPCAO';
+  if(used.has(id)){let n=2;while(used.has(id+'-'+n))n++;id=id+'-'+n;}used.add(id);
+  return {...(existing?.variants.find(v=>v.id===id)||{}),id,sku,label,price};
+ });
+}
+async function uploadPhoto(file,productId){
+ const ext=PHOTO_TYPES[file.type];if(!ext)throw new Error('Envie a foto em JPG, PNG ou WEBP.');
+ if(file.size>PHOTO_MAX)throw new Error('A foto passa de 5 MB. Reduza o tamanho e tente de novo.');
+ const path=slugify(productId).slice(0,80)+'/'+Date.now().toString(36)+'.'+ext,bucket=backend.storage.from(PHOTO_BUCKET);
+ checked(await bucket.upload(path,file,{contentType:file.type,cacheControl:'31536000',upsert:false}));
+ return bucket.getPublicUrl(path).data.publicUrl;
 }
 function error(form,text){const el=form.querySelector('[data-form-error]');if(el){el.textContent=text;el.hidden=false;}else toast(text);}
 function render(){
@@ -246,10 +313,19 @@ document.addEventListener('submit',async event=>{
  if(kind==='order-status'&&session?.role==='admin'){
   checked(await backend.rpc('fenie_update_order',{p_id:form.dataset.id,p_status:get('status'),p_note:get('note')}));await syncAccount();toast('Atendimento atualizado.');return;
  }
+ if(kind==='admin-product-search'&&session?.role==='admin'){filters.adminQ=get('q');filters.adminBrand=get('brand');filters.adminStatus=get('status');filters.adminLimit=ADMIN_PAGE;render();return;}
  if(kind==='product'&&session?.role==='admin'){
-  const p=product(form.dataset.id),price=Math.round(Number(get('price'))*100);if(!Number.isSafeInteger(price)||price<1||price>100000000)throw new Error('Informe um preço válido.');
-  const variants=p.variants.map(v=>v.id===get('variant')?{...v,price}:v);
-  checked(await backend.from('fenie_products').update({name:get('name'),variants,active:data.has('active')}).eq('id',p.id).select().single());await syncAccount();modal.close();toast('Produto atualizado.');return;
+  const existing=form.dataset.id?product(form.dataset.id):null,name=get('name'),brand=get('brand');
+  if(form.dataset.id&&!existing)throw new Error('Este produto não existe mais. Atualize a página.');
+  if(!name)throw new Error('Informe o nome do produto.');if(!brand)throw new Error('Informe a marca.');
+  const variants=readVariants(data,existing),id=existing?.id||slugify(name)+'-'+Date.now().toString(36);
+  let image=get('image');const file=data.get('photo');
+  if(file&&typeof file==='object'&&file.size>0)image=await uploadPhoto(file,id);
+  if(image&&!/^https:\/\/\S+$/.test(image))throw new Error('Use um link de foto que comece com https://.');
+  const row={name,brand,size:get('size'),category:get('category'),image,variants,active:data.has('active'),featured:data.has('featured')};
+  if(existing)checked(await backend.from('fenie_products').update(row).eq('id',id).select().single());
+  else checked(await backend.from('fenie_products').insert({id,...row,sort_order:Math.max(0,...state.products.map(p=>p.sort_order||0))+1}).select().single());
+  await syncAccount();modal.close();toast(existing?'Produto atualizado.':'Produto cadastrado.');return;
  }
  }catch(e){error(form,friendly(e));if(!form.isConnected)toast(friendly(e));}
  finally{delete form.dataset.busy;setBusy(form,false);}
@@ -258,6 +334,7 @@ document.addEventListener('change',async event=>{
  const el=event.target;
  if(el.dataset.variant){cartSelections[el.dataset.variant]=el.value;const p=product(el.dataset.variant),v=p?.variants.find(v=>v.id===el.value),card=el.closest('[data-product]');if(card)card.querySelector('.price').innerHTML=(v?'':'<small>A partir de</small>')+money(v?.price||Math.min(...p.variants.map(v=>v.price)));return;}
  if(el.hasAttribute('data-status-filter')){filters.status=el.value;render();return;}
+ if(el.hasAttribute&&el.hasAttribute('data-photo-input')){const file=el.files?.[0],img=modal.querySelector('[data-photo-preview]');if(!file||!img)return;if(!PHOTO_TYPES[file.type]){toast('Envie a foto em JPG, PNG ou WEBP.');el.value='';return;}if(file.size>PHOTO_MAX){toast('A foto passa de 5 MB.');el.value='';return;}img.src=URL.createObjectURL(file);img.hidden=false;modal.querySelector('[data-photo-empty]')?.remove();return;}
  if(el.name==='payment'){state.checkout.method=el.value;document.querySelector('#installmentsField').hidden=el.value!=='boleto-parcelado';persist();return;}
  if(el.name==='installments'){state.checkout.installments=el.value;persist();return;}
  if(el.name==='address'){state.checkout.addressId=el.value;persist();return;}
@@ -291,6 +368,17 @@ document.addEventListener('click',async event=>{
  if(action==='address-open'&&session?.role==='client'){const checkout=root.querySelector('[data-form="checkout"]');if(checkout)saveCheckout(checkout);addressModal(id);return;}
  if(action==='client-open'&&session?.role==='admin'){clientModal(id);return;}
  if(action==='product-open'&&session?.role==='admin'){productModal(id);return;}
+ if(action==='product-new'&&session?.role==='admin'){productModal(null);return;}
+ if(action==='admin-more'&&session?.role==='admin'){filters.adminLimit=(filters.adminLimit||ADMIN_PAGE)+ADMIN_PAGE;render();return;}
+ if(action==='clear-admin-products'&&session?.role==='admin'){filters.adminQ='';filters.adminBrand='';filters.adminStatus='';filters.adminLimit=ADMIN_PAGE;render();return;}
+ if(action==='variant-add'&&session?.role==='admin'){const list=modal.querySelector('[data-variant-list]');if(list)list.insertAdjacentHTML('beforeend',variantRow());return;}
+ if(action==='variant-remove'&&session?.role==='admin'){const rows=modal.querySelectorAll('[data-variant-row]');if(rows.length<2){toast('O produto precisa de ao menos uma opção.');return;}button.closest('[data-variant-row]')?.remove();return;}
+ if(action==='product-delete'&&session?.role==='admin'){
+  if(button.dataset.confirm!=='1'){button.dataset.confirm='1';button.textContent='Confirmar exclusão definitiva';toast('Clique novamente para excluir. Essa ação não pode ser desfeita.');return;}
+  const p=product(id);if(!p)return;const removed=checked(await backend.from('fenie_products').delete().eq('id',id).select());
+  if(!removed?.length)throw new Error('Não foi possível excluir. Confira seu acesso de administrador.');
+  await syncAccount();modal.close();toast('Produto excluído.');return;
+ }
  if(action==='toggle-product'&&session?.role==='admin'){const p=product(id);checked(await backend.from('fenie_products').update({active:!p.active}).eq('id',id).select().single());await syncAccount();toast('Publicação atualizada.');return;}
  if(action==='message-open'){
   const o=state.orders.find(o=>o.id===id&&(session?.role==='admin'||o.clientId===client()?.id));if(!o)return;

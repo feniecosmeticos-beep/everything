@@ -9,9 +9,10 @@ function environment(search='',otpError=null,role='client'){
  let loggedIn=false;
  const root={innerHTML:'',querySelector:()=>null},modal={open:false,showModal(){this.open=true},close(){this.open=false}},toast={};
  const backend={auth:{verifyOtp:async p=>{calls.push(['verifyOtp',p]);if(otpError)return {error:otpError};loggedIn=true;return {data:{user}}},getUser:async()=>({data:{user:loggedIn?user:null}}),onAuthStateChange(){},signInWithPassword:async p=>{calls.push(['login',p]);loggedIn=true;return {data:{user}}},signUp:async p=>{calls.push(['signup',p]);return {data:{session:null}}},resetPasswordForEmail:async(...p)=>{calls.push(['recovery',...p]);return {data:{}}},updateUser:async p=>{calls.push(['updateUser',p]);return {data:{}}},signOut:async()=>{loggedIn=false;return {data:{}}}},
- from(table){let operation='read',payload;const q={select(){return q},order(){return q},eq(){return q},range(){return q},update(p){operation='update';payload=p;return q},insert(p){operation='insert';payload=p;return q},single(){return q},then(ok,no){if(operation!=='read')calls.push([table,operation,payload]);return Promise.resolve({data:operation==='read'?rows[table]||[]:payload}).then(ok,no)}};return q},
+ from(table){let operation='read',payload;const q={select(){return q},order(){return q},eq(){return q},range(){return q},update(p){operation='update';payload=p;return q},insert(p){operation='insert';payload=p;return q},delete(){operation='delete';payload=null;return q},single(){return q},then(ok,no){if(operation!=='read')calls.push([table,operation,payload]);return Promise.resolve({data:operation==='read'?rows[table]||[]:operation==='delete'?[{}]:payload}).then(ok,no)}};return q},
+ storage:{from:bucket=>({upload:async(path,file,opts)=>{calls.push(['upload',bucket,path,opts]);return {data:{path}}},getPublicUrl:path=>({data:{publicUrl:'https://example.supabase.co/storage/v1/object/public/'+bucket+'/'+path}})})},
  rpc:async(name,p)=>{calls.push([name,p]);return {data:'FEN-00000001'}}};
- const document={title:'',querySelector:s=>s==='#app'?root:s==='#modal'?modal:toast,addEventListener:(type,fn)=>{(events[type]??=[]).push(fn)}};
+ const document={title:'',querySelector:s=>s==='#app'?root:s==='#modal'?modal:toast,addEventListener:(type,fn)=>{(events[type]??=[]).push(fn)},dispatchClick:button=>events.click[0]({target:{closest:()=>button}})};
  const historyCalls=[];
  let browserHash='#/entrar';
  const mockLocation={search,origin:'https://protected-preview.example',pathname:'/',get hash(){return browserHash},set hash(value){browserHash=value.startsWith('#')?value:'#'+value}};
@@ -92,4 +93,43 @@ test('convite administrativo abre definição de senha e volta ao login de gest�
  const e=environment('?token_hash=token_de_teste_sem_valor_real_123456&type=invite',null,'admin');await e.ready();await e.submit('verify-email');e.api.render();
  assert.equal(e.calls[0][1].type,'invite');assert.equal(e.context.location.hash,'#/nova-senha');assert.match(e.root.innerHTML,/Ative seu acesso/);
  await e.submit('reset-password',{password:'senha ficticia do teste'});assert.equal(e.context.location.hash,'#/admin/entrar');assert.ok(e.calls.some(c=>c[0]==='updateUser'));
+});
+
+test('admin edita todos os campos do produto, preserva o código da opção e adiciona nova opção',async()=>{
+ const e=environment('',null,'admin');await e.ready();await e.submit('login',{email:'equipe@example.invalid',password:'teste'},{role:'admin'});
+ await e.submit('product',{name:'Produto novo nome',brand:'Olenka',category:'Finalizadores',size:'1 L',image:'https://cdn.example.invalid/foto.webp',active:'on',featured:'on',variant_id:['v1',''],variant_label:['1 L','Kit 2 un'],variant_sku:['SKU-1L','sku kit 2'],variant_price:['42,50','80.00']},{id:'p1'});
+ const [,op,row]=e.calls.find(c=>c[0]==='fenie_products');
+ assert.equal(op,'update');assert.equal(row.name,'Produto novo nome');assert.equal(row.brand,'Olenka');assert.equal(row.category,'Finalizadores');assert.equal(row.size,'1 L');assert.equal(row.image,'https://cdn.example.invalid/foto.webp');assert.equal(row.featured,true);
+ assert.equal(JSON.stringify(row.variants.map(v=>[v.id,v.sku,v.price])),JSON.stringify([['v1','SKU-1L',4250],['SKU-KIT-2','sku kit 2',8000]]));
+});
+test('admin envia foto para o armazenamento e grava o link público',async()=>{
+ const e=environment('',null,'admin');await e.ready();await e.submit('login',{email:'equipe@example.invalid',password:'teste'},{role:'admin'});
+ const photo={size:1000,type:'image/webp',name:'foto.webp'};
+ await e.submit('product',{name:'Produto',brand:'Fenié',image:'',photo,variant_id:'v1',variant_label:'900 ml',variant_sku:'SKU',variant_price:'42.50'},{id:'p1'});
+ const up=e.calls.find(c=>c[0]==='upload');assert.equal(up[1],'fenie-produtos');assert.match(up[2],/^p1\/[a-z0-9]+\.webp$/);assert.equal(up[3].upsert,false);
+ assert.match(e.calls.find(c=>c[0]==='fenie_products')[2].image,/^https:\/\/example\.supabase\.co\/storage\/v1\/object\/public\/fenie-produtos\/p1\//);
+});
+test('foto em formato ou tamanho inválido é recusada sem gravar',async()=>{
+ const e=environment('',null,'admin');await e.ready();await e.submit('login',{email:'equipe@example.invalid',password:'teste'},{role:'admin'});
+ const err=await e.submit('product',{name:'Produto',brand:'Fenié',photo:{size:9e6,type:'image/webp'},variant_id:'v1',variant_label:'900 ml',variant_sku:'SKU',variant_price:'42.50'},{id:'p1'});
+ assert.match(err.textContent,/5 MB/);assert.equal(e.calls.some(c=>c[0]==='upload'||c[0]==='fenie_products'),false);
+});
+test('admin cadastra produto novo com identificador gerado',async()=>{
+ const e=environment('',null,'admin');await e.ready();await e.submit('login',{email:'equipe@example.invalid',password:'teste'},{role:'admin'});
+ await e.submit('product',{name:'Máscara Reconstrução',brand:'Spa do Fio',category:'Máscaras e tratamentos',size:'500 g',image:'',variant_id:'',variant_label:'500 g',variant_sku:'SDF-MSC-500',variant_price:'99.90'},{id:''});
+ const [,op,row]=e.calls.find(c=>c[0]==='fenie_products');
+ assert.equal(op,'insert');assert.match(row.id,/^mascara-reconstrucao-[a-z0-9]+$/);assert.equal(row.variants[0].id,'SDF-MSC-500');assert.equal(row.variants[0].price,9990);assert.equal(row.active,false);
+});
+test('cliente não consegue gravar produto pelo formulário do painel',async()=>{
+ const e=environment();await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ await e.submit('product',{name:'X',brand:'X',variant_label:'X',variant_sku:'X',variant_price:'1'},{id:'p1'});
+ assert.equal(e.calls.some(c=>c[0]==='fenie_products'),false);
+});
+test('exclusão exige segundo clique de confirmação',async()=>{
+ const e=environment('',null,'admin');await e.ready();await e.submit('login',{email:'equipe@example.invalid',password:'teste'},{role:'admin'});
+ const button={dataset:{action:'product-delete',id:'p1'},textContent:'Excluir produto'};
+ await e.context.document.dispatchClick(button);
+ assert.equal(e.calls.some(c=>c[1]==='delete'),false);assert.equal(button.dataset.confirm,'1');
+ await e.context.document.dispatchClick(button);
+ assert.equal(e.calls.filter(c=>c[1]==='delete').length,1);
 });

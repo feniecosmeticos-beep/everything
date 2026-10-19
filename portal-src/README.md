@@ -8,7 +8,15 @@ Salões fazem o cadastro comum e confirmam o e-mail. O banco libera o acesso aut
 
 Administradores usam somente o login em /#/admin/entrar. Os e-mails autorizados são mantidos na tabela privada fenie_private.admin_access, sem lista no frontend e sem cadastro público administrativo. O responsável provisiona as autorizações e envia convites individuais pelo Supabase. Cada pessoa ativa o convite e cria sua própria senha. Um e-mail ainda não confirmado não recebe privilégios. Alterar para um e-mail fora da lista remove o papel administrativo; revogar a lista impede acesso imediatamente na próxima operação autorizada pelo banco.
 
-O painel oferece gestão de produtos, preços, publicação, destaques, dados dos salões e atendimento de pedidos. As alterações de produtos afetam este portal. A publicação estática anterior continua separada.
+O painel oferece gestão de produtos, preços, publicação, destaques, dados dos salões e atendimento de pedidos.
+
+### Painel de produtos (/#/admin/catalogo)
+
+- Busca por nome, marca, categoria ou código; filtros por marca e situação (publicados, ocultos, sem foto, marca a confirmar, sem categoria).
+- Edição completa: nome, marca, categoria, embalagem, foto, opções comerciais (rótulo, código e preço; adicionar e remover), publicação e destaque.
+- Fotos: envio de JPG, PNG ou WEBP até 5 MB para o bucket público `fenie-produtos` (gravação só por administradores) ou link https.
+- Cadastro de produto novo e exclusão com confirmação em dois cliques. Pedidos já feitos guardam cópia dos itens e não são afetados.
+- Códigos internos das opções são preservados ao editar, para não quebrar carrinhos e históricos. As alterações de produtos afetam este portal. A publicação estática anterior continua separada.
 
 ## Execução e publicação
 
@@ -16,7 +24,7 @@ Node.js 22 ou superior. npm ci, npm test, npm run build. Compilar dist/ e public
 
 ## Banco e segurança
 
-Projeto Supabase gxqhblahdqkhiuiocyqc, região sa-east-1. Quatro migrações aplicadas e alinhadas ao histórico remoto. A migração automatic_client_access_and_named_admins substitui o fluxo de aprovação pelo acesso após confirmação, preserva bloqueios explícitos existentes, transforma a autorização inicial em lista administrativa persistente e retira o RPC de aprovação manual.
+Projeto Supabase gxqhblahdqkhiuiocyqc, região sa-east-1. Cinco migrações aplicadas e alinhadas ao histórico remoto. A migração automatic_client_access_and_named_admins substitui o fluxo de aprovação pelo acesso após confirmação, preserva bloqueios explícitos existentes, transforma a autorização inicial em lista administrativa persistente e retira o RPC de aprovação manual.
 
 RLS em todas as tabelas expostas. Clientes leem apenas seus dados; a equipe autorizada gerencia o catálogo e os pedidos. Os papéis não vêm de user_metadata. Os preços são calculados no servidor, pedidos guardam snapshot, forma de pagamento e idempotência. Anotações internas ficam separadas dos dados do cliente. Base importada: 488 grupos e 712 opções.
 

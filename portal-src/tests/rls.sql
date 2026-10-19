@@ -84,5 +84,28 @@ select set_config('request.jwt.claims','{"sub":"33333333-3333-4333-8333-33333333
 set local role authenticated;
 do $$ begin assert not fenie_private.is_admin(),'anonymous user admin';end $$;
 reset role;
+select set_config('request.jwt.claims','{"sub":"33333333-3333-4333-8333-333333333333","role":"authenticated","is_anonymous":false}',true);
+set local role authenticated;
+do $$ begin
+ insert into public.fenie_products(id,name,brand,size,category,image,active,variants) values('teste-painel','Produto de teste','Fenié','500 ml','Finalizadores','',false,'[{"id":"TESTE-1","sku":"TESTE-1","label":"500 ml","price":1000}]');
+ update public.fenie_products set brand='Outra marca',category='Óleos',size='1 L',image='https://example.invalid/foto.webp' where id='teste-painel';
+ assert (select brand='Outra marca' and image like 'https://%' from public.fenie_products where id='teste-painel'),'admin full edit';
+ delete from public.fenie_products where id='teste-painel';
+ assert (select count(*)=0 from public.fenie_products where id='teste-painel'),'admin delete';
+end $$;
+reset role;
+select set_config('request.jwt.claims','{"sub":"11111111-1111-4111-8111-111111111111","role":"authenticated","is_anonymous":false}',true);
+set local role authenticated;
+do $$ declare n int; begin
+ begin insert into public.fenie_products(id,name,brand,variants) values('cliente-cria','X','X','[{"id":"X","sku":"X","label":"X","price":1}]');raise exception 'client insert';exception when insufficient_privilege then null;end;
+ update public.fenie_products set brand='invadido' where id=(select id from public.fenie_products limit 1);get diagnostics n=row_count;assert n=0,'client update';
+ delete from public.fenie_products;get diagnostics n=row_count;assert n=0,'client delete';
+end $$;
+reset role;
+set local role anon;
+do $$ declare n int; begin
+ begin delete from public.fenie_products;raise exception 'anon delete';exception when insufficient_privilege then null;end;
+end $$;
+reset role;
 rollback;
-select 'PASS: RLS, automatic client access, named verified admins, ownership, server prices, payment, idempotency, internal notes; all fixtures rolled back' as verification;
+select 'PASS: RLS, automatic client access, named verified admins, ownership, server prices, payment, idempotency, internal notes, admin product editing; all fixtures rolled back' as verification;
