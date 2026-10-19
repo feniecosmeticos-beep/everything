@@ -129,7 +129,7 @@ test('oxidants have the 14 exact volumes, explicit family aliases and verified p
 test('WhatsApp encodes the confirmed number, selected volumes, accurate totals and salon name',()=>{
   const state=vm.createContext({I:n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n/100)});
   loadFunction('L',state);loadFunction('catalogueBaseCartSummary',state);state.J=state.catalogueBaseCartSummary;
-  loadFunction('TA',state);loadFunction('orderWhatsAppHref',state);
+  loadFunction('orderPaymentLabel',state);loadFunction('TA',state);loadFunction('orderWhatsAppHref',state);
   const quantities={'OLK-OX-35V-900':2,'MC-OX-06V':1,'DOH-OX-900-V10':1};
   const url=new URL(state.orderWhatsAppHref(quantities,data.products,{name:'Salão A & B + teste\nCuritiba'}));
   assert.equal(url.origin,'https://wa.me');assert.equal(url.pathname,'/554198402800');
@@ -146,4 +146,46 @@ test('parent SKU search finds all volumes and legacy cart requires a volume choi
   loadFunction('L',state);loadFunction('catalogueBaseCartSummary',state);
   const summary=state.catalogueBaseCartSummary({'MC-OX-900':1},data.products);
   assert.equal(summary.items.length,0);assert.match(summary.issues[0].reason,/volumagem/);
+});
+
+test('payment choices and boleto installments are encoded in both WhatsApp and copyable message',()=>{
+  const state=vm.createContext({I:n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n/100)});
+  for(const name of ['L','catalogueBaseCartSummary','orderPaymentLabel','TA','orderWhatsAppHref'])loadFunction(name,state);
+  state.J=state.catalogueBaseCartSummary;const items={'MC-OX-06V':2};
+  for(const [paymentMethod,paymentInstallments,label] of [
+    ['pix','2','Pix'],['credito','2','Cartão de crédito'],['debito','2','Cartão de débito'],
+    ['boleto-avista','6','Boleto à vista'],['boleto-parcelado','2','Boleto parcelado em 2x'],
+    ['boleto-parcelado','6','Boleto parcelado em 6x'],['combinar','2','A combinar com o atendimento']
+  ]){
+    const options={paymentMethod,paymentInstallments,name:'Salão & Cia'};
+    const message=state.TA(items,data.products,options);
+    const url=new URL(state.orderWhatsAppHref(items,data.products,options));
+    assert.equal(url.searchParams.get('text'),message);
+    assert.ok(message.includes('Forma de pagamento: '+label));
+    assert.match(message,/85,00/);assert.match(message,/Salão & Cia/);
+    assert.equal((message.match(/Forma de pagamento:/g)||[]).length,1);
+  }
+  assert.equal(state.orderPaymentLabel('__proto__'),'A combinar com o atendimento');
+  assert.equal(state.orderPaymentLabel('constructor'),'A combinar com o atendimento');
+  assert.equal(state.orderPaymentLabel('<script>'),'A combinar com o atendimento');
+  for(const invalid of ['0','1','7','2.5','6x','2\nOutra linha'])assert.equal(state.orderPaymentLabel('boleto-parcelado',invalid),'Boleto parcelado em até 6x (parcelas a confirmar)');
+});
+test('review changes keep WhatsApp link and open message synchronized without changing totals',()=>{
+  const fields={
+    '#clientName':{value:'Salão teste'},
+    'input[name="paymentMethod"]:checked':{value:'boleto-parcelado'},
+    '#paymentInstallments':{value:'6',disabled:true},
+    '#paymentInstallmentField':{hidden:true},
+    '#whatsappOrder':{href:''},'.msg-preview':{textContent:''}
+  };
+  const state=vm.createContext({reviewOrderDetails:{},document:{querySelector:s=>fields[s]},EA:{seller:'teste'},c:{A:1},d:[],
+    orderWhatsAppHref:(c,d,o)=>JSON.stringify(o),TA:(c,d,o)=>JSON.stringify(o)});
+  loadFunction('orderReviewOptions',state);loadFunction('syncOrderReview',state);state.syncOrderReview();
+  assert.equal(fields['#paymentInstallmentField'].hidden,false);assert.equal(fields['#paymentInstallments'].disabled,false);
+  assert.equal(fields['#whatsappOrder'].href,fields['.msg-preview'].textContent);
+  assert.equal(JSON.parse(fields['#whatsappOrder'].href).paymentInstallments,'6');
+  fields['input[name="paymentMethod"]:checked'].value='pix';state.syncOrderReview();
+  assert.equal(fields['#paymentInstallmentField'].hidden,true);assert.equal(fields['#paymentInstallments'].disabled,true);
+  assert.equal(JSON.parse(fields['#whatsappOrder'].href).paymentMethod,'pix');
+  assert.equal(state.reviewOrderDetails.name,'Salão teste');
 });

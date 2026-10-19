@@ -7,3 +7,9 @@ Os três cadastros agregados ficam ocultos para compra. Links antigos abrem a es
 Fotos reais e locais por opção. Olenka 10 Vol e Doha 5, 10, 30, 40 Vol usam imagem da linha de 20 Vol, identificada na legenda e no texto alternativo. Origem e vínculo de cada foto em [auditoria](audits/oxidants-2026-10-19.json). Nenhum rótulo foi alterado digitalmente.
 
 WhatsApp confirmado pelo usuário: +55 41 9840-2800 (554198402800). A revisão gera um link com produtos, volumagens, quantidades, preços, total, nome opcional e origem da campanha. O cliente abre a conversa e envia a mensagem. Não registra pedido automaticamente no Mercos, não cobra pagamento e não presume disponibilidade ou frete. Testes conferem o link sem enviar mensagens reais.
+
+## Forma de pagamento
+
+Na revisão, o cliente escolhe Pix, cartão de crédito, cartão de débito, boleto à vista ou boleto parcelado de 2 a 6 vezes. Também pode definir com o atendimento. Boleto parcelado exibe a seleção de parcelas; a mensagem inclui a quantidade exata. Cartões e Pix não recebem regras de parcelamento ou descontos presumidos. A escolha é uma preferência para confirmação comercial, sem cobrança no catálogo.
+
+Nome e pagamento são mantidos em memória enquanto o cliente edita o pedido. O link do WhatsApp e a mensagem para copiar são atualizados juntos, inclusive após trocar parcelas ou voltar ao Pix. Nenhum dado de cartão é coletado.

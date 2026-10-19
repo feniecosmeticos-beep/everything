@@ -28,6 +28,8 @@ Atualização de 13/10/2026, inspirada na identidade do [site institucional da F
 - Filtro explícito para os itens com marca a confirmar.
 - Destaques: vitrine dos mais vendidos agrupada por linha e ranking completo por marca/classificação, com dados reais de 01 a 14/10/2026. MUP fica em uma única posição. Os combos estão pausados. Consulte `docs/destaques.md`.
 
+- Forma de pagamento na revisão: Pix, crédito, débito, boleto à vista ou parcelado de 2 a 6 vezes. A escolha segue na mensagem do WhatsApp e na opção de copiar pedido.
+
 ### Rotas
 
 | Caminho | Conteúdo |
@@ -75,6 +77,6 @@ Os arquivos-fonte anteriores à exportação HTML não fazem parte deste reposit
 
 A revisão de 16/10/2026 utilizou REA 6.5.0 e testes de navegação, pedido e reposição. Consulte [o relatório](docs/revisao-rea.md) para falhas corrigidas, evidências e limitações.
 
-Execute `node --test scripts/tests/test-catalogue.cjs`, `python scripts/tests/test-sales.py` e `python scripts/tests/test-assets.py` para as 15 verificações automatizadas.
+Execute `node --test scripts/tests/test-catalogue.cjs`, `python scripts/tests/test-sales.py` e `python scripts/tests/test-assets.py` para as 17 verificações automatizadas.
 
 Após editar CSS ou JavaScript, rode `python scripts/version-assets.py` para atualizar as versões por conteúdo no HTML. Para gerar uma versão independente: `python scripts/export-html.py catalogo-revisado.html`.
