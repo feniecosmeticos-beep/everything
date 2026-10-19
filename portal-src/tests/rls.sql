@@ -28,7 +28,7 @@ values('aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa','11111111-1111-4111-8111-111111111
 ('bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbbb','22222222-2222-4222-8222-222222222222','Teste B','Rua Teste, 2','Centro','Curitiba','PR','80000000');
 set local role anon;
 do $$ begin
- assert (select count(*)=488 from public.fenie_products),'public catalogue';
+ begin perform * from public.fenie_products;raise exception 'anon reads catalogue';exception when insufficient_privilege then null;end;
  begin perform * from public.fenie_profiles;raise exception 'anon profiles exposed';exception when insufficient_privilege then null;end;
  begin perform public.fenie_place_order('{}');raise exception 'anon RPC exposed';exception when insufficient_privilege then null;end;
 end $$;
@@ -108,4 +108,4 @@ do $$ declare n int; begin
 end $$;
 reset role;
 rollback;
-select 'PASS: RLS, automatic client access, named verified admins, ownership, server prices, payment, idempotency, internal notes, admin product editing; all fixtures rolled back' as verification;
+select 'PASS: RLS, automatic client access, named verified admins, ownership, server prices, payment, idempotency, internal notes, admin product editing, login-only catalogue; all fixtures rolled back' as verification;

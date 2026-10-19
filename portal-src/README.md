@@ -1,6 +1,8 @@
 # Portal Fenié com Supabase
 
-Portal público: https://fenie-portal.vercel.app/. Variante independente do catálogo estático em https://catalogofenie.vercel.app/.
+Portal: https://fenie-portal.vercel.app/. É a única porta de entrada do catálogo: https://catalogofenie.vercel.app/ redireciona para cá e produtos e preços só aparecem após o login (visitantes não leem a tabela de produtos no banco).
+
+Publicação: a Vercel constrói a partir do GitHub (branch codex/fenie-portal-supabase, raiz portal-src, npm ci, npm run build, saída dist).
 
 ## Clientes e equipe
 
@@ -24,7 +26,7 @@ Node.js 22 ou superior. npm ci, npm test, npm run build. Compilar dist/ e public
 
 ## Banco e segurança
 
-Projeto Supabase gxqhblahdqkhiuiocyqc, região sa-east-1. Cinco migrações aplicadas e alinhadas ao histórico remoto. A migração automatic_client_access_and_named_admins substitui o fluxo de aprovação pelo acesso após confirmação, preserva bloqueios explícitos existentes, transforma a autorização inicial em lista administrativa persistente e retira o RPC de aprovação manual.
+Projeto Supabase gxqhblahdqkhiuiocyqc, região sa-east-1. Seis migrações aplicadas (a última, catalog_login_only, pelo SQL Editor) e alinhadas ao histórico remoto. A migração automatic_client_access_and_named_admins substitui o fluxo de aprovação pelo acesso após confirmação, preserva bloqueios explícitos existentes, transforma a autorização inicial em lista administrativa persistente e retira o RPC de aprovação manual.
 
 RLS em todas as tabelas expostas. Clientes leem apenas seus dados; a equipe autorizada gerencia o catálogo e os pedidos. Os papéis não vêm de user_metadata. Os preços são calculados no servidor, pedidos guardam snapshot, forma de pagamento e idempotência. Anotações internas ficam separadas dos dados do cliente. Base importada: 488 grupos e 712 opções.
 
