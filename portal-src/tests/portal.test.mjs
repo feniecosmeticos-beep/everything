@@ -133,3 +133,11 @@ test('exclusão exige segundo clique de confirmação',async()=>{
  await e.context.document.dispatchClick(button);
  assert.equal(e.calls.filter(c=>c[1]==='delete').length,1);
 });
+
+test('visitante sem login não carrega produtos e a vitrine pública leva ao login',async()=>{
+ const e=environment();await e.ready();
+ assert.equal(e.api.getState().products.length,0);
+ e.context.location.hash='#/catalogo';e.api.render();
+ assert.equal(e.context.location.hash,'#/entrar');
+ assert.doesNotMatch(e.root.innerHTML,/Explorar produtos/);
+});
