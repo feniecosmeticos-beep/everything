@@ -5,7 +5,7 @@ import {readFile} from 'node:fs/promises';
 const source=(await readFile(new URL('../app.js',import.meta.url),'utf8')).replace(/^import .*\n/,'').replace(/\}\)\(\);\s*$/,'window.testPortal={syncAccount,getState:()=>state,getSession:()=>session,render};})();');
 function environment(search='',otpError=null,role='client'){
  const calls=[],events={},store=new Map(),user={id:'client-1'},profile={id:'client-1',role,status:'approved',name:'Cliente',salon:'Salão',email:'cliente@example.invalid',phone:''};
- const rows={fenie_products:[{id:'p1',name:'Produto',brand:'Fenié',size:'900 ml',image:'img',active:true,featured:true,variants:[{id:'v1',sku:'SKU',label:'20 Vol',price:4250}]}],fenie_profiles:[profile],fenie_addresses:[{id:'a1',user_id:'client-1',label:'Salão',street:'Rua, 1',district:'Centro',city:'Curitiba',uf:'PR',cep:'80000000'}],fenie_orders:[]};
+ const rows={fenie_products:[{id:'p1',name:'Produto',brand:'Fenié',size:'900 ml',category:'Oxidantes',image:'img',active:true,featured:true,variants:[{id:'v1',sku:'SKU',label:'20 Vol',price:4250}]},{id:'p2',name:'Máscara Nutrição',brand:'Olenka',size:'500 g',category:'Máscaras',image:'img',active:true,featured:false,variants:[{id:'v2',sku:'MSK',label:'500 g',price:9000}]}],fenie_profiles:[profile],fenie_addresses:[{id:'a1',user_id:'client-1',label:'Salão',street:'Rua, 1',district:'Centro',city:'Curitiba',uf:'PR',cep:'80000000'}],fenie_orders:[]};
  let loggedIn=false;
  const root={innerHTML:'',querySelector:()=>null},modal={open:false,showModal(){this.open=true},close(){this.open=false}},toast={};
  const backend={auth:{verifyOtp:async p=>{calls.push(['verifyOtp',p]);if(otpError)return {error:otpError};loggedIn=true;return {data:{user}}},getUser:async()=>({data:{user:loggedIn?user:null}}),onAuthStateChange(){},signInWithPassword:async p=>{calls.push(['login',p]);loggedIn=true;return {data:{user}}},signUp:async p=>{calls.push(['signup',p]);return {data:{session:null}}},resetPasswordForEmail:async(...p)=>{calls.push(['recovery',...p]);return {data:{}}},updateUser:async p=>{calls.push(['updateUser',p]);return {data:{}}},signOut:async()=>{loggedIn=false;return {data:{}}}},
@@ -27,7 +27,8 @@ function environment(search='',otpError=null,role='client'){
   const button={dataset:{action},textContent:'Verificar aprovação',disabled:false};
   await events.click[0]({target:{closest:()=>button}});return button;
  }
- return {calls,context,rows,ready,submit,click,root,historyCalls,api:context.window.testPortal};
+ async function change(target){await events.change[0]({target});}
+ return {calls,context,rows,ready,submit,click,change,root,historyCalls,api:context.window.testPortal};
 }
 test('login usa Supabase e lê o perfil aprovado do banco',async()=>{
  const e=environment();await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'senha de teste'}, {role:'client'});
@@ -158,4 +159,14 @@ test('pedido do salão tem botão Enviar para o WhatsApp e aviso de que só vale
  assert.match(e.root.innerHTML,/href="https:\/\/wa\.me\/554198402800\?text=[^"]+">Enviar para o WhatsApp/);
  assert.match(e.root.innerHTML,/só é realizado após o envio da mensagem pelo WhatsApp/);
  assert.doesNotMatch(e.root.innerHTML,/Ver mensagem do WhatsApp/);
+});
+
+test('trocar categoria ou marca filtra na hora, sem botão Buscar',async()=>{
+ const e=environment();await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.location.hash='#/cliente/catalogo';e.api.render();
+ assert.doesNotMatch(e.root.innerHTML,/>Buscar</);assert.match(e.root.innerHTML,/>Categorias</);
+ const form={dataset:{form:'catalog-search'},data:{q:'',brand:'',category:'Máscaras'},querySelector:()=>null};
+ const select={tagName:'SELECT',dataset:{},name:'category',hasAttribute:()=>false,closest:()=>form};
+ await e.change(select);
+ assert.match(e.root.innerHTML,/Máscara Nutrição/);assert.doesNotMatch(e.root.innerHTML,/<h3>Produto<\/h3>/);
 });

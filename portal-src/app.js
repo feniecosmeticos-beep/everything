@@ -7,7 +7,7 @@ const clone=x=>JSON.parse(JSON.stringify(x)),C=x=>String(x??'').replace(/[&<>"']
 const money=n=>(n/100).toLocaleString('pt-BR',{style:'currency',currency:'BRL'}),initials=n=>n.split(/\s+/).slice(0,2).map(x=>x[0]).join('').toUpperCase();
 const AUTH_PHOTOS=['https://catalogofenie.vercel.app/assets/images/ox-olenka-linha-20.png','https://catalogofenie.vercel.app/assets/images/0b46351c789f3a46182a.png'];
 const PHOTO_BUCKET='fenie-produtos',PHOTO_TYPES={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'},PHOTO_MAX=5*1024*1024,ADMIN_PAGE=40;
-let session=null,cartSelections={},filters={q:'',brand:'',status:'',clientQ:'',adminQ:'',adminBrand:'',adminStatus:'',adminLimit:ADMIN_PAGE},variantRowSeq=0,newOrderId='',toastTimer;
+let session=null,cartSelections={},filters={q:'',brand:'',category:'',status:'',clientQ:'',adminQ:'',adminBrand:'',adminStatus:'',adminLimit:ADMIN_PAGE},variantRowSeq=0,newOrderId='',toastTimer;
 const icons={home:'<path d="m3 10 9-7 9 7M5 9v12h14V9M9 21v-7h6v7"/>',box:'<path d="m3 7 9-4 9 4v11l-9 4-9-4V7Zm0 0 9 5 9-5M12 12v10"/>',bag:'<path d="M5 7h14l1 14H4L5 7ZM8 8V6a4 4 0 0 1 8 0v2"/>',users:'<circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M17 5a3 3 0 0 1 0 6M18 15a5 5 0 0 1 3 6"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 22v-3a8 8 0 0 1 16 0v3"/>',pin:'<path d="M19 10c0 6-7 12-7 12S5 16 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/>',star:'<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>',search:'<circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/>',arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>'};
 function icon(n){return '<span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24">'+(icons[n]||icons.box)+'</svg></span>';}
 function product(id){return state.products.find(p=>p.id===id);}
@@ -108,8 +108,8 @@ function customerHome(){
 }
 function normalize(s){return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
 function catalogPage(savedOnly=false,publicView=false){
- const products=state.products.filter(p=>p.active&&(!savedOnly||state.saved.includes(p.id))&&(!filters.brand||p.brand===filters.brand)&&(!filters.q||normalize([p.name,p.brand,p.id,...p.variants.map(v=>v.sku)].join(' ')).includes(normalize(filters.q))));
- return heading(savedOnly?'MINHA REPOSIÇÃO':'SELEÇÃO PROFISSIONAL',savedOnly?'Os seus essenciais.':'Escolhas para o seu salão.','Consulte as opções e os preços atuais. Disponibilidade, frete e condições serão confirmados pela equipe.',publicView?'<a class="btn primary" href="#/entrar">Entrar →</a>':'<a class="btn primary" href="#/cliente/carrinho">Ver pedido · '+cartCount()+'</a>')+'<form class="filterbar" data-form="catalog-search"><div class="search-wrap">'+icon('search')+'<input class="search-input" type="search" name="q" value="'+C(filters.q)+'" placeholder="Buscar produto, marca ou código" aria-label="Buscar produto, marca ou código"></div><select class="filter-select" name="brand" aria-label="Filtrar por marca"><option value="">Todas as marcas</option>'+[...new Set(state.products.map(p=>p.brand))].map(b=>'<option '+(filters.brand===b?'selected':'')+'>'+C(b)+'</option>').join('')+'</select><button class="btn">Buscar</button><button class="btn ghost" type="button" data-action="clear-filters">Limpar</button></form>'+(products.length?'<div class="catalog-grid">'+products.slice(((filters.page||1)-1)*24,(filters.page||1)*24).map(productCard).join('')+'</div><div class="actions" style="margin-top:24px"><span>'+products.length+' produtos · página '+(filters.page||1)+' de '+Math.max(1,Math.ceil(products.length/24))+'</span>'+((filters.page||1)>1?'<button class="btn" data-action="catalog-page" data-page="'+((filters.page||1)-1)+'">← Anterior</button>':'')+((filters.page||1)*24<products.length?'<button class="btn" data-action="catalog-page" data-page="'+((filters.page||1)+1)+'">Próxima →</button>':'')+'</div>':'<section class="card empty"><h2>Nenhum produto por aqui.</h2><p>'+(savedOnly?'Toque na estrela de um produto no catálogo para salvar sua reposição.':'Tente outra marca, nome ou código.')+'</p><a class="btn" href="#/cliente/catalogo">Explorar catálogo →</a></section>');
+ const products=state.products.filter(p=>p.active&&(!savedOnly||state.saved.includes(p.id))&&(!filters.brand||p.brand===filters.brand)&&(!filters.category||p.category===filters.category)&&(!filters.q||normalize([p.name,p.brand,p.category,p.id,...p.variants.map(v=>v.sku+' '+v.label)].join(' ')).includes(normalize(filters.q))));
+ return heading(savedOnly?'MINHA REPOSIÇÃO':'SELEÇÃO PROFISSIONAL',savedOnly?'Os seus essenciais.':'Escolhas para o seu salão.','Consulte as opções e os preços atuais. Disponibilidade, frete e condições serão confirmados pela equipe.',publicView?'<a class="btn primary" href="#/entrar">Entrar →</a>':'<a class="btn primary" href="#/cliente/carrinho">Ver pedido · '+cartCount()+'</a>')+'<form class="filterbar" data-form="catalog-search"><div class="search-wrap">'+icon('search')+'<input class="search-input" type="search" name="q" value="'+C(filters.q)+'" placeholder="Buscar produto, marca ou código" aria-label="Buscar produto, marca ou código"></div><select class="filter-select" name="brand" aria-label="Filtrar por marca"><option value="">Marcas</option>'+[...new Set(state.products.map(p=>p.brand))].map(b=>'<option '+(filters.brand===b?'selected':'')+'>'+C(b)+'</option>').join('')+'</select><select class="filter-select" name="category" aria-label="Filtrar por categoria"><option value="">Categorias</option>'+categoryOptions(filters.category)+'</select><button class="btn ghost" type="button" data-action="clear-filters">Limpar</button></form>'+(products.length?'<div class="catalog-grid">'+products.slice(((filters.page||1)-1)*24,(filters.page||1)*24).map(productCard).join('')+'</div><div class="actions" style="margin-top:24px"><span>'+products.length+' produtos · página '+(filters.page||1)+' de '+Math.max(1,Math.ceil(products.length/24))+'</span>'+((filters.page||1)>1?'<button class="btn" data-action="catalog-page" data-page="'+((filters.page||1)-1)+'">← Anterior</button>':'')+((filters.page||1)*24<products.length?'<button class="btn" data-action="catalog-page" data-page="'+((filters.page||1)+1)+'">Próxima →</button>':'')+'</div>':'<section class="card empty"><h2>Nenhum produto por aqui.</h2><p>'+(savedOnly?'Toque na estrela de um produto no catálogo para salvar sua reposição.':'Tente outra marca, nome ou código.')+'</p><a class="btn" href="#/cliente/catalogo">Explorar catálogo →</a></section>');
 }
 function itemSnapshot(id,quantity){const m=variant(id);return m?{productId:m.p.id,variantId:id,name:m.p.name,brand:m.p.brand,volume:m.v.label,size:m.p.size,sku:m.v.sku,price:m.v.price,quantity}:null;}
 function cartItems(){return Object.entries(state.cart).map(([id,q])=>itemSnapshot(id,q)).filter(Boolean);}
@@ -155,6 +155,16 @@ function adminProducts(){
   return !q||normalize(p.name+' '+p.brand+' '+p.category+' '+p.size+' '+p.variants.map(v=>v.sku+' '+v.label).join(' ')).includes(q);
  });
 }
+function categoryOptions(selected){return [...new Set(state.products.filter(p=>p.active).map(p=>p.category).filter(c=>c&&!/n[ãa]o informado/i.test(c)))].sort((a,b)=>a.localeCompare(b,'pt-BR')).map(c=>'<option value="'+C(c)+'" '+(selected===c?'selected':'')+'>'+C(c)+'</option>').join('');}
+const LIVE_FILTERS={'catalog-search':f=>{filters.q=f('q');filters.brand=f('brand');filters.category=f('category');filters.page=1;},'admin-product-search':f=>{filters.adminQ=f('q');filters.adminBrand=f('brand');filters.adminStatus=f('status');filters.adminLimit=ADMIN_PAGE;},'client-search':f=>{filters.clientQ=f('q');}};
+let liveFilterTimer;
+function applyLiveFilter(form,focusName){
+ const kind=form.dataset.form,apply=LIVE_FILTERS[kind];if(!apply)return;
+ const data=new FormData(form);apply(n=>String(data.get(n)||'').trim());
+ const active=focusName&&form.querySelector('[name="'+focusName+'"]'),caret=active?.selectionStart;
+ render();
+ if(focusName){const again=root.querySelector('[data-form="'+kind+'"] [name="'+focusName+'"]');if(again){again.focus();try{again.setSelectionRange(caret,caret);}catch{}}}
+}
 function photoThumb(src){return src?'<img class="table-photo" src="'+C(src)+'" alt="" loading="lazy">':'<span class="table-photo photo-missing" aria-hidden="true">sem foto</span>';}
 function adminCatalog(){
  const list=adminProducts(),shown=list.slice(0,filters.adminLimit||ADMIN_PAGE),brands=[...new Set(state.products.map(p=>p.brand))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
@@ -163,7 +173,7 @@ function adminCatalog(){
  +'<form data-form="admin-product-search" class="filterbar"><div class="search-wrap">'+icon('search')+'<input class="search-input" type="search" name="q" value="'+C(filters.adminQ)+'" placeholder="Buscar nome, marca, categoria ou código" aria-label="Buscar produtos"></div>'
  +'<select class="filter-select" name="brand" aria-label="Filtrar por marca"><option value="">Todas as marcas</option>'+brands.map(b=>'<option value="'+C(b)+'" '+(filters.adminBrand===b?'selected':'')+'>'+C(b)+'</option>').join('')+'</select>'
  +'<select class="filter-select" name="status" aria-label="Filtrar por situação">'+statuses.map(([v,l])=>'<option value="'+v+'" '+(filters.adminStatus===v?'selected':'')+'>'+l+'</option>').join('')+'</select>'
- +'<button class="btn">Buscar</button><button class="btn ghost" type="button" data-action="clear-admin-products">Limpar</button></form>'
+ +'<button class="btn ghost" type="button" data-action="clear-admin-products">Limpar</button></form>'
  +'<section class="card table-wrap"><table class="table"><thead><tr><th>Produto</th><th>Categoria</th><th>Opções</th><th>Preço</th><th>Visibilidade</th><th></th></tr></thead><tbody>'
  +shown.map(p=>'<tr><td><div class="row">'+photoThumb(p.image)+'<div><strong>'+C(p.name)+'</strong><small>'+C(p.brand)+(p.size?' · '+C(p.size):'')+(p.featured?' · ★ destaque':'')+'</small></div></div></td><td>'+C(p.category||'—')+'</td><td>'+p.variants.length+'</td><td>'+priceRange(p)+'</td><td><button class="btn small" data-action="toggle-product" data-id="'+C(p.id)+'" aria-label="'+(p.active?'Ocultar':'Publicar')+' '+C(p.name)+'">'+(p.active?'Publicado':'Oculto')+'</button></td><td><button class="btn small" data-action="product-open" data-id="'+C(p.id)+'">Editar ↗</button></td></tr>').join('')
  +'</tbody></table>'+(list.length?'':'<p class="muted" style="padding:20px 0">Nenhum produto encontrado com esses filtros.</p>')+'</section>'
@@ -294,7 +304,7 @@ document.addEventListener('submit',async event=>{
  if(kind==='reset-password'){
   checked(await backend.auth.updateUser({password:String(data.get('password')||'')}));const destination=inviteMode?'/admin/entrar':'/entrar';recoveryMode=false;inviteMode=false;history.replaceState(null,'',location.pathname+'#'+destination);await signOut();go(destination);toast('Senha salva. Entre com sua nova senha.');return;
  }
- if(kind==='catalog-search'){filters.q=get('q');filters.brand=get('brand');filters.page=1;render();return;}
+ if(kind==='catalog-search'){filters.q=get('q');filters.brand=get('brand');filters.category=get('category');filters.page=1;render();return;}
  if(kind==='client-search'&&session?.role==='admin'){filters.clientQ=get('q');render();return;}
  if(kind==='checkout'&&session?.role==='client'){
   saveCheckout(form);persist();const items=cartItems().map(i=>({productId:i.productId,variantId:i.variantId,quantity:i.quantity}));
@@ -337,6 +347,7 @@ document.addEventListener('change',async event=>{
  const el=event.target;
  if(el.dataset.variant){cartSelections[el.dataset.variant]=el.value;const p=product(el.dataset.variant),v=p?.variants.find(v=>v.id===el.value),card=el.closest('[data-product]');if(card)card.querySelector('.price').innerHTML=(v?'':'<small>A partir de</small>')+money(v?.price||Math.min(...p.variants.map(v=>v.price)));return;}
  if(el.hasAttribute('data-status-filter')){filters.status=el.value;render();return;}
+ if(el.tagName==='SELECT'){const form=el.closest('[data-form]');if(form&&LIVE_FILTERS[form.dataset.form]){applyLiveFilter(form);return;}}
  if(el.hasAttribute&&el.hasAttribute('data-photo-input')){const file=el.files?.[0],img=modal.querySelector('[data-photo-preview]');if(!file||!img)return;if(!PHOTO_TYPES[file.type]){toast('Envie a foto em JPG, PNG ou WEBP.');el.value='';return;}if(file.size>PHOTO_MAX){toast('A foto passa de 5 MB.');el.value='';return;}img.src=URL.createObjectURL(file);img.hidden=false;modal.querySelector('[data-photo-empty]')?.remove();return;}
  if(el.name==='payment'){state.checkout.method=el.value;document.querySelector('#installmentsField').hidden=el.value!=='boleto-parcelado';persist();return;}
  if(el.name==='installments'){state.checkout.installments=el.value;persist();return;}
@@ -345,7 +356,8 @@ document.addEventListener('change',async event=>{
  if(el.dataset.feature&&session?.role==='admin'){try{checked(await backend.from('fenie_products').update({featured:el.checked}).eq('id',el.dataset.feature).select().single());await syncAccount();toast('Destaque atualizado.');}catch(e){el.checked=!el.checked;toast(friendly(e));}}
 
 });
-document.addEventListener('input',event=>{if(event.target.id==='orderNotes')state.checkout.notes=event.target.value;const counter=event.target.dataset?.count&&document.getElementById(event.target.dataset.count);if(counter)counter.textContent=event.target.value.length;});
+document.addEventListener('input',event=>{if(event.target.id==='orderNotes')state.checkout.notes=event.target.value;
+ if(event.target.name==='q'){const form=event.target.closest?.('[data-form]');if(form&&LIVE_FILTERS[form.dataset.form]){clearTimeout(liveFilterTimer);liveFilterTimer=setTimeout(()=>applyLiveFilter(form,'q'),250);}}const counter=event.target.dataset?.count&&document.getElementById(event.target.dataset.count);if(counter)counter.textContent=event.target.value.length;});
 document.addEventListener('click',async event=>{
  const button=event.target.closest('[data-action]');if(!button)return;const action=button.dataset.action,id=button.dataset.id;
  if(button.dataset.busy)return;button.dataset.busy='1';
@@ -356,7 +368,7 @@ document.addEventListener('click',async event=>{
  if(action==='modal-close'){modal.close();return;}
  if(action==='logout'){persist();await signOut();return;}
  if(action==='recover-done'){modal.close();go('/entrar');return;}
- if(action==='clear-filters'){filters.q='';filters.brand='';filters.page=1;render();return;}
+ if(action==='clear-filters'){filters.q='';filters.brand='';filters.category='';filters.page=1;render();return;}
  if(action==='clear-client-search'){filters.clientQ='';render();return;}
  if(action==='catalog-page'){filters.page=Number(button.dataset.page)||1;render();document.querySelector('#main')?.scrollIntoView();return;}
  if(action==='save-product'){if(!session){go('/entrar');return;}if(!product(id))return;state.saved=state.saved.includes(id)?state.saved.filter(s=>s!==id):[...state.saved,id];persist();render();toast('Lista de reposição atualizada.');return;}
