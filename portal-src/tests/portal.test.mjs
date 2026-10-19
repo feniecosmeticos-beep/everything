@@ -149,3 +149,13 @@ test('admin grava a descrição do produto e o salão vê o texto no card',async
  const err=await e.submit('product',{name:'Produto',brand:'Fenié',description:'x'.repeat(2001),variant_id:'v1',variant_label:'900 ml',variant_sku:'SKU',variant_price:'42.50'},{id:'p1'});
  assert.match(err.textContent,/2\.000/);
 });
+
+test('pedido do salão tem botão Enviar para o WhatsApp e aviso de que só vale após o envio',async()=>{
+ const e=environment();
+ e.rows.fenie_orders=[{id:'FEN-00000009',user_id:'client-1',created_at:'2026-10-19T12:00:00Z',status:'waiting',payment_method:'pix',installments:1,items:[{productId:'p1',variantId:'v1',name:'Produto',label:'20 Vol',sku:'SKU',price:4250,quantity:2}],address:{label:'Salão',street:'Rua, 1',district:'Centro',city:'Curitiba',uf:'PR',cep:'80000000',complement:''},notes:'',events:[{date:'2026-10-19T12:00:00Z',text:'Solicitação registrada'}],total_cents:8500}];
+ await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.location.hash='#/cliente/pedidos/FEN-00000009';e.api.render();
+ assert.match(e.root.innerHTML,/href="https:\/\/wa\.me\/554198402800\?text=[^"]+">Enviar para o WhatsApp/);
+ assert.match(e.root.innerHTML,/só é realizado após o envio da mensagem pelo WhatsApp/);
+ assert.doesNotMatch(e.root.innerHTML,/Ver mensagem do WhatsApp/);
+});
