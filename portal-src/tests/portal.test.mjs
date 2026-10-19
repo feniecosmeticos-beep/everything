@@ -141,3 +141,11 @@ test('visitante sem login não carrega produtos e a vitrine pública leva ao log
  assert.equal(e.context.location.hash,'#/entrar');
  assert.doesNotMatch(e.root.innerHTML,/Explorar produtos/);
 });
+
+test('admin grava a descrição do produto e o salão vê o texto no card',async()=>{
+ const e=environment('',null,'admin');await e.ready();await e.submit('login',{email:'equipe@example.invalid',password:'teste'},{role:'admin'});
+ await e.submit('product',{name:'Produto',brand:'Fenié',description:'  Reconstrução profunda.\r\nUso semanal.  ',variant_id:'v1',variant_label:'900 ml',variant_sku:'SKU',variant_price:'42.50'},{id:'p1'});
+ assert.equal(e.calls.find(c=>c[0]==='fenie_products')[2].description,'Reconstrução profunda.\nUso semanal.');
+ const err=await e.submit('product',{name:'Produto',brand:'Fenié',description:'x'.repeat(2001),variant_id:'v1',variant_label:'900 ml',variant_sku:'SKU',variant_price:'42.50'},{id:'p1'});
+ assert.match(err.textContent,/2\.000/);
+});

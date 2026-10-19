@@ -100,7 +100,7 @@ function orderTotal(o){return o.items.reduce((n,i)=>n+i.price*i.quantity,0);}
 function orderRows(orders,admin=false){return orders.length?orders.map(o=>{const c=state.clients.find(c=>c.id===o.clientId);return '<div class="order-row"><div><strong>'+C(o.id)+'</strong><small>'+C(admin?c?.salon:o.date)+' · '+o.items.reduce((n,i)=>n+i.quantity,0)+' unidades</small></div><strong class="row-amount">'+money(orderTotal(o))+'</strong>'+badge(o.status)+'<a class="btn small" href="#/'+(admin?'admin':'cliente')+'/pedidos/'+o.id+'">Ver pedido ↗</a></div>';}).join(''):'<div class="empty"><h2>Ainda não há pedidos.</h2><p>Seu histórico aparecerá depois da primeira solicitação.</p></div>';}
 function productCard(p){
  const selected=cartSelections[p.id]||'',v=p.variants.find(v=>v.id===selected),min=Math.min(...p.variants.map(v=>v.price)),saved=state.saved.includes(p.id);
- return '<article class="product" data-product="'+C(p.id)+'"><button class="save-btn '+(saved?'saved':'')+'" data-action="save-product" data-id="'+C(p.id)+'" aria-label="'+(saved?'Remover da':'Adicionar à')+' lista de reposição: '+C(p.name)+'" aria-pressed="'+saved+'">'+(saved?'★':'☆')+'</button><div class="photo"><img src="'+p.image+'" alt="'+C(p.name)+'" loading="lazy"></div><div class="product-info"><p class="eyebrow">'+C(p.brand)+'</p><h3>'+C(p.name)+'</h3><div class="product-meta">'+C(p.size)+' · '+(p.variants.length>1?p.variants.length+' opções da linha':'Unidade de venda')+'</div><div class="price">'+(p.variants.length>1&&!v?'<small>A partir de</small>':'')+money(v?.price||min)+'</div>'+(p.variants.length>1?'<label class="field-label" for="variant-'+C(p.id)+'" style="font-size:10px;margin-bottom:6px">Opção</label><select id="variant-'+C(p.id)+'" data-variant="'+C(p.id)+'"><option value="">Escolher opção</option>'+p.variants.map(v=>'<option value="'+C(v.id)+'" '+(selected===v.id?'selected':'')+'>'+C(v.label)+' · '+money(v.price)+'</option>').join('')+'</select>':'')+'<button class="btn primary" data-action="add-product" data-id="'+C(p.id)+'" '+(!p.active?'disabled':'')+'>'+(p.active?'Adicionar ao pedido +':'Indisponível')+'</button></div></article>';
+ return '<article class="product" data-product="'+C(p.id)+'"><button class="save-btn '+(saved?'saved':'')+'" data-action="save-product" data-id="'+C(p.id)+'" aria-label="'+(saved?'Remover da':'Adicionar à')+' lista de reposição: '+C(p.name)+'" aria-pressed="'+saved+'">'+(saved?'★':'☆')+'</button><div class="photo"><img src="'+p.image+'" alt="'+C(p.name)+'" loading="lazy"></div><div class="product-info"><p class="eyebrow">'+C(p.brand)+'</p><h3>'+C(p.name)+'</h3><div class="product-meta">'+C(p.size)+' · '+(p.variants.length>1?p.variants.length+' opções da linha':'Unidade de venda')+'</div>'+(p.description?'<p class="product-desc">'+C(p.description)+'</p><button type="button" class="text-btn product-more" data-action="product-details" data-id="'+C(p.id)+'">Ver detalhes</button>':'')+'<div class="price">'+(p.variants.length>1&&!v?'<small>A partir de</small>':'')+money(v?.price||min)+'</div>'+(p.variants.length>1?'<label class="field-label" for="variant-'+C(p.id)+'" style="font-size:10px;margin-bottom:6px">Opção</label><select id="variant-'+C(p.id)+'" data-variant="'+C(p.id)+'"><option value="">Escolher opção</option>'+p.variants.map(v=>'<option value="'+C(v.id)+'" '+(selected===v.id?'selected':'')+'>'+C(v.label)+' · '+money(v.price)+'</option>').join('')+'</select>':'')+'<button class="btn primary" data-action="add-product" data-id="'+C(p.id)+'" '+(!p.active?'disabled':'')+'>'+(p.active?'Adicionar ao pedido +':'Indisponível')+'</button></div></article>';
 }
 function customerHome(){
  const c=client(),orders=state.orders.filter(o=>o.clientId===c.id),pending=orders.filter(o=>!['delivered','cancelled'].includes(o.status)).length;
@@ -196,7 +196,7 @@ function textField(name,label,value,{max=100,required=true,type='text',list='',p
  return '<div class="field"><label for="f-'+name+'">'+label+'</label><input id="f-'+name+'" name="'+name+'" type="'+type+'" value="'+C(value)+'" maxlength="'+max+'"'+(required?' required':'')+(list?' list="'+list+'"':'')+(placeholder?' placeholder="'+C(placeholder)+'"':'')+'>'+(help?'<small>'+help+'</small>':'')+'</div>';
 }
 function productModal(id){
- const p=id?product(id):{id:'',name:'',brand:'',size:'',category:'',image:'',active:true,featured:false,variants:[{id:'',sku:'',label:'',price:0}]};if(!p)return;
+ const p=id?product(id):{id:'',name:'',brand:'',size:'',category:'',description:'',image:'',active:true,featured:false,variants:[{id:'',sku:'',label:'',price:0}]};if(!p)return;
  const uniq=key=>[...new Set(state.products.map(x=>x[key]).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR')).map(x=>'<option value="'+C(x)+'"></option>').join('');
  showModal(id?'Editar produto':'Novo produto','<form data-form="product" data-id="'+C(p.id)+'">'
  +'<div class="photo-edit"><div class="photo-frame">'+(p.image?'<img data-photo-preview src="'+C(p.image)+'" alt="Foto atual do produto">':'<img data-photo-preview alt="Prévia da foto" hidden><span class="photo-missing" data-photo-empty>sem foto</span>')+'</div>'
@@ -205,6 +205,7 @@ function productModal(id){
  +textField('name','Nome do produto',p.name,{max:300})
  +'<div class="form-grid">'+textField('brand','Marca',p.brand,{list:'brandOptions'})+textField('category','Categoria',p.category,{required:false,list:'categoryOptions'})+'</div>'
  +textField('size','Embalagem / tamanho',p.size,{required:false,placeholder:'Ex.: 1 L, 300 g, kit'})
+ +'<div class="field"><label for="f-description">Descrição do produto</label><textarea id="f-description" name="description" maxlength="2000" rows="5" placeholder="Para que serve, principais ativos, modo de uso e resultado esperado no salão." data-count="descriptionCount">'+C(p.description||'')+'</textarea><small><span id="descriptionCount">'+(p.description||'').length+'</span>/2000 caracteres. Quebras de linha são mantidas.</small></div>'
  +'<datalist id="brandOptions">'+uniq('brand')+'</datalist><datalist id="categoryOptions">'+uniq('category')+'</datalist>'
  +'<div class="rule"></div><div class="section-mini"><h3>Opções comerciais</h3><small>Cada opção tem seu próprio código e preço. O cliente escolhe a opção no pedido.</small></div>'
  +'<div data-variant-list>'+p.variants.map(variantRow).join('')+'</div><button type="button" class="btn small ghost" data-action="variant-add">+ Adicionar opção</button>'
@@ -323,7 +324,8 @@ document.addEventListener('submit',async event=>{
   let image=get('image');const file=data.get('photo');
   if(file&&typeof file==='object'&&file.size>0)image=await uploadPhoto(file,id);
   if(image&&!/^https:\/\/\S+$/.test(image))throw new Error('Use um link de foto que comece com https://.');
-  const row={name,brand,size:get('size'),category:get('category'),image,variants,active:data.has('active'),featured:data.has('featured')};
+  const description=String(data.get('description')||'').replace(/\r\n/g,'\n').trim();if(description.length>2000)throw new Error('A descrição passa de 2.000 caracteres.');
+  const row={name,brand,size:get('size'),category:get('category'),description,image,variants,active:data.has('active'),featured:data.has('featured')};
   if(existing)checked(await backend.from('fenie_products').update(row).eq('id',id).select().single());
   else checked(await backend.from('fenie_products').insert({id,...row,sort_order:Math.max(0,...state.products.map(p=>p.sort_order||0))+1}).select().single());
   await syncAccount();modal.close();toast(existing?'Produto atualizado.':'Produto cadastrado.');return;
@@ -343,7 +345,7 @@ document.addEventListener('change',async event=>{
  if(el.dataset.feature&&session?.role==='admin'){try{checked(await backend.from('fenie_products').update({featured:el.checked}).eq('id',el.dataset.feature).select().single());await syncAccount();toast('Destaque atualizado.');}catch(e){el.checked=!el.checked;toast(friendly(e));}}
 
 });
-document.addEventListener('input',event=>{if(event.target.id==='orderNotes')state.checkout.notes=event.target.value;});
+document.addEventListener('input',event=>{if(event.target.id==='orderNotes')state.checkout.notes=event.target.value;const counter=event.target.dataset?.count&&document.getElementById(event.target.dataset.count);if(counter)counter.textContent=event.target.value.length;});
 document.addEventListener('click',async event=>{
  const button=event.target.closest('[data-action]');if(!button)return;const action=button.dataset.action,id=button.dataset.id;
  if(button.dataset.busy)return;button.dataset.busy='1';
@@ -368,6 +370,7 @@ document.addEventListener('click',async event=>{
  if(action==='remove-item'&&session?.role==='client'){delete state.cart[id];persist();render();return;}
  if(action==='address-open'&&session?.role==='client'){const checkout=root.querySelector('[data-form="checkout"]');if(checkout)saveCheckout(checkout);addressModal(id);return;}
  if(action==='client-open'&&session?.role==='admin'){clientModal(id);return;}
+ if(action==='product-details'){const p=product(id);if(!p)return;showModal(p.name,'<div class="detail-head"><img src="'+C(p.image)+'" alt=""><div><p class="eyebrow">'+C(p.brand)+'</p><small>'+C([p.size,p.category].filter(Boolean).join(' · '))+'</small></div></div><p class="detail-text">'+C(p.description)+'</p><div class="rule"></div><h3 style="margin-bottom:10px">Opções</h3>'+p.variants.map(v=>'<div class="summary-line"><span>'+C(v.label)+' <small>'+C(v.sku)+'</small></span><strong>'+money(v.price)+'</strong></div>').join(''));return;}
  if(action==='product-open'&&session?.role==='admin'){productModal(id);return;}
  if(action==='product-new'&&session?.role==='admin'){productModal(null);return;}
  if(action==='admin-more'&&session?.role==='admin'){filters.adminLimit=(filters.adminLimit||ADMIN_PAGE)+ADMIN_PAGE;render();return;}
