@@ -1,41 +1,37 @@
 # Portal Fenié com Supabase
 
-Variante independente do catálogo estático. Cliente: cadastro com confirmação de e-mail, aprovação, endereços, reposição e pedidos. Equipe: aprovação de clientes, atendimento de pedidos, notas internas e edição de produtos/destaques.
+Portal público: https://fenie-portal.vercel.app/. Variante independente do catálogo estático em https://catalogofenie.vercel.app/.
 
-## Execução
+## Clientes e equipe
 
-Requer Node.js 22 ou superior. `npm ci`, `npm test`, `npm run build`. Sirva `dist/` por HTTP. `public-config.json` contém apenas URL e chave publicável do projeto; não adicionar chaves secretas. A compilação inclui o SDK fixado no lockfile.
+Salões fazem o cadastro comum e confirmam o e-mail. O banco libera o acesso automaticamente; não há aprovação manual pela equipe. O salão de teste existente já está ativo.
 
-## Banco
+Administradores usam somente o login em /#/admin/entrar. Os e-mails autorizados são mantidos na tabela privada fenie_private.admin_access, sem lista no frontend e sem cadastro público administrativo. O responsável provisiona as autorizações e envia convites individuais pelo Supabase. Cada pessoa ativa o convite e cria sua própria senha. Um e-mail ainda não confirmado não recebe privilégios. Alterar para um e-mail fora da lista remove o papel administrativo; revogar a lista impede acesso imediatamente na próxima operação autorizada pelo banco.
 
-Projeto: gxqhblahdqkhiuiocyqc, região sa-east-1. Migrações em `supabase/migrations/` já aplicadas ao projeto remoto. Versões locais alinhadas ao histórico remoto gerado pelo Supabase. RLS em todas as tabelas; dados privados somente do proprietário ou da equipe autorizada. Nenhum papel vem de user_metadata. Pedidos usam preços do servidor e snapshot imutável, UUID de idempotência, forma de pagamento e parcelas. Anotações internas estão em tabela separada, acessível somente para administradores.
+O painel oferece gestão de produtos, preços, publicação, destaques, dados dos salões e atendimento de pedidos. As alterações de produtos afetam este portal. A publicação estática anterior continua separada.
 
-`catalogue-import.json` preserva 488 grupos e 712 opções da base publicada. A importação é administrativa; nunca disponibilizar importação com privilégios no navegador. Para importar em projeto novo, aplicar migrações e inserir esse JSON com acesso administrativo no banco.
+## Execução e publicação
 
-## Primeiro administrador
+Node.js 22 ou superior. npm ci, npm test, npm run build. Compilar dist/ e publicar somente seus arquivos no projeto Vercel fenie-portal (prj_x9viwDxrFO2Yw4Vy9FtRllUvBWHU), equipe team_zVxyPLv78v2KAQHVfo81tSxh. O frontend usa apenas a URL e a chave publicável do Supabase em public-config.json. Não adicionar chaves secretas.
 
-O e-mail inicial foi cadastrado de forma privada pelo proprietário em `fenie_private.initial_admin`; ele não é publicado neste repositório. A pessoa deve cadastrar sua própria senha na tela de cadastro e confirmar o e-mail. O gatilho de autenticação consome a autorização uma única vez e libera o administrador. Sem confirmação, a conta continua como cliente pendente. Os próximos clientes dependem da aprovação dessa equipe.
+## Banco e segurança
 
-## Validação
+Projeto Supabase gxqhblahdqkhiuiocyqc, região sa-east-1. Quatro migrações aplicadas e alinhadas ao histórico remoto. A migração automatic_client_access_and_named_admins substitui o fluxo de aprovação pelo acesso após confirmação, preserva bloqueios explícitos existentes, transforma a autorização inicial em lista administrativa persistente e retira o RPC de aprovação manual.
 
-Onze testes dos formulários e retornos de autenticação passaram (`npm test`). `tests/rls.sql` valida permissões, isolamento entre contas, bloqueio de autoaprovação, preços do servidor, parcelas e idempotência em transação com rollback. A execução no projeto isolado passou e não deixou contas ou pedidos fictícios. API pública: 488 produtos/712 opções, HTTP 200. Perfis e pedidos sem login: HTTP 401. Schema privado pela API: HTTP 406. Advisor de segurança sem apontamentos.
+RLS em todas as tabelas expostas. Clientes leem apenas seus dados; a equipe autorizada gerencia o catálogo e os pedidos. Os papéis não vêm de user_metadata. Os preços são calculados no servidor, pedidos guardam snapshot, forma de pagamento e idempotência. Anotações internas ficam separadas dos dados do cliente. Base importada: 488 grupos e 712 opções.
 
-## Publicação e autenticação
+## E-mails e retornos
 
-Portal público: https://fenie-portal.vercel.app/ (projeto Vercel independente fenie-portal). O catálogo público original permanece em https://catalogofenie.vercel.app/.
+Site URL: https://fenie-portal.vercel.app/. Os templates confirmation, recovery e invite usam SiteURL + TokenHash. O portal remove o token do endereço, usa no-referrer e só verifica após o clique da pessoa. A confirmação não depende do navegador original do cadastro. Convites abrem a definição da própria senha e retornam ao login administrativo.
 
-A antiga prévia catalogofenie-73uj1ajze estava protegida pela Vercel e bloqueava o retorno dos e-mails no celular. Não compartilhar esse endereço com clientes. O Site URL do Supabase e o authSiteUrl da compilação agora apontam para o portal público. Os modelos de confirmação e recuperação usam SiteURL + TokenHash, consumido por verifyOtp após confirmação explícita na página. Isso permite abrir o e-mail em outro navegador, sem depender do verificador PKCE salvo no navegador do cadastro. O token é removido do endereço antes da interface e das imagens; a página usa no-referrer. Tipos aceitos: email e recovery. Links expirados exibem orientação para recuperar acesso.
+Resend Free, domínio auth.feniecosmeticos.com.br verificado, SMTP salvo pelo responsável. DNS configurado sem alterar o MX principal. Veja EMAIL-SETUP.md.
 
-Publicação: compilar dist/ e publicar apenas esses arquivos no projeto prj_x9viwDxrFO2Yw4Vy9FtRllUvBWHU, equipe team_zVxyPLv78v2KAQHVfo81tSxh. Não substituir o projeto catalogofenie. A branch do portal continua separada e o PR permanece em rascunho até validar o administrador.
+## Validação e limites
 
-O salão de teste já confirmou o e-mail e está pendente de aprovação; basta entrar com a senha existente no endereço novo. A entrega e a confirmação do e-mail anterior foram observadas no banco. O novo fluxo por link ainda exige um teste humano real. O primeiro administrador autorizado ainda precisa se cadastrar e confirmar o próprio e-mail.
+12 testes de formulários e navegação passaram. tests/rls.sql passou em transação com rollback: liberação automática de clientes confirmados, negação a não confirmados, administradores apenas por lista e e-mail verificado, mudança de e-mail, isolamento, bloqueio de escalada por metadados, preços do servidor, parcelas, idempotência e notas internas.
 
-## Limites desta etapa
+Os arquivos públicos respondem HTTP 200 sem login Vercel e correspondem ao build local. O cadastro de teste confirmou o e-mail e já foi liberado no banco. A ativação real dos convites administrativos e o primeiro login administrativo aguardam os destinatários.
 
-Pagamento é preferência informada ao atendimento; não existe cobrança automática. Frete e disponibilidade são confirmados pela equipe. Envio ao WhatsApp abre a mensagem preenchida para a pessoa confirmar. Lista de reposição e rascunho do carrinho ficam no navegador por conta; pedidos, perfis, endereços e alterações administrativas ficam no banco. O primeiro acesso administrativo e o novo fluxo completo de recuperação aguardam teste humano; o agente não criou senha nem enviou mensagens ou pedidos reais.
+O advisor não apontou falhas de RLS. Há um aviso de proteção contra senhas vazadas desativada: esse recurso requer Pro ou superior, enquanto o projeto permanece Free. Referência: https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection.
 
-O Resend está no plano Free, conectado à prévia. auth.feniecosmeticos.com.br foi verificado; os três registros DNS foram conferidos sem alterar o MX principal. O SMTP do Supabase foi salvo pelo responsável. Os modelos de confirmação e recuperação foram publicados e conferidos no painel. A entrega real e o primeiro login ainda aguardam o cadastro do administrador; veja EMAIL-SETUP.md.
-
-## Consulta de aprovação
-
-O cadastro de cliente só libera pedidos após aprovação pela equipe. Verificar aprovação consulta o perfil no banco, mostra Verificando durante a consulta e um retorno explícito quando continua pendente. Após aprovação, a mesma consulta abre a área do cliente. Não há autoaprovação. O primeiro administrador ainda precisa realizar o cadastro com o e-mail autorizado de forma privada.
+Pagamento é preferência informada ao atendimento; não há cobrança automática. Envio ao WhatsApp abre a mensagem para o cliente confirmar. Nenhuma senha foi criada pelo agente, nem houve envio de pedidos reais.
