@@ -198,9 +198,29 @@ function adminHighlights(){
 }
 function notFound(){return '<section class="card empty"><p class="eyebrow">ESTE CAMINHO NÃO EXISTE</p><h1>Vamos encontrar sua próxima tela.</h1><a class="btn primary" href="#/entrar">Voltar ao início →</a></section>';}
 function showModal(title,body){modal.innerHTML='<div class="modal-head"><h2 id="modalTitle">'+C(title)+'</h2><button class="close" data-action="modal-close" aria-label="Fechar">×</button></div>'+body;modal.showModal();}
-function addressModal(id){
+let cepLookup='';
+async function fillByCep(el){
+ const cep=String(el.value||'').replace(/\D/g,'').slice(0,8),form=el.closest('[data-form="address"]'),status=form?.querySelector('[data-cep-status]');
+ if(cep.length===8&&el.value!==cep.slice(0,5)+'-'+cep.slice(5))el.value=cep.slice(0,5)+'-'+cep.slice(5);
+ if(!form||cep.length!==8||cep===cepLookup)return;cepLookup=cep;
+ const set=(n,v)=>{const f=form.querySelector('[name="'+n+'"]');if(f&&v)f.value=v;};
+ if(status)status.textContent='Buscando endereço…';
+ try{
+  const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),6000);
+  const res=await fetch('https://viacep.com.br/ws/'+cep+'/json/',{signal:ctrl.signal});clearTimeout(timer);
+  const d=res.ok?await res.json():{erro:true};
+  if(cepLookup!==cep)return;
+  if(d.erro){if(status)status.textContent='CEP não encontrado. Confira o número ou preencha o endereço manualmente.';return;}
+  const street=form.querySelector('[name="street"]');
+  if(d.logradouro&&street&&!street.value.toLowerCase().startsWith(d.logradouro.toLowerCase()))street.value=d.logradouro+', ';
+  set('district',d.bairro);set('city',d.localidade);set('uf',d.uf);
+  if(status)status.textContent=d.logradouro?'Endereço encontrado. Complete com o número.':'CEP geral da cidade. Preencha rua e bairro.';
+  if(street){street.focus();const n=street.value.length;try{street.setSelectionRange(n,n);}catch{}}
+ }catch{if(cepLookup===cep)cepLookup='';if(status)status.textContent='Não foi possível buscar o CEP agora. Preencha o endereço manualmente.';}
+}
+function addressModal(id){cepLookup='';
  const a=client().addresses.find(a=>a.id===id)||{label:'',street:'',district:'',city:'Curitiba',uf:'PR',cep:'',complement:''};
- showModal(id?'Editar endereço':'Novo endereço de entrega','<form data-form="address" data-id="'+C(id||'')+'">'+input('label','Nome do endereço',a.label)+input('street','Rua, número',a.street)+input('complement','Complemento',a.complement,'text',false)+'<div class="form-grid">'+input('district','Bairro',a.district)+input('city','Cidade',a.city)+input('uf','UF',a.uf)+input('cep','CEP',a.cep)+'</div><p class="form-error" data-form-error role="alert" hidden></p><button class="btn primary full">Salvar endereço →</button></form>');
+ showModal(id?'Editar endereço':'Novo endereço de entrega','<form data-form="address" data-id="'+C(id||'')+'">'+input('label','Nome do endereço',a.label)+'<div class="field"><label for="f-cep">CEP</label><input id="f-cep" name="cep" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" value="'+C(a.cep)+'" required maxlength="9" data-cep><small data-cep-status aria-live="polite">Digite o CEP para preencher o endereço automaticamente.</small></div>'+input('street','Rua, número',a.street)+input('complement','Complemento',a.complement,'text',false)+'<div class="form-grid">'+input('district','Bairro',a.district)+input('city','Cidade',a.city)+input('uf','UF',a.uf)+'</div><p class="form-error" data-form-error role="alert" hidden></p><button class="btn primary full">Salvar endereço →</button></form>');
 }
 function clientModal(id){
  const c=state.clients.find(c=>c.id===id);if(!c)return;
@@ -334,7 +354,7 @@ document.addEventListener('submit',async event=>{
   checked(await backend.from('fenie_profiles').update({name:get('name'),salon:get('salon'),phone:get('phone')}).eq('id',session.clientId).select().single());await syncAccount();toast('Cadastro atualizado.');return;
  }
  if(kind==='address'&&session?.role==='client'){
-  const a={user_id:session.clientId};for(const n of ['label','street','district','city','uf','cep','complement'])a[n]=get(n);a.uf=a.uf.toUpperCase();
+  const a={user_id:session.clientId};for(const n of ['label','street','district','city','uf','cep','complement'])a[n]=get(n);a.uf=a.uf.toUpperCase();a.cep=String(a.cep||'').replace(/\D/g,'');a.street=String(a.street||'').trim().replace(/,$/,'');
   const id=form.dataset.id;const q=id?backend.from('fenie_addresses').update(a).eq('id',id):backend.from('fenie_addresses').insert(a);
   const saved=checked(await q.select().single());state.checkout.addressId=saved.id;persist();await syncAccount();modal.close();toast('Endereço salvo.');return;
  }
@@ -381,6 +401,7 @@ document.addEventListener('change',async event=>{
 
 });
 document.addEventListener('input',event=>{if(event.target.id==='orderNotes')state.checkout.notes=event.target.value;
+ if(event.target.dataset?.cep!==undefined){fillByCep(event.target);return;}
  if(event.target.name==='q'){const form=event.target.closest?.('[data-form]');if(form&&LIVE_FILTERS[form.dataset.form]){clearTimeout(liveFilterTimer);liveFilterTimer=setTimeout(()=>applyLiveFilter(form,'q'),250);}}const counter=event.target.dataset?.count&&document.getElementById(event.target.dataset.count);if(counter)counter.textContent=event.target.value.length;});
 document.addEventListener('click',async event=>{
  const button=event.target.closest('[data-action]');if(!button)return;const action=button.dataset.action,id=button.dataset.id;

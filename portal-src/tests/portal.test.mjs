@@ -28,8 +28,9 @@ function environment(search='',otpError=null,role='client'){
   await events.click[0]({target:{closest:()=>button}});return button;
  }
  async function change(target){await events.change[0]({target});}
+ async function typed(target){for(const fn of events.input||[])await fn({target});for(let k=0;k<5;k++)await new Promise(ok=>setImmediate(ok));}
  async function clickAll(target){for(const fn of events.click)await fn({target,preventDefault(){}});}
- return {calls,context,rows,ready,submit,click,change,clickAll,root,historyCalls,api:context.window.testPortal};
+ return {calls,context,rows,ready,submit,click,change,typed,clickAll,root,historyCalls,api:context.window.testPortal};
 }
 test('login usa Supabase e lê o perfil aprovado do banco',async()=>{
  const e=environment();await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'senha de teste'}, {role:'client'});
@@ -244,4 +245,26 @@ test('pedido já confirmado não oferece cancelamento pelo salão',async()=>{
  assert.doesNotMatch(e.root.innerHTML,/data-action="order-cancel"/);assert.match(e.root.innerHTML,/Para cancelar, fale com a equipe/);
  const b={dataset:{action:'order-cancel',id:'FEN-00000009'}};b.closest=sel=>sel==='[data-action]'?b:null;await e.clickAll(b);
  assert.ok(!e.context.document.querySelector('#modal').open);
+});
+test('CEP preenche rua, bairro, cidade e UF e salva só os números',async()=>{
+ const e=environment();await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ const urls=[];e.context.AbortController=AbortController;e.context.fetch=async u=>{urls.push(u);return {ok:true,json:async()=>({logradouro:'Rua XV de Novembro',bairro:'Centro',localidade:'Curitiba',uf:'PR'})}};
+ const fields={};for(const n of ['street','district','city','uf'])fields[n]={name:n,value:'',focus(){this.focused=true},setSelectionRange(){}};
+ const status={textContent:''},form={querySelector:s=>s==='[data-cep-status]'?status:fields[s.match(/name="(\w+)"/)?.[1]]};
+ const cep={value:'8002031',dataset:{cep:''},closest:()=>form};
+ await e.typed(cep);assert.equal(urls.length,0);
+ cep.value='80020310';await e.typed(cep);
+ assert.equal(urls[0],'https://viacep.com.br/ws/80020310/json/');assert.equal(cep.value,'80020-310');
+ assert.equal(fields.street.value,'Rua XV de Novembro, ');assert.equal(fields.district.value,'Centro');assert.equal(fields.city.value,'Curitiba');assert.equal(fields.uf.value,'PR');
+ assert.ok(fields.street.focused);assert.match(status.textContent,/Complete com o número/);
+ await e.typed(cep);assert.equal(urls.length,1);
+ await e.submit('address',{label:'Salão',street:'Rua XV de Novembro, 100',complement:'',district:'Centro',city:'Curitiba',uf:'pr',cep:'80020-310'});
+ const saved=e.calls.find(c=>c[0]==='fenie_addresses');assert.equal(saved[2].cep,'80020310');assert.equal(saved[2].uf,'PR');
+});
+test('CEP inexistente avisa e deixa preencher à mão',async()=>{
+ const e=environment();await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.AbortController=AbortController;e.context.fetch=async()=>({ok:true,json:async()=>({erro:true})});
+ const street={value:'',focus(){}},status={textContent:''},form={querySelector:s=>s==='[data-cep-status]'?status:street};
+ await e.typed({value:'99999999',dataset:{cep:''},closest:()=>form});
+ assert.equal(street.value,'');assert.match(status.textContent,/CEP não encontrado/);
 });
