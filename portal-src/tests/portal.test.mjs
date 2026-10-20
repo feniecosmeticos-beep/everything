@@ -226,3 +226,22 @@ test('admin altera o preço direto na tabela para produto de opção única',asy
  const [,op,row]=e.calls.find(c=>c[0]==='fenie_products');assert.equal(op,'update');assert.equal(row.variants[0].price,4990);assert.equal(row.variants[0].id,'v1');
  const err=await e.submit('inline-price',{price:'0'},{id:'p1'});assert.match(err.textContent,/preço válido/);
 });
+test('salão cancela pedido aguardando atendimento com motivo opcional',async()=>{
+ const e=environment();e.rows.fenie_orders=[ORDER()];await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.location.hash='#/cliente';e.api.render();assert.match(e.root.innerHTML,/data-action="order-cancel" data-id="FEN-00000009"/);
+ e.context.location.hash='#/cliente/pedidos/FEN-00000009';e.api.render();assert.match(e.root.innerHTML,/data-action="order-cancel"/);
+ const b={dataset:{action:'order-cancel',id:'FEN-00000009'}};b.closest=sel=>sel==='[data-action]'?b:null;await e.clickAll(b);
+ const modal=e.context.document.querySelector('#modal');assert.ok(modal.open);assert.match(modal.innerHTML,/Confirmar cancelamento/);
+ assert.equal(e.calls.filter(c=>c[0]==='fenie_cancel_order').length,0);
+ e.rows.fenie_orders=[{...ORDER(),status:'cancelled'}];
+ await e.submit('order-cancel',{reason:'Pedi errado'},{id:'FEN-00000009'});
+ const call=e.calls.find(c=>c[0]==='fenie_cancel_order');assert.deepEqual(JSON.parse(JSON.stringify(call[1])),{p_id:'FEN-00000009',p_reason:'Pedi errado'});
+ e.api.render();assert.match(e.root.innerHTML,/foi cancelado/);assert.doesNotMatch(e.root.innerHTML,/>Enviar para o WhatsApp/);assert.doesNotMatch(e.root.innerHTML,/data-action="order-cancel"/);
+});
+test('pedido já confirmado não oferece cancelamento pelo salão',async()=>{
+ const e=environment();e.rows.fenie_orders=[{...ORDER(),status:'confirmed'}];await e.ready();await e.submit('login',{email:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.location.hash='#/cliente/pedidos/FEN-00000009';e.api.render();
+ assert.doesNotMatch(e.root.innerHTML,/data-action="order-cancel"/);assert.match(e.root.innerHTML,/Para cancelar, fale com a equipe/);
+ const b={dataset:{action:'order-cancel',id:'FEN-00000009'}};b.closest=sel=>sel==='[data-action]'?b:null;await e.clickAll(b);
+ assert.ok(!e.context.document.querySelector('#modal').open);
+});
