@@ -38,7 +38,7 @@ test('login usa Supabase e lê o perfil aprovado do banco',async()=>{
  assert.equal(e.calls[0][0],'login');assert.equal(e.api.getSession().role,'client');assert.equal(e.context.location.hash,'#/cliente');
 });
 test('cadastro solicita confirmação e nunca atribui papel administrativo',async()=>{
- const e=environment();await e.ready();await e.submit('register',{email:'cliente@example.invalid',password:'senha de teste',name:'Nome',salon:'Salão',phone:'(41) 0000-0000'});
+ const e=environment();await e.ready();await e.submit('register',{email:'cliente@example.invalid',password:'senha de teste',name:'Nome',salon:'Salão',phone:'(41) 99999-0000'});
  const p=e.calls.find(c=>c[0]==='signup')[1];assert.equal(p.options.data.application,'fenie_portal');assert.equal(p.options.data.role,undefined);assert.equal(p.options.data.status,undefined);assert.equal(e.api.getSession(),null);
  assert.equal(p.options.emailRedirectTo,'https://fenie-portal.vercel.app/');
 });
@@ -268,4 +268,20 @@ test('CEP inexistente avisa e deixa preencher à mão',async()=>{
  const street={value:'',focus(){}},status={textContent:''},form={querySelector:s=>s==='[data-cep-status]'?status:street};
  await e.typed({value:'99999999',dataset:{cep:''},closest:()=>form});
  assert.equal(street.value,'');assert.match(status.textContent,/CEP não encontrado/);
+});
+test('cadastro recusa telefone já usado e telefone sem DDD antes de criar a conta',async()=>{
+ const e=environment();await e.ready();
+ const rpc=e.context.createClient().rpc;
+ let err=await e.submit('register',{email:'novo@example.invalid',password:'senha de teste',name:'Nome',salon:'Salão',phone:'99999-0000'});
+ assert.match(err.textContent,/WhatsApp completo, com DDD/);assert.ok(!e.calls.some(c=>c[0]==='signup'));
+ const backend=e.context.createClient();backend.rpc=async(name,p)=>{e.calls.push([name,p]);return name==='fenie_phone_taken'?{data:true}:{data:null}};
+ err=await e.submit('register',{email:'novo@example.invalid',password:'senha de teste',name:'Nome',salon:'Salão',phone:'(41) 99999-0000'});
+ assert.match(err.textContent,/Este telefone já tem cadastro/);assert.deepEqual(JSON.parse(JSON.stringify(e.calls.find(c=>c[0]==='fenie_phone_taken')[1])),{p_phone:'+5541999990000'});
+ assert.ok(!e.calls.some(c=>c[0]==='signup'));
+});
+test('e-mail já cadastrado mostra mensagem em português com caminho de recuperação',async()=>{
+ const e=environment();await e.ready();
+ const backend=e.context.createClient();backend.auth.signUp=async()=>({error:{message:'User already registered'}});
+ const err=await e.submit('register',{email:'cliente@example.invalid',password:'senha de teste',name:'Nome',salon:'Salão',phone:'(41) 99999-0000'});
+ assert.match(err.textContent,/Este e-mail já tem cadastro/);assert.doesNotMatch(err.textContent,/already/);
 });

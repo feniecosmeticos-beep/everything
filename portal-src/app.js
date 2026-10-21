@@ -59,6 +59,7 @@ async function syncAccount(redirect=false){
 }
 function friendly(e){const text=e?.message||'Não foi possível concluir. Tente novamente.';
  if(/invalid login/i.test(text))return 'E-mail, telefone ou senha incorretos.';
+ if(/already registered|already been registered|already exists/i.test(text))return 'Este e-mail já tem cadastro. Entre com sua senha ou toque em “Esqueci minha senha”.';
  if(/phone logins are disabled/i.test(text))return 'O acesso por telefone está em preparação. Entre em contato com a Fenié.';
  if(/phone not confirmed/i.test(text))return 'Seu acesso por telefone precisa ser revisado pela Fenié.';
  if(/email not confirmed/i.test(text))return 'Confirme seu e-mail antes de entrar.';
@@ -358,6 +359,10 @@ document.addEventListener('submit',async event=>{
   await syncAccount(true);toast('Sua senha pessoal foi salva. Bem-vindo ao portal!');return;
  }
  if(kind==='register'){
+  let phone;try{phone=loginCredentials(get('phone'),'x').phone;}catch{}
+  if(!phone)throw new Error('Informe o WhatsApp completo, com DDD. Ex.: (41) 99999-1234.');
+  const taken=await backend.rpc('fenie_phone_taken',{p_phone:phone});
+  if(taken&&!taken.error&&taken.data===true)throw new Error('Este telefone já tem cadastro. Entre com ele e sua senha, ou fale com a Fenié.');
   const result=checked(await backend.auth.signUp({email:get('email'),password:String(data.get('password')||''),options:{emailRedirectTo:__AUTH_SITE_URL__,data:{application:'fenie_portal',name:get('name'),salon:get('salon'),phone:get('phone')}}}));
   if(result.session){await syncAccount(true);}else showModal('Confirme seu e-mail','<p>Confira sua caixa de entrada para confirmar o endereço e depois entre no portal. Se o e-mail já estiver cadastrado, use a recuperação de senha.</p><a class="btn primary" href="#/entrar">Voltar para entrar</a>');return;
  }
