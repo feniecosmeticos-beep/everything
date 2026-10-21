@@ -169,10 +169,10 @@ test('categorias em botões filtram com um toque e a marca filtra na hora',async
  e.context.location.hash='#/cliente/catalogo';e.api.render();
  assert.doesNotMatch(e.root.innerHTML,/>Buscar</);assert.match(e.root.innerHTML,/data-action="category-chip" data-category="Máscaras"/);
  const chip={dataset:{action:'category-chip',category:'Máscaras'}};chip.closest=sel=>sel==='[data-action]'?chip:null;await e.clickAll(chip);
- assert.match(e.root.innerHTML,/Máscara Nutrição/);assert.doesNotMatch(e.root.innerHTML,/<h3>Produto<\/h3>/);
+ assert.match(e.root.innerHTML,/Máscara Nutrição/);assert.doesNotMatch(e.root.innerHTML,/<h3><a[^>]*>Produto<\/a><\/h3>/);
  const form={dataset:{form:'catalog-search'},data:{q:'',brand:'Fenié',category:''},querySelector:()=>null};
  await e.change({tagName:'SELECT',dataset:{},name:'brand',hasAttribute:()=>false,closest:()=>form});
- assert.match(e.root.innerHTML,/<h3>Produto<\/h3>/);assert.doesNotMatch(e.root.innerHTML,/Máscara Nutrição/);
+ assert.match(e.root.innerHTML,/<h3><a[^>]*>Produto<\/a><\/h3>/);assert.doesNotMatch(e.root.innerHTML,/Máscara Nutrição/);
 });
 
 const ORDER=()=>({id:'FEN-00000009',user_id:'client-1',created_at:'2026-10-19T12:00:00Z',status:'waiting',whatsapp_sent_at:null,payment_method:'pix',installments:1,items:[{productId:'p1',variantId:'v1',name:'Produto',volume:'900 ml',sku:'SKU',price:4250,quantity:2}],address:{label:'Salão',street:'Rua, 1',district:'Centro',city:'Curitiba',uf:'PR',cep:'80000000',complement:''},notes:'',events:[{date:'2026-10-19T12:00:00Z',text:'Solicitação registrada'}],total_cents:8500});
@@ -284,4 +284,25 @@ test('e-mail já cadastrado mostra mensagem em português com caminho de recuper
  const backend=e.context.createClient();backend.auth.signUp=async()=>({error:{message:'User already registered'}});
  const err=await e.submit('register',{email:'cliente@example.invalid',password:'senha de teste',name:'Nome',salon:'Salão',phone:'(41) 99999-0000'});
  assert.match(err.textContent,/Este e-mail já tem cadastro/);assert.doesNotMatch(err.textContent,/already/);
+});
+test('produto tem página própria com opções, quantidade, descrição e produtos da mesma marca',async()=>{
+ const e=environment();e.rows.fenie_products.push({id:'p3',name:'Shampoo Nutrição',brand:'Olenka',size:'1 L',category:'Shampoos',image:'img',active:true,featured:false,variants:[{id:'v3a',sku:'SH-1',label:'1 L',price:15900},{id:'v3b',sku:'SH-250',label:'250 ml',price:5900}],description:'Limpa sem ressecar.\nModo de uso: aplicar e enxaguar.'});
+ await e.ready();await e.submit('login',{identifier:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.location.hash='#/cliente/catalogo';e.api.render();assert.match(e.root.innerHTML,/href="#\/cliente\/produto\/p3"/);
+ e.context.location.hash='#/cliente/produto/p3';e.api.render();const h=e.root.innerHTML;
+ assert.match(h,/<h1>Shampoo Nutrição<\/h1>/);assert.match(h,/Conheça o produto/);assert.match(h,/<p>Modo de uso: aplicar e enxaguar.<\/p>/);
+ assert.match(h,/name="pdp-variant" value="v3b"/);assert.match(h,/Adicionar ao pedido/);assert.match(h,/Mais de Olenka/);assert.match(h,/data-product="p2"/);
+ assert.match(h,/<strong>Produto<\/strong>/);
+ const add={dataset:{action:'add-product',id:'p3'}};add.closest=sel=>sel==='[data-action]'?add:null;await e.clickAll(add);
+ const ch={dataset:{variant:'p3'},value:'v3b',closest:()=>null};await e.change(ch);await e.clickAll(add);
+ assert.equal(e.api.getState().cart.v3a,1);assert.equal(e.api.getState().cart.v3b,1);
+});
+test('produto inexistente mostra aviso e vitrine de marcas leva ao catálogo filtrado',async()=>{
+ const e=environment();e.rows.fenie_products.push({id:'p4',name:'Máscara Glynett',brand:'GLYNETT',size:'500 g',category:'Máscaras',image:'img',active:true,featured:false,variants:[{id:'v4',sku:'G4',label:'500 g',price:8900}]});
+ await e.ready();await e.submit('login',{identifier:'cliente@example.invalid',password:'teste'},{role:'client'});
+ e.context.location.hash='#/cliente/produto/nao-existe';e.api.render();assert.match(e.root.innerHTML,/Produto indisponível/);
+ e.context.location.hash='#/cliente';e.api.render();assert.match(e.root.innerHTML,/AS MARCAS DA FENIÉ/);assert.match(e.root.innerHTML,/brand-logos\/glynett.png/);
+ e.context.location.hash='#/cliente/marcas';e.api.render();assert.match(e.root.innerHTML,/data-action="brand-open" data-brand="GLYNETT"/);
+ const b={dataset:{action:'brand-open',brand:'GLYNETT'}};b.closest=sel=>sel==='[data-action]'?b:null;await e.clickAll(b);
+ e.context.location.hash='#/cliente/catalogo';e.api.render();assert.match(e.root.innerHTML,/brand-banner/);assert.match(e.root.innerHTML,/Máscara Glynett/);assert.doesNotMatch(e.root.innerHTML,/Máscara Nutrição/);
 });
