@@ -37,7 +37,8 @@ Deno.serve(async(req:Request)=>{
   const auth=await fetch(url+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:serviceKey,'Content-Type':'application/json'},body:JSON.stringify({email,password})});
   if(!auth.ok)return response({message:'E-mail, telefone ou senha incorretos.'},400);
   const session=await auth.json();
-  if(!account||session.user?.app_metadata?.internal_phone_login!==true)return response({message:'E-mail, telefone ou senha incorretos.'},400);
+  // Any approved client account mapped to this phone may sign in with its own password.
+  if(!account)return response({message:'E-mail, telefone ou senha incorretos.'},400);
   // Return ordinary Auth credentials; the client establishes the standard Supabase session.
   return response({access_token:session.access_token,refresh_token:session.refresh_token});
  }catch{return response({message:'Não foi possível entrar. Tente novamente em instantes.'},503);}
