@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { loginCredentials } from './auth-identifier.js';
 const backend=createClient(__SUPABASE_URL__,__SUPABASE_KEY__,{auth:{flowType:'pkce',detectSessionInUrl:true,autoRefreshToken:true,persistSession:true}});
 (function(){
 'use strict';
@@ -57,7 +58,9 @@ async function syncAccount(redirect=false){
  }catch(e){if(version!==syncVersion)return;loading=false;session=null;state.clients=[];state.orders=[];root.innerHTML=publicHead()+'<main class="content"><section class="card empty"><h1>Não foi possível carregar o portal.</h1><p role="alert">'+C(friendly(e))+'</p><button class="btn primary" data-action="refresh">Tentar novamente</button></section></main>';throw e;}
 }
 function friendly(e){const text=e?.message||'Não foi possível concluir. Tente novamente.';
- if(/invalid login/i.test(text))return 'E-mail ou senha incorretos.';
+ if(/invalid login/i.test(text))return 'E-mail, telefone ou senha incorretos.';
+ if(/phone logins are disabled/i.test(text))return 'O acesso por telefone está em preparação. Entre em contato com a Fenié.';
+ if(/phone not confirmed/i.test(text))return 'Seu acesso por telefone precisa ser revisado pela Fenié.';
  if(/email not confirmed/i.test(text))return 'Confirme seu e-mail antes de entrar.';
  if(/rate limit/i.test(text))return 'Muitas tentativas. Aguarde alguns minutos e tente novamente.';
  if(/fetch|network/i.test(text))return 'Confira sua conexão e tente novamente.';
@@ -73,18 +76,22 @@ function publicHead(){return '<header class="public-head"><a href="#/entrar" ari
 function publicFoot(){return '<footer class="public-foot"><span>Fenié Professionnel · Produtos profissionais. Atendimento próximo.</span><span>Portal do salão · Fenié Professionnel</span></footer>';}
 function input(name,label,value='',type='text',required=true){return '<div class="field"><label for="f-'+name+'">'+label+'</label><input id="f-'+name+'" name="'+name+'" type="'+type+'" value="'+C(value)+'" '+(required?'required':'')+' maxlength="100"></div>';}
 function authScreen(mode){
- const admin=mode==='admin',register=mode==='cadastro',recover=mode==='recuperar',reset=mode==='nova-senha';
- const title=register?'Seu próximo capítulo.':reset?(inviteMode?'Ative seu acesso.':'Crie sua nova senha.'):recover?'Vamos recuperar seu acesso.':admin?'Tudo no seu lugar.':'Que bom ter você aqui.';
- const desc=register?'Cadastre seu salão e confirme seu e-mail para começar. Seu acesso é liberado automaticamente.':reset?'Escolha uma senha com pelo menos 10 caracteres.':recover?'Enviaremos as instruções para o e-mail cadastrado.':admin?'Gerencie produtos, dados, pedidos e destaques do catálogo. Acesso reservado à equipe autorizada.':'Entre para acompanhar seus pedidos e simplificar a reposição do salão.';
+ const admin=mode==='admin',register=mode==='cadastro',recover=mode==='recuperar',first=mode==='primeiro-acesso',reset=mode==='nova-senha'||first;
+ const title=register?'Seu próximo capítulo.':first?'Uma senha só sua.':reset?(inviteMode?'Ative seu acesso.':'Crie sua nova senha.'):recover?'Vamos recuperar seu acesso.':admin?'Tudo no seu lugar.':'Que bom ter você aqui.';
+ const desc=register?'Cadastre seu salão e confirme seu e-mail para começar. Seu acesso é liberado automaticamente.':first?'Seu cadastro já está pronto. Para começar, substitua a senha inicial por uma senha pessoal com pelo menos 10 caracteres.':reset?'Escolha uma senha com pelo menos 10 caracteres.':recover?'Enviaremos as instruções para o e-mail cadastrado.':admin?'Gerencie produtos, dados, pedidos e destaques do catálogo. Acesso reservado à equipe autorizada.':'Entre com seu e-mail ou telefone cadastrado para acompanhar os pedidos e simplificar a reposição do salão.';
  const password='<div class="field"><label for="f-password">'+(reset?'Nova senha':'Senha')+'</label><input id="f-password" name="password" type="password" required minlength="'+(register||reset?'10':'1')+'" maxlength="100" autocomplete="'+(register||reset?'new-password':'current-password')+'"></div>';
  let fields=register?input('salon','Nome do salão')+'<div class="form-grid">'+input('name','Seu nome')+input('phone','WhatsApp','','tel')+'</div>':'';
- if(!reset)fields+=input('email','E-mail','','email');
+ if(!reset)fields+=!register&&!recover?'<div class="field"><label for="f-identifier">'+(admin?'E-mail':'E-mail ou telefone')+'</label><input id="f-identifier" name="identifier" type="'+(admin?'email':'text')+'" required maxlength="254" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="'+(admin?'seu@email.com':'E-mail ou telefone com DDD')+'"></div>':input('email','E-mail','','email');
+ if(first)fields+='<div class="field"><label for="f-current-password">Senha atual</label><input id="f-current-password" name="currentPassword" type="password" required maxlength="100" autocomplete="current-password"></div>';
  if(!recover)fields+=password;
- const kind=register?'register':recover?'recover':reset?'reset-password':'login';
+ if(first)fields+='<div class="field"><label for="f-password-confirm">Confirme a nova senha</label><input id="f-password-confirm" name="passwordConfirm" type="password" required minlength="10" maxlength="100" autocomplete="new-password"></div>';
+ const kind=register?'register':recover?'recover':first?'first-password':reset?'reset-password':'login';
  const label=register?'Solicitar cadastro':recover?'Enviar link de recuperação':reset?'Salvar nova senha':'Entrar';
  const body='<form data-form="'+kind+'" data-role="'+(admin?'admin':'client')+'">'+fields+'<p class="form-error" data-form-error role="alert" hidden></p><button class="btn primary full" type="submit">'+label+' '+icon('arrow')+'</button></form>'+
  (!register&&!recover&&!reset?'<p class="center-note"><a href="#/recuperar">Esqueci minha senha</a></p>':'')+
- (!admin&&!reset?'<p class="center-note">'+(register||recover?'<a href="#/entrar">← Voltar para entrar</a>':'Novo por aqui? <a href="#/cadastro"><strong>Cadastre seu salão</strong></a>')+'</p>':'');
+ (!admin&&!reset?'<p class="center-note">'+(register||recover?'<a href="#/entrar">← Voltar para entrar</a>':'Novo por aqui? <a href="#/cadastro"><strong>Cadastre seu salão</strong></a>')+'</p>':'')+
+ (first?'<p class="center-note"><button class="text-btn" type="button" data-action="logout">Sair da conta</button></p>':'')+
+ (recover?'<p class="center-note">Seu acesso é por telefone? <a href="https://wa.me/554198402800?text=Preciso%20recuperar%20meu%20acesso%20ao%20Portal%20Feni%C3%A9" target="_blank" rel="noopener noreferrer"><strong>Fale com a Fenié</strong></a>.</p>':'');
  const story='<section class="auth-story" aria-labelledby="auth-story-title"><div class="auth-story-copy"><p class="eyebrow"><span class="auth-brand-rule" aria-hidden="true"></span>FENIÉ · '+(admin?'GESTÃO DO CATÁLOGO':'PORTAL DO SALÃO')+'</p><h1 id="auth-story-title">Seu talento.<br><em>Nosso cuidado.</em></h1><p class="auth-story-intro">Uma conexão que vai além dos produtos.<br> Feita para acompanhar o seu salão.</p></div><div class="auth-showcase"><div class="auth-orbit" aria-hidden="true"></div><span class="auth-showcase-note">Cuidado em cada detalhe.</span><div class="auth-product auth-product-tall"><img src="'+C(AUTH_PHOTOS[0])+'" alt="Creme oxidante profissional Olenka" width="180" height="235" fetchpriority="high" decoding="async"></div><div class="auth-product auth-product-low"><img src="'+C(AUTH_PHOTOS[1])+'" alt="Máscara profissional Royal Finish" width="180" height="185" decoding="async"></div><span class="auth-showcase-star" aria-hidden="true">✳</span></div><div class="auth-story-signoff"><span>Profissional, como você.</span><span class="auth-signoff-line" aria-hidden="true"></span><span>Fenié Professionnel</span></div></section>';
  return publicHead()+'<main id="main" tabindex="-1" class="auth-layout auth-premium">'+story+'<section class="auth-form" aria-label="Acesso ao portal"><nav class="role-tabs" aria-label="Tipo de acesso"><a href="#/entrar" class="'+(!admin?'active':'')+'">Sou cliente</a><a href="#/admin/entrar" class="'+(admin?'active':'')+'">Sou administrador</a></nav><p class="eyebrow auth-form-eyebrow">'+(admin?'ÁREA ADMINISTRATIVA':'BEM-VINDO À FENIÉ')+'</p><h2>'+title+'</h2><p class="sub">'+desc+'</p>'+body+'</section></main>'+publicFoot();
 }
@@ -284,11 +291,14 @@ function error(form,text){const el=form.querySelector('[data-form-error]');if(el
 function render(){
  if(emailLink){emailLinkScreen();return;}
  const path=route();if(loading)return;if(modal.open)modal.close();
+ if(session&&client()?.must_change_password&&path!=='/primeiro-acesso'){go('/primeiro-acesso');return;}
+ if(path==='/primeiro-acesso'&&!session){go('/entrar');return;}
+ if(path==='/primeiro-acesso'&&session&&!client()?.must_change_password){go(session.role==='admin'?'/admin':'/cliente');return;}
  if(path.startsWith('/admin')&&path!=='/admin/entrar'&&session?.role!=='admin'){go('/admin/entrar');return;}
  if(path.startsWith('/cliente')&&session?.role!=='client'){go('/entrar');return;}
  if(path.startsWith('/cliente')&&client()?.status!=='approved'&&path!=='/cliente/aguardando'){go('/cliente/aguardando');return;}
  let html;
- if(['/entrar','/admin/entrar','/cadastro','/recuperar','/nova-senha'].includes(path))html=authScreen(path==='/admin/entrar'?'admin':path.slice(1));
+ if(['/entrar','/admin/entrar','/cadastro','/recuperar','/nova-senha','/primeiro-acesso'].includes(path))html=authScreen(path==='/admin/entrar'?'admin':path.slice(1));
  else if(path==='/catalogo'){go(session?.role==='client'?'/cliente/catalogo':'/entrar');return;}
  else if(path==='/cliente/aguardando'){if(client().status==='approved'){go('/cliente');return;}html=pendingScreen();}
  else if(path==='/cliente')html=shell(customerHome());
@@ -326,9 +336,26 @@ document.addEventListener('submit',async event=>{
   checked(await backend.rpc('fenie_cancel_order',{p_id:form.dataset.id,p_reason:get('reason')||null}));modal.close();await syncAccount();toast('Pedido cancelado.');return;
  }
  if(kind==='login'){
-  checked(await backend.auth.signInWithPassword({email:get('email'),password:String(data.get('password')||'')}));await syncAccount();
+  const credentials=loginCredentials(get('identifier'),String(data.get('password')||''),form.dataset.role==='admin');
+  if(credentials.phone){
+   const response=await fetch(__SUPABASE_URL__+'/functions/v1/fenie-phone-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(credentials)});
+   const result=await response.json();if(!response.ok)throw new Error(result.message||'Não foi possível entrar.');
+   checked(await backend.auth.setSession({access_token:result.access_token,refresh_token:result.refresh_token}));
+  }else checked(await backend.auth.signInWithPassword(credentials));
+  await syncAccount();
   if(form.dataset.role!==session?.role)throw new Error('Sua conta não tem acesso a esta área. Use a área correspondente ao seu perfil.');
   go(session.role==='admin'?'/admin':client().status==='approved'?'/cliente':'/cliente/aguardando');return;
+ }
+ if(kind==='first-password'){
+  if(!session||!client()?.must_change_password)throw new Error('Entre novamente para atualizar sua senha.');
+  const password=String(data.get('password')||''),currentPassword=String(data.get('currentPassword')||'');
+  if(password.length<10)throw new Error('Escolha uma senha com pelo menos 10 caracteres.');
+  if(password!==String(data.get('passwordConfirm')||''))throw new Error('A confirmação não corresponde à nova senha.');
+  if(password===currentPassword)throw new Error('Escolha uma senha diferente da senha inicial.');
+  const authSession=checked(await backend.auth.getSession());
+  const response=await fetch(__SUPABASE_URL__+'/functions/v1/fenie-password-change',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+authSession.session.access_token},body:JSON.stringify({password,currentPassword})});
+  const changed=await response.json();if(!response.ok)throw new Error(changed.message||'Não foi possível atualizar sua senha.');
+  await syncAccount(true);toast('Sua senha pessoal foi salva. Bem-vindo ao portal!');return;
  }
  if(kind==='register'){
   const result=checked(await backend.auth.signUp({email:get('email'),password:String(data.get('password')||''),options:{emailRedirectTo:__AUTH_SITE_URL__,data:{application:'fenie_portal',name:get('name'),salon:get('salon'),phone:get('phone')}}}));
