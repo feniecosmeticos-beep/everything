@@ -62,7 +62,9 @@ test('CEP incompleto é explicado ao cliente antes de gravar o endereço',async(
 });
 test('CEP completo é normalizado e salvo com oito dígitos',async()=>{
  const e=environment();await e.ready();await e.submit('login',{identifier:'cliente@example.invalid',password:'teste'},{role:'client'});
- const error=await e.submit('address',{label:'Salão',cep:'82200-053',street:'Avenida Anita Garibaldi, 1433',district:'Ahu',city:'Curitiba',uf:'PR'},{id:''});
+ await e.click('address-open');
+ assert.match(e.context.document.querySelector('#modal').innerHTML,/name="cep"[^>]*maxlength="10"/);
+ const error=await e.submit('address',{label:'Salão',cep:'82.200-053',street:'Avenida Anita Garibaldi, 1433',district:'Ahu',city:'Curitiba',uf:'PR'},{id:''});
  assert.equal(error.textContent,'');
  const call=e.calls.find(([name,operation])=>name==='fenie_addresses'&&operation==='insert');
  assert.equal(call[2].cep,'82200053');
