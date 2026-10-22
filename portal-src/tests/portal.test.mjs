@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFile} from 'node:fs/promises';
 const authIdentifier=(await readFile(new URL('../auth-identifier.js',import.meta.url),'utf8')).replace(/^export /gm,'');
-const source=authIdentifier+(await readFile(new URL('../app.js',import.meta.url),'utf8')).replace(/^import .*\n/gm,'').replace(/\}\)\(\);\s*$/,'window.testPortal={syncAccount,getState:()=>state,getSession:()=>session,render};})();');
+const source=authIdentifier+(await readFile(new URL('../app.js',import.meta.url),'utf8')).replace(/^import [^\r\n]*\r?\n/gm,'').replace(/\}\)\(\);\s*$/,'window.testPortal={syncAccount,getState:()=>state,getSession:()=>session,render};})();');
 function environment(search='',otpError=null,role='client'){
  const calls=[],events={},store=new Map(),user={id:'client-1'},profile={id:'client-1',role,status:'approved',name:'Cliente',salon:'Salão',email:'cliente@example.invalid',phone:''};
  const rows={fenie_products:[{id:'p1',name:'Produto',brand:'Fenié',size:'900 ml',category:'Oxidantes',image:'img',active:true,featured:true,variants:[{id:'v1',sku:'SKU',label:'20 Vol',price:4250}]},{id:'p2',name:'Máscara Nutrição',brand:'Olenka',size:'500 g',category:'Máscaras',image:'img',active:true,featured:false,variants:[{id:'v2',sku:'MSK',label:'500 g',price:9000}]}],fenie_profiles:[profile],fenie_addresses:[{id:'a1',user_id:'client-1',label:'Salão',street:'Rua, 1',district:'Centro',city:'Curitiba',uf:'PR',cep:'80000000'}],fenie_orders:[]};
@@ -53,6 +53,29 @@ test('checkout envia apenas referências e quantidades ao RPC, com pagamento e i
  const input=e.calls.find(c=>c[0]==='fenie_place_order')[1].p_input;
  assert.equal(input.method,'boleto-parcelado');assert.equal(input.installments,3);assert.equal(input.items[0].quantity,2);
  assert.equal(input.items[0].price,undefined);assert.equal(input.user_id,undefined);assert.equal(input.requestId,'cccccccc-cccc-4ccc-8ccc-cccccccccccc');
+});
+test('CEP incompleto é explicado ao cliente antes de gravar o endereço',async()=>{
+ const e=environment();await e.ready();await e.submit('login',{identifier:'cliente@example.invalid',password:'teste'},{role:'client'});
+ const error=await e.submit('address',{label:'Salão',cep:'82.200-53',street:'Avenida Anita Garibaldi, 1433',district:'Ahu',city:'Curitiba',uf:'PR'},{id:''});
+ assert.match(error.textContent,/CEP.*8 dígitos/);
+ assert.equal(e.calls.some(([name,operation])=>name==='fenie_addresses'&&operation==='insert'),false);
+});
+test('CEP completo é normalizado e salvo com oito dígitos',async()=>{
+ const e=environment();await e.ready();await e.submit('login',{identifier:'cliente@example.invalid',password:'teste'},{role:'client'});
+ const error=await e.submit('address',{label:'Salão',cep:'82200-053',street:'Avenida Anita Garibaldi, 1433',district:'Ahu',city:'Curitiba',uf:'PR'},{id:''});
+ assert.equal(error.textContent,'');
+ const call=e.calls.find(([name,operation])=>name==='fenie_addresses'&&operation==='insert');
+ assert.equal(call[2].cep,'82200053');
+});
+test('URLs de fotos do catálogo não podem criar atributos HTML',async()=>{
+ const e=environment();e.rows.fenie_products[0].image='https://img.example.invalid/foto"onerror="alert(1)';
+ await e.ready();await e.submit('login',{identifier:'cliente@example.invalid',password:'teste'},{role:'client'});
+ for(const path of ['#/cliente/catalogo','#/cliente/produto/p1','#/cliente/carrinho']){
+  if(path.endsWith('/carrinho'))e.api.getState().cart={v1:1};
+  e.context.location.hash=path;e.api.render();
+  assert.doesNotMatch(e.root.innerHTML,/src="https:\/\/img\.example\.invalid\/foto"onerror=/);
+  assert.match(e.root.innerHTML,/src="https:\/\/img\.example\.invalid\/foto&amp;quot;onerror=|src="https:\/\/img\.example\.invalid\/foto&quot;onerror=/);
+ }
 });
 test('edição de perfil não envia papel, aprovação nem e-mail',async()=>{
  const e=environment();await e.ready();await e.submit('login',{identifier:'cliente@example.invalid',password:'teste'},{role:'client'});
