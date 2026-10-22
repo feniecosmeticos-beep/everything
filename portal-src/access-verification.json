@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-19T17:57:22.554Z",
+  "deploymentId": "dpl_2AK3x2GPVJP9qpNAYZs6URuvd887",
+  "publicUrl": "https://fenie-portal.vercel.app/",
+  "testsPassed": 12,
+  "rlsRollbackTests": "PASS",
+  "confirmedExistingClientsActive": 1,
+  "authorizedAdminEmails": 3,
+  "adminPublicRegistration": false,
+  "salonManualApproval": false,
+  "inviteSending": "awaiting user authorization",
+  "adminFirstLogin": "awaiting recipient activation",
+  "securityAdvisor": {
+    "rlsFindings": 0,
+    "leakedPasswordProtection": "disabled; Pro plan required",
+    "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+  }
+}
