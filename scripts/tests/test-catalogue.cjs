@@ -195,7 +195,7 @@ test('event prices keep table, event and Pix/card values and reach the WhatsApp 
   assert.deepEqual([ox.eventListCents,ox.priceCents,ox.eventPixCents],[4250,3690,3490]);
   const combo=data.products.find(p=>p.id==='EVT-BI-COMBO-01');
   assert.deepEqual([combo.eventListCents,combo.priceCents,combo.eventPixCents],[135300,120900,120900]);
-  assert.equal(data.products.filter(p=>p.eventListCents).length,188);
+  assert.equal(data.products.filter(p=>p.eventListCents).length,182);
   const event=new vm.Script(readFileSync(path.join(__dirname,'..','..','assets','event-offer.js'),'utf8'));
   const state=vm.createContext({I:n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n/100),document:{addEventListener(){}},window:{}});
   state.globalThis=state;event.runInContext(state);state.FenieEvent=state.window.FenieEvent;

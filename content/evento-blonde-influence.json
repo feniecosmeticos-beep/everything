@@ -168,15 +168,6 @@
    }
   },
   {
-   "name": "Mini Lipid Serum de Nutrição 30ml",
-   "list": 2600,
-   "event": 2500,
-   "pix": 2400,
-   "ids": [
-    "OLK-FND-LPS-30"
-   ]
-  },
-  {
    "name": "09 COLOR PRO (36/3/2)",
    "list": 131400,
    "event": 109900,
@@ -187,15 +178,6 @@
     "category": "Combos do evento",
     "size": "Combo"
    }
-  },
-  {
-   "name": "Tônico Anti-Queda Feminino - Growth Splash - 100ml",
-   "list": 9600,
-   "event": 9100,
-   "pix": 8900,
-   "ids": [
-    "OLK-TNC-GSP-100"
-   ]
   },
   {
    "name": "Hair Brushing 215ml",
@@ -822,15 +804,6 @@
    ]
   },
   {
-   "name": "Olenkolor Prateados 250ml",
-   "list": 8900,
-   "event": 8500,
-   "pix": 8300,
-   "ids": [
-    "OLK-COL-PRA-250"
-   ]
-  },
-  {
    "name": "Proteína de Reestruturação Banho de Colágeno 20ml",
    "list": 8900,
    "event": 8500,
@@ -1103,15 +1076,6 @@
    ]
   },
   {
-   "name": "Kit Cabelos Coloridos Shampoo + Condicionador",
-   "list": 8400,
-   "event": 8000,
-   "pix": 7800,
-   "ids": [
-    "MUP-KIT-COL-2"
-   ]
-  },
-  {
    "name": "Pomada de Finalização com Brilho Men's Care 80g",
    "list": 5200,
    "event": 4900,
@@ -1121,30 +1085,12 @@
    ]
   },
   {
-   "name": "Shampoo para Cabelos Coloridos 250ml - MUP Color",
-   "list": 5500,
-   "event": 5200,
-   "pix": 5100,
-   "ids": [
-    "MUP-SH-COL-250"
-   ]
-  },
-  {
    "name": "Pomada de Finalização Seca Men's Care 80g",
    "list": 5200,
    "event": 4900,
    "pix": 4800,
    "ids": [
     "OLK-POM-MEN-80-02"
-   ]
-  },
-  {
-   "name": "Cond. Cabelos Coloridos MUP 250ml",
-   "list": 5500,
-   "event": 5200,
-   "pix": 5100,
-   "ids": [
-    "MUP-COND-COL-250"
    ]
   },
   {
@@ -1182,6 +1128,50 @@
    "ids": [
     "MUP-SH-TPF-3000"
    ]
+  }
+ ],
+ "keptRegularPrice": [
+  {
+   "name": "Mini Lipid Serum de Nutrição 30ml",
+   "ids": [
+    "OLK-FND-LPS-30"
+   ],
+   "reason": "Mantido no preço normal do catálogo por decisão de 05/11/2026"
+  },
+  {
+   "name": "Tônico Anti-Queda Feminino - Growth Splash - 100ml",
+   "ids": [
+    "OLK-TNC-GSP-100"
+   ],
+   "reason": "Mantido no preço normal do catálogo por decisão de 05/11/2026"
+  },
+  {
+   "name": "Olenkolor Prateados 250ml",
+   "ids": [
+    "OLK-COL-PRA-250"
+   ],
+   "reason": "Mantido no preço normal do catálogo por decisão de 05/11/2026"
+  },
+  {
+   "name": "Kit Cabelos Coloridos Shampoo + Condicionador",
+   "ids": [
+    "MUP-KIT-COL-2"
+   ],
+   "reason": "Mantido no preço normal do catálogo por decisão de 05/11/2026"
+  },
+  {
+   "name": "Shampoo para Cabelos Coloridos 250ml - MUP Color",
+   "ids": [
+    "MUP-SH-COL-250"
+   ],
+   "reason": "Mantido no preço normal do catálogo por decisão de 05/11/2026"
+  },
+  {
+   "name": "Cond. Cabelos Coloridos MUP 250ml",
+   "ids": [
+    "MUP-COND-COL-250"
+   ],
+   "reason": "Mantido no preço normal do catálogo por decisão de 05/11/2026"
   }
  ]
 }
