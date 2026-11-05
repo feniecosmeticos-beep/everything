@@ -67,13 +67,13 @@
 /* Vitrine do evento na página inicial */
 .ev-home { margin: 0 0 24px; min-width: 0; }
 .ev-editorial { text-align: center; padding: 18px 16px 30px; }
-.ev-eyebrow { margin: 0; font: 600 11px/1.5 var(--sans); letter-spacing: .13em; text-transform: uppercase; color: var(--gold-ink); }
+.ev-eyebrow { margin: 0; max-width: none; font: 600 11px/1.5 var(--sans); letter-spacing: .13em; text-transform: uppercase; color: var(--gold-ink); }
 .ev-editorial h1 { margin: 18px 0 16px; font: 400 clamp(36px, 4.5vw, 58px)/1.07 var(--display); letter-spacing: -.045em; color: var(--ink); }
 .ev-editorial h1 em { color: var(--gold-ink); font-weight: 400; }
 .ev-editorial-copy { margin: 0 auto 22px; max-width: 460px; font: 400 16px/1.5 var(--sans); color: var(--muted); }
 .ev-discover { display: inline-flex; align-items: center; justify-content: space-between; gap: 38px; min-height: 50px; padding: 13px 22px; border-radius: 10px; background: var(--midnight); color: #fffdf8; text-decoration: none; font: 600 14px/1.4 var(--sans); }
 .ev-discover:hover { background: var(--midnight-hover); }
-.ev-reassurance { margin: 12px 0 0; font: 400 12px/1.5 var(--sans); color: var(--muted); }
+.ev-reassurance { margin: 12px 0 0; max-width: none; font: 400 12px/1.5 var(--sans); color: var(--muted); }
 .ev-reassurance span { margin-inline: 5px; }
 .ev-explore { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; position: sticky; top: var(--ev-sticky-top, 0px); z-index: 8; margin: 0 0 18px; padding: 8px 0; background: var(--bg); border-block: 1px solid var(--line); }
 .ev-explore a { display: flex; align-items: center; justify-content: center; gap: 4px; min-height: 44px; padding: 10px 8px; border-radius: 8px; color: var(--ink); font: 500 14px/1.3 var(--sans); text-align: center; text-decoration: none; }
