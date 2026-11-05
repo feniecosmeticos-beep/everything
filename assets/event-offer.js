@@ -149,7 +149,7 @@
   /* ---------- Experiência no celular durante o evento ---------- */
 
   const SECTIONS = ["Combos do evento", "Lançamento Secrets", "Royal Look", "Blond Tech e Plex", "MUP Color", "Olenkolor", "Tratamentos", "Self Care", "Finalização Happy End", "Men's Care, Therapy e Especialidades"];
-  const SECTION_PREVIEW = 6;
+  const SECTION_PREVIEW = 3;
   let api = null;
   let lastCount = null;
 
@@ -161,47 +161,85 @@
 
   function bridge(fns) { api = fns; }
 
+  function offerGroups() {
+    const offers = api.products().filter((p) => has(p) && p.status !== "hidden");
+    return SECTIONS.map((name) => ({ name, items: offers.filter((p) => p.eventSection === name) })).filter((g) => g.items.length);
+  }
+
+  function collectionFromUrl(groups) {
+    const params = new URLSearchParams(location.hash.split("?")[1] || "");
+    const requested = params.get("colecao");
+    const collection = ["combos", "lancamentos", "linhas"].includes(requested) ? requested : "combos";
+    const lines = groups.filter((g) => !["Combos do evento", "Lançamento Secrets"].includes(g.name));
+    const line = lines.find((g) => g.name === params.get("linha"))?.name || lines[0]?.name;
+    return { collection, line, lines };
+  }
+
   function home(root) {
     if (!api || !cfg.active) return;
     const main = root.querySelector(".main") || root;
-    const offers = api.products().filter((p) => has(p) && p.status !== "hidden");
-    const groups = SECTIONS.map((name) => ({ name, items: offers.filter((p) => p.eventSection === name) })).filter((g) => g.items.length);
+    const groups = offerGroups();
     if (!groups.length) return;
-    const sections = groups.map((g, i) => {
-      const html = api.cards(g.items, "draft");
-      return `<section class="ev-sec results-section" id="ev-sec-${i}" data-ev-sec="${i}" aria-labelledby="ev-sec-title-${i}">
-        <div class="ev-sec-head"><h2 id="ev-sec-title-${i}">${esc(g.name)}</h2>${g.name === "Combos do evento" ? "<p>Preço fixo em qualquer forma de pagamento</p>" : ""}</div>
-        <div class="product-grid ev-grid" data-ev-grid>${html}</div>
-        <button type="button" class="ev-more" data-ev-more hidden>Ver todos de ${esc(g.name)}</button>
-      </section>`;
-    }).join("");
-    main.insertAdjacentHTML("afterbegin", `<section class="ev-home" id="ev-home" aria-label="Ofertas do evento ${esc(cfg.name)}">
-      <div class="ev-hero"><span>Evento ${esc(cfg.name)}</span><h1>Ofertas exclusivas para o seu salão</h1><p>No Pix ou cartão o preço fica ainda menor.</p></div>
-      <section class="ev-how" aria-labelledby="ev-how-title">
-        <h2 id="ev-how-title">Como funciona</h2>
-        <ol>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span><b>Escolha</b> os produtos</span></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg><span><b>Confira</b> o pedido</span></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.9L3 21l1.2-4.4A9 9 0 1 1 21 12Z"/></svg><span><b>Envie</b> pelo WhatsApp</span></li>
-        </ol>
-        <p>Sem cadastro e sem pagamento aqui. Nossa equipe confirma o pedido e a entrega com você.</p>
-      </section>
-      <nav class="ev-tabs" aria-label="Linhas em oferta"><div>${groups.map((g, i) => `<button type="button" data-ev-tab="${i}" aria-pressed="${i === 0}">${esc(g.name)}</button>`).join("")}</div></nav>
-      ${sections}
-      <a class="ev-all" href="#/catalogo">Ver o catálogo completo <span aria-hidden="true">→</span></a>
-    </section>`);
-    main.querySelectorAll("[data-ev-grid]").forEach((grid) => {
-      const cards = [...grid.children];
-      if (cards.length > SECTION_PREVIEW + 1) {
-        cards.slice(SECTION_PREVIEW).forEach((c) => c.classList.add("ev-collapsed"));
-        const more = grid.parentElement.querySelector("[data-ev-more]");
-        more.hidden = false;
-        more.textContent = `Ver mais ${cards.length - SECTION_PREVIEW} produtos`;
-      }
-    });
+    const state = collectionFromUrl(groups);
+    // A página do evento substitui a vitrine genérica; marcas e seleções mantêm suas rotas próprias.
+    main.innerHTML = `<section class="ev-home" id="ev-home" aria-label="Ofertas do evento ${esc(cfg.name)}">
+      <div class="ev-editorial">
+        <p class="ev-eyebrow">A seleção ${esc(cfg.name)} · ${esc(cfg.dateLabel)}</p>
+        <h1>Grandes resultados.<br><em>Boas escolhas.</em></h1>
+        <p class="ev-editorial-copy">Produtos profissionais e preços exclusivos<br class="ev-desktop-break"> para renovar a sua bancada.</p>
+        <a class="ev-discover" href="#ev-products" data-ev-discover>Descobrir ofertas <span aria-hidden="true">→</span></a>
+        <p class="ev-reassurance">Sem cadastro <span aria-hidden="true">·</span> Pedido pelo WhatsApp</p>
+      </div>
+      <nav class="ev-explore" aria-label="Explorar ofertas do evento">
+        <a href="#/?colecao=combos" data-ev-collection="combos">Combos</a>
+        <a href="#/?colecao=lancamentos" data-ev-collection="lancamentos">Lançamentos</a>
+        <a href="#/destaques?view=pedidos">Mais vendidos <span aria-hidden="true">↗</span></a>
+        <a href="#/?colecao=linhas" data-ev-collection="linhas">Por linha</a>
+      </nav>
+      <section class="ev-sec results-section" id="ev-products" aria-labelledby="ev-products-title"></section>
+      <div class="ev-explore-footer"><a class="ev-all" href="#/catalogo">Explorar todo o catálogo <span aria-hidden="true">→</span></a><a href="#/marcas">Encontrar por marca <span aria-hidden="true">↗</span></a></div>
+      <details class="ev-order-help"><summary>Como funciona o pedido?</summary><p>Escolha os produtos, confira as quantidades e a forma de pagamento e envie o pedido pelo WhatsApp. Nossa equipe confirma a disponibilidade, o pagamento e a entrega com você. Não há cobrança neste catálogo.</p></details>
+    </section>`;
+    renderCollection(state.collection, state.line);
     measureSticky();
-    watchSections();
     decorate();
+  }
+
+  function renderCollection(collection, line, moveFocus = false) {
+    const panel = document.getElementById("ev-products");
+    if (!panel || !api) return;
+    const groups = offerGroups();
+    const lines = groups.filter((g) => !["Combos do evento", "Lançamento Secrets"].includes(g.name));
+    const name = collection === "combos" ? "Combos do evento" : collection === "lancamentos" ? "Lançamento Secrets" : line;
+    const group = groups.find((g) => g.name === name) || groups[0];
+    panel.dataset.collection = collection;
+    panel.dataset.line = group.name;
+    document.querySelectorAll("[data-ev-collection]").forEach((link) => {
+      if (link.dataset.evCollection === collection) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    });
+    const picker = collection === "linhas" ? `<div class="ev-line-picker"><label for="ev-line">Qual linha você procura?</label><select id="ev-line" data-ev-line>${lines.map((g) => `<option value="${esc(g.name)}"${g.name === group.name ? " selected" : ""}>${esc(g.name)}</option>`).join("")}</select></div>` : "";
+    panel.innerHTML = `${picker}<div class="ev-sec-head"><div><h2 id="ev-products-title" tabindex="-1">${esc(group.name)}</h2><p>${collection === "combos" ? "Preço fixo em qualquer forma de pagamento" : "Escolha seus favoritos para o pedido"}</p></div><span class="ev-result-count" role="status"></span></div><div class="product-grid ev-grid" data-ev-grid></div><button type="button" class="ev-more" data-ev-more hidden></button>`;
+    const grid = panel.querySelector("[data-ev-grid]");
+    grid.innerHTML = api.cards(group.items, "draft");
+    const cards = [...grid.children];
+    cards.slice(SECTION_PREVIEW).forEach((c) => c.classList.add("ev-collapsed"));
+    const more = panel.querySelector("[data-ev-more]");
+    more.hidden = cards.length <= SECTION_PREVIEW;
+    more.textContent = `Ver todos de ${group.name} (${cards.length})`;
+    panel.querySelector(".ev-result-count").textContent = `Mostrando ${Math.min(SECTION_PREVIEW, cards.length)} de ${cards.length}`;
+    decorate();
+    if (moveFocus) jumpToProducts(true);
+  }
+
+  function selectCollection(collection, line) {
+    const groups = offerGroups();
+    const state = collectionFromUrl(groups);
+    line = line || state.line;
+    const params = new URLSearchParams({ colecao: collection });
+    if (collection === "linhas" && line) params.set("linha", line);
+    history.replaceState(null, "", `#/?${params}`);
+    renderCollection(collection, line, true);
   }
 
   function measureSticky() {
@@ -210,39 +248,14 @@
     document.documentElement.style.setProperty("--ev-sticky-top", `${h}px`);
   }
 
-  let sectionObserver = null;
-  function watchSections() {
-    sectionObserver?.disconnect();
-    if (!("IntersectionObserver" in window)) return;
-    sectionObserver = new IntersectionObserver((entries) => {
-      const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-      if (!visible) return;
-      if (Date.now() < jumpingUntil) return;
-      markTab(visible.target.dataset.evSec);
-    }, { rootMargin: "-35% 0px -60% 0px" });
-    document.querySelectorAll("[data-ev-sec]").forEach((s) => sectionObserver.observe(s));
-  }
-
-  let jumpingUntil = 0;
-  function markTab(idx) {
-    document.querySelectorAll("[data-ev-tab]").forEach((btn) => {
-      const on = btn.dataset.evTab === String(idx);
-      btn.setAttribute("aria-pressed", String(on));
-      if (on) {
-        const rail = btn.parentElement;
-        rail.scrollTo({ left: btn.offsetLeft - (rail.clientWidth - btn.offsetWidth) / 2, behavior: "smooth" });
-      }
-    });
-  }
-
-  function jumpTo(idx) {
-    const sec = document.getElementById(`ev-sec-${idx}`);
+  function jumpToProducts(focus = false) {
+    const sec = document.getElementById("ev-products");
     if (!sec) return;
-    const tabs = document.querySelector(".ev-tabs");
+    measureSticky();
+    const tabs = document.querySelector(".ev-explore");
     const offset = (parseInt(getComputedStyle(document.documentElement).getPropertyValue("--ev-sticky-top")) || 0) + (tabs?.offsetHeight || 0) + 8;
-    jumpingUntil = Date.now() + 1200;
-    markTab(idx);
-    window.scrollTo({ top: Math.max(0, sec.getBoundingClientRect().top + window.scrollY - offset), behavior: "smooth" });
+    if (focus) sec.querySelector("h2")?.focus({ preventScroll: true });
+    window.scrollTo({ top: Math.max(0, sec.getBoundingClientRect().top + window.scrollY - offset), behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   }
 
   function stepperMarkup(p, qty) {
@@ -338,15 +351,26 @@
       if (delta > 0) added(stepBtn, id);
       return;
     }
-    const tab = event.target.closest("[data-ev-tab]");
-    if (tab) {
-      jumpTo(tab.dataset.evTab);
+    const collection = event.target.closest("[data-ev-collection]");
+    if (collection && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey) {
+      event.preventDefault();
+      selectCollection(collection.dataset.evCollection);
+      return;
+    }
+    if (event.target.closest("[data-ev-discover]")) {
+      event.preventDefault();
+      jumpToProducts(true);
       return;
     }
     const more = event.target.closest("[data-ev-more]");
     if (more) {
       more.parentElement.querySelectorAll(".ev-collapsed").forEach((c) => c.classList.remove("ev-collapsed"));
       more.hidden = true;
+      const panel = more.parentElement;
+      const cards = [...panel.querySelector("[data-ev-grid]").children];
+      panel.querySelector(".ev-result-count").textContent = `Mostrando ${cards.length} de ${cards.length}`;
+      const firstNew = cards[SECTION_PREVIEW]?.querySelector("a, button");
+      firstNew?.focus({ preventScroll: true });
       decorate();
       return;
     }
@@ -361,6 +385,10 @@
       if (["", "#", "#/"].includes(location.hash)) goTop();
       else { location.hash = "/"; setTimeout(goTop, 350); }
     }
+  });
+
+  document.addEventListener("change", (event) => {
+    if (event.target.matches("[data-ev-line]")) selectCollection("linhas", event.target.value);
   });
 
   let pending = 0;

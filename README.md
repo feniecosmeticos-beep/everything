@@ -53,7 +53,9 @@ O catálogo está aberto sem login e mostra os preços do talonário do evento e
 - Fonte dos preços: `content/evento-blonde-influence.json` (colunas TABELA, EVENTO e PIX/CARTÃO).
 - Aplicação: `python scripts/apply-event-prices.py` sobre o catálogo sem preços de evento.
 - Exibição: `assets/event-offer.js` e `assets/catalogue-event.css`. Para mostrar contagem regressiva, preencha `endsAt` em `event-offer.js`.
-- Experiência no celular: a página inicial abre com a vitrine do evento (abas por linha, combos primeiro); os cards têm seletor de quantidade e atalhos +6/+12 para oxidantes e colorações; a barra fixa mostra total, economia e "Finalizar pedido", que leva direto à revisão; na revisão, o botão do WhatsApp fica fixo no rodapé.
+- Entrada editorial: "Grandes resultados. Boas escolhas.", com atalho direto para ofertas e aviso de pedido sem cadastro pelo WhatsApp.
+- Exploração: atalhos para Combos, Lançamentos, Mais vendidos e Por linha. Uma seleção por vez, com três cards iniciais e opção de ver todos; a escolha da linha permanece na URL ao recarregar ou voltar de uma ficha. Marcas e catálogo completo têm acessos próprios. A explicação do pedido fica em uma seção expansível.
+- Experiência no celular: os cards têm seletor de quantidade e atalhos +6/+12 para oxidantes e colorações; a barra fixa mostra total, economia e "Finalizar pedido", que leva direto à revisão; na revisão, o botão do WhatsApp fica fixo no rodapé.
 - Encerramento: reverta o commit dos preços do evento e o commit que abriu o catálogo sem login.
 
 ## Dados comerciais
