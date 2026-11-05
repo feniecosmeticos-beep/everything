@@ -56,6 +56,7 @@ O catálogo está aberto sem login e mostra os preços do talonário do evento e
 - Entrada editorial: "Grandes resultados. Boas escolhas.", com atalho direto para ofertas e aviso de pedido sem cadastro pelo WhatsApp.
 - Exploração: atalhos para Combos, Lançamentos, Mais vendidos e Por linha. Uma seleção por vez, com três cards iniciais e opção de ver todos; a escolha da linha permanece na URL ao recarregar ou voltar de uma ficha. Marcas e catálogo completo têm acessos próprios. A explicação do pedido fica em uma seção expansível.
 - Experiência no celular: os cards têm seletor de quantidade e atalhos +6/+12 para oxidantes e colorações; a barra fixa mostra total, economia e "Finalizar pedido", que leva direto à revisão; na revisão, o botão do WhatsApp fica fixo no rodapé.
+- Kits Secret Curl: Home Care (R$ 94,00), com Ativador e Escova (R$ 160,00) e com Gelatina e Escova (R$ 160,00), conferidos no Mercos em 05/11/2026. Entram primeiro em Lançamento Secrets, com composição na ficha e no WhatsApp; utilizam a tabela regular, sem desconto de evento presumido. Consulte `docs/kits-secrets.md`.
 - Encerramento: reverta o commit dos preços do evento e o commit que abriu o catálogo sem login.
 
 ## Dados comerciais

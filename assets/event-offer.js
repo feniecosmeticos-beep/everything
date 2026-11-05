@@ -40,7 +40,7 @@
   }
 
   function detail(p) {
-    if (!has(p)) return `<div class="detail-price">${brl(p.priceCents)}<small>por unidade de venda · tabela padrão Mercos</small></div>`;
+    if (!has(p)) return `<div class="detail-price">${brl(p.priceCents)}<small>por unidade de venda · tabela padrão Mercos</small></div>${comboDetail(p)}`;
     const pix = pixOf(p);
     const save = p.eventListCents - pix;
     return `<div class="detail-price ev-detail">
@@ -55,10 +55,12 @@
   }
 
   function comboDetail(p) {
-    if (!isCombo(p) || !Array.isArray(p.eventIncludes)) return "";
+    const items = isCombo(p) ? p.eventIncludes : p.kitIncludes;
+    if (!Array.isArray(items) || !items.length) return "";
+    const label = isCombo(p) ? "O que vem no combo" : "O que vem no kit";
     const list = (items) => items.map((x) => `<li>${esc(x)}</li>`).join("");
-    return `<section class="ev-combo" aria-label="O que vem no combo">
-      <h2>O que vem no combo</h2><ul class="ev-combo-items">${list(p.eventIncludes)}</ul>
+    return `<section class="ev-combo" aria-label="${label}">
+      <h2>${label}</h2><ul class="ev-combo-items">${list(items)}</ul>
       ${p.eventGifts?.length ? `<div class="ev-combo-gifts"><h3>Brindes inclusos</h3><ul>${list(p.eventGifts)}</ul></div>` : ""}
       ${p.eventNote ? `<p class="ev-combo-note">${esc(p.eventNote)}</p>` : ""}
       ${p.eventArt ? `<details class="ev-combo-art-box"><summary>Ver a arte do combo</summary><img class="ev-combo-art" src="${esc(p.eventArt)}" alt="Arte do ${esc(p.name)} com produtos, brindes e preço" loading="lazy" decoding="async" width="900" height="1125"></details>` : ""}
@@ -66,7 +68,7 @@
   }
 
   function msgItem(p) {
-    if (!has(p)) return [];
+    if (!has(p)) return p.kitIncludes?.length ? [`Composição do kit: ${p.kitIncludes.join("; ")}`] : [];
     const lines = [`Tabela: ${brl(p.eventListCents)} · preço do evento ${cfg.name}`];
     if (isCombo(p) && p.eventGifts?.length) lines.push(`Brindes: ${p.eventGifts.join(", ")}`);
     if (!isCombo(p) && pixOf(p) < p.priceCents) lines.push(`No Pix/cartão: ${brl(pixOf(p))}`);
@@ -128,7 +130,7 @@
     return `<small class="ev-dock-save">Economia de ${brl(Math.max(save.now, 0) || save.pix)}${save.now > 0 ? "" : " no Pix"}</small>`;
   }
 
-  const greeting = () => (cfg.active ? `Olá! Montei meu pedido com os preços exclusivos do evento ${cfg.name}.` : "Olá! Montei um pedido pelo Catálogo Fenié PRO.");
+  const greeting = () => (cfg.active ? `Olá! Montei meu pedido pelo catálogo do evento ${cfg.name}.` : "Olá! Montei um pedido pelo Catálogo Fenié PRO.");
   const summaryNote = () => (cfg.active ? `Preços exclusivos do evento ${cfg.name} nos itens marcados` : "Tabela padrão Mercos");
 
   function countdown() {
@@ -162,8 +164,8 @@
   function bridge(fns) { api = fns; }
 
   function offerGroups() {
-    const offers = api.products().filter((p) => has(p) && p.status !== "hidden");
-    return SECTIONS.map((name) => ({ name, items: offers.filter((p) => p.eventSection === name) })).filter((g) => g.items.length);
+    const offers = api.products().filter((p) => (has(p) || p.catalogueSection === "Lançamento Secrets") && p.status !== "hidden");
+    return SECTIONS.map((name) => ({ name, items: offers.filter((p) => (p.catalogueSection || p.eventSection) === name) })).filter((g) => g.items.length);
   }
 
   function collectionFromUrl(groups) {
