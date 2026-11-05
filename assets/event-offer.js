@@ -32,8 +32,9 @@
   function card(p) {
     if (!has(p)) return brl(p.priceCents);
     const pix = pixOf(p);
+    const gifts = Array.isArray(p.eventGifts) && p.eventGifts.length ? `<span class="ev-gifts">+ ${p.eventGifts.length} brindes inclusos</span>` : "";
     const pixLine = isCombo(p)
-      ? `<span class="ev-pix ev-pix-fixed"><small>Preço único em qualquer pagamento</small></span>`
+      ? `<span class="ev-pix ev-pix-fixed"><small>Preço único em qualquer pagamento</small></span>${gifts}`
       : pix < p.priceCents ? `<span class="ev-pix">${brl(pix)} <small>no Pix ou cartão</small></span>` : "";
     return `<span class="ev-price"><del>De ${brl(p.eventListCents)}</del><span class="ev-now">${brl(p.priceCents)}</span>${pixLine}</span>`;
   }
@@ -50,12 +51,24 @@
       }</div>
       ${save > 0 ? `<p class="ev-save">Você economiza ${brl(save)} por unidade${pct(p) > 0 ? ` (${pct(p)}% abaixo da tabela)` : ""}.</p>` : ""}
       <p class="ev-terms">${isCombo(p) ? "Combo com preço fixo, válido em qualquer forma de pagamento." : "Condição válida apenas para pedidos do evento. Fora dele, vale a tabela regular."}</p>
-    </div>`;
+    </div>${comboDetail(p)}`;
+  }
+
+  function comboDetail(p) {
+    if (!isCombo(p) || !Array.isArray(p.eventIncludes)) return "";
+    const list = (items) => items.map((x) => `<li>${esc(x)}</li>`).join("");
+    return `<section class="ev-combo" aria-label="O que vem no combo">
+      <h2>O que vem no combo</h2><ul class="ev-combo-items">${list(p.eventIncludes)}</ul>
+      ${p.eventGifts?.length ? `<div class="ev-combo-gifts"><h3>Brindes inclusos</h3><ul>${list(p.eventGifts)}</ul></div>` : ""}
+      ${p.eventNote ? `<p class="ev-combo-note">${esc(p.eventNote)}</p>` : ""}
+      ${p.eventArt ? `<details class="ev-combo-art-box"><summary>Ver a arte do combo</summary><img class="ev-combo-art" src="${esc(p.eventArt)}" alt="Arte do ${esc(p.name)} com produtos, brindes e preço" loading="lazy" decoding="async" width="900" height="1125"></details>` : ""}
+    </section>`;
   }
 
   function msgItem(p) {
     if (!has(p)) return [];
     const lines = [`Tabela: ${brl(p.eventListCents)} · preço do evento ${cfg.name}`];
+    if (isCombo(p) && p.eventGifts?.length) lines.push(`Brindes: ${p.eventGifts.join(", ")}`);
     if (!isCombo(p) && pixOf(p) < p.priceCents) lines.push(`No Pix/cartão: ${brl(pixOf(p))}`);
     return lines;
   }

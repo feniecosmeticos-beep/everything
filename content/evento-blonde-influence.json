@@ -17,7 +17,21 @@
     "id": "EVT-BI-COMBO-01",
     "brand": "OLENKA",
     "category": "Combos do evento",
-    "size": "Combo"
+    "size": "Combo",
+    "image": "./assets/products/evt-bi-combo-01.webp",
+    "art": "./assets/products/evt-bi-combo-01-arte.webp",
+    "includes": [
+     "1 Kit Royal Look (shampoo dilatador + alisante 1 L)",
+     "1 Alisante Royal Soft 1 kg",
+     "1 Máscara Royal Finish 500 g",
+     "2 Kits Royal Care (shampoo + dual mask 250 ml)"
+    ],
+    "gifts": [
+     "1 Mini Royal Look",
+     "1 Mini escova",
+     "1 Cumbuca",
+     "1 Pincel"
+    ]
    },
    "section": "Combos do evento"
   },
@@ -40,7 +54,19 @@
     "id": "EVT-BI-COMBO-02",
     "brand": "OLENKA",
     "category": "Combos do evento",
-    "size": "Combo"
+    "size": "Combo",
+    "image": "./assets/products/evt-bi-combo-02.webp",
+    "art": "./assets/products/evt-bi-combo-02-arte.webp",
+    "includes": [
+     "1 Máscara Blend de Proteínas 600 g",
+     "3 Máscaras Banho de Colágeno 220 g",
+     "3 Máscaras Blend de Proteínas 220 g"
+    ],
+    "gifts": [
+     "3 Mini Blend",
+     "3 Mini Colágeno",
+     "1 Mini escova"
+    ]
    },
    "section": "Combos do evento"
   },
@@ -63,7 +89,19 @@
     "id": "EVT-BI-COMBO-03",
     "brand": "OLENKA",
     "category": "Combos do evento",
-    "size": "Combo"
+    "size": "Combo",
+    "image": "./assets/products/evt-bi-combo-03.webp",
+    "art": "./assets/products/evt-bi-combo-03-arte.webp",
+    "includes": [
+     "1 Kit Bio Reconstrutor (spray + óleos de reconstrução 500 ml)",
+     "3 Kits Self Care Bio Reconstrutor (shampoo + máscara 250 ml)",
+     "3 pH Acid",
+     "1 Blond Plex"
+    ],
+    "gifts": [
+     "1 Mini escova",
+     "3 Mini pH Acid"
+    ]
    },
    "section": "Combos do evento"
   },
@@ -86,7 +124,19 @@
     "id": "EVT-BI-COMBO-04",
     "brand": "OLENKA",
     "category": "Combos do evento",
-    "size": "Combo"
+    "size": "Combo",
+    "image": "./assets/products/evt-bi-combo-04.webp",
+    "art": "./assets/products/evt-bi-combo-04-arte.webp",
+    "includes": [
+     "1 Alisante Royal Soft 1 kg",
+     "1 Máscara Blend de Proteínas 600 g",
+     "1 Máscara Banho de Colágeno 220 g",
+     "1 Óleo de Reparação Happy End 60 ml"
+    ],
+    "gifts": [
+     "3 Mini CC Cream",
+     "1 Mini escova"
+    ]
    },
    "section": "Combos do evento"
   },
@@ -109,7 +159,20 @@
     "id": "EVT-BI-COMBO-05",
     "brand": "OLENKA",
     "category": "Combos do evento",
-    "size": "Combo"
+    "size": "Combo",
+    "image": "./assets/products/evt-bi-combo-05.webp",
+    "art": "./assets/products/evt-bi-combo-05-arte.webp",
+    "includes": [
+     "6 Pós descolorantes Blond Tech 450 g",
+     "6 Oxidantes Blond Tech 900 ml",
+     "1 Blond Plex 250 ml"
+    ],
+    "gifts": [
+     "1 Cumbuca",
+     "1 Pincel",
+     "3 CC Cream",
+     "1 Mini escova"
+    ]
    },
    "section": "Combos do evento"
   },
@@ -132,7 +195,24 @@
     "id": "EVT-BI-COMBO-06",
     "brand": "OLENKA",
     "category": "Combos do evento",
-    "size": "Combo"
+    "size": "Combo",
+    "image": "./assets/products/evt-bi-combo-06.webp",
+    "art": "./assets/products/evt-bi-combo-06-arte.webp",
+    "includes": [
+     "2 Kits Self Care+ Hidratação",
+     "2 Kits Self Care+ Nutrição",
+     "2 Kits Self Care+ Controle de Oleosidade",
+     "2 Kits Self Care+ Loiro (Blonde Protect)",
+     "3 Lipid Serum 100 ml",
+     "3 CC Cream Leave-in 250 ml",
+     "3 pH Acid 250 ml"
+    ],
+    "gifts": [
+     "3 Mini Serum",
+     "3 Mini CC Cream",
+     "3 Mini pH Acid",
+     "1 Mini escova"
+    ]
    },
    "section": "Combos do evento"
   },
@@ -155,7 +235,20 @@
     "id": "EVT-BI-COMBO-07",
     "brand": "MUP COLOR",
     "category": "Combos do evento",
-    "size": "Combo"
+    "size": "Combo",
+    "image": "./assets/products/evt-bi-combo-07.webp",
+    "art": "./assets/products/evt-bi-combo-07-arte.webp",
+    "includes": [
+     "24 Colorações MUP Color",
+     "3 Oxidantes MUP Color 900 ml",
+     "1 Pó descolorante MUP Color"
+    ],
+    "gifts": [
+     "1 Hair Spray MUP",
+     "1 Papel para Mechas (30 folhas)",
+     "1 Livro de Colorimetria"
+    ],
+    "note": "Tonalidades e volumes dos oxidantes são definidos com a nossa equipe ao confirmar o pedido."
    },
    "section": "Combos do evento"
   },
@@ -178,7 +271,19 @@
     "id": "EVT-BI-COMBO-08",
     "brand": "MUP COLOR",
     "category": "Combos do evento",
-    "size": "Combo"
+    "size": "Combo",
+    "image": "./assets/products/evt-bi-combo-08.webp",
+    "art": "./assets/products/evt-bi-combo-08-arte.webp",
+    "includes": [
+     "24 Colorações MUP Color",
+     "6 Oxidantes MUP Color 900 ml"
+    ],
+    "gifts": [
+     "1 Hair Spray MUP",
+     "1 Papel para Mechas (30 folhas)",
+     "1 Livro de Colorimetria"
+    ],
+    "note": "Tonalidades e volumes dos oxidantes são definidos com a nossa equipe ao confirmar o pedido."
    },
    "section": "Combos do evento"
   },
@@ -191,7 +296,20 @@
     "id": "EVT-BI-COMBO-09",
     "brand": "MUP COLOR",
     "category": "Combos do evento",
-    "size": "Combo"
+    "size": "Combo",
+    "image": "./assets/products/evt-bi-combo-09.webp",
+    "art": "./assets/products/evt-bi-combo-09-arte.webp",
+    "includes": [
+     "36 Colorações MUP Color",
+     "3 Oxidantes MUP Color 900 ml",
+     "2 Pós descolorantes MUP Color"
+    ],
+    "gifts": [
+     "1 Hair Spray MUP",
+     "1 Papel para Mechas (30 folhas)",
+     "1 Livro de Colorimetria"
+    ],
+    "note": "Tonalidades e volumes dos oxidantes são definidos com a nossa equipe ao confirmar o pedido."
    },
    "section": "Combos do evento"
   },
