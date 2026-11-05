@@ -151,7 +151,7 @@ window.FENIE_HIGHLIGHTS = {
             "sku": "PPM-PAP-STD120F-60",
             "units": 24,
             "sourceRank": 14,
-            "brand": null
+            "brand": "PAPEL PARA MECHAS"
           },
           {
             "sku": "MUP-COL-91",
@@ -283,7 +283,7 @@ window.FENIE_HIGHLIGHTS = {
             "sku": "PPM-PAP-STD200F-60",
             "units": 10,
             "sourceRank": 36,
-            "brand": null
+            "brand": "PAPEL PARA MECHAS"
           },
           {
             "sku": "MUP-COL-1289",
@@ -457,7 +457,7 @@ window.FENIE_HIGHLIGHTS = {
             "sku": "PPM-PAP-STP340F-60",
             "units": 6,
             "sourceRank": 65,
-            "brand": null
+            "brand": "PAPEL PARA MECHAS"
           },
           {
             "sku": "MAK-BSE-C180-1",
@@ -535,7 +535,7 @@ window.FENIE_HIGHLIGHTS = {
             "sku": "PPM-PAP-PRM100F-120",
             "units": 5,
             "sourceRank": 78,
-            "brand": null
+            "brand": "PAPEL PARA MECHAS"
           },
           {
             "sku": "OLK-MSK-WEB-500",
@@ -697,7 +697,7 @@ window.FENIE_HIGHLIGHTS = {
             "sku": "PPM-PAP-CLC190F-90",
             "units": 3,
             "sourceRank": 106,
-            "brand": null
+            "brand": "PAPEL PARA MECHAS"
           },
           {
             "sku": "VBN-PPA-100",
@@ -985,7 +985,7 @@ window.FENIE_HIGHLIGHTS = {
             "sku": "PPM-MTC-50",
             "units": 2,
             "sourceRank": 157,
-            "brand": null
+            "brand": "PAPEL PARA MECHAS"
           },
           {
             "sku": "MUP-COL-6L",
@@ -1147,7 +1147,7 @@ window.FENIE_HIGHLIGHTS = {
             "sku": "PPM-PAP-STP180F-60",
             "units": 1,
             "sourceRank": 186,
-            "brand": null
+            "brand": "PAPEL PARA MECHAS"
           },
           {
             "sku": "OLK-CMB-2609-02",
@@ -1588,6 +1588,10 @@ window.FENIE_HIGHLIGHTS = {
             "units": 59
           },
           {
+            "brand": "PAPEL PARA MECHAS",
+            "units": 51
+          },
+          {
             "brand": "SPA DO FIO",
             "units": 40
           },
@@ -1633,21 +1637,21 @@ window.FENIE_HIGHLIGHTS = {
             ]
           },
           {
-            "brand": "SEM-MARCA",
-            "label": "Sem marca informada",
-            "units": 64,
-            "sourceOrder": 2,
-            "members": [
-              "Não informada"
-            ]
-          },
-          {
             "brand": "GLYNETT",
             "label": "GLYNETT",
             "units": 62,
             "sourceOrder": 3,
             "members": [
               "GLYNETT"
+            ]
+          },
+          {
+            "brand": "PAPEL PARA MECHAS",
+            "label": "Papel para Mechas",
+            "units": 51,
+            "sourceOrder": 11,
+            "members": [
+              "PAPEL PARA MECHAS"
             ]
           },
           {
@@ -1684,6 +1688,15 @@ window.FENIE_HIGHLIGHTS = {
             "sourceOrder": 7,
             "members": [
               "VABENE"
+            ]
+          },
+          {
+            "brand": "SEM-MARCA",
+            "label": "Sem marca informada",
+            "units": 13,
+            "sourceOrder": 2,
+            "members": [
+              "Não informada"
             ]
           },
           {
