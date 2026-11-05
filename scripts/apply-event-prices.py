@@ -67,6 +67,9 @@ data = json.dumps(products, ensure_ascii=False, separators=(",", ":"))
 src = src[:start] + data + src[j + 1:]
 
 PATCHES = [
+    # Logo leve (480 px) no rodapé, no lugar do PNG de 2048 px
+    ('./assets/images/21d2db2597e755fc4322.png" alt="Feni\\xE9 PRO" width="2048" height="1228"',
+     './assets/images/logo-fenie-480.png" alt="Feni\\xE9 PRO" width="480" height="288"'),
     # Ponte entre o catálogo e assets/event-offer.js (carrinho, produtos e cards)
     ('k=!0,no()',
      'k=!0,globalThis.FenieEvent&&globalThis.FenieEvent.bridge({cart:()=>c,products:()=>d,summary:()=>J(c,d),setQty:(i,q)=>{let P=d.find(x=>x.id===i);if(!P||["hidden","unavailable"].includes(P.status))return!1;q>0?c[i]=Math.min(999,q):delete c[i];return Z()},cards:(l,o)=>eo(l,o||"draft"),toast:t}),no()'),
