@@ -64,7 +64,9 @@ Origem: `Fenie-Catalogo-Fotos-Previa (7).html`, importado em 13/10/2026. A impor
 
 A tabela geral é de 07/10/2026; os 14 oxidantes foram conferidos em 19/10/2026. Pedidos pelo WhatsApp +55 41 9840-2800 estão habilitados: o cliente confere e envia a mensagem. Disponibilidade, frete e condições dependem do atendimento. Consulte [oxidantes e WhatsApp](docs/oxidantes-e-whatsapp.md).
 
-Pendências do restante do cadastro: 200 opções sem foto, 111 com marca a confirmar, 275 com embalagem a confirmar e 175 com grupo não informado. Esses grupos podem se sobrepor. Esses campos e a disponibilidade devem ser conferidos pelo atendimento antes de confirmar a compra.
+Coleta de fotos no Mercos em 05/11/2026: consulta aos 737 registros ativos e aplicação das imagens conferidas, com origem, código do Mercos e integridade dos arquivos documentados em `docs/audits/mercos-photos-2026-11-05.json`. Imagens genéricas de "sem foto", embalagens divergentes e artes promocionais antigas ficam fora da importação. As embalagens comuns de coloração são identificadas como referência da linha, sem representar a tonalidade.
+
+Demais pendências do cadastro original: 111 opções com marca a confirmar, 275 com embalagem a confirmar e 175 com grupo não informado. Esses grupos podem se sobrepor. Esses campos e a disponibilidade devem ser conferidos pelo atendimento antes de confirmar a compra.
 
 ## Organização
 
