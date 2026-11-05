@@ -38,7 +38,7 @@ def slugify(text):
 
 EVENT_ORDER = -2000
 for n, row in enumerate(EVENT["rows"]):
-    fields = {"priceCents": row["event"], "eventListCents": row["list"], "eventPixCents": row["pix"]}
+    fields = {"priceCents": row["event"], "eventListCents": row["list"], "eventPixCents": row["pix"], "eventSection": row["section"]}
     if "ids" in row:
         for pid in row["ids"]:
             p = by_id[pid]
@@ -67,6 +67,21 @@ data = json.dumps(products, ensure_ascii=False, separators=(",", ":"))
 src = src[:start] + data + src[j + 1:]
 
 PATCHES = [
+    # Ponte entre o catálogo e assets/event-offer.js (carrinho, produtos e cards)
+    ('k=!0,no()',
+     'k=!0,globalThis.FenieEvent&&globalThis.FenieEvent.bridge({cart:()=>c,products:()=>d,summary:()=>J(c,d),setQty:(i,q)=>{let P=d.find(x=>x.id===i);if(!P||["hidden","unavailable"].includes(P.status))return!1;q>0?c[i]=Math.min(999,q):delete c[i];return Z()},cards:(l,o)=>eo(l,o||"draft"),toast:t}),no()'),
+    # Vitrine do evento no topo da página inicial
+    ('["/","/catalogo","/marcas","/selecoes"].includes(A)?uA():',
+     '["/","/catalogo","/marcas","/selecoes"].includes(A)?(uA(),A==="/"&&globalThis.FenieEvent&&globalThis.FenieEvent.home(R)):'),
+    # Avisa a camada do evento a cada mudança no pedido
+    ('function W(){let A=J(c,d);',
+     'function W(){let A=J(c,d);globalThis.FenieEvent&&globalThis.FenieEvent.onCart&&queueMicrotask(()=>globalThis.FenieEvent.onCart(A));'),
+    # Barra do pedido leva direto para a revisão e o WhatsApp
+    ('<a href="#/carrinho" class="primary">Revisar pedido <span aria-hidden="true">\\u2192</span></a>`)}',
+     '<a href="#/resumo" class="primary">Finalizar pedido <span aria-hidden="true">\\u2192</span></a>`)}'),
+    # Confirmação no próprio botão em vez do aviso que cobre a tela
+    ('c[a]=s,Z()&&t("Produto adicionado ao pedido."),document.querySelector("#toast").insertAdjacentHTML(',
+     'c[a]=s;if(globalThis.FenieEvent&&globalThis.FenieEvent.added){Z();globalThis.FenieEvent.added(o,a,g);return}Z()&&t("Produto adicionado ao pedido."),document.querySelector("#toast").insertAdjacentHTML('),
     ('return `<div class="hl-discount-summary" data-combo-summary>${summary.discountCents?',
      'return `<div class="hl-discount-summary" data-combo-summary>${globalThis.FenieEvent?globalThis.FenieEvent.cartSavings(summary):""}${summary.discountCents?'),
     ('<small>${A.count} ${A.count===1?"unidade no pedido":"unidades no pedido"}</small><strong>${I(A.totalCents)}</strong></div>',

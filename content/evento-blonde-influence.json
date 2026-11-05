@@ -18,7 +18,8 @@
     "brand": "OLENKA",
     "category": "Combos do evento",
     "size": "Combo"
-   }
+   },
+   "section": "Combos do evento"
   },
   {
    "name": "Ativador de Cachos Secret Curl Happy End 200ml",
@@ -27,7 +28,8 @@
    "pix": 8600,
    "ids": [
     "OLK-FND-SCT-200"
-   ]
+   ],
+   "section": "Finalização Happy End"
   },
   {
    "name": "02 TRATAMENTOS",
@@ -39,7 +41,8 @@
     "brand": "OLENKA",
     "category": "Combos do evento",
     "size": "Combo"
-   }
+   },
+   "section": "Combos do evento"
   },
   {
    "name": "Cc Cream Leave - In Universal Happy End 250ml",
@@ -48,7 +51,8 @@
    "pix": 8300,
    "ids": [
     "OLK-FND-CCC-250"
-   ]
+   ],
+   "section": "Finalização Happy End"
   },
   {
    "name": "03 RECONSTRUTOR",
@@ -60,7 +64,8 @@
     "brand": "OLENKA",
     "category": "Combos do evento",
     "size": "Combo"
-   }
+   },
+   "section": "Combos do evento"
   },
   {
    "name": "Óleo Happy End 60ml",
@@ -69,7 +74,8 @@
    "pix": 10700,
    "ids": [
     "OLK-FND-ORP-60"
-   ]
+   ],
+   "section": "Finalização Happy End"
   },
   {
    "name": "04 REPOSIÇÃO HIDROLIPÍDICA",
@@ -81,7 +87,8 @@
     "brand": "OLENKA",
     "category": "Combos do evento",
     "size": "Combo"
-   }
+   },
+   "section": "Combos do evento"
   },
   {
    "name": "Pomada de Finalização Seca Happy End 80g",
@@ -90,7 +97,8 @@
    "pix": 6300,
    "ids": [
     "OLK-FND-PMS-80"
-   ]
+   ],
+   "section": "Finalização Happy End"
   },
   {
    "name": "05 BLOND TECH",
@@ -102,7 +110,8 @@
     "brand": "OLENKA",
     "category": "Combos do evento",
     "size": "Combo"
-   }
+   },
+   "section": "Combos do evento"
   },
   {
    "name": "Spray de Alto Brilho Happy End 60ml",
@@ -111,7 +120,8 @@
    "pix": 10000,
    "ids": [
     "OLK-FND-SPB-60"
-   ]
+   ],
+   "section": "Finalização Happy End"
   },
   {
    "name": "06 OLENKA HUB",
@@ -123,7 +133,8 @@
     "brand": "OLENKA",
     "category": "Combos do evento",
     "size": "Combo"
-   }
+   },
+   "section": "Combos do evento"
   },
   {
    "name": "Pó Modelador de Texturização e Volume",
@@ -132,7 +143,8 @@
    "pix": 6800,
    "ids": [
     "OLK-FND-PMT-60"
-   ]
+   ],
+   "section": "Finalização Happy End"
   },
   {
    "name": "07 COLOR ESSENCIAL (24/3/1)",
@@ -144,7 +156,8 @@
     "brand": "MUP COLOR",
     "category": "Combos do evento",
     "size": "Combo"
-   }
+   },
+   "section": "Combos do evento"
   },
   {
    "name": "Lipid Serum - 100ml",
@@ -153,7 +166,8 @@
    "pix": 7400,
    "ids": [
     "OLK-FND-LPS-100"
-   ]
+   ],
+   "section": "Finalização Happy End"
   },
   {
    "name": "08 COLOR ESSENCIAL (24/6)",
@@ -165,7 +179,8 @@
     "brand": "MUP COLOR",
     "category": "Combos do evento",
     "size": "Combo"
-   }
+   },
+   "section": "Combos do evento"
   },
   {
    "name": "09 COLOR PRO (36/3/2)",
@@ -177,7 +192,8 @@
     "brand": "MUP COLOR",
     "category": "Combos do evento",
     "size": "Combo"
-   }
+   },
+   "section": "Combos do evento"
   },
   {
    "name": "Hair Brushing 215ml",
@@ -186,7 +202,8 @@
    "pix": 7900,
    "ids": [
     "OLK-FND-HBS-215"
-   ]
+   ],
+   "section": "Finalização Happy End"
   },
   {
    "name": "Kit Royal Look (Sh. + Alisante)",
@@ -195,7 +212,8 @@
    "pix": 57600,
    "ids": [
     "OLK-KIT-ALIS-2"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "Shampoo Dilatador Royal Look 1L",
@@ -204,7 +222,8 @@
    "pix": 14800,
    "ids": [
     "OLK-SH-ROY-1000"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "OX Blond Tech 10V 900ml",
@@ -213,7 +232,8 @@
    "pix": 3490,
    "ids": [
     "OLK-OX-10V-900"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "Alisante Capilar Royal Look 1L",
@@ -222,7 +242,8 @@
    "pix": 51000,
    "ids": [
     "OLK-ALI-RLK-1000"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "OX Blond Tech 20V 900ml",
@@ -231,7 +252,8 @@
    "pix": 3490,
    "ids": [
     "OLK-OX-20V-900"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "Mini Royal Look (shampoo 120ml + Alisante 100ml)",
@@ -243,7 +265,8 @@
     "brand": "OLENKA",
     "category": "Alisantes e Progressivas",
     "size": "120 ml + 100 ml"
-   }
+   },
+   "section": "Royal Look"
   },
   {
    "name": "OX Blond Tech 30V 900ml",
@@ -252,7 +275,8 @@
    "pix": 3490,
    "ids": [
     "OLK-OX-30V-900"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "Spray de Correção da Cor Royal Blond 250ml",
@@ -261,7 +285,8 @@
    "pix": 8800,
    "ids": [
     "OLK-SPY-RBD-250"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "OX Blond X 35V 900ml",
@@ -270,7 +295,8 @@
    "pix": 4500,
    "ids": [
     "OLK-OX-35V-900"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "Alisante Royal Soft 1kg",
@@ -279,7 +305,8 @@
    "pix": 36900,
    "ids": [
     "OLK-ALI-RST-1000"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "OX Blond Tech 40V 900ml",
@@ -288,7 +315,8 @@
    "pix": 3490,
    "ids": [
     "OLK-OX-40V-900"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "Máscara Universal PRO Royal Finish 500g",
@@ -297,7 +325,8 @@
    "pix": 13900,
    "ids": [
     "OLK-MSK-FNS-500"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "Pó para Descoloração Capilar Blond Tech 450g",
@@ -306,7 +335,8 @@
    "pix": 8900,
    "ids": [
     "OLK-PDC-BTO-450"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "pH Acid - Másc. pH 250ml",
@@ -315,7 +345,8 @@
    "pix": 7300,
    "ids": [
     "OLK-MSK-PHA-250"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "Máscara Blend de Proteinas 600g",
@@ -324,7 +355,8 @@
    "pix": 22000,
    "ids": [
     "OLK-MSK-BDP-600"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "Kit Royal Care - Sh + Dual Mask",
@@ -333,7 +365,8 @@
    "pix": 8900,
    "ids": [
     "OLK-KIT-RYC-2"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "Mascara Blend de Proteínas 220g",
@@ -342,7 +375,8 @@
    "pix": 7900,
    "ids": [
     "OLK-MSK-BDP-220"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "Shampooo Royal Care 250ml",
@@ -351,7 +385,8 @@
    "pix": 5500,
    "ids": [
     "OLK-SH-RYC-250"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "Dual Mask Royal Care 250ml",
@@ -360,7 +395,8 @@
    "pix": 5500,
    "ids": [
     "OLK-MSK-RYC-250"
-   ]
+   ],
+   "section": "Royal Look"
   },
   {
    "name": "Kit Self Care Bio Reconstrutor (Sh. + Cond.)",
@@ -369,7 +405,8 @@
    "pix": 8600,
    "ids": [
     "OLK-KIT-SBI-2"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Shampoo Bio Reconstrutor Self Care 280ml",
@@ -381,7 +418,8 @@
     "brand": "OLENKA",
     "category": "Máscaras e tratamentos",
     "size": "280 ml"
-   }
+   },
+   "section": "Self Care"
   },
   {
    "name": "Kit Bio Reconstrutor (Spray + Gloss)",
@@ -390,7 +428,8 @@
    "pix": 36700,
    "ids": [
     "OLK-KIT-BIO-2"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Dual Mousse Bio Reconstrutor Self Care 250g",
@@ -402,7 +441,8 @@
     "brand": "OLENKA",
     "category": "Máscaras e tratamentos",
     "size": "250 g"
-   }
+   },
+   "section": "Self Care"
   },
   {
    "name": "Spray de Regeneração Bio Reconstrutor 500ml",
@@ -411,7 +451,8 @@
    "pix": 23300,
    "ids": [
     "OLK-SPY-BIO-500"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Kit Self Care Liso (Sh. + Cond.)",
@@ -420,7 +461,8 @@
    "pix": 8200,
    "ids": [
     "OLK-KIT-SLI-2"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Gloss de Reestruturação Bio Reconstrutor 500ml",
@@ -429,7 +471,8 @@
    "pix": 18500,
    "ids": [
     "OLK-GLO-BIO-500"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Shampoo Manutenção do Liso Self Care 280ml",
@@ -438,7 +481,8 @@
    "pix": 4200,
    "ids": [
     "OLK-SH-SLI-280"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Dual Mousse Manutenção do Liso Self Care 250g",
@@ -447,7 +491,8 @@
    "pix": 5100,
    "ids": [
     "OLK-MSK-SLI-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Kit 2 Blond Plex",
@@ -456,7 +501,8 @@
    "pix": 23200,
    "ids": [
     "OLK-KIT-BPX-2"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "Kit Self Care Loiros (Sh. + Cond.)",
@@ -465,7 +511,8 @@
    "pix": 8200,
    "ids": [
     "OLK-KIT-SLO-2"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Ultra Defense Blond Plex 250ml",
@@ -474,7 +521,8 @@
    "pix": 12900,
    "ids": [
     "OLK-BLD-PLX-250"
-   ]
+   ],
+   "section": "Blond Tech e Plex"
   },
   {
    "name": "Shampoo Proteção de Loiros Self Care 280ml",
@@ -483,7 +531,8 @@
    "pix": 4200,
    "ids": [
     "OLK-SH-SLO-280"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Dual Mousse Proteção de Loiros Self Care 250g",
@@ -492,7 +541,8 @@
    "pix": 5100,
    "ids": [
     "OLK-MSK-SLO-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Kit Hidra 3' (Sh. + Dual)",
@@ -501,7 +551,8 @@
    "pix": 18000,
    "ids": [
     "OLK-KIT-HID3-2"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Kit Self Care Regeneração (Sh. + Cond.)",
@@ -510,7 +561,8 @@
    "pix": 8200,
    "ids": [
     "OLK-KIT-REG-2"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Shampoo Hidratante Hidra 3' 500ml",
@@ -519,7 +571,8 @@
    "pix": 11000,
    "ids": [
     "OLK-SH-HID3-500"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Shampoo Regeneração Intensa Self Care 280ml",
@@ -528,7 +581,8 @@
    "pix": 4200,
    "ids": [
     "OLK-SH-REG-280"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Dual Mask Hidra 3' 500ml",
@@ -537,7 +591,8 @@
    "pix": 12900,
    "ids": [
     "OLK-MSK-HID3-500"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Dual Mousse Regeneração Intensa Self Care 250g",
@@ -546,7 +601,8 @@
    "pix": 5100,
    "ids": [
     "OLK-MSK-REG-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Web Mask Hidra 3' 500g",
@@ -555,7 +611,8 @@
    "pix": 15100,
    "ids": [
     "OLK-MSK-WEB-500"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Kit Self Care Cachos (Sh. + Mousse)",
@@ -564,7 +621,8 @@
    "pix": 8200,
    "ids": [
     "OLK-KIT-CAC-2"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Shampoo Cabelos Cacheados Self Care 280ml",
@@ -573,7 +631,8 @@
    "pix": 4200,
    "ids": [
     "OLK-SH-CAC-280"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Dual Mousse Cabelos Cacheados Self Care 250g",
@@ -582,7 +641,8 @@
    "pix": 5100,
    "ids": [
     "OLK-MSK-CAC-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Kit Self Care High Nutrition (shampoo + Dual)",
@@ -591,7 +651,8 @@
    "pix": 8700,
    "ids": [
     "OLK-KIT-NUT-2"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Shampoo Purificante Men's Care 300ml",
@@ -600,7 +661,8 @@
    "pix": 3300,
    "ids": [
     "OLK-SH-MEN-300"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Shampoo Nutrição 250ml Self Care+",
@@ -609,7 +671,8 @@
    "pix": 5500,
    "ids": [
     "OLK-SH-NUT-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Condicionador Revitalizante Men's Care 300ml",
@@ -618,7 +681,8 @@
    "pix": 3300,
    "ids": [
     "OLK-COND-MEN-300"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Dual Mask Nutrição 250ml Self Care+",
@@ -627,7 +691,8 @@
    "pix": 5500,
    "ids": [
     "OLK-MSK-NUT-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Kit Self Care Oil Control (shampoo + Dual)",
@@ -636,7 +701,8 @@
    "pix": 8700,
    "ids": [
     "OLK-KIT-OLC-2"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Kit Men's Care (Sh. + Cond. 300ml)",
@@ -645,7 +711,8 @@
    "pix": 6500,
    "ids": [
     "OLK-KIT-MEN-300"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Shampoo Oil Control Self Care+ 250ml",
@@ -654,7 +721,8 @@
    "pix": 5500,
    "ids": [
     "OLK-SH-OLC-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Kit Therapy (Sh. 500ml + Gel Esfol. 250g)",
@@ -663,7 +731,8 @@
    "pix": 16300,
    "ids": [
     "OLK-KIT-THE-2"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Dual Mask Oil Control Self Care+ 250ml",
@@ -672,7 +741,8 @@
    "pix": 5500,
    "ids": [
     "OLK-MSK-OLC-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Shampoo Purificante Therapy 500ml",
@@ -681,7 +751,8 @@
    "pix": 6800,
    "ids": [
     "OLK-SH-THE-500"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Kit Self Care Blonde Protect (shampoo + Dual)",
@@ -690,7 +761,8 @@
    "pix": 8700,
    "ids": [
     "OLK-KIT-BPT-2"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Gel Esfoliante para Couro Cabeludo Therapy 250g",
@@ -699,7 +771,8 @@
    "pix": 10100,
    "ids": [
     "OLK-GEL-THE-250"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Shampoo Blonde Protect Self Care+ 250ml",
@@ -708,7 +781,8 @@
    "pix": 5500,
    "ids": [
     "OLK-SH-BPT-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Dual Mask Blonde Protect Self Care+ 250ml",
@@ -720,7 +794,8 @@
     "brand": "OLENKA",
     "category": "Máscaras e tratamentos",
     "size": "250 ml"
-   }
+   },
+   "section": "Self Care"
   },
   {
    "name": "Olenkolor Acobreados 250ml",
@@ -729,7 +804,8 @@
    "pix": 8300,
    "ids": [
     "OLK-COL-ACO-250"
-   ]
+   ],
+   "section": "Olenkolor"
   },
   {
    "name": "Kit Self Care Intense Hydration (shampoo + Dual)",
@@ -738,7 +814,8 @@
    "pix": 8700,
    "ids": [
     "OLK-KIT-HYD-2"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Olenkolor Loiro Dourado 250ml",
@@ -747,7 +824,8 @@
    "pix": 8300,
    "ids": [
     "OLK-COL-DOU-250"
-   ]
+   ],
+   "section": "Olenkolor"
   },
   {
    "name": "Shampoo Hidratante - 250ml Self Care+",
@@ -756,7 +834,8 @@
    "pix": 5500,
    "ids": [
     "OLK-SH-HYD-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Olenkolor Loiro Intenso 250ml",
@@ -765,7 +844,8 @@
    "pix": 8300,
    "ids": [
     "OLK-COL-INT-250"
-   ]
+   ],
+   "section": "Olenkolor"
   },
   {
    "name": "Dual Mask Hidrantante 250ml Self Care+",
@@ -774,7 +854,8 @@
    "pix": 5500,
    "ids": [
     "OLK-MSK-HYD-250"
-   ]
+   ],
+   "section": "Self Care"
   },
   {
    "name": "Olenkolor Morenas Iluminadas 250ml",
@@ -783,7 +864,8 @@
    "pix": 8300,
    "ids": [
     "OLK-COL-MIL-250"
-   ]
+   ],
+   "section": "Olenkolor"
   },
   {
    "name": "Olenkolor Loiro Platinado 250ml",
@@ -792,7 +874,8 @@
    "pix": 8300,
    "ids": [
     "OLK-COL-PLA-250"
-   ]
+   ],
+   "section": "Olenkolor"
   },
   {
    "name": "Shake Banho de Colágeno Intenso 500g",
@@ -801,7 +884,8 @@
    "pix": 19500,
    "ids": [
     "OLK-SHK-COL-500"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Proteína de Reestruturação Banho de Colágeno 20ml",
@@ -810,7 +894,8 @@
    "pix": 8300,
    "ids": [
     "OLK-PRO-COL-200"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Máscara Banho de Colageno 220g",
@@ -819,7 +904,8 @@
    "pix": 8300,
    "ids": [
     "OLK-MSK-COL-220"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Creme Ativador Secret Curls 250g",
@@ -831,7 +917,8 @@
     "brand": "OLENKA",
     "category": "Cachos",
     "size": "250 g"
-   }
+   },
+   "section": "Lançamento Secrets"
   },
   {
    "name": "Mini Máscara Banho de Colágeno - 50g",
@@ -840,7 +927,8 @@
    "pix": 1900,
    "ids": [
     "OLK-MSK-COL-050"
-   ]
+   ],
+   "section": "Tratamentos"
   },
   {
    "name": "Gelaina Modeladora Secret Curl 250g",
@@ -852,7 +940,8 @@
     "brand": "OLENKA",
     "category": "Cachos",
     "size": "250 g"
-   }
+   },
+   "section": "Lançamento Secrets"
   },
   {
    "name": "Mascara 2x1 Secret Curls 250g",
@@ -864,7 +953,8 @@
     "brand": "OLENKA",
     "category": "Cachos",
     "size": "250 g"
-   }
+   },
+   "section": "Lançamento Secrets"
   },
   {
    "name": "Kit Especialidades (Sh. + Cond. 1,5L)",
@@ -873,7 +963,8 @@
    "pix": 23200,
    "ids": [
     "OLK-KIT-ESP-2"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Shampoo Hidratante Secret Curl 300ml",
@@ -885,7 +976,8 @@
     "brand": "OLENKA",
     "category": "Cachos",
     "size": "300 ml"
-   }
+   },
+   "section": "Lançamento Secrets"
   },
   {
    "name": "Shampoo Especialidades 1,5l",
@@ -894,7 +986,8 @@
    "pix": 14800,
    "ids": [
     "OLK-SH-ESP-1500"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Condicionador Especialidades 1,5l",
@@ -903,7 +996,8 @@
    "pix": 14800,
    "ids": [
     "OLK-COND-ESP-1.5"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Coloração Mup",
@@ -983,7 +1077,8 @@
     "MUP-COL-834",
     "MUP-COL-1034",
     "MUP-COL-1037"
-   ]
+   ],
+   "section": "MUP Color"
   },
   {
    "name": "Oxidante MUP 06 VOL",
@@ -992,7 +1087,8 @@
    "pix": 3490,
    "ids": [
     "MC-OX-06V"
-   ]
+   ],
+   "section": "MUP Color"
   },
   {
    "name": "Kit Men's Care (Sh. + Cond. 1,5L)",
@@ -1001,7 +1097,8 @@
    "pix": 21300,
    "ids": [
     "OLK-KIT-MEN-1.5"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Oxidante MUP 20 VOL",
@@ -1010,7 +1107,8 @@
    "pix": 3490,
    "ids": [
     "MC-OX-20V"
-   ]
+   ],
+   "section": "MUP Color"
   },
   {
    "name": "Shampoo Purificante Men's Care 1,5l",
@@ -1019,7 +1117,8 @@
    "pix": 12100,
    "ids": [
     "OLK-SH-MEN-1.5"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Oxidante MUP 30 VOL",
@@ -1028,7 +1127,8 @@
    "pix": 3490,
    "ids": [
     "MC-OX-30V"
-   ]
+   ],
+   "section": "MUP Color"
   },
   {
    "name": "Condicionador Revitalizante Men's Care 1,5l",
@@ -1037,7 +1137,8 @@
    "pix": 12100,
    "ids": [
     "OLK-COND-MEN-1.5"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Oxidante MUP 40 VOL",
@@ -1046,7 +1147,8 @@
    "pix": 3490,
    "ids": [
     "MC-OX-40V"
-   ]
+   ],
+   "section": "MUP Color"
   },
   {
    "name": "Balm Pré e Pós Barba 2x1 Men's Care 300ml",
@@ -1055,7 +1157,8 @@
    "pix": 4200,
    "ids": [
     "OLK-BLM-MEN-300"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Pó Descolorante MUP",
@@ -1064,7 +1167,8 @@
    "pix": 8900,
    "ids": [
     "MUP-COL-STD-450"
-   ]
+   ],
+   "section": "MUP Color"
   },
   {
    "name": "Óleo Hidratante 2x1 Men's Care 60ml",
@@ -1073,7 +1177,8 @@
    "pix": 4800,
    "ids": [
     "OLK-OIL-MEN-060"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Pomada de Finalização com Brilho Men's Care 80g",
@@ -1082,7 +1187,8 @@
    "pix": 4800,
    "ids": [
     "OLK-POM-MEN-80-01"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Pomada de Finalização Seca Men's Care 80g",
@@ -1091,7 +1197,8 @@
    "pix": 4800,
    "ids": [
     "OLK-POM-MEN-80-02"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Tônico Anti-Queda 2x1 Men's Care 100ml",
@@ -1100,7 +1207,8 @@
    "pix": 7700,
    "ids": [
     "OLK-TON-MEN-100"
-   ]
+   ],
+   "section": "Men's Care, Therapy e Especialidades"
   },
   {
    "name": "Color Start MUP Color - 250ml",
@@ -1109,7 +1217,8 @@
    "pix": 6600,
    "ids": [
     "MUP-PPT-CST-250"
-   ]
+   ],
+   "section": "MUP Color"
   },
   {
    "name": "Hair Spray Extra Forte 400ml - MUP Color",
@@ -1118,7 +1227,8 @@
    "pix": 7900,
    "ids": [
     "MUP-SH-LVT-3000"
-   ]
+   ],
+   "section": "MUP Color"
   },
   {
    "name": "Shampoo Profissional Lavatório 3L MUP",
@@ -1127,7 +1237,8 @@
    "pix": 12900,
    "ids": [
     "MUP-SH-TPF-3000"
-   ]
+   ],
+   "section": "MUP Color"
   }
  ],
  "keptRegularPrice": [
@@ -1173,5 +1284,17 @@
    ],
    "reason": "Mantido no preço normal do catálogo por decisão de 05/11/2026"
   }
+ ],
+ "sections": [
+  "Combos do evento",
+  "Lançamento Secrets",
+  "Royal Look",
+  "Blond Tech e Plex",
+  "MUP Color",
+  "Olenkolor",
+  "Tratamentos",
+  "Self Care",
+  "Finalização Happy End",
+  "Men's Care, Therapy e Especialidades"
  ]
 }

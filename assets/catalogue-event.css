@@ -62,9 +62,98 @@
 .ev-savings-tag { font: 700 10px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-ink); }
 .order-dock small.ev-dock-save { display: block; color: #1d6b3a; font-weight: 700; }
 
+.ev-banner .ev-b-short { display: none; }
+
+/* Vitrine do evento na página inicial */
+.ev-home { margin: 0 0 40px; }
+.ev-hero { padding: 22px 24px; border-radius: 20px; background: var(--midnight); color: #f5f1e8; }
+.ev-hero span { font: 700 11px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+.ev-hero h1 { margin: 8px 0 6px; font: 400 32px/1.1 var(--display); color: #fff; }
+.ev-hero p { margin: 0; font-size: 14px; color: #d9d3c6; }
+.ev-tabs {
+  position: sticky; top: var(--ev-sticky-top, 0px); z-index: 8; margin: 14px -4px 4px; padding: 8px 4px;
+  background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(6px);
+}
+.ev-tabs > div { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
+.ev-tabs > div::-webkit-scrollbar { display: none; }
+.ev-tabs button {
+  flex: 0 0 auto; scroll-snap-align: start; min-height: 40px; padding: 8px 14px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 600 13px/1 var(--sans); cursor: pointer;
+}
+.ev-tabs button[aria-pressed="true"] { background: var(--midnight); border-color: var(--midnight); color: var(--gold); }
+.ev-sec { scroll-margin-top: calc(var(--ev-sticky-top, 0px) + 64px); padding-top: 18px; }
+.ev-sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 12px; }
+.ev-sec-head h2 { margin: 0; font: 400 26px/1.15 var(--display); color: var(--ink); }
+.ev-sec-head p { margin: 0; font-size: 12px; font-weight: 600; color: var(--gold-ink); }
+.ev-grid .ev-collapsed { display: none; }
+.ev-more {
+  display: block; width: 100%; min-height: 48px; margin: 12px 0 0; border: 1px dashed var(--gold); border-radius: 12px;
+  background: transparent; color: var(--gold-ink); font: 700 14px var(--sans); cursor: pointer;
+}
+.ev-all { display: block; margin: 28px 0 8px; padding: 16px; border-radius: 14px; border: 1px solid var(--line); text-align: center; color: var(--ink); font-weight: 700; text-decoration: none; background: var(--surface); }
+
+/* Quantidade direto no card */
+.ev-qty { display: grid; gap: 8px; }
+.ev-step { display: grid; grid-template-columns: 52px 1fr 52px; align-items: center; min-height: 48px; border-radius: 999px; background: var(--midnight); color: #fff; overflow: hidden; }
+.ev-step[hidden] { display: none; }
+.ev-step button { height: 100%; min-height: 48px; border: 0; background: transparent; color: var(--gold); font: 700 24px/1 var(--sans); cursor: pointer; touch-action: manipulation; }
+.ev-step button:active { background: #ffffff1a; }
+.ev-step button:disabled { opacity: .35; }
+.ev-step output { text-align: center; font: 700 18px/1 var(--sans); font-variant-numeric: tabular-nums; }
+.ev-step output::after { content: " no pedido"; font-size: 12px; font-weight: 400; color: #c9c4b8; }
+.ev-bulk { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ev-bulk button {
+  min-height: 42px; border-radius: 999px; border: 1px solid var(--gold); background: #fbf6ea; color: var(--gold-ink);
+  font: 700 14px/1 var(--sans); cursor: pointer; touch-action: manipulation;
+}
+.ev-bulk button:active { background: #f1e5c8; }
+.product-card.ev-in-cart { border-color: #1d6b3a; box-shadow: 0 0 0 1px #1d6b3a inset; }
+@keyframes ev-flash { 0% { transform: scale(1); } 40% { transform: scale(1.35); color: var(--gold); } 100% { transform: scale(1); } }
+.ev-flash { display: inline-block; animation: ev-flash .35s ease-out; }
+.add-btn.ev-added, .primary.ev-added { background: #1d6b3a !important; border-color: #1d6b3a !important; color: #fff !important; }
+
+/* Barra do pedido */
+@keyframes ev-bump { 0% { transform: translateY(0); } 35% { transform: translateY(-6px); } 100% { transform: translateY(0); } }
+#orderDock.ev-bump { animation: ev-bump .35s ease-out; }
+
+.ev-send-bar { display: none; }
+
+@media (max-width: 760px) {
+  .ev-send-bar:not([hidden]) {
+    display: block; position: fixed; left: 8px; right: 8px; bottom: calc(66px + env(safe-area-inset-bottom)); z-index: 29;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .ev-send-bar.ev-send-hide { transform: translateY(20px); opacity: 0; pointer-events: none; }
+  .ev-send-bar button {
+    width: 100%; min-height: 54px; border: 0; border-radius: 999px; background: #1d6b3a; color: #fff;
+    font: 700 16px/1 var(--sans); box-shadow: 0 10px 28px #07131f40; cursor: pointer;
+  }
+  .results-section .ev-ribbon .ev-upto { font-size: 0; }
+  body.has-order #orderDock:not([hidden]) {
+    display: flex !important; position: fixed; left: 8px; right: 8px; bottom: calc(66px + env(safe-area-inset-bottom)); z-index: 29;
+    align-items: center; justify-content: space-between; gap: 10px; padding: 10px 10px 10px 16px; border-radius: 16px;
+    background: var(--midnight); color: #fff; border: 0; box-shadow: 0 10px 28px #07131f40;
+  }
+  body.has-order #orderDock small { color: #c9c4b8; font-size: 11px; }
+  body.has-order #orderDock strong { color: #fff; font-size: 20px; line-height: 1.15; }
+  body.has-order #orderDock small.ev-dock-save { color: #7fd49c; font-size: 12px; }
+  body.has-order #orderDock .primary { flex: 0 0 auto; min-height: 48px; padding: 12px 18px; border-radius: 999px; background: var(--gold); color: var(--midnight); font-size: 14px; font-weight: 700; }
+  body.has-order { padding-bottom: calc(150px + env(safe-area-inset-bottom)) !important; }
+  body.has-order .toast, body.has-order .toast.show { bottom: calc(146px + env(safe-area-inset-bottom)) !important; }
+  .ev-hero { padding: 18px; border-radius: 16px; }
+  .ev-hero h1 { font-size: 26px; }
+  .ev-hero p { font-size: 13px; }
+  .ev-tabs { margin-inline: -16px; padding-inline: 16px; }
+  .ev-sec-head h2 { font-size: 22px; }
+  .ev-grid .ev-step output::after, .product-grid .ev-step output::after { content: ""; }
+}
+
 @media (max-width: 640px) {
-  .ev-banner { font-size: 11px; padding: 8px 12px; }
-  .ev-banner strong { font-size: 12px; }
+  .ev-banner { flex-wrap: nowrap; justify-content: space-between; gap: 8px; font-size: 12px; padding: 7px 12px; text-align: left; }
+  .ev-banner strong { font-size: 12px; white-space: nowrap; }
+  .ev-banner .ev-b-long { display: none; }
+  .ev-banner .ev-b-short { display: inline; flex: 1; white-space: nowrap; }
+  .ev-banner a { padding: 6px 12px; white-space: nowrap; }
   .ev-ribbon { top: 6px; left: 6px; font-size: 9px; }
   .ev-ribbon .ev-long { display: none; }
   .ev-ribbon .ev-short { display: inline; }
