@@ -53,15 +53,23 @@ for n, row in enumerate(EVENT["rows"]):
             name = f"Combo {number} · {title.title()}"
         else:
             name = row["name"]
-        products.append({
+        item = {
             "id": meta["id"], "sku": meta["id"], "slug": f"{slugify(name)}-{meta['id'].lower()}",
             "name": name, "brand": meta["brand"], "sourceGroup": meta["brand"],
             "line": meta["category"], "category": meta["category"], "size": meta["size"],
             "status": "consult", "order": EVENT_ORDER + n,
             "keywords": [meta["id"], meta["brand"], meta["category"], "evento", "blonde influence", "oferta", *(["combo"] if combo else [])],
-            "reviewPending": ["Foto oficial", "Disponibilidade comercial"] + (["Composição do combo"] if combo else []),
+            "reviewPending": ["Disponibilidade comercial"] + ([] if meta.get("image") else ["Foto oficial"]) + (["Composição do combo"] if combo and not meta.get("includes") else []),
             **fields,
-        })
+        }
+        if meta.get("image"):
+            item.update({"image": meta["image"], "imageKind": "product", "imageAlt": f"{name}: produtos do combo do evento {EVENT['event']}"})
+        for key, field in (("includes", "eventIncludes"), ("gifts", "eventGifts"), ("art", "eventArt"), ("note", "eventNote")):
+            if meta.get(key):
+                item[field] = meta[key]
+                if key in ("includes", "gifts"):
+                    item["keywords"] += [x.lower() for x in meta[key]]
+        products.append(item)
 
 data = json.dumps(products, ensure_ascii=False, separators=(",", ":"))
 src = src[:start] + data + src[j + 1:]

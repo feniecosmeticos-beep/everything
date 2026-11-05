@@ -92,6 +92,22 @@
 }
 .ev-all { display: block; margin: 28px 0 8px; padding: 16px; border-radius: 14px; border: 1px solid var(--line); text-align: center; color: var(--ink); font-weight: 700; text-decoration: none; background: var(--surface); }
 
+/* Combos: brindes e composição */
+.ev-price .ev-gifts { display: inline-block; justify-self: start; align-self: flex-start; margin-top: 4px; padding: 4px 8px; border-radius: 999px; background: #fbf1dc; color: #6b4e16; font: 700 12px/1.2 var(--sans); }
+.ev-combo { margin: 16px 0; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.ev-combo h2 { margin: 0 0 10px; font: 500 22px/1.2 var(--display); color: var(--ink); }
+.ev-combo ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.ev-combo-items li { position: relative; padding-left: 26px; font-size: 15px; line-height: 1.4; color: var(--ink); }
+.ev-combo-items li::before { content: ""; position: absolute; left: 4px; top: 6px; width: 12px; height: 7px; border-left: 2px solid #1d6b3a; border-bottom: 2px solid #1d6b3a; transform: rotate(-45deg); }
+.ev-combo-gifts { margin-top: 14px; padding: 12px 14px; border-radius: 12px; background: #fbf1dc; }
+.ev-combo-gifts h3 { margin: 0 0 8px; font: 700 12px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: #6b4e16; }
+.ev-combo-gifts ul { display: flex; flex-wrap: wrap; gap: 6px; }
+.ev-combo-gifts li { padding: 5px 10px; border-radius: 999px; background: #fff; border: 1px solid #ead6a8; font-size: 13px; color: #4a3610; }
+.ev-combo-note { margin: 12px 0 0; font-size: 13px; line-height: 1.45; color: var(--muted); }
+.ev-combo-art-box { margin-top: 12px; }
+.ev-combo-art-box summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; color: var(--gold-ink); }
+.ev-combo-art { display: block; width: 100%; height: auto; margin-top: 14px; border-radius: 12px; }
+
 /* Como funciona */
 .ev-how { margin: 12px 0 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
 .ev-how h2 { margin: 0 0 10px; font: 700 11px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--gold-ink); }
