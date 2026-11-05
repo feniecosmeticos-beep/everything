@@ -1,0 +1,63 @@
+/* Evento Blonde Influence: faixa, selos e preços exclusivos */
+.ev-banner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px 14px;
+  padding: 9px 16px; background: var(--midnight); color: #f5f1e8;
+  font: 600 12px/1.35 var(--sans); letter-spacing: .02em; text-align: center;
+}
+.ev-banner strong { color: var(--gold); font-family: var(--display); font-size: 14px; letter-spacing: .08em; text-transform: uppercase; }
+.ev-banner a { color: var(--midnight); background: var(--gold); border-radius: 999px; padding: 4px 12px; text-decoration: none; font-weight: 700; }
+.ev-banner a:hover, .ev-banner a:focus-visible { background: var(--gold-hover); }
+.ev-banner [data-ev-countdown] { font-variant-numeric: tabular-nums; color: var(--gold-hover); }
+.ev-banner small { flex-basis: 100%; font-weight: 400; color: #c9c4b8; font-size: 11px; }
+
+.catalog-nav a.ev-nav { color: var(--gold-ink); font-weight: 700; }
+.catalog-nav a.ev-nav::before { content: "● "; color: #b3261e; }
+
+.product-visual { position: relative; }
+.ev-ribbon {
+  position: absolute; top: 10px; left: 10px; z-index: 2; display: inline-flex; align-items: stretch;
+  border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(7, 19, 31, .18);
+  font: 700 10px/1 var(--sans); letter-spacing: .04em; text-transform: uppercase;
+}
+.ev-ribbon b { background: var(--midnight); color: var(--gold); padding: 6px 8px; }
+
+.ev-ribbon .ev-short { display: none; }
+.ev-ribbon b, .ev-ribbon i { white-space: nowrap; }
+.ev-ribbon i { background: #b3261e; color: #fff; font-style: normal; padding: 6px 7px; }
+
+.price .ev-price { display: flex; flex-direction: column; gap: 2px; letter-spacing: 0; }
+.ev-price del { font-size: 12px; color: var(--muted); font-weight: 400; }
+.ev-price .ev-now { font-size: 1.15em; font-weight: 700; color: var(--ink); letter-spacing: -.02em; }
+.ev-price .ev-pix { font-size: 13px; font-weight: 700; color: #1d6b3a; }
+.ev-price .ev-pix small { font-weight: 400; color: var(--muted); font-size: 11px; }
+.ev-price .ev-pix-fixed small { color: var(--gold-ink); font-weight: 600; }
+
+.detail-price.ev-detail {
+  font-size: 16px; display: grid; gap: 8px; padding: 16px; margin: 12px 0;
+  border: 1px solid var(--gold); border-radius: var(--radius); background: #fbf6ea;
+}
+.ev-detail .ev-tag {
+  justify-self: start; background: var(--midnight); color: var(--gold); border-radius: 999px;
+  padding: 5px 12px; font: 700 11px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase;
+}
+.ev-detail del { color: var(--muted); font-size: 14px; }
+.ev-detail-row { display: flex; flex-wrap: wrap; gap: 10px 28px; align-items: flex-end; }
+.ev-detail-row small { display: block; font-size: 12px; color: var(--muted); }
+.ev-detail-row strong { font-size: 30px; letter-spacing: -.03em; color: var(--ink); }
+.ev-detail-pix strong { color: #1d6b3a; }
+.ev-save { margin: 0; color: #b3261e; font-weight: 700; font-size: 14px; }
+.ev-terms { margin: 0; color: var(--muted); font-size: 12px; }
+
+.ev-review { display: grid; gap: 6px; margin-top: 6px; }
+.ev-review-pix strong { color: #1d6b3a; }
+
+@media (max-width: 640px) {
+  .ev-banner { font-size: 11px; padding: 8px 12px; }
+  .ev-banner strong { font-size: 12px; }
+  .ev-ribbon { top: 6px; left: 6px; font-size: 9px; }
+  .ev-ribbon .ev-long { display: none; }
+  .ev-ribbon .ev-short { display: inline; }
+  .ev-banner small { display: none; }
+  .ev-ribbon b, .ev-ribbon i { padding: 5px 6px; }
+  .ev-detail-row strong { font-size: 26px; }
+}

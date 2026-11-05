@@ -46,6 +46,15 @@ Atualização de 13/10/2026, inspirada na identidade do [site institucional da F
 
 Exemplo de filtro: `#/catalogo?q=DOH-COL-RYF-889&category=coloracao`. Parâmetros comerciais de campanha na URL continuam preservados.
 
+## Evento Blonde Influence (09/11/2026)
+
+O catálogo está aberto sem login e mostra os preços do talonário do evento em 171 produtos, mais 17 itens que não existiam no catálogo (9 combos, linha Secrets e kits menores). Cada item com condição de evento mostra o preço de tabela riscado, o preço do evento, o valor no Pix ou cartão e o selo "Exclusivo do evento". A mensagem do WhatsApp inclui tabela, preço do evento, total no Pix/cartão e a economia.
+
+- Fonte dos preços: `content/evento-blonde-influence.json` (colunas TABELA, EVENTO e PIX/CARTÃO).
+- Aplicação: `python scripts/apply-event-prices.py` sobre o catálogo sem preços de evento.
+- Exibição: `assets/event-offer.js` e `assets/catalogue-event.css`. Para mostrar contagem regressiva, preencha `endsAt` em `event-offer.js`.
+- Encerramento: reverta o commit dos preços do evento e o commit que abriu o catálogo sem login.
+
 ## Dados comerciais
 
 Origem: `Fenie-Catalogo-Fotos-Previa (7).html`, importado em 13/10/2026. A importação original tinha 701 opções, agrupadas em 488 produtos. Em 19/10/2026, os três oxidantes agregados receberam 14 variações conferidas no Mercos: são 712 opções selecionáveis e três registros agregados ocultos para preservar vínculos históricos.

@@ -1,0 +1,1187 @@
+{
+ "event": "Blonde Influence",
+ "date": "2026-11-09",
+ "source": "Tabela de preço para o evento.pdf",
+ "columns": {
+  "list": "TABELA",
+  "event": "EVENTO",
+  "pix": "PIX/CARTÃO"
+ },
+ "rows": [
+  {
+   "name": "01 ALISAMENTO",
+   "list": 135300,
+   "event": 120900,
+   "pix": 120900,
+   "new": {
+    "id": "EVT-BI-COMBO-01",
+    "brand": "OLENKA",
+    "category": "Combos do evento",
+    "size": "Combo"
+   }
+  },
+  {
+   "name": "Ativador de Cachos Secret Curl Happy End 200ml",
+   "list": 9200,
+   "event": 8700,
+   "pix": 8600,
+   "ids": [
+    "OLK-FND-SCT-200"
+   ]
+  },
+  {
+   "name": "02 TRATAMENTOS",
+   "list": 75900,
+   "event": 68900,
+   "pix": 68900,
+   "new": {
+    "id": "EVT-BI-COMBO-02",
+    "brand": "OLENKA",
+    "category": "Combos do evento",
+    "size": "Combo"
+   }
+  },
+  {
+   "name": "Cc Cream Leave - In Universal Happy End 250ml",
+   "list": 8900,
+   "event": 8500,
+   "pix": 8300,
+   "ids": [
+    "OLK-FND-CCC-250"
+   ]
+  },
+  {
+   "name": "03 RECONSTRUTOR",
+   "list": 104400,
+   "event": 93900,
+   "pix": 93900,
+   "new": {
+    "id": "EVT-BI-COMBO-03",
+    "brand": "OLENKA",
+    "category": "Combos do evento",
+    "size": "Combo"
+   }
+  },
+  {
+   "name": "Óleo Happy End 60ml",
+   "list": 11500,
+   "event": 10900,
+   "pix": 10700,
+   "ids": [
+    "OLK-FND-ORP-60"
+   ]
+  },
+  {
+   "name": "04 REPOSIÇÃO HIDROLIPÍDICA",
+   "list": 108400,
+   "event": 94900,
+   "pix": 94900,
+   "new": {
+    "id": "EVT-BI-COMBO-04",
+    "brand": "OLENKA",
+    "category": "Combos do evento",
+    "size": "Combo"
+   }
+  },
+  {
+   "name": "Pomada de Finalização Seca Happy End 80g",
+   "list": 6800,
+   "event": 6500,
+   "pix": 6300,
+   "ids": [
+    "OLK-FND-PMS-80"
+   ]
+  },
+  {
+   "name": "05 BLOND TECH",
+   "list": 105400,
+   "event": 94900,
+   "pix": 94900,
+   "new": {
+    "id": "EVT-BI-COMBO-05",
+    "brand": "OLENKA",
+    "category": "Combos do evento",
+    "size": "Combo"
+   }
+  },
+  {
+   "name": "Spray de Alto Brilho Happy End 60ml",
+   "list": 10800,
+   "event": 10300,
+   "pix": 10000,
+   "ids": [
+    "OLK-FND-SPB-60"
+   ]
+  },
+  {
+   "name": "06 OLENKA HUB",
+   "list": 126300,
+   "event": 109900,
+   "pix": 109900,
+   "new": {
+    "id": "EVT-BI-COMBO-06",
+    "brand": "OLENKA",
+    "category": "Combos do evento",
+    "size": "Combo"
+   }
+  },
+  {
+   "name": "Pó Modelador de Texturização e Volume",
+   "list": 7300,
+   "event": 6900,
+   "pix": 6800,
+   "ids": [
+    "OLK-FND-PMT-60"
+   ]
+  },
+  {
+   "name": "07 COLOR ESSENCIAL (24/3/1)",
+   "list": 88160,
+   "event": 78900,
+   "pix": 78900,
+   "new": {
+    "id": "EVT-BI-COMBO-07",
+    "brand": "MUP COLOR",
+    "category": "Combos do evento",
+    "size": "Combo"
+   }
+  },
+  {
+   "name": "Lipid Serum - 100ml",
+   "list": 8000,
+   "event": 7600,
+   "pix": 7400,
+   "ids": [
+    "OLK-FND-LPS-100"
+   ]
+  },
+  {
+   "name": "08 COLOR ESSENCIAL (24/6)",
+   "list": 89760,
+   "event": 78900,
+   "pix": 78900,
+   "new": {
+    "id": "EVT-BI-COMBO-08",
+    "brand": "MUP COLOR",
+    "category": "Combos do evento",
+    "size": "Combo"
+   }
+  },
+  {
+   "name": "Mini Lipid Serum de Nutrição 30ml",
+   "list": 2600,
+   "event": 2500,
+   "pix": 2400,
+   "ids": [
+    "OLK-FND-LPS-30"
+   ]
+  },
+  {
+   "name": "09 COLOR PRO (36/3/2)",
+   "list": 131400,
+   "event": 109900,
+   "pix": 109900,
+   "new": {
+    "id": "EVT-BI-COMBO-09",
+    "brand": "MUP COLOR",
+    "category": "Combos do evento",
+    "size": "Combo"
+   }
+  },
+  {
+   "name": "Tônico Anti-Queda Feminino - Growth Splash - 100ml",
+   "list": 9600,
+   "event": 9100,
+   "pix": 8900,
+   "ids": [
+    "OLK-TNC-GSP-100"
+   ]
+  },
+  {
+   "name": "Hair Brushing 215ml",
+   "list": 8500,
+   "event": 8100,
+   "pix": 7900,
+   "ids": [
+    "OLK-FND-HBS-215"
+   ]
+  },
+  {
+   "name": "Kit Royal Look (Sh. + Alisante)",
+   "list": 61900,
+   "event": 58800,
+   "pix": 57600,
+   "ids": [
+    "OLK-KIT-ALIS-2"
+   ]
+  },
+  {
+   "name": "Shampoo Dilatador Royal Look 1L",
+   "list": 15900,
+   "event": 15100,
+   "pix": 14800,
+   "ids": [
+    "OLK-SH-ROY-1000"
+   ]
+  },
+  {
+   "name": "OX Blond Tech 10V 900ml",
+   "list": 4250,
+   "event": 3690,
+   "pix": 3490,
+   "ids": [
+    "OLK-OX-10V-900"
+   ]
+  },
+  {
+   "name": "Alisante Capilar Royal Look 1L",
+   "list": 54800,
+   "event": 52100,
+   "pix": 51000,
+   "ids": [
+    "OLK-ALI-RLK-1000"
+   ]
+  },
+  {
+   "name": "OX Blond Tech 20V 900ml",
+   "list": 4250,
+   "event": 3690,
+   "pix": 3490,
+   "ids": [
+    "OLK-OX-20V-900"
+   ]
+  },
+  {
+   "name": "Mini Royal Look (shampoo 120ml + Alisante 100ml)",
+   "list": 11800,
+   "event": 11200,
+   "pix": 11000,
+   "new": {
+    "id": "EVT-OLK-MINI-ROYAL",
+    "brand": "OLENKA",
+    "category": "Alisantes e Progressivas",
+    "size": "120 ml + 100 ml"
+   }
+  },
+  {
+   "name": "OX Blond Tech 30V 900ml",
+   "list": 4250,
+   "event": 3690,
+   "pix": 3490,
+   "ids": [
+    "OLK-OX-30V-900"
+   ]
+  },
+  {
+   "name": "Spray de Correção da Cor Royal Blond 250ml",
+   "list": 9500,
+   "event": 9000,
+   "pix": 8800,
+   "ids": [
+    "OLK-SPY-RBD-250"
+   ]
+  },
+  {
+   "name": "OX Blond X 35V 900ml",
+   "list": 5400,
+   "event": 4900,
+   "pix": 4500,
+   "ids": [
+    "OLK-OX-35V-900"
+   ]
+  },
+  {
+   "name": "Alisante Royal Soft 1kg",
+   "list": 39700,
+   "event": 37700,
+   "pix": 36900,
+   "ids": [
+    "OLK-ALI-RST-1000"
+   ]
+  },
+  {
+   "name": "OX Blond Tech 40V 900ml",
+   "list": 4250,
+   "event": 3690,
+   "pix": 3490,
+   "ids": [
+    "OLK-OX-40V-900"
+   ]
+  },
+  {
+   "name": "Máscara Universal PRO Royal Finish 500g",
+   "list": 14900,
+   "event": 14200,
+   "pix": 13900,
+   "ids": [
+    "OLK-MSK-FNS-500"
+   ]
+  },
+  {
+   "name": "Pó para Descoloração Capilar Blond Tech 450g",
+   "list": 11000,
+   "event": 9900,
+   "pix": 8900,
+   "ids": [
+    "OLK-PDC-BTO-450"
+   ]
+  },
+  {
+   "name": "pH Acid - Másc. pH 250ml",
+   "list": 7800,
+   "event": 7400,
+   "pix": 7300,
+   "ids": [
+    "OLK-MSK-PHA-250"
+   ]
+  },
+  {
+   "name": "Máscara Blend de Proteinas 600g",
+   "list": 23700,
+   "event": 22500,
+   "pix": 22000,
+   "ids": [
+    "OLK-MSK-BDP-600"
+   ]
+  },
+  {
+   "name": "Kit Royal Care - Sh + Dual Mask",
+   "list": 9600,
+   "event": 9100,
+   "pix": 8900,
+   "ids": [
+    "OLK-KIT-RYC-2"
+   ]
+  },
+  {
+   "name": "Mascara Blend de Proteínas 220g",
+   "list": 8500,
+   "event": 8100,
+   "pix": 7900,
+   "ids": [
+    "OLK-MSK-BDP-220"
+   ]
+  },
+  {
+   "name": "Shampooo Royal Care 250ml",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "ids": [
+    "OLK-SH-RYC-250"
+   ]
+  },
+  {
+   "name": "Dual Mask Royal Care 250ml",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "ids": [
+    "OLK-MSK-RYC-250"
+   ]
+  },
+  {
+   "name": "Kit Self Care Bio Reconstrutor (Sh. + Cond.)",
+   "list": 9200,
+   "event": 8700,
+   "pix": 8600,
+   "ids": [
+    "OLK-KIT-SBI-2"
+   ]
+  },
+  {
+   "name": "Shampoo Bio Reconstrutor Self Care 280ml",
+   "list": 6000,
+   "event": 5700,
+   "pix": 5600,
+   "new": {
+    "id": "EVT-OLK-SH-SBI-280",
+    "brand": "OLENKA",
+    "category": "Máscaras e tratamentos",
+    "size": "280 ml"
+   }
+  },
+  {
+   "name": "Kit Bio Reconstrutor (Spray + Gloss)",
+   "list": 39500,
+   "event": 37500,
+   "pix": 36700,
+   "ids": [
+    "OLK-KIT-BIO-2"
+   ]
+  },
+  {
+   "name": "Dual Mousse Bio Reconstrutor Self Care 250g",
+   "list": 6000,
+   "event": 5700,
+   "pix": 5600,
+   "new": {
+    "id": "EVT-OLK-MSK-SBI-250",
+    "brand": "OLENKA",
+    "category": "Máscaras e tratamentos",
+    "size": "250 g"
+   }
+  },
+  {
+   "name": "Spray de Regeneração Bio Reconstrutor 500ml",
+   "list": 25000,
+   "event": 23800,
+   "pix": 23300,
+   "ids": [
+    "OLK-SPY-BIO-500"
+   ]
+  },
+  {
+   "name": "Kit Self Care Liso (Sh. + Cond.)",
+   "list": 8800,
+   "event": 8400,
+   "pix": 8200,
+   "ids": [
+    "OLK-KIT-SLI-2"
+   ]
+  },
+  {
+   "name": "Gloss de Reestruturação Bio Reconstrutor 500ml",
+   "list": 19900,
+   "event": 18900,
+   "pix": 18500,
+   "ids": [
+    "OLK-GLO-BIO-500"
+   ]
+  },
+  {
+   "name": "Shampoo Manutenção do Liso Self Care 280ml",
+   "list": 4500,
+   "event": 4300,
+   "pix": 4200,
+   "ids": [
+    "OLK-SH-SLI-280"
+   ]
+  },
+  {
+   "name": "Dual Mousse Manutenção do Liso Self Care 250g",
+   "list": 5500,
+   "event": 5200,
+   "pix": 5100,
+   "ids": [
+    "OLK-MSK-SLI-250"
+   ]
+  },
+  {
+   "name": "Kit 2 Blond Plex",
+   "list": 24900,
+   "event": 23700,
+   "pix": 23200,
+   "ids": [
+    "OLK-KIT-BPX-2"
+   ]
+  },
+  {
+   "name": "Kit Self Care Loiros (Sh. + Cond.)",
+   "list": 8800,
+   "event": 8400,
+   "pix": 8200,
+   "ids": [
+    "OLK-KIT-SLO-2"
+   ]
+  },
+  {
+   "name": "Ultra Defense Blond Plex 250ml",
+   "list": 13900,
+   "event": 13200,
+   "pix": 12900,
+   "ids": [
+    "OLK-BLD-PLX-250"
+   ]
+  },
+  {
+   "name": "Shampoo Proteção de Loiros Self Care 280ml",
+   "list": 4500,
+   "event": 4300,
+   "pix": 4200,
+   "ids": [
+    "OLK-SH-SLO-280"
+   ]
+  },
+  {
+   "name": "Dual Mousse Proteção de Loiros Self Care 250g",
+   "list": 5500,
+   "event": 5200,
+   "pix": 5100,
+   "ids": [
+    "OLK-MSK-SLO-250"
+   ]
+  },
+  {
+   "name": "Kit Hidra 3' (Sh. + Dual)",
+   "list": 19400,
+   "event": 18400,
+   "pix": 18000,
+   "ids": [
+    "OLK-KIT-HID3-2"
+   ]
+  },
+  {
+   "name": "Kit Self Care Regeneração (Sh. + Cond.)",
+   "list": 8800,
+   "event": 8400,
+   "pix": 8200,
+   "ids": [
+    "OLK-KIT-REG-2"
+   ]
+  },
+  {
+   "name": "Shampoo Hidratante Hidra 3' 500ml",
+   "list": 11800,
+   "event": 11200,
+   "pix": 11000,
+   "ids": [
+    "OLK-SH-HID3-500"
+   ]
+  },
+  {
+   "name": "Shampoo Regeneração Intensa Self Care 280ml",
+   "list": 4500,
+   "event": 4300,
+   "pix": 4200,
+   "ids": [
+    "OLK-SH-REG-280"
+   ]
+  },
+  {
+   "name": "Dual Mask Hidra 3' 500ml",
+   "list": 13900,
+   "event": 13200,
+   "pix": 12900,
+   "ids": [
+    "OLK-MSK-HID3-500"
+   ]
+  },
+  {
+   "name": "Dual Mousse Regeneração Intensa Self Care 250g",
+   "list": 5500,
+   "event": 5200,
+   "pix": 5100,
+   "ids": [
+    "OLK-MSK-REG-250"
+   ]
+  },
+  {
+   "name": "Web Mask Hidra 3' 500g",
+   "list": 16200,
+   "event": 15400,
+   "pix": 15100,
+   "ids": [
+    "OLK-MSK-WEB-500"
+   ]
+  },
+  {
+   "name": "Kit Self Care Cachos (Sh. + Mousse)",
+   "list": 8800,
+   "event": 8400,
+   "pix": 8200,
+   "ids": [
+    "OLK-KIT-CAC-2"
+   ]
+  },
+  {
+   "name": "Shampoo Cabelos Cacheados Self Care 280ml",
+   "list": 4500,
+   "event": 4300,
+   "pix": 4200,
+   "ids": [
+    "OLK-SH-CAC-280"
+   ]
+  },
+  {
+   "name": "Dual Mousse Cabelos Cacheados Self Care 250g",
+   "list": 5500,
+   "event": 5200,
+   "pix": 5100,
+   "ids": [
+    "OLK-MSK-CAC-250"
+   ]
+  },
+  {
+   "name": "Kit Self Care High Nutrition (shampoo + Dual)",
+   "list": 9400,
+   "event": 8900,
+   "pix": 8700,
+   "ids": [
+    "OLK-KIT-NUT-2"
+   ]
+  },
+  {
+   "name": "Shampoo Purificante Men's Care 300ml",
+   "list": 3500,
+   "event": 3300,
+   "pix": 3300,
+   "ids": [
+    "OLK-SH-MEN-300"
+   ]
+  },
+  {
+   "name": "Shampoo Nutrição 250ml Self Care+",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "ids": [
+    "OLK-SH-NUT-250"
+   ]
+  },
+  {
+   "name": "Condicionador Revitalizante Men's Care 300ml",
+   "list": 3500,
+   "event": 3300,
+   "pix": 3300,
+   "ids": [
+    "OLK-COND-MEN-300"
+   ]
+  },
+  {
+   "name": "Dual Mask Nutrição 250ml Self Care+",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "ids": [
+    "OLK-MSK-NUT-250"
+   ]
+  },
+  {
+   "name": "Kit Self Care Oil Control (shampoo + Dual)",
+   "list": 9400,
+   "event": 8900,
+   "pix": 8700,
+   "ids": [
+    "OLK-KIT-OLC-2"
+   ]
+  },
+  {
+   "name": "Kit Men's Care (Sh. + Cond. 300ml)",
+   "list": 7000,
+   "event": 6700,
+   "pix": 6500,
+   "ids": [
+    "OLK-KIT-MEN-300"
+   ]
+  },
+  {
+   "name": "Shampoo Oil Control Self Care+ 250ml",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "ids": [
+    "OLK-SH-OLC-250"
+   ]
+  },
+  {
+   "name": "Kit Therapy (Sh. 500ml + Gel Esfol. 250g)",
+   "list": 17500,
+   "event": 16600,
+   "pix": 16300,
+   "ids": [
+    "OLK-KIT-THE-2"
+   ]
+  },
+  {
+   "name": "Dual Mask Oil Control Self Care+ 250ml",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "ids": [
+    "OLK-MSK-OLC-250"
+   ]
+  },
+  {
+   "name": "Shampoo Purificante Therapy 500ml",
+   "list": 7300,
+   "event": 6900,
+   "pix": 6800,
+   "ids": [
+    "OLK-SH-THE-500"
+   ]
+  },
+  {
+   "name": "Kit Self Care Blonde Protect (shampoo + Dual)",
+   "list": 9400,
+   "event": 8900,
+   "pix": 8700,
+   "ids": [
+    "OLK-KIT-BPT-2"
+   ]
+  },
+  {
+   "name": "Gel Esfoliante para Couro Cabeludo Therapy 250g",
+   "list": 10900,
+   "event": 10400,
+   "pix": 10100,
+   "ids": [
+    "OLK-GEL-THE-250"
+   ]
+  },
+  {
+   "name": "Shampoo Blonde Protect Self Care+ 250ml",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "ids": [
+    "OLK-SH-BPT-250"
+   ]
+  },
+  {
+   "name": "Dual Mask Blonde Protect Self Care+ 250ml",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "new": {
+    "id": "EVT-OLK-MSK-BPT-250",
+    "brand": "OLENKA",
+    "category": "Máscaras e tratamentos",
+    "size": "250 ml"
+   }
+  },
+  {
+   "name": "Olenkolor Acobreados 250ml",
+   "list": 8900,
+   "event": 8500,
+   "pix": 8300,
+   "ids": [
+    "OLK-COL-ACO-250"
+   ]
+  },
+  {
+   "name": "Kit Self Care Intense Hydration (shampoo + Dual)",
+   "list": 9400,
+   "event": 8900,
+   "pix": 8700,
+   "ids": [
+    "OLK-KIT-HYD-2"
+   ]
+  },
+  {
+   "name": "Olenkolor Loiro Dourado 250ml",
+   "list": 8900,
+   "event": 8500,
+   "pix": 8300,
+   "ids": [
+    "OLK-COL-DOU-250"
+   ]
+  },
+  {
+   "name": "Shampoo Hidratante - 250ml Self Care+",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "ids": [
+    "OLK-SH-HYD-250"
+   ]
+  },
+  {
+   "name": "Olenkolor Loiro Intenso 250ml",
+   "list": 8900,
+   "event": 8500,
+   "pix": 8300,
+   "ids": [
+    "OLK-COL-INT-250"
+   ]
+  },
+  {
+   "name": "Dual Mask Hidrantante 250ml Self Care+",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "ids": [
+    "OLK-MSK-HYD-250"
+   ]
+  },
+  {
+   "name": "Olenkolor Morenas Iluminadas 250ml",
+   "list": 8900,
+   "event": 8500,
+   "pix": 8300,
+   "ids": [
+    "OLK-COL-MIL-250"
+   ]
+  },
+  {
+   "name": "Olenkolor Loiro Platinado 250ml",
+   "list": 8900,
+   "event": 8500,
+   "pix": 8300,
+   "ids": [
+    "OLK-COL-PLA-250"
+   ]
+  },
+  {
+   "name": "Shake Banho de Colágeno Intenso 500g",
+   "list": 21000,
+   "event": 20000,
+   "pix": 19500,
+   "ids": [
+    "OLK-SHK-COL-500"
+   ]
+  },
+  {
+   "name": "Olenkolor Prateados 250ml",
+   "list": 8900,
+   "event": 8500,
+   "pix": 8300,
+   "ids": [
+    "OLK-COL-PRA-250"
+   ]
+  },
+  {
+   "name": "Proteína de Reestruturação Banho de Colágeno 20ml",
+   "list": 8900,
+   "event": 8500,
+   "pix": 8300,
+   "ids": [
+    "OLK-PRO-COL-200"
+   ]
+  },
+  {
+   "name": "Máscara Banho de Colageno 220g",
+   "list": 8900,
+   "event": 8500,
+   "pix": 8300,
+   "ids": [
+    "OLK-MSK-COL-220"
+   ]
+  },
+  {
+   "name": "Creme Ativador Secret Curls 250g",
+   "list": 6600,
+   "event": 6300,
+   "pix": 6100,
+   "new": {
+    "id": "EVT-OLK-SCR-CAT-250",
+    "brand": "OLENKA",
+    "category": "Cachos",
+    "size": "250 g"
+   }
+  },
+  {
+   "name": "Mini Máscara Banho de Colágeno - 50g",
+   "list": 1990,
+   "event": 1900,
+   "pix": 1900,
+   "ids": [
+    "OLK-MSK-COL-050"
+   ]
+  },
+  {
+   "name": "Gelaina Modeladora Secret Curl 250g",
+   "list": 6600,
+   "event": 6300,
+   "pix": 6100,
+   "new": {
+    "id": "EVT-OLK-SCR-GEL-250",
+    "brand": "OLENKA",
+    "category": "Cachos",
+    "size": "250 g"
+   }
+  },
+  {
+   "name": "Mascara 2x1 Secret Curls 250g",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "new": {
+    "id": "EVT-OLK-SCR-MSK-250",
+    "brand": "OLENKA",
+    "category": "Cachos",
+    "size": "250 g"
+   }
+  },
+  {
+   "name": "Kit Especialidades (Sh. + Cond. 1,5L)",
+   "list": 24900,
+   "event": 23700,
+   "pix": 23200,
+   "ids": [
+    "OLK-KIT-ESP-2"
+   ]
+  },
+  {
+   "name": "Shampoo Hidratante Secret Curl 300ml",
+   "list": 5900,
+   "event": 5600,
+   "pix": 5500,
+   "new": {
+    "id": "EVT-OLK-SCR-SH-300",
+    "brand": "OLENKA",
+    "category": "Cachos",
+    "size": "300 ml"
+   }
+  },
+  {
+   "name": "Shampoo Especialidades 1,5l",
+   "list": 15900,
+   "event": 15100,
+   "pix": 14800,
+   "ids": [
+    "OLK-SH-ESP-1500"
+   ]
+  },
+  {
+   "name": "Condicionador Especialidades 1,5l",
+   "list": 15900,
+   "event": 15100,
+   "pix": 14800,
+   "ids": [
+    "OLK-COND-ESP-1.5"
+   ]
+  },
+  {
+   "name": "Coloração Mup",
+   "list": 2690,
+   "event": 2390,
+   "pix": 2290,
+   "ids": [
+    "MUP-COL-5L",
+    "MUP-COL-6L",
+    "MUP-COL-7L",
+    "MUP-COL-8L",
+    "MUP-COL-9L",
+    "MUP-COL-1",
+    "MUP-COL-3",
+    "MUP-COL-4",
+    "MUP-COL-5",
+    "MUP-COL-51",
+    "MUP-COL-53",
+    "MUP-COL-535",
+    "MUP-COL-565",
+    "MUP-COL-57",
+    "MUP-COL-571",
+    "MUP-COL-6",
+    "MUP-COL-61",
+    "MUP-COL-613",
+    "MUP-COL-63",
+    "MUP-COL-635",
+    "MUP-COL-64",
+    "MUP-COL-643",
+    "MUP-COL-646",
+    "MUP-COL-653",
+    "MUP-COL-666",
+    "MUP-COL-67",
+    "MUP-COL-671",
+    "MUP-COL-7",
+    "MUP-COL-71",
+    "MUP-COL-713",
+    "MUP-COL-72",
+    "MUP-COL-73",
+    "MUP-COL-732",
+    "MUP-COL-735",
+    "MUP-COL-74",
+    "MUP-COL-743",
+    "MUP-COL-766",
+    "MUP-COL-77",
+    "MUP-COL-771",
+    "MUP-COL-8",
+    "MUP-COL-81",
+    "MUP-COL-82",
+    "MUP-COL-83",
+    "MUP-COL-837",
+    "MUP-COL-84",
+    "MUP-COL-843",
+    "MUP-COL-871",
+    "MUP-COL-9",
+    "MUP-COL-91",
+    "MUP-COL-912",
+    "MUP-COL-913",
+    "MUP-COL-92",
+    "MUP-COL-93",
+    "MUP-COL-10",
+    "MUP-COL-907",
+    "MUP-COL-101",
+    "MUP-COL-1012",
+    "MUP-COL-1200",
+    "MUP-COL-1210",
+    "MUP-COL-1212",
+    "MUP-COL-1289",
+    "MUP-COL-M11",
+    "MUP-COL-M12",
+    "MUP-COL-M33",
+    "MUP-COL-M44",
+    "MUP-COL-M66",
+    "MUP-COL-M99",
+    "MUP-COL-6626",
+    "MUP-COL-773",
+    "MUP-COL-834",
+    "MUP-COL-1034",
+    "MUP-COL-1037"
+   ]
+  },
+  {
+   "name": "Oxidante MUP 06 VOL",
+   "list": 4250,
+   "event": 3690,
+   "pix": 3490,
+   "ids": [
+    "MC-OX-06V"
+   ]
+  },
+  {
+   "name": "Kit Men's Care (Sh. + Cond. 1,5L)",
+   "list": 22900,
+   "event": 21800,
+   "pix": 21300,
+   "ids": [
+    "OLK-KIT-MEN-1.5"
+   ]
+  },
+  {
+   "name": "Oxidante MUP 20 VOL",
+   "list": 4250,
+   "event": 3690,
+   "pix": 3490,
+   "ids": [
+    "MC-OX-20V"
+   ]
+  },
+  {
+   "name": "Shampoo Purificante Men's Care 1,5l",
+   "list": 13000,
+   "event": 12400,
+   "pix": 12100,
+   "ids": [
+    "OLK-SH-MEN-1.5"
+   ]
+  },
+  {
+   "name": "Oxidante MUP 30 VOL",
+   "list": 4250,
+   "event": 3690,
+   "pix": 3490,
+   "ids": [
+    "MC-OX-30V"
+   ]
+  },
+  {
+   "name": "Condicionador Revitalizante Men's Care 1,5l",
+   "list": 13000,
+   "event": 12400,
+   "pix": 12100,
+   "ids": [
+    "OLK-COND-MEN-1.5"
+   ]
+  },
+  {
+   "name": "Oxidante MUP 40 VOL",
+   "list": 4250,
+   "event": 3690,
+   "pix": 3490,
+   "ids": [
+    "MC-OX-40V"
+   ]
+  },
+  {
+   "name": "Balm Pré e Pós Barba 2x1 Men's Care 300ml",
+   "list": 4500,
+   "event": 4300,
+   "pix": 4200,
+   "ids": [
+    "OLK-BLM-MEN-300"
+   ]
+  },
+  {
+   "name": "Pó Descolorante MUP",
+   "list": 11000,
+   "event": 9900,
+   "pix": 8900,
+   "ids": [
+    "MUP-COL-STD-450"
+   ]
+  },
+  {
+   "name": "Óleo Hidratante 2x1 Men's Care 60ml",
+   "list": 5200,
+   "event": 4900,
+   "pix": 4800,
+   "ids": [
+    "OLK-OIL-MEN-060"
+   ]
+  },
+  {
+   "name": "Kit Cabelos Coloridos Shampoo + Condicionador",
+   "list": 8400,
+   "event": 8000,
+   "pix": 7800,
+   "ids": [
+    "MUP-KIT-COL-2"
+   ]
+  },
+  {
+   "name": "Pomada de Finalização com Brilho Men's Care 80g",
+   "list": 5200,
+   "event": 4900,
+   "pix": 4800,
+   "ids": [
+    "OLK-POM-MEN-80-01"
+   ]
+  },
+  {
+   "name": "Shampoo para Cabelos Coloridos 250ml - MUP Color",
+   "list": 5500,
+   "event": 5200,
+   "pix": 5100,
+   "ids": [
+    "MUP-SH-COL-250"
+   ]
+  },
+  {
+   "name": "Pomada de Finalização Seca Men's Care 80g",
+   "list": 5200,
+   "event": 4900,
+   "pix": 4800,
+   "ids": [
+    "OLK-POM-MEN-80-02"
+   ]
+  },
+  {
+   "name": "Cond. Cabelos Coloridos MUP 250ml",
+   "list": 5500,
+   "event": 5200,
+   "pix": 5100,
+   "ids": [
+    "MUP-COND-COL-250"
+   ]
+  },
+  {
+   "name": "Tônico Anti-Queda 2x1 Men's Care 100ml",
+   "list": 8300,
+   "event": 7900,
+   "pix": 7700,
+   "ids": [
+    "OLK-TON-MEN-100"
+   ]
+  },
+  {
+   "name": "Color Start MUP Color - 250ml",
+   "list": 7100,
+   "event": 6700,
+   "pix": 6600,
+   "ids": [
+    "MUP-PPT-CST-250"
+   ]
+  },
+  {
+   "name": "Hair Spray Extra Forte 400ml - MUP Color",
+   "list": 10900,
+   "event": 9000,
+   "pix": 7900,
+   "ids": [
+    "MUP-SH-LVT-3000"
+   ]
+  },
+  {
+   "name": "Shampoo Profissional Lavatório 3L MUP",
+   "list": 14900,
+   "event": 13900,
+   "pix": 12900,
+   "ids": [
+    "MUP-SH-TPF-3000"
+   ]
+  }
+ ]
+}
