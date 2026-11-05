@@ -171,7 +171,16 @@
       </section>`;
     }).join("");
     main.insertAdjacentHTML("afterbegin", `<section class="ev-home" id="ev-home" aria-label="Ofertas do evento ${esc(cfg.name)}">
-      <div class="ev-hero"><span>Evento ${esc(cfg.name)}</span><h1>Ofertas exclusivas para o seu salão</h1><p>No Pix ou cartão o preço fica ainda menor. Monte o pedido e envie pelo WhatsApp.</p></div>
+      <div class="ev-hero"><span>Evento ${esc(cfg.name)}</span><h1>Ofertas exclusivas para o seu salão</h1><p>No Pix ou cartão o preço fica ainda menor.</p></div>
+      <section class="ev-how" aria-labelledby="ev-how-title">
+        <h2 id="ev-how-title">Como funciona</h2>
+        <ol>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span><b>Escolha</b> os produtos</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg><span><b>Confira</b> o pedido</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.9L3 21l1.2-4.4A9 9 0 1 1 21 12Z"/></svg><span><b>Envie</b> pelo WhatsApp</span></li>
+        </ol>
+        <p>Sem cadastro e sem pagamento aqui. Nossa equipe confirma o pedido e a entrega com você.</p>
+      </section>
       <nav class="ev-tabs" aria-label="Linhas em oferta"><div>${groups.map((g, i) => `<button type="button" data-ev-tab="${i}" aria-pressed="${i === 0}">${esc(g.name)}</button>`).join("")}</div></nav>
       ${sections}
       <a class="ev-all" href="#/catalogo">Ver o catálogo completo <span aria-hidden="true">→</span></a>
