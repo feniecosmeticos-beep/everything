@@ -51,6 +51,17 @@
 .ev-review { display: grid; gap: 6px; margin-top: 6px; }
 .ev-review-pix strong { color: #1d6b3a; }
 
+.hl-discount-summary > div.ev-savings,
+.ev-savings {
+  display: grid; justify-content: stretch; align-items: start; gap: 4px; margin: 0 0 12px; padding: 12px 14px;
+  border: 1px solid #b7d8c2; border-left: 4px solid #1d6b3a; border-radius: 10px; background: #eef7f1; color: var(--ink);
+}
+.ev-savings p { margin: 0; font-size: 15px; line-height: 1.35; }
+.ev-savings p strong { color: #1d6b3a; font-size: 17px; }
+.ev-savings small { color: var(--muted); font-size: 12px; }
+.ev-savings-tag { font: 700 10px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-ink); }
+.order-dock small.ev-dock-save { display: block; color: #1d6b3a; font-weight: 700; }
+
 @media (max-width: 640px) {
   .ev-banner { font-size: 11px; padding: 8px 12px; }
   .ev-banner strong { font-size: 12px; }

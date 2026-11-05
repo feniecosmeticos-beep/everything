@@ -89,9 +89,30 @@
     if (!cfg.active || !items.some((i) => has(i.product))) return "";
     const pix = pixTotalCents(items);
     const list = listTotalCents(items);
-    return `<div class="ev-review">${pix < summary.totalCents ? `<div class="summary-total ev-review-pix"><span>No Pix ou cartão</span><strong>${brl(pix)}</strong></div>` : ""}${
-      list > pix ? `<p class="ev-save">Economia de até ${brl(list - pix)} sobre a tabela, só no evento ${cfg.name}.</p>` : ""
-    }</div>`;
+    return pix < summary.totalCents ? `<div class="ev-review"><div class="summary-total ev-review-pix"><span>No Pix ou cartão</span><strong>${brl(pix)}</strong></div></div>` : "";
+  }
+
+  function savingsOf(summary) {
+    const items = summary?.items || [];
+    if (!cfg.active || !items.some((i) => has(i.product))) return null;
+    const list = listTotalCents(items);
+    return { now: list - summary.totalCents, pix: list - pixTotalCents(items) };
+  }
+
+  function cartSavings(summary) {
+    const save = savingsOf(summary);
+    if (!save || save.pix <= 0) return "";
+    const head = save.now > 0
+      ? `Você já economizou <strong>${brl(save.now)}</strong> neste pedido`
+      : `Pague no Pix ou cartão e economize <strong>${brl(save.pix)}</strong>`;
+    const pixLine = save.now > 0 && save.pix > save.now ? `<small>No Pix ou cartão, a economia sobe para ${brl(save.pix)}.</small>` : "";
+    return `<div class="ev-savings" role="status"><span class="ev-savings-tag">Evento ${cfg.name}</span><p>${head}</p>${pixLine}</div>`;
+  }
+
+  function dockSavings(summary) {
+    const save = savingsOf(summary);
+    if (!save || save.pix <= 0) return "";
+    return `<small class="ev-dock-save">Economia de ${brl(Math.max(save.now, 0) || save.pix)}${save.now > 0 ? "" : " no Pix"}</small>`;
   }
 
   const greeting = () => (cfg.active ? `Olá! Montei meu pedido com os preços exclusivos do evento ${cfg.name}.` : "Olá! Montei um pedido pelo Catálogo Fenié PRO.");
@@ -117,5 +138,5 @@
     countdown();
   });
 
-  window.FenieEvent = { cfg, has, card, detail, ribbon, ribbonFamily, msgItem, msgTotal, reviewTotal, greeting, summaryNote };
+  window.FenieEvent = { cfg, has, card, detail, ribbon, ribbonFamily, msgItem, msgTotal, reviewTotal, cartSavings, dockSavings, greeting, summaryNote };
 })();

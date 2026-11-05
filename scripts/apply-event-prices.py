@@ -67,6 +67,10 @@ data = json.dumps(products, ensure_ascii=False, separators=(",", ":"))
 src = src[:start] + data + src[j + 1:]
 
 PATCHES = [
+    ('return `<div class="hl-discount-summary" data-combo-summary>${summary.discountCents?',
+     'return `<div class="hl-discount-summary" data-combo-summary>${globalThis.FenieEvent?globalThis.FenieEvent.cartSavings(summary):""}${summary.discountCents?'),
+    ('<small>${A.count} ${A.count===1?"unidade no pedido":"unidades no pedido"}</small><strong>${I(A.totalCents)}</strong></div>',
+     '<small>${A.count} ${A.count===1?"unidade no pedido":"unidades no pedido"}</small><strong>${I(A.totalCents)}</strong>${globalThis.FenieEvent?globalThis.FenieEvent.dockSavings(A):""}</div>'),
     ('document.querySelector(".review-banner span").textContent=',
      '(document.querySelector(".review-banner span")||{}).textContent='),
     ('<a href="#/produto/${A.slug}" class="product-link"><div class="product-visual">${O(A)}</div>',
