@@ -1,0 +1,167 @@
+/* Camada visual do catálogo — sistema gerado com a skill UI/UX Pro Max
+   Estilo: minimalista premium (escuro + dourado), tipografia Playfair Display + Inter,
+   movimento sutil. Prioridade em toque (≥44px), contraste 4.5:1 e leitura no celular. */
+
+:root {
+  --ui-ink: #0c0a09;
+  --ui-ink-2: #44403c;
+  --ui-muted: #57534e;
+  --ui-bg: #f6f3ee;
+  --ui-card: #ffffff;
+  --ui-line: #e2ddd5;
+  --ui-night: #0b1622;
+  --ui-gold: #c7a56b;
+  --ui-gold-ink: #7a5a1f;
+  --ui-good: #166534;
+  --ui-good-bg: #ecf6ef;
+  --ui-sale: #b42318;
+  --ui-r-sm: 10px;
+  --ui-r: 14px;
+  --ui-r-lg: 20px;
+  --ui-press: cubic-bezier(.2, .8, .2, 1);
+  --display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "Inter", "Segoe UI", Arial, sans-serif;
+}
+
+body { font-family: var(--sans); color: var(--ui-ink); background: var(--ui-bg); -webkit-tap-highlight-color: transparent; }
+button, input, select, textarea { font-family: inherit; }
+
+/* Foco visível e retorno ao toque */
+:where(a, button, input, select, summary, [tabindex]):focus-visible { outline: 2px solid var(--ui-gold-ink); outline-offset: 2px; }
+:where(.add-btn, .primary, .secondary, .variant-chip, .ev-tabs button, .ev-bulk button, .ev-step button, .bottom-nav a, .ev-more, .ev-send-bar button) {
+  transition: transform .12s var(--ui-press), background-color .18s ease, color .18s ease, border-color .18s ease;
+}
+:where(.add-btn, .primary, .variant-chip, .ev-tabs button, .ev-bulk button, .ev-more, .ev-send-bar button):active { transform: scale(.97); }
+
+/* Cards de produto */
+.product-card { border: 1px solid var(--ui-line); border-radius: var(--ui-r); background: var(--ui-card); box-shadow: 0 1px 2px #0c0a090a; }
+.product-card .brandline { color: var(--ui-gold-ink); font: 600 11px/1.2 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
+.product-card h3 { font: 600 15px/1.35 var(--sans); color: var(--ui-ink); letter-spacing: -.01em; }
+
+/* Preço do evento: um bloco curto, com a economia ao lado do preço de tabela */
+.price .ev-price { display: grid; gap: 2px; }
+.ev-price .ev-was { display: flex; align-items: center; gap: 6px; }
+.ev-price del { font: 400 12px/1 var(--sans); color: var(--ui-muted); }
+.ev-price .ev-off { font: 700 11px/1 var(--sans); color: #fff; background: var(--ui-sale); border-radius: 999px; padding: 3px 6px; }
+.ev-price .ev-now { font: 700 22px/1.15 var(--sans); color: var(--ui-ink); letter-spacing: -.02em; }
+.ev-price .ev-pix { font: 400 12px/1.3 var(--sans); color: var(--ui-ink-2); }
+.ev-price .ev-pix strong { color: var(--ui-good); font-weight: 700; font-size: 14px; }
+.ev-price .ev-pix-fixed small { color: var(--ui-gold-ink); font-weight: 600; font-size: 12px; }
+
+/* Botão de adicionar: ação principal sempre preenchida */
+.add-btn, .card-bottom .add-btn {
+  min-height: 48px; border-radius: 999px; border: 0; background: var(--ui-night); color: #fff;
+  font: 600 15px/1 var(--sans); display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+}
+.add-btn span[aria-hidden="true"] { color: var(--ui-gold); font-size: 18px; }
+.add-btn:hover { background: #142c3c; }
+.add-btn[disabled] { background: #d6d3d1; color: #57534e; }
+
+/* Imagem pendente: bloco de marca no lugar do aviso interno */
+.image-pending {
+  display: grid; place-content: center; gap: 4px; text-align: center; min-height: 100%;
+  background: linear-gradient(160deg, #13212e 0%, #0b1622 100%);
+}
+.image-pending .pack-mark { font: 500 22px/1.1 var(--display); color: var(--ui-gold); }
+.image-pending .pack-line { font: 500 11px/1.2 var(--sans); color: #d6d3d1; letter-spacing: .06em; text-transform: uppercase; }
+.image-pending small { display: none; }
+
+/* Vitrine do evento */
+.ev-hero { background: radial-gradient(120% 140% at 100% 0%, #1d3346 0%, var(--ui-night) 60%); border-radius: var(--ui-r-lg); }
+.ev-hero h1 { font-family: var(--display); font-weight: 500; letter-spacing: -.01em; }
+.ev-hero p { color: #e7e5e4; }
+.ev-tabs button { font: 600 14px/1 var(--sans); min-height: 44px; border-color: var(--ui-line); background: var(--ui-card); }
+.ev-tabs button[aria-pressed="true"] { background: var(--ui-night); border-color: var(--ui-night); color: var(--ui-gold); }
+.ev-sec-head h2 { font-family: var(--display); font-weight: 500; }
+.ev-more { border-style: solid; border-color: var(--ui-line); background: var(--ui-card); color: var(--ui-ink); }
+
+.ev-from-off { display: inline-block; margin-left: 8px; vertical-align: middle; font: 700 11px/1 var(--sans); color: #fff; background: var(--ui-sale); border-radius: 999px; padding: 4px 7px; letter-spacing: 0; }
+
+/* Detalhe: esconde avisos internos de cadastro e destaca o preço */
+.detail-specs dl > div:nth-child(2), .detail-visual .product-photo small { display: none; }
+.product-editorial:not(:has(details)), .main .notice { display: none; }
+
+@media (max-width: 760px) {
+  .main { padding-inline: 16px; }
+
+  /* Faixa e cabeçalho mais baixos */
+  .ev-banner { padding: 6px 12px; min-height: 40px; }
+  .header-inner { padding-block: 8px; }
+
+  /* Card em lista: foto quadrada, informação à direita, ação abaixo */
+  body .results-section .product-grid:not(.featured-grid) { gap: 12px; }
+  body .results-section .product-card { border-radius: var(--ui-r); }
+  body .results-section .product-link { grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: start; padding: 14px 14px 10px; }
+  body .results-section .product-visual { width: 96px; height: 96px; border-radius: var(--ui-r-sm); border: 0; background: #f5f5f4; }
+  body .results-section .product-photo { padding: 6px; height: 100%; }
+  body .results-section .product-photo img { width: 100%; height: 100%; object-fit: contain; }
+  body .results-section .product-photo small,
+  body .results-section .product-identity { display: none; }
+  body .results-section .image-pending { padding: 8px; }
+  body .results-section .image-pending .pack-mark { font-size: 15px; }
+  body .results-section .image-pending .pack-line { font-size: 9px; }
+  body .results-section .brandline { margin-bottom: 4px; }
+  body .results-section .product-info h3 {
+    font-size: 15px; line-height: 1.35; margin: 0 0 8px;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  body .results-section .price { margin-top: 0; font-size: 20px; }
+  body .results-section .card-bottom { padding: 0 14px 14px; display: grid; gap: 8px; }
+  .results-section .ev-ribbon { display: none; }
+  .product-card.ev-in-cart { box-shadow: 0 0 0 2px var(--ui-good) inset; border-color: var(--ui-good); }
+
+  /* Tonalidades e volumes em uma linha deslizante */
+  .results-section .variant-chips { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -14px; padding: 2px 14px 4px; scroll-snap-type: x proximity; }
+  .results-section .variant-chips::-webkit-scrollbar { display: none; }
+  .results-section .variant-chip { flex: 0 0 auto; min-height: 44px; padding: 10px 14px; border-radius: 999px; font-size: 14px; white-space: nowrap; scroll-snap-align: start; }
+  .variant-chip[aria-pressed="true"] { background: var(--ui-night); color: var(--ui-gold); border-color: var(--ui-night); }
+  .results-section .variant-label { margin-bottom: 6px; }
+
+  /* Vitrine */
+  .ev-hero { padding: 18px 18px 20px; }
+  .ev-hero h1 { font-size: 26px; line-height: 1.15; }
+  .ev-tabs { padding-block: 8px; }
+  .ev-sec { padding-top: 22px; }
+  .ev-sec-head { margin-bottom: 10px; }
+  .ev-sec-head h2 { font-size: 24px; }
+
+  /* Seletor de quantidade e atalhos */
+  .ev-step { min-height: 48px; background: var(--ui-good); }
+  .ev-step button { color: #fff; }
+  .ev-step output::after { content: " no pedido"; color: #d1fadf; }
+  .ev-bulk button { min-height: 44px; font-size: 14px; border-color: var(--ui-line); background: #fff; color: var(--ui-ink); }
+
+  /* Barra do pedido: uma linha compacta, encostada no menu inferior */
+  body.has-order #orderDock:not([hidden]) {
+    left: 8px; right: 8px; bottom: calc(64px + env(safe-area-inset-bottom)); padding: 8px 8px 8px 14px; min-height: 64px; border-radius: var(--ui-r);
+    background: var(--ui-night);
+  }
+  body.has-order #orderDock > div { display: grid; grid-template-columns: auto auto; column-gap: 8px; align-items: baseline; min-width: 0; }
+  body.has-order #orderDock > div > small:first-child { grid-column: 1 / -1; order: 2; font-size: 11px; color: #d6d3d1; }
+  body.has-order #orderDock strong { font-size: 19px; order: 1; }
+  body.has-order #orderDock small.ev-dock-save { order: 3; grid-column: 1 / -1; font-size: 12px; color: #86efac; }
+  body.has-order #orderDock .primary { min-height: 48px; padding: 0 18px; font-size: 15px; }
+  body.has-order[data-ev-route="produto"] #orderDock:not([hidden]) { display: none !important; }
+
+  /* Detalhe do produto: compra fixa no rodapé */
+  body[data-ev-route="produto"] .purchase-row {
+    position: sticky; bottom: calc(64px + env(safe-area-inset-bottom)); z-index: 20; margin-inline: -16px; padding: 10px 16px;
+    background: #fffffff2; border-top: 1px solid var(--ui-line); box-shadow: 0 -6px 18px #0c0a0912;
+  }
+  body[data-ev-route="produto"] .purchase-row .primary { min-height: 48px; border-radius: 999px; }
+  .detail-price.ev-detail { border-radius: var(--ui-r); }
+  .ev-detail-row strong { font-family: var(--sans); font-weight: 700; }
+
+  /* Menu inferior */
+  .bottom-nav { box-shadow: 0 -4px 16px #0c0a090d; }
+  .bottom-nav a { font-size: 11px; font-weight: 500; }
+  .bottom-nav a[aria-current="page"] { color: var(--ui-gold-ink); background: #f3ead9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+@media (max-width: 760px) {
+  .ev-detail .ev-tag { font-size: 10px; line-height: 1.35; white-space: normal; }
+}

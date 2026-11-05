@@ -95,7 +95,7 @@ PATCHES = [
     ('<a href="#/produto/${e.slug}" class="product-link"><div class="product-visual">${O(e)}</div>',
      '<a href="#/produto/${e.slug}" class="product-link"><div class="product-visual">${O(e)}${globalThis.FenieEvent?globalThis.FenieEvent.ribbonFamily(A.products):""}</div>'),
     ('<div class="price">${a?I(a.priceCents):`<small>A partir de</small> ${I(iA(A,dA[`${o}:${i.id}`]))}`}</div>',
-     '<div class="price">${a?(globalThis.FenieEvent?globalThis.FenieEvent.card(a):I(a.priceCents)):`<small>A partir de</small> ${I(iA(A,dA[`${o}:${i.id}`]))}`}</div>'),
+     '<div class="price">${a?(globalThis.FenieEvent?globalThis.FenieEvent.card(a):I(a.priceCents)):`<small>A partir de</small> ${I(iA(A,dA[`${o}:${i.id}`]))}${globalThis.FenieEvent?globalThis.FenieEvent.fromBadge(A.products):""}`}</div>'),
     ('<div class="detail-price">${I(o.priceCents)}<small>por unidade de venda \\xB7 tabela padr\\xE3o Mercos</small></div>',
      '${globalThis.FenieEvent?globalThis.FenieEvent.detail(o):`<div class="detail-price">${I(o.priceCents)}<small>por unidade de venda \\xB7 tabela padr\\xE3o Mercos</small></div>`}'),
     ('`Unit\\xE1rio: ${I(g.priceCents)}`,',

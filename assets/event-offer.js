@@ -29,13 +29,21 @@
     return `<span class="ev-ribbon"><b><span class="ev-long">Exclusivo do evento</span><span class="ev-short">Evento</span></b>${off > 0 ? `<i><span class="ev-upto">até </span>-${off}%</i>` : ""}</span>`;
   }
 
+  function fromBadge(products) {
+    const offers = (products || []).filter(has);
+    if (!offers.length) return "";
+    const off = Math.max(...offers.map(pct));
+    return off > 0 ? `<b class="ev-from-off">até -${off}% no evento</b>` : "";
+  }
+
   function card(p) {
     if (!has(p)) return brl(p.priceCents);
     const pix = pixOf(p);
     const pixLine = isCombo(p)
       ? `<span class="ev-pix ev-pix-fixed"><small>Preço único em qualquer pagamento</small></span>`
-      : pix < p.priceCents ? `<span class="ev-pix">${brl(pix)} <small>no Pix ou cartão</small></span>` : "";
-    return `<span class="ev-price"><del>De ${brl(p.eventListCents)}</del><span class="ev-now">${brl(p.priceCents)}</span>${pixLine}</span>`;
+      : pix < p.priceCents ? `<span class="ev-pix"><strong>${brl(pix)}</strong> <small>no Pix ou cartão</small></span>` : "";
+    const off = pct(p);
+    return `<span class="ev-price"><span class="ev-was"><del>${brl(p.eventListCents)}</del>${off > 0 ? `<b class="ev-off">-${off}%</b>` : ""}</span><span class="ev-now">${brl(p.priceCents)}</span>${pixLine}</span>`;
   }
 
   function detail(p) {
@@ -275,7 +283,13 @@
     }
   }
 
+  function syncRoute() {
+    const route = (location.hash.replace(/^#/, "").split("?")[0] || "/").split("/")[1] || "inicio";
+    document.body.dataset.evRoute = route;
+  }
+
   function onCart(summary) {
+    syncRoute();
     syncSendBar();
     document.querySelectorAll("#view .ev-qty").forEach((box) => syncBox(box, box.parentElement.querySelector("button.add-btn")));
     const count = summary?.count ?? 0;
@@ -353,8 +367,9 @@
     const view = document.querySelector("#view");
     if (view && "MutationObserver" in window) new MutationObserver(scheduleDecorate).observe(view, { childList: true, subtree: true });
     window.addEventListener("resize", measureSticky, { passive: true });
-    window.addEventListener("hashchange", () => setTimeout(syncSendBar, 50));
+    window.addEventListener("hashchange", () => { syncRoute(); setTimeout(syncSendBar, 50); });
+    syncRoute();
   });
 
-  window.FenieEvent = { cfg, has, card, detail, ribbon, ribbonFamily, msgItem, msgTotal, reviewTotal, cartSavings, dockSavings, greeting, summaryNote, bridge, home, onCart, added };
+  window.FenieEvent = { cfg, has, card, detail, ribbon, ribbonFamily, msgItem, msgTotal, reviewTotal, cartSavings, dockSavings, greeting, summaryNote, fromBadge, bridge, home, onCart, added };
 })();
