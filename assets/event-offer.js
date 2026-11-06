@@ -15,6 +15,41 @@
   const pixOf = (p) => (has(p) && Number.isSafeInteger(p.eventPixCents) ? p.eventPixCents : p.priceCents);
   const pct = (p) => Math.round((1 - pixOf(p) / p.eventListCents) * 100);
   const isCombo = (p) => p.category === "Combos do evento";
+  const isPerceived = (p) => has(p) && p.eventReferenceType === "perceived";
+  const discountedPayment = (method) => ["pix", "credito", "debito"].includes(method);
+
+  function paymentQuote(summary, method = "combinar") {
+    const items = (summary.items || []).map((item) => {
+      const unitPriceCents = discountedPayment(method) ? pixOf(item.product) : item.product.priceCents;
+      return { ...item, unitPriceCents, subtotalCents: Math.max(0, unitPriceCents * item.quantity - (item.discountCents || 0)) };
+    });
+    return { ...summary, items, totalCents: items.reduce((sum, item) => sum + item.subtotalCents, 0), paymentMethod: method };
+  }
+
+  function paymentTotalLabel(method) {
+    const labels = { pix: "Total no Pix", credito: "Total no cartão de crédito", debito: "Total no cartão de débito", "boleto-avista": "Total no boleto à vista", "boleto-parcelado": "Total no boleto parcelado" };
+    return Object.hasOwn(labels, method) ? labels[method] : "Total dos produtos";
+  }
+
+  function reviewTotals(summary, method) {
+    return `${cartSavings(summary)}<div class="summary-total review-payable" aria-live="polite"><span>${paymentTotalLabel(method)}</span><strong>${brl(summary.totalCents)}</strong></div><p class="review-total-note">${method === "combinar" ? "Escolha o pagamento para conferir o valor final dos produtos." : "Valor dos produtos para a forma de pagamento selecionada."} Frete e disponibilidade confirmados pelo atendimento.</p>`;
+  }
+
+  function syncReview(summary, method) {
+    syncSendBar();
+    const bar = document.querySelector("#evSendBar");
+    const value = bar?.querySelector("[data-review-payable]");
+    const label = bar?.querySelector("[data-review-payment-label]");
+    if (value) value.textContent = brl(summary.totalCents);
+    if (label) label.textContent = paymentTotalLabel(method);
+  }
+
+  function comboPreview(p) {
+    const items = isCombo(p) ? p.eventIncludes : p.kitIncludes;
+    if (!items?.length) return "";
+    const list = items.map((item) => item.replace(/\([^)]*\)/g, "").trim());
+    return `<p class="ev-combo-preview">${list.map(esc).join(" + ")}</p>${p.eventGifts?.length ? `<p class="ev-combo-gift-preview">Brinde: ${esc(p.eventGifts[0])}${p.eventGifts.length > 1 ? ` + ${p.eventGifts.length - 1} ${p.eventGifts.length === 2 ? "outro" : "outros"}` : ""}</p>` : ""}`;
+  }
 
   function ribbon(p) {
     if (!has(p)) return "";
@@ -36,7 +71,7 @@
     const pixLine = isCombo(p)
       ? `<span class="ev-pix ev-pix-fixed"><small>Preço único em qualquer pagamento</small></span>${gifts}`
       : pix < p.priceCents ? `<span class="ev-pix">${brl(pix)} <small>no Pix ou cartão</small></span>` : "";
-    return `<span class="ev-price"><del>De ${brl(p.eventListCents)}</del><span class="ev-now">${brl(p.priceCents)}</span>${pixLine}</span>`;
+    return `<span class="ev-price"><del>${isPerceived(p) ? "Valor percebido" : "De"} ${brl(p.eventListCents)}</del><span class="ev-now">${brl(p.priceCents)}</span>${pixLine}</span>`;
   }
 
   function detail(p) {
@@ -45,11 +80,11 @@
     const save = p.eventListCents - pix;
     return `<div class="detail-price ev-detail">
       <span class="ev-tag">Preço exclusivo · Evento ${cfg.name}</span>
-      <del>Preço de tabela ${brl(p.eventListCents)}</del>
+      <del>${isPerceived(p) ? "Valor percebido" : "Preço de tabela"} ${brl(p.eventListCents)}</del>
       <div class="ev-detail-row"><div><small>Preço do evento</small><strong>${brl(p.priceCents)}</strong></div>${
         !isCombo(p) && pix < p.priceCents ? `<div class="ev-detail-pix"><small>No Pix ou cartão</small><strong>${brl(pix)}</strong></div>` : ""
       }</div>
-      ${save > 0 ? `<p class="ev-save">Você economiza ${brl(save)} por unidade${pct(p) > 0 ? ` (${pct(p)}% abaixo da tabela)` : ""}.</p>` : ""}
+      ${save > 0 ? `<p class="ev-save">Você economiza ${brl(save)} por unidade${pct(p) > 0 ? ` (${pct(p)}% abaixo ${isPerceived(p) ? "do valor percebido" : "da tabela"})` : ""}.</p>` : ""}
       <p class="ev-terms">${isCombo(p) ? "Combo com preço fixo, válido em qualquer forma de pagamento." : "Condição válida apenas para pedidos do evento. Fora dele, vale a tabela regular."}</p>
     </div>${comboDetail(p)}`;
   }
@@ -63,23 +98,21 @@
       <h2>${label}</h2><ul class="ev-combo-items">${list(items)}</ul>
       ${p.eventGifts?.length ? `<div class="ev-combo-gifts"><h3>Brindes inclusos</h3><ul>${list(p.eventGifts)}</ul></div>` : ""}
       ${p.eventNote ? `<p class="ev-combo-note">${esc(p.eventNote)}</p>` : ""}
-      ${p.eventArt ? `<details class="ev-combo-art-box"><summary>Ver a arte do combo</summary><img class="ev-combo-art" src="${esc(p.eventArt)}" alt="Arte do ${esc(p.name)} com produtos, brindes e preço" loading="lazy" decoding="async" width="900" height="1125"></details>` : ""}
+      ${p.eventArt && !isPerceived(p) ? `<details class="ev-combo-art-box"><summary>Ver a arte do combo</summary><img class="ev-combo-art" src="${esc(p.eventArt)}" alt="Arte do ${esc(p.name)} com produtos, brindes e preço" loading="lazy" decoding="async" width="900" height="1125"></details>` : ""}
     </section>`;
   }
 
   function msgItem(p) {
     if (!has(p)) return p.kitIncludes?.length ? [`Composição do kit: ${p.kitIncludes.join("; ")}`] : [];
-    const lines = [`Tabela: ${brl(p.eventListCents)} · preço do evento ${cfg.name}`];
+    const lines = [`${isPerceived(p) ? "Valor percebido" : "Tabela"}: ${brl(p.eventListCents)} · preço do evento ${cfg.name}`];
     if (isCombo(p) && p.eventGifts?.length) lines.push(`Brindes: ${p.eventGifts.join(", ")}`);
-    if (!isCombo(p) && pixOf(p) < p.priceCents) lines.push(`No Pix/cartão: ${brl(pixOf(p))}`);
     return lines;
   }
 
   function pixTotalCents(items) {
-    return (items || []).reduce((sum, { product, quantity, subtotalCents }) => {
+    return (items || []).reduce((sum, { product, quantity, subtotalCents, discountCents = 0 }) => {
       if (!has(product)) return sum + subtotalCents;
-      const discount = product.priceCents * quantity - subtotalCents;
-      return sum + pixOf(product) * quantity - discount;
+      return sum + Math.max(0, pixOf(product) * quantity - discountCents);
     }, 0);
   }
 
@@ -93,9 +126,8 @@
     const pix = pixTotalCents(items);
     const list = listTotalCents(items);
     const lines = [];
-    if (pix < total) lines.push(`Total no Pix/cartão: ${brl(pix)}`);
-    const best = ["pix", "credito", "debito"].includes(method) ? pix : total;
-    if (list > best) lines.push(`Economia sobre a tabela: ${brl(list - best)}`);
+    const best = discountedPayment(method) ? pix : total;
+    if (list > best) lines.push(`Economia sobre ${items.some((i) => isPerceived(i.product)) ? "os valores de referência" : "a tabela"}: ${brl(list - best)}`);
     return lines;
   }
 
@@ -295,21 +327,15 @@
   }
 
   /* Na revisão, o botão do WhatsApp fica sempre ao alcance do polegar */
-  let sendObserver = null;
   function syncSendBar() {
     let bar = document.getElementById("evSendBar");
     const onReview = location.hash === "#/resumo" && !!document.querySelector("#whatsappOrder");
-    if (!onReview) { if (bar) bar.hidden = true; sendObserver?.disconnect(); return; }
+    if (!onReview) { if (bar) bar.hidden = true; return; }
     if (!bar) {
-      document.body.insertAdjacentHTML("beforeend", '<div id="evSendBar" class="ev-send-bar" hidden><button type="button" data-ev-send>Enviar pedido pelo WhatsApp <span aria-hidden="true">→</span></button></div>');
+      document.body.insertAdjacentHTML("beforeend", '<div id="evSendBar" class="ev-send-bar" hidden><div class="ev-send-total"><small data-review-payment-label>Total dos produtos</small><strong data-review-payable></strong></div><button type="button" data-ev-send>Enviar pelo WhatsApp <span aria-hidden="true">→</span></button></div>');
       bar = document.getElementById("evSendBar");
     }
     bar.hidden = false;
-    sendObserver?.disconnect();
-    if ("IntersectionObserver" in window) {
-      sendObserver = new IntersectionObserver(([entry]) => { bar.classList.toggle("ev-send-hide", entry.isIntersecting); });
-      sendObserver.observe(document.querySelector("#whatsappOrder"));
-    }
   }
 
   function onCart(summary) {
@@ -408,5 +434,5 @@
     window.addEventListener("hashchange", () => setTimeout(syncSendBar, 50));
   });
 
-  window.FenieEvent = { cfg, has, card, detail, ribbon, ribbonFamily, msgItem, msgTotal, reviewTotal, cartSavings, dockSavings, greeting, summaryNote, bridge, home, onCart, added };
+  window.FenieEvent = { cfg, has, card, detail, ribbon, ribbonFamily, msgItem, msgTotal, reviewTotal, cartSavings, dockSavings, greeting, summaryNote, bridge, home, onCart, added, paymentQuote, paymentTotalLabel, reviewTotals, syncReview, comboPreview };
 })();

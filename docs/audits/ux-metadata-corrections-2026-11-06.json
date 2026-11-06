@@ -1,0 +1,36 @@
+{
+  "reviewedAt": "2026-11-06",
+  "policy": "Medidas explícitas no nome comercial; códigos de tonalidade não são litros. Nenhuma embalagem desconhecida foi presumida.",
+  "corrections": [
+    {
+      "sku": "MUP-COL-5L",
+      "before": "5 L",
+      "after": "Embalagem a confirmar",
+      "source": "Coloração 5L - Castanho Claro Luminoso"
+    },
+    {
+      "sku": "MUP-COL-6L",
+      "before": "6 L",
+      "after": "Embalagem a confirmar",
+      "source": "Coloração 6L - Louro Escuro Luminoso"
+    },
+    {
+      "sku": "MUP-COL-7L",
+      "before": "7 L",
+      "after": "Embalagem a confirmar",
+      "source": "Coloração 7L - Louro Médio Luminoso"
+    },
+    {
+      "sku": "MUP-COL-8L",
+      "before": "8 L",
+      "after": "Embalagem a confirmar",
+      "source": "Coloração 8L - Louro Claro Luminoso"
+    },
+    {
+      "sku": "MUP-COL-9L",
+      "before": "9 L",
+      "after": "Embalagem a confirmar",
+      "source": "Coloração 9L - Louro Muito Claro Luminoso"
+    }
+  ]
+}
