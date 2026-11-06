@@ -10,7 +10,9 @@ import unicodedata
 import openpyxl
 
 ROOT=Path(__file__).resolve().parents[1]
-BRANDS={'MUP COLOR','MUP MAKEUP','OLENKA','GLYNETT','SPA DO FIO','PROHALL','RIGOLIM','DOHA'}
+BRANDS={'MUP COLOR','MUP MAKEUP','OLENKA','GLYNETT','SPA DO FIO','PROHALL','RIGOLIM','DOHA','PAPEL PARA MECHAS'}
+# Marca confirmada pela Fenié; o Mercos antigo deixou estes itens sem marca.
+CONFIRMED_SOURCE_BRANDS={'PAPEL PARA MECHAS'}
 spec=importlib.util.spec_from_file_location('sales_import',ROOT/'scripts/import-sales.py')
 sales_import=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sales_import)
@@ -31,12 +33,17 @@ def decode_js_string(value):
         return mapping.get(token,token)
     return re.sub(r'\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|.)',decode,value)
 
-def catalogue_names():
+def catalogue_products():
     app=(ROOT/'assets/catalogue.js').read_text(encoding='utf-8')
-    block=app[app.index('uo={'):app.index(',lo={')]
+    start=app.index('"products":[')+len('"products":')
+    products,_=json.JSONDecoder().raw_decode(app[start:])
+    return products
+
+
+def catalogue_names(products):
     result=defaultdict(list)
-    for match in re.finditer(r'\{id:"((?:\\.|[^"\\])*)",sku:"((?:\\.|[^"\\])*)",slug:"((?:\\.|[^"\\])*)",name:"((?:\\.|[^"\\])*)"',block):
-        result[normalized(decode_js_string(match.group(4)))].append(decode_js_string(match.group(2)))
+    for product in products:
+        result[normalized(product['name'])].append(product['sku'])
     if not result:
         raise ValueError('não foi possível ler os nomes comerciais do catálogo')
     return result
@@ -45,13 +52,22 @@ def public_brand(value):
     brand=str(value).strip().upper().replace('•','')
     return brand if brand in BRANDS else None
 
+
+def report_brand(raw_brand,product=None):
+    if product and product.get('sourceGroup') in CONFIRMED_SOURCE_BRANDS:
+        return product['sourceGroup']
+    return str(raw_brand).strip()
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('report',type=Path)
     args=parser.parse_args()
     workbook=openpyxl.load_workbook(args.report,data_only=True,read_only=True)
-    summary=list(workbook['Resumo'].values)
-    products=list(workbook['Produtos'].values)
+    try:
+        summary=list(workbook['Resumo'].values)
+        products=list(workbook['Produtos'].values)
+    finally:
+        workbook.close()
     period_text=next(row[1] for row in summary if row and row[0]=='Período')
     period_match=re.fullmatch(r'(\d{2}/\d{2}/\d{4}) a (\d{2}/\d{2}/\d{4})',period_text)
     if not period_match:
@@ -60,10 +76,13 @@ def main():
     if from_date>to_date or from_date.strftime('%Y-%m')!=to_date.strftime('%Y-%m'):
         raise ValueError('use um relatório de um único mês')
     header=next(index for index,row in enumerate(products) if row[0]=='Posição' and row[1]=='Produto' and row[3]=='Quantidade vendida')
-    names=catalogue_names()
+    catalogue=catalogue_products()
+    names=catalogue_names(catalogue)
+    by_sku={product['sku']:product for product in catalogue}
     rows=[]
     unmatched=[]
     all_brand_units=defaultdict(int)
+    brand_allocations=defaultdict(lambda:defaultdict(int))
     report_total=0
     seen=set()
     for row in products[header+1:]:
@@ -80,8 +99,10 @@ def main():
         report_total+=quantity
         all_brand_units[str(row[2]).strip()]+=quantity
         matches=names[normalized(name)]
+        brand=report_brand(row[2],by_sku[matches[0]] if len(matches)==1 else None)
+        brand_allocations[str(row[2]).strip()][brand]+=quantity
         if len(matches)==1:
-            rows.append({'sku':matches[0],'units':quantity,'sourceRank':int(row[0]),'brand':public_brand(row[2])})
+            rows.append({'sku':matches[0],'units':quantity,'sourceRank':int(row[0]),'brand':public_brand(brand)})
         else:
             unmatched.append({'product':name,'brand':str(row[2]).strip(),'units':quantity,'sourceRank':int(row[0])})
     total_cell=next(row[1] for row in summary if row and row[0]=='Quantidade vendida')
@@ -97,16 +118,21 @@ def main():
             continue
         if all_brand_units[str(row[0]).strip()]!=row[1]:
             raise ValueError(f'quantidade da marca {row[0]} não reconcilia')
-        brand=public_brand(row[0])
-        if brand:
-            brands.append({'brand':brand,'units':int(row[1])})
-        raw=str(row[0]).strip()
-        key='MUP' if raw in {'MUP COLOR','MUP MAKEUP'} else 'SEM-MARCA' if raw=='Não informada' else 'CURSOS' if raw=='Não se aplica (curso)' else brand or raw.upper()
-        label='MUP' if key=='MUP' else 'Sem marca informada' if key=='SEM-MARCA' else 'Cursos' if key=='CURSOS' else key
-        if key not in classifications:
-            classifications[key]={'brand':key,'label':label,'units':0,'sourceOrder':len(classifications),'members':[]}
-        classifications[key]['units']+=int(row[1])
-        classifications[key]['members'].append(raw)
+        for raw,units in brand_allocations[str(row[0]).strip()].items():
+            brand=public_brand(raw)
+            if brand:
+                existing=next((item for item in brands if item['brand']==brand),None)
+                if existing:
+                    existing['units']+=units
+                else:
+                    brands.append({'brand':brand,'units':units})
+            key='MUP' if raw in {'MUP COLOR','MUP MAKEUP'} else 'SEM-MARCA' if raw=='Não informada' else 'CURSOS' if raw=='Não se aplica (curso)' else brand or raw.upper()
+            label='MUP' if key=='MUP' else 'Sem marca informada' if key=='SEM-MARCA' else 'Cursos' if key=='CURSOS' else 'Papel para Mechas' if key=='PAPEL PARA MECHAS' else key
+            if key not in classifications:
+                classifications[key]={'brand':key,'label':label,'units':0,'sourceOrder':len(classifications),'members':[]}
+            classifications[key]['units']+=units
+            if raw not in classifications[key]['members']:
+                classifications[key]['members'].append(raw)
     full_ranking=sorted(classifications.values(),key=lambda item:(-item['units'],item['sourceOrder']))
     if sum(item['units'] for item in full_ranking)!=report_total:
         raise ValueError('ranking consolidado não reconcilia com todas as vendas do relatório')

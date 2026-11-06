@@ -27,13 +27,13 @@ A economia é arredondada em centavos por combo e distribuída proporcionalmente
 ## Mais pedidos e ranking por marca
 
 - **Mais pedidos:** vitrine baseada na quantidade vendida, conforme escolha do usuário. As variantes da mesma linha ficam em um cartão com escolha de tamanho ou tonalidade; a lista completa é apresentada em lotes de 12 cartões pelo botão “Mostrar mais produtos”. Não há contagem de pedidos no relatório, e nenhuma é inferida.
-- **Mais vendidos:** ranking por marca, conforme orientação do usuário para evitar posições separadas para cada tonalidade. Cada marca reúne todas as suas linhas e colorações. Os oito totais vêm do resumo por marca do relatório.
+- **Mais vendidos:** ranking completo por marca ou classificação, sem posições separadas para cada tonalidade. MUP reúne Color e Makeup. Os totais são reconciliados com todas as vendas do relatório.
 
 Na vitrine, os volumes são agrupados pelas famílias já cadastradas no catálogo. Empates são ordenados pelo nome. Fotos, embalagem e preço atual permitem abrir a ficha ou adicionar uma unidade ao pedido. No ranking, os logos estão centralizados e há acesso ao catálogo de cada marca. A origem e o intervalo dos dados aparecem abaixo das áreas. Os preços do catálogo não são apresentados como faturamento histórico.
 
 O relatório recebido cobre 01/10/2026 a 14/10/2026. Foram conferidos 260 itens e 1.741 unidades; 250 nomes têm correspondência única com os SKUs do catálogo, somando 1.724 unidades. As dez linhas sem correspondência (17 unidades) estão registradas em `docs/ranking-sem-correspondencia.json` e aparecem na vitrine sem preço ou botão de compra, identificadas para consulta. Os totais por marca são independentes desse cruzamento e foram reconciliados com a aba Produtos.
 
-O ranking inclui somente as oito marcas presentes na vitrine de marcas do catálogo, somando 1.656 unidades: MUP Color 1.191, Olenka 239, Glynett 62, MUP Makeup 59, Spa do Fio 40, Prohall 32, Rigolim 27 e Doha 6. Marcas adicionais do relatório, cursos e itens sem identificação ficam fora dessa lista. MUP Color e MUP Makeup continuam separadas, como no catálogo. As identificações de marca seguem o relatório, que registra inferências de linha para duas unidades Olenka e uma Prohall.
+O ranking inclui 12 classificações e todas as 1.741 unidades: MUP 1.250, Olenka 239, Glynett 62, Papel para Mechas 51, Spa do Fio 40, Prohall 32, Rigolim 27, Vabene 14, Sem marca informada 13, Cursos 6, Doha 6 e Cromaire 1. Empates preservam a ordem do relatório. Em 05/11/2026, a Fenié confirmou Papel para Mechas como marca e forneceu sua logo. Os 12 produtos do grupo receberam essa identificação; sete deles somam 51 unidades no relatório, anteriormente incluídas nas 64 unidades sem marca. A correção preserva o total histórico e as correspondências por SKU. O importador mantém essa identificação confirmada nas próximas leituras do relatório.
 
 ## Preparar as vendas
 
