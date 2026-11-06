@@ -1,0 +1,22 @@
+{
+  "checkedAt": "2026-10-19T17:45:59.344Z",
+  "testsPassed": 11,
+  "publicUrl": "https://fenie-portal.vercel.app/",
+  "deploymentId": "dpl_FawWU6x85mvQKQAC8GTxpBohSvA7",
+  "assets": [
+    {
+      "file": "index.html",
+      "status": 200,
+      "matchesLocal": true
+    },
+    {
+      "file": "app.js",
+      "status": 200,
+      "matchesLocal": true
+    }
+  ],
+  "clientTestRemainsPending": true,
+  "noUserRolesChanged": true,
+  "firstAdminSignupPending": true,
+  "browserSignedInApprovalTest": "pending human login"
+}

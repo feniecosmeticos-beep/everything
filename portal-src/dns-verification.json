@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-19",
+  "domain": "auth.feniecosmeticos.com.br",
+  "provider": "Resend",
+  "region": "sa-east-1",
+  "nameservers": [
+    "ns902.hostgator.com.br",
+    "ns903.hostgator.com.br"
+  ],
+  "records": [
+    {
+      "type": "TXT",
+      "name": "resend._domainkey.auth.feniecosmeticos.com.br",
+      "value": "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCw4SJJ7NzOz6KU/fL6fY4eDsSwgVAlXIe3kVxl7O0t3Zyk3U9/mWArXsVFSRikoNqcF1C3Nh0tsLmBqDtPwGmkzlTXcq7UcNf3+9zs0lciqJSSy1LBB4oeyiBCmM/68rzJnB7MZ5IBmvPCqA9p0FclDSSiHUxFVwzR2Ioe0b7qLwIDAQAB",
+      "ttl": 14400
+    },
+    {
+      "type": "MX",
+      "name": "send.auth.feniecosmeticos.com.br",
+      "priority": 10,
+      "value": "feedback-smtp.sa-east-1.amazonses.com",
+      "ttl": 14400
+    },
+    {
+      "type": "TXT",
+      "name": "send.auth.feniecosmeticos.com.br",
+      "value": "v=spf1 include:amazonses.com ~all",
+      "ttl": 14400
+    }
+  ],
+  "authoritativeDNS": "all three records found",
+  "resendStatus": "verified",
+  "rootMX": [
+    {
+      "exchange": "mail.feniecosmeticos.com.br",
+      "priority": 0,
+      "type": "MX"
+    }
+  ]
+}

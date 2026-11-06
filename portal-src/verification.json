@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-19",
+  "supabaseProject": "gxqhblahdqkhiuiocyqc",
+  "catalogue": {
+    "products": 488,
+    "options": 712
+  },
+  "tests": {
+    "uiForms": "5 passed",
+    "rls": "passed (fixtures rolled back)",
+    "initialAdminVerification": "passed (fixture rolled back)",
+    "anonymousProfilesHTTP": 401,
+    "anonymousOrdersHTTP": 401,
+    "privateSchemaHTTP": 406,
+    "securityAdvisors": []
+  },
+  "productionChanged": false,
+  "fullLiveAuthFlow": "Pending administrator signup, e-mail delivery and confirmation; no real password created by agent."
+}

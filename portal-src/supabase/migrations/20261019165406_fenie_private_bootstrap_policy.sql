@@ -1,0 +1,1 @@
+create policy initial_admin_deny on fenie_private.initial_admin for all to authenticated using(false) with check(false); comment on table fenie_private.initial_admin is 'Single-use bootstrap allowlist; no API or authenticated table grants. Only trusted authentication triggers consume entries after verified email.';

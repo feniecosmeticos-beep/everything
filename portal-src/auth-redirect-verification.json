@@ -1,0 +1,23 @@
+{
+  "checkedAt": "2026-10-19T17:35:28.459Z",
+  "publicUrl": "https://fenie-portal.vercel.app/",
+  "deploymentId": "dpl_CGBLfUQGh3TbJ2vtmaUgSKuRr7N9",
+  "projectId": "prj_x9viwDxrFO2Yw4Vy9FtRllUvBWHU",
+  "publicWithoutVercelLogin": true,
+  "testsPassed": 9,
+  "existingTestAccountEmailConfirmed": true,
+  "existingTestAccountStatus": "pending",
+  "firstAdminRegistered": false,
+  "liveNewEmailCallbackTest": "pending user test",
+  "fix": "Public stable origin and token_hash email confirmation independent of original browser",
+  "publicFilesMatchLocal": [
+    "index.html",
+    "app.js",
+    "styles.css",
+    "data.js"
+  ],
+  "browserConfirmationPage": true,
+  "tokenRemovedBeforeRendering": true,
+  "realApiRejectsDummyOtpAndShowsRecovery": true,
+  "supabaseSiteUrlSaved": "https://fenie-portal.vercel.app/"
+}
