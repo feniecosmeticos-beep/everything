@@ -10,7 +10,7 @@
  "rows": [
   {
    "name": "01 ALISAMENTO",
-   "list": 135300,
+   "list": 151300,
    "event": 120900,
    "pix": 120900,
    "new": {
@@ -33,7 +33,8 @@
      "1 Pincel"
     ]
    },
-   "section": "Combos do evento"
+   "section": "Combos do evento",
+   "referenceType": "perceived"
   },
   {
    "name": "Ativador de Cachos Secret Curl Happy End 200ml",
@@ -47,7 +48,7 @@
   },
   {
    "name": "02 TRATAMENTOS",
-   "list": 75900,
+   "list": 79880,
    "event": 68900,
    "pix": 68900,
    "new": {
@@ -68,7 +69,8 @@
      "1 Mini escova"
     ]
    },
-   "section": "Combos do evento"
+   "section": "Combos do evento",
+   "referenceType": "perceived"
   },
   {
    "name": "Cc Cream Leave - In Universal Happy End 250ml",
@@ -82,7 +84,7 @@
   },
   {
    "name": "03 RECONSTRUTOR",
-   "list": 104400,
+   "list": 113370,
    "event": 93900,
    "pix": 93900,
    "new": {
@@ -103,7 +105,8 @@
      "3 Mini pH Acid"
     ]
    },
-   "section": "Combos do evento"
+   "section": "Combos do evento",
+   "referenceType": "perceived"
   },
   {
    "name": "Óleo Happy End 60ml",
@@ -117,7 +120,7 @@
   },
   {
    "name": "04 REPOSIÇÃO HIDROLIPÍDICA",
-   "list": 108400,
+   "list": 117370,
    "event": 94900,
    "pix": 94900,
    "new": {
@@ -138,7 +141,8 @@
      "1 Mini escova"
     ]
    },
-   "section": "Combos do evento"
+   "section": "Combos do evento",
+   "referenceType": "perceived"
   },
   {
    "name": "Pomada de Finalização Seca Happy End 80g",
@@ -152,7 +156,7 @@
   },
   {
    "name": "05 BLOND TECH",
-   "list": 105400,
+   "list": 114370,
    "event": 94900,
    "pix": 94900,
    "new": {
@@ -174,7 +178,8 @@
      "1 Mini escova"
     ]
    },
-   "section": "Combos do evento"
+   "section": "Combos do evento",
+   "referenceType": "perceived"
   },
   {
    "name": "Spray de Alto Brilho Happy End 60ml",
@@ -188,7 +193,7 @@
   },
   {
    "name": "06 OLENKA HUB",
-   "list": 126300,
+   "list": 144200,
    "event": 109900,
    "pix": 109900,
    "new": {
@@ -214,7 +219,8 @@
      "1 Mini escova"
     ]
    },
-   "section": "Combos do evento"
+   "section": "Combos do evento",
+   "referenceType": "perceived"
   },
   {
    "name": "Pó Modelador de Texturização e Volume",
@@ -228,7 +234,7 @@
   },
   {
    "name": "07 COLOR ESSENCIAL (24/3/1)",
-   "list": 88160,
+   "list": 99960,
    "event": 78900,
    "pix": 78900,
    "new": {
@@ -250,7 +256,8 @@
     ],
     "note": "Tonalidades e volumes dos oxidantes são definidos com a nossa equipe ao confirmar o pedido."
    },
-   "section": "Combos do evento"
+   "section": "Combos do evento",
+   "referenceType": "perceived"
   },
   {
    "name": "Lipid Serum - 100ml",
@@ -264,7 +271,7 @@
   },
   {
    "name": "08 COLOR ESSENCIAL (24/6)",
-   "list": 89760,
+   "list": 100660,
    "event": 78900,
    "pix": 78900,
    "new": {
@@ -285,11 +292,12 @@
     ],
     "note": "Tonalidades e volumes dos oxidantes são definidos com a nossa equipe ao confirmar o pedido."
    },
-   "section": "Combos do evento"
+   "section": "Combos do evento",
+   "referenceType": "perceived"
   },
   {
    "name": "09 COLOR PRO (36/3/2)",
-   "list": 131400,
+   "list": 143200,
    "event": 109900,
    "pix": 109900,
    "new": {
@@ -311,7 +319,8 @@
     ],
     "note": "Tonalidades e volumes dos oxidantes são definidos com a nossa equipe ao confirmar o pedido."
    },
-   "section": "Combos do evento"
+   "section": "Combos do evento",
+   "referenceType": "perceived"
   },
   {
    "name": "Hair Brushing 215ml",
@@ -1414,5 +1423,11 @@
   "Self Care",
   "Finalização Happy End",
   "Men's Care, Therapy e Especialidades"
- ]
+ ],
+ "comboReferenceSource": {
+  "file": "BLONDE INFLUENCER 2026_20261106_124920_0000_261106_124938.pdf",
+  "sha256": "600eba95119672fe4703513765895771bc954a816d93610a24e459f17e642331",
+  "verifiedAt": "2026-11-06",
+  "note": "Valores percebidos dos combos; venda e Pix permanecem iguais. Economia calculada em centavos: combo 06 R$ 343,00, corrigindo a diferença de R$ 0,10 na arte."
+ }
 }

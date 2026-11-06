@@ -39,6 +39,8 @@ def slugify(text):
 EVENT_ORDER = -2000
 for n, row in enumerate(EVENT["rows"]):
     fields = {"priceCents": row["event"], "eventListCents": row["list"], "eventPixCents": row["pix"], "eventSection": row["section"]}
+    if row.get("referenceType"):
+        fields["eventReferenceType"] = row["referenceType"]
     if "ids" in row:
         for pid in row["ids"]:
             p = by_id[pid]

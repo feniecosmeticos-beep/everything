@@ -194,7 +194,7 @@ test('event prices keep table, event and Pix/card values and reach the WhatsApp 
   const ox=data.products.find(p=>p.sku==='MC-OX-06V');
   assert.deepEqual([ox.eventListCents,ox.priceCents,ox.eventPixCents],[4250,3690,3490]);
   const combo=data.products.find(p=>p.id==='EVT-BI-COMBO-01');
-  assert.deepEqual([combo.eventListCents,combo.priceCents,combo.eventPixCents],[135300,120900,120900]);
+  assert.deepEqual([combo.eventListCents,combo.priceCents,combo.eventPixCents],[151300,120900,120900]);
   assert.equal(data.products.filter(p=>p.eventListCents).length,182);
   const event=new vm.Script(readFileSync(path.join(__dirname,'..','..','assets','event-offer.js'),'utf8'));
   const state=vm.createContext({I:n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n/100),document:{addEventListener(){}},window:{}});
@@ -231,4 +231,41 @@ test('Secret Curl kits keep verified prices and composition without invented pro
   assert.doesNotMatch(message,/Economia sobre a tabela|Total no Pix\/cartão/);
   assert.match(state.FenieEvent.detail(kits[1]),/O que vem no kit/);
   assert.equal(state.FenieEvent.ribbon(kits[1]),'');
+});
+
+test('nine combos use the PDF perceived values without changing payable totals',()=>{
+  const reference=[151300,79880,113370,117370,114370,144200,99960,100660,143200];
+  const payable=[120900,68900,93900,94900,94900,109900,78900,78900,109900];
+  const combos=reference.map((_,i)=>data.products.find(p=>p.id===`EVT-BI-COMBO-${String(i+1).padStart(2,'0')}`));
+  assert.deepEqual(combos.map(p=>p.eventListCents),reference);
+  assert.deepEqual(combos.map(p=>p.priceCents),payable);
+  assert.deepEqual(combos.map(p=>p.eventPixCents),payable);
+  assert.ok(combos.every(p=>p.eventReferenceType==='perceived'));
+  assert.equal(data.products.filter(p=>p.eventReferenceType==='perceived').length,9);
+  const state=vm.createContext({I:n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n/100),document:{addEventListener(){}},window:{}});
+  state.globalThis=state;
+  vm.runInContext(readFileSync(path.join(__dirname,'..','..','assets','event-offer.js'),'utf8'),state);
+  state.FenieEvent=state.window.FenieEvent;
+  for(const name of ['L','catalogueBaseCartSummary','orderPaymentLabel','TA'])loadFunction(name,state);
+  state.J=state.catalogueBaseCartSummary;
+  const all=Object.fromEntries(combos.map(p=>[p.id,1]));
+  const summary=state.J(all,data.products);
+  assert.equal(summary.totalCents,851100);
+  assert.match(state.FenieEvent.cartSavings(summary),/2\.132,10/);
+  assert.match(state.FenieEvent.card(combos[0]),/Valor percebido R\$\s?1\.513,00/);
+  assert.match(state.FenieEvent.detail(combos[5]),/343,00/);
+  assert.match(state.FenieEvent.detail(combos[5]),/abaixo do valor percebido/);
+  assert.doesNotMatch(state.FenieEvent.detail(combos[5]),/343,10|Preço de tabela/);
+  assert.doesNotMatch(state.FenieEvent.detail(combos[5]),/Ver a arte do combo/);
+  for(const paymentMethod of ['pix','credito','debito','boleto-avista','boleto-parcelado']){
+    const message=state.TA(all,data.products,{paymentMethod,paymentInstallments:'6'});
+    assert.match(message,/Total dos produtos: R\$\s?8\.511,00/);
+    assert.match(message,/Economia sobre os valores de referência: R\$\s?2\.132,10/);
+    assert.match(message,/Valor percebido: R\$\s?1\.513,00/);
+    assert.doesNotMatch(message,/Economia sobre a tabela|Total no Pix\/cartão/);
+  }
+  const mixed=state.TA({'EVT-BI-COMBO-01':1,'MC-OX-06V':2},data.products,{paymentMethod:'pix'});
+  assert.match(mixed,/Total dos produtos: R\$\s?1\.282,80/);
+  assert.match(mixed,/Total no Pix\/cartão: R\$\s?1\.278,80/);
+  assert.match(mixed,/Economia sobre os valores de referência: R\$\s?319,20/);
 });

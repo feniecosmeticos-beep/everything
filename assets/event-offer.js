@@ -15,6 +15,7 @@
   const pixOf = (p) => (has(p) && Number.isSafeInteger(p.eventPixCents) ? p.eventPixCents : p.priceCents);
   const pct = (p) => Math.round((1 - pixOf(p) / p.eventListCents) * 100);
   const isCombo = (p) => p.category === "Combos do evento";
+  const isPerceived = (p) => has(p) && p.eventReferenceType === "perceived";
 
   function ribbon(p) {
     if (!has(p)) return "";
@@ -36,7 +37,7 @@
     const pixLine = isCombo(p)
       ? `<span class="ev-pix ev-pix-fixed"><small>Preço único em qualquer pagamento</small></span>${gifts}`
       : pix < p.priceCents ? `<span class="ev-pix">${brl(pix)} <small>no Pix ou cartão</small></span>` : "";
-    return `<span class="ev-price"><del>De ${brl(p.eventListCents)}</del><span class="ev-now">${brl(p.priceCents)}</span>${pixLine}</span>`;
+    return `<span class="ev-price"><del>${isPerceived(p) ? "Valor percebido" : "De"} ${brl(p.eventListCents)}</del><span class="ev-now">${brl(p.priceCents)}</span>${pixLine}</span>`;
   }
 
   function detail(p) {
@@ -45,11 +46,11 @@
     const save = p.eventListCents - pix;
     return `<div class="detail-price ev-detail">
       <span class="ev-tag">Preço exclusivo · Evento ${cfg.name}</span>
-      <del>Preço de tabela ${brl(p.eventListCents)}</del>
+      <del>${isPerceived(p) ? "Valor percebido" : "Preço de tabela"} ${brl(p.eventListCents)}</del>
       <div class="ev-detail-row"><div><small>Preço do evento</small><strong>${brl(p.priceCents)}</strong></div>${
         !isCombo(p) && pix < p.priceCents ? `<div class="ev-detail-pix"><small>No Pix ou cartão</small><strong>${brl(pix)}</strong></div>` : ""
       }</div>
-      ${save > 0 ? `<p class="ev-save">Você economiza ${brl(save)} por unidade${pct(p) > 0 ? ` (${pct(p)}% abaixo da tabela)` : ""}.</p>` : ""}
+      ${save > 0 ? `<p class="ev-save">Você economiza ${brl(save)} por unidade${pct(p) > 0 ? ` (${pct(p)}% abaixo ${isPerceived(p) ? "do valor percebido" : "da tabela"})` : ""}.</p>` : ""}
       <p class="ev-terms">${isCombo(p) ? "Combo com preço fixo, válido em qualquer forma de pagamento." : "Condição válida apenas para pedidos do evento. Fora dele, vale a tabela regular."}</p>
     </div>${comboDetail(p)}`;
   }
@@ -63,13 +64,13 @@
       <h2>${label}</h2><ul class="ev-combo-items">${list(items)}</ul>
       ${p.eventGifts?.length ? `<div class="ev-combo-gifts"><h3>Brindes inclusos</h3><ul>${list(p.eventGifts)}</ul></div>` : ""}
       ${p.eventNote ? `<p class="ev-combo-note">${esc(p.eventNote)}</p>` : ""}
-      ${p.eventArt ? `<details class="ev-combo-art-box"><summary>Ver a arte do combo</summary><img class="ev-combo-art" src="${esc(p.eventArt)}" alt="Arte do ${esc(p.name)} com produtos, brindes e preço" loading="lazy" decoding="async" width="900" height="1125"></details>` : ""}
+      ${p.eventArt && !isPerceived(p) ? `<details class="ev-combo-art-box"><summary>Ver a arte do combo</summary><img class="ev-combo-art" src="${esc(p.eventArt)}" alt="Arte do ${esc(p.name)} com produtos, brindes e preço" loading="lazy" decoding="async" width="900" height="1125"></details>` : ""}
     </section>`;
   }
 
   function msgItem(p) {
     if (!has(p)) return p.kitIncludes?.length ? [`Composição do kit: ${p.kitIncludes.join("; ")}`] : [];
-    const lines = [`Tabela: ${brl(p.eventListCents)} · preço do evento ${cfg.name}`];
+    const lines = [`${isPerceived(p) ? "Valor percebido" : "Tabela"}: ${brl(p.eventListCents)} · preço do evento ${cfg.name}`];
     if (isCombo(p) && p.eventGifts?.length) lines.push(`Brindes: ${p.eventGifts.join(", ")}`);
     if (!isCombo(p) && pixOf(p) < p.priceCents) lines.push(`No Pix/cartão: ${brl(pixOf(p))}`);
     return lines;
@@ -95,7 +96,7 @@
     const lines = [];
     if (pix < total) lines.push(`Total no Pix/cartão: ${brl(pix)}`);
     const best = ["pix", "credito", "debito"].includes(method) ? pix : total;
-    if (list > best) lines.push(`Economia sobre a tabela: ${brl(list - best)}`);
+    if (list > best) lines.push(`Economia sobre ${items.some((i) => isPerceived(i.product)) ? "os valores de referência" : "a tabela"}: ${brl(list - best)}`);
     return lines;
   }
 
