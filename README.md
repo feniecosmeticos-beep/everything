@@ -46,19 +46,6 @@ Atualização de 13/10/2026, inspirada na identidade do [site institucional da F
 
 Exemplo de filtro: `#/catalogo?q=DOH-COL-RYF-889&category=coloracao`. Parâmetros comerciais de campanha na URL continuam preservados.
 
-## Evento Blonde Influence (09/11/2026)
-
-O catálogo está aberto sem login e mostra os preços do talonário do evento em 171 produtos, mais 17 itens que não existiam no catálogo (9 combos, linha Secrets e kits menores). Cada item com condição de evento mostra o preço de tabela riscado, o preço do evento, o valor no Pix ou cartão e o selo "Exclusivo do evento". A mensagem do WhatsApp inclui tabela, preço do evento, total no Pix/cartão e a economia.
-
-- Fonte dos preços: `content/evento-blonde-influence.json` (colunas TABELA, EVENTO e PIX/CARTÃO).
-- Aplicação: `python scripts/apply-event-prices.py` sobre o catálogo sem preços de evento.
-- Exibição: `assets/event-offer.js` e `assets/catalogue-event.css`. Para mostrar contagem regressiva, preencha `endsAt` em `event-offer.js`.
-- Entrada editorial: "Grandes resultados. Boas escolhas.", com atalho direto para ofertas e aviso de pedido sem cadastro pelo WhatsApp.
-- Exploração: atalhos para Combos, Lançamentos, Mais vendidos e Por linha. Uma seleção por vez, com três cards iniciais e opção de ver todos; a escolha da linha permanece na URL ao recarregar ou voltar de uma ficha. Marcas e catálogo completo têm acessos próprios. A explicação do pedido fica em uma seção expansível.
-- Experiência no celular: os cards têm seletor de quantidade e atalhos +6/+12 para oxidantes e colorações; a barra fixa mostra total, economia e "Finalizar pedido", que leva direto à revisão; na revisão, o botão do WhatsApp fica fixo no rodapé.
-- Kits Secret Curl: Home Care (R$ 94,00), com Ativador e Escova (R$ 160,00) e com Gelatina e Escova (R$ 160,00), conferidos no Mercos em 05/11/2026. Entram primeiro em Lançamento Secrets, com composição na ficha e no WhatsApp; utilizam a tabela regular, sem desconto de evento presumido. Consulte `docs/kits-secrets.md`.
-- Encerramento: reverta o commit dos preços do evento e o commit que abriu o catálogo sem login.
-
 ## Dados comerciais
 
 Origem: `Fenie-Catalogo-Fotos-Previa (7).html`, importado em 13/10/2026. A importação original tinha 701 opções, agrupadas em 488 produtos. Em 19/10/2026, os três oxidantes agregados receberam 14 variações conferidas no Mercos: são 712 opções selecionáveis e três registros agregados ocultos para preservar vínculos históricos.
@@ -68,6 +55,8 @@ A tabela geral é de 07/10/2026; os 14 oxidantes foram conferidos em 19/10/2026.
 Coleta de fotos no Mercos em 05/11/2026: consulta aos 737 registros ativos e aplicação das imagens conferidas, com origem, código do Mercos e integridade dos arquivos documentados em `docs/audits/mercos-photos-2026-11-05.json`. Imagens genéricas de "sem foto", embalagens divergentes e artes promocionais antigas ficam fora da importação. As embalagens comuns de coloração são identificadas como referência da linha, sem representar a tonalidade.
 
 Demais pendências do cadastro original: 111 opções com marca a confirmar, 275 com embalagem a confirmar e 175 com grupo não informado. Esses grupos podem se sobrepor. Esses campos e a disponibilidade devem ser conferidos pelo atendimento antes de confirmar a compra.
+
+Kits Secret Curl (Home Care R$ 94,00, Ativador + Escova R$ 160,00, Gelatina + Escova R$ 160,00) conferidos no Mercos em 05/11/2026, com preço regular. Consulte `docs/kits-secrets.md`.
 
 ## Organização
 

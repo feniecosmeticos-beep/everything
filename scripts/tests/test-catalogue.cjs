@@ -122,8 +122,8 @@ test('oxidants have the 14 exact volumes, explicit family aliases and verified p
     assert.equal(family.variants.length,volumes.length);
     assert.equal(data.products.find(p=>p.sku===parent).status,'hidden');
   }
-  assert.equal(data.products.find(p=>p.sku==='OLK-OX-35V-900').priceCents,4900); // preço do evento Blonde Influence
-  assert.equal(data.products.filter(p=>p.status!=='hidden').length,732); // 712 + 17 itens do evento + 3 kits Secret Curl
+  assert.equal(data.products.find(p=>p.sku==='OLK-OX-35V-900').priceCents,5400);
+  assert.equal(data.products.filter(p=>p.status!=='hidden').length,715); // 712 + 3 kits Secret Curl
   assert.ok(data.products.filter(p=>p.parentSku==='DOH-OX-900').every(p=>p.commercialSku==='DOH-OX-900'));
 });
 test('WhatsApp encodes the confirmed number, selected volumes, accurate totals and salon name',()=>{
@@ -136,7 +136,7 @@ test('WhatsApp encodes the confirmed number, selected volumes, accurate totals a
   const message=url.searchParams.get('text');
   assert.match(message,/35 Vol/);assert.match(message,/6 Vol/);assert.match(message,/10 Vol/);
   assert.match(message,/SKU: DOH-OX-900/);assert.doesNotMatch(message,/V10|DEMONSTRA/);
-  assert.match(message,/189,80/);assert.match(message,/Salão A & B \+ teste Curitiba/);
+  assert.match(message,/205,40/);assert.match(message,/Salão A & B \+ teste Curitiba/);
   assert.throws(()=>state.orderWhatsAppHref({},data.products));
   assert.throws(()=>state.orderWhatsAppHref({'MC-OX-900':1},data.products),/Revise/);
 });
@@ -162,7 +162,7 @@ test('payment choices and boleto installments are encoded in both WhatsApp and c
     const url=new URL(state.orderWhatsAppHref(items,data.products,options));
     assert.equal(url.searchParams.get('text'),message);
     assert.ok(message.includes('Forma de pagamento: '+label));
-    assert.match(message,/73,80/);assert.match(message,/Salão & Cia/);
+    assert.match(message,/85,00/);assert.match(message,/Salão & Cia/);
     assert.equal((message.match(/Forma de pagamento:/g)||[]).length,1);
   }
   assert.equal(state.orderPaymentLabel('__proto__'),'A combinar com o atendimento');
@@ -190,45 +190,10 @@ test('review changes keep WhatsApp link and open message synchronized without ch
   assert.equal(state.reviewOrderDetails.name,'Salão teste');
 });
 
-test('event prices keep table, event and Pix/card values and reach the WhatsApp message',()=>{
-  const ox=data.products.find(p=>p.sku==='MC-OX-06V');
-  assert.deepEqual([ox.eventListCents,ox.priceCents,ox.eventPixCents],[4250,3690,3490]);
-  const combo=data.products.find(p=>p.id==='EVT-BI-COMBO-01');
-  assert.deepEqual([combo.eventListCents,combo.priceCents,combo.eventPixCents],[135300,120900,120900]);
-  assert.equal(data.products.filter(p=>p.eventListCents).length,182);
-  const event=new vm.Script(readFileSync(path.join(__dirname,'..','..','assets','event-offer.js'),'utf8'));
-  const state=vm.createContext({I:n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n/100),document:{addEventListener(){}},window:{}});
-  state.globalThis=state;event.runInContext(state);state.FenieEvent=state.window.FenieEvent;
-  for(const name of ['L','catalogueBaseCartSummary','orderPaymentLabel','TA'])loadFunction(name,state);
-  state.J=state.catalogueBaseCartSummary;
-  const message=state.TA({'MC-OX-06V':2},data.products,{paymentMethod:'pix'});
-  assert.match(message,/Blonde Influence/);assert.match(message,/No Pix\/cartão: R\$\s?34,90/);
-  assert.match(message,/Total no Pix\/cartão: R\$\s?69,80/);assert.match(message,/Economia sobre a tabela: R\$\s?15,20/);
-});
-
-test('Secret Curl kits keep verified prices and composition without invented promotions',()=>{
-  const ids=['OLK-KIT-SCT-HC','OLK-KIT-SCT-ATV','OLK-KIT-SCT-GEL'];
-  const kits=ids.map(id=>data.products.find(p=>p.id===id));
+test('catalog keeps regular prices and no event leftovers',()=>{
+  assert.equal(data.products.find(p=>p.sku==='MC-OX-06V').priceCents,4250);
+  assert.ok(data.products.every(p=>!p.id.startsWith('EVT-')&&p.eventListCents===undefined&&p.eventPixCents===undefined));
+  const kits=['OLK-KIT-SCT-HC','OLK-KIT-SCT-ATV','OLK-KIT-SCT-GEL'].map(id=>data.products.find(p=>p.id===id));
   assert.deepEqual(kits.map(p=>p.priceCents),[9400,16000,16000]);
-  for(const kit of kits){
-    assert.equal(data.products.filter(p=>p.sku===kit.sku).length,1);
-    assert.equal(kit.catalogueSection,'Lançamento Secrets');
-    assert.ok(kit.image && kit.kitIncludes.length>=2);
-    assert.equal(kit.eventListCents,undefined);
-    assert.equal(kit.eventPixCents,undefined);
-  }
-  const state=vm.createContext({I:n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n/100),document:{addEventListener(){}},window:{}});
-  state.globalThis=state;
-  vm.runInContext(readFileSync(path.join(__dirname,'..','..','assets','event-offer.js'),'utf8'),state);
-  state.FenieEvent=state.window.FenieEvent;
-  for(const name of ['L','catalogueBaseCartSummary','orderPaymentLabel','TA'])loadFunction(name,state);
-  state.J=state.catalogueBaseCartSummary;
-  const message=state.TA(Object.fromEntries(ids.map(id=>[id,1])),data.products,{paymentMethod:'pix'});
-  assert.match(message,/Total dos produtos: R\$\s?414,00/);
-  assert.match(message,/Composição do kit:/);
-  assert.match(message,/Creme Ativador Secret Curl · 250 ml/);
-  assert.match(message,/Escova Secret Curl/);
-  assert.doesNotMatch(message,/Economia sobre a tabela|Total no Pix\/cartão/);
-  assert.match(state.FenieEvent.detail(kits[1]),/O que vem no kit/);
-  assert.equal(state.FenieEvent.ribbon(kits[1]),'');
+  assert.ok(kits.every(p=>p.image&&p.status==='consult'));
 });
